@@ -22,6 +22,7 @@ import LanguageSwitcher from 'components/languageSwitcher/LanguageSwitcher'
 
 import lernado_dark from 'assets/logo/lernado-dark.png'
 import lernado from 'assets/logo/lernado.png'
+import { ThemeModeEnum } from 'config/enums/theme.enum'
 
 interface DrawerPartProps {
   Items: ItemsType
@@ -119,7 +120,9 @@ export const TopBar = ({ Items }: DrawerPartProps) => {
       }}>
       <Avatar
         alt="Learnado"
-        src={theme.palette.mode === 'light' ? lernado : lernado_dark}
+        src={
+          theme.palette.mode === ThemeModeEnum.LIGHT ? lernado : lernado_dark
+        }
         variant="square"
         sx={{
           width: '10%',
