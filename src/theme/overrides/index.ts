@@ -7,7 +7,7 @@ import divider from "./divider";
 
 export default function overridesMUIComponents(theme: Theme) {
   const components = Object.assign({
-    MuiButton: button(theme),
+    MuiButton: button(),
     MuiOutlinedInput: textField(theme),
     MuiTooltip: tooltip(theme),
     MuiDivider: divider(theme),

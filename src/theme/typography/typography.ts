@@ -1,14 +1,14 @@
 import { TypographyOptions } from '@mui/material/styles/createTypography'
-import { FONT } from 'config/constants/fonts.config'
+import { APP_FONT_FAMILY } from 'config/constants/fonts.config'
 
 const typography: TypographyOptions = {
-  fontFamily: FONT,
+  fontFamily: APP_FONT_FAMILY,
   fontWeightRegular: 400,
   fontWeightMedium: 600,
   fontWeightBold: 900,
   h1: {
     fontWeight: 500,
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '1.75rem',
     lineHeight: '2rem',
     '&:first-letter': {
@@ -17,7 +17,7 @@ const typography: TypographyOptions = {
   },
   h2: {
     fontWeight: 300,
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '1.563rem',
     lineHeight: '2.188rem',
     '&:first-letter': {
@@ -26,20 +26,20 @@ const typography: TypographyOptions = {
   },
   h3: {
     fontWeight: 200,
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '1.125rem',
     lineHeight: '1.563rem',
   },
   h4: {
     fontWeight: 100,
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '1rem',
     lineHeight: '1.438rem',
   },
   h5: {
     fontSize: '1rem',
     lineHeight: '1.438rem',
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontWeight: 100,
     textTransform: 'none',
     '&:first-letter': {
@@ -48,23 +48,23 @@ const typography: TypographyOptions = {
   },
   h6: {
     fontWeight: 100,
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '1rem',
     lineHeight: '1.563rem',
   },
   body1: {
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '0.938rem',
     lineHeight: '1.313rem',
   },
   body2: {
     fontWeight: 400,
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '0.813rem',
     lineHeight: '1.25rem',
   },
   subtitle1: {
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '0.938rem',
     '&:first-letter': {
       textTransform: 'Uppercase',
@@ -72,14 +72,14 @@ const typography: TypographyOptions = {
   },
   subtitle2: {
     fontWeight: 300,
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontSize: '0.9rem',
     lineHeight: '1.25rem',
   },
   button: {
     fontSize: '1rem',
     lineHeight: '1.438rem',
-    fontFamily: FONT,
+    fontFamily: APP_FONT_FAMILY,
     fontWeight: 400,
     textTransform: 'none',
     '&:first-letter': {

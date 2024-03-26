@@ -1,6 +1,4 @@
-import { Theme } from "@mui/material";
-
-export default function button(theme: Theme) {
+export default function button() {
   return {
     defaultProps: {
       disableElevation: true,
@@ -9,8 +7,8 @@ export default function button(theme: Theme) {
     styleOverrides: {
       root: {
         fontWeight: 500,
-        borderRadius: "4px",
+        borderRadius: '4px',
       },
     },
-  };
+  }
 }

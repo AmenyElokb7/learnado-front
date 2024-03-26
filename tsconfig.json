@@ -38,6 +38,6 @@
       "locales/*": ["src/locales/*"]
     }
   },
-  "include": ["src"],
+  "include": ["src", "i18n.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
