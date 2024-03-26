@@ -1,29 +1,17 @@
-# README #
+# Vite + React + Typescript + Eslint + Prettier + React Testing Library
 
-This README would normally document whatever steps are necessary to get your application up and running.
+A starter for React with Typescript with the fast Vite and all static code testing with Eslint and formatting with Prettier.
 
-### What is this repository for? ###
+I found out about Vite and I wanted to have a boilerplate for the technologies that I use. You can find more about these in the following links: [Vite](https://github.com/vitejs/vite), [React](https://reactjs.org/), [Typescript](https://www.typescriptlang.org/), [Eslint](https://eslint.org/), [Prettier](https://prettier.io/).
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## Installation
 
-### How do I get set up? ###
+Clone the repo and run `yarn install`
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
+## Start
 
-### Contribution guidelines ###
+After the successfull installation of the packages: `yarn dev`
 
-* Writing tests
-* Code review
-* Other guidelines
+## Test
 
-### Who do I talk to? ###
-
-* Repo owner or admin
-* Other community or team contact
+Run `yarn test` to run testing
