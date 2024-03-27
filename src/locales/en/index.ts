@@ -1,5 +1,5 @@
-import { TOPBAR } from './../en/topbar'
+import { topbar } from './../en/topbar'
 const en = {
-  TOPBAR,
+  topbar,
 }
 export default en

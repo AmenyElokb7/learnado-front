@@ -1,4 +1,4 @@
-export const TOPBAR = {
+export const topbar = {
   Home: 'Home',
   Instructors: 'Instructors',
   AboutUs: 'About us',

@@ -14,4 +14,14 @@ export const GLOBAL_VARIABLES = {
     MEDIUM: 700,
     LONG: 1000,
   },
+  LANGUAGES: {
+    SHORT: {
+      EN: 'en',
+      FR: 'fr',
+    },
+    LONG: {
+      ENGLISH: 'english',
+      FRENCH: 'french',
+    },
+  },
 }

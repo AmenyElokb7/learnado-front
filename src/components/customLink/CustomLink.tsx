@@ -1,15 +1,16 @@
-import { NavLink } from 'react-router-dom'
 import { CustomLinkProps } from './CustomLink.type'
-import { useTheme } from '@mui/material'
-import { StyledLink } from './customLink.style'
+import { CustomLinkRoot } from './customLink.style'
+import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
 
-const CustomLink = ({ to, label }: CustomLinkProps) => {
-  const theme = useTheme()
-
+const CustomLink = ({ to, label, isActive }: CustomLinkProps) => {
   return (
-    <NavLink to={to} style={({ isActive }) => StyledLink(theme, { isActive })}>
+    <CustomLinkRoot
+      to={to}
+      isactive={
+        isActive ? GLOBAL_VARIABLES.TRUE_STRING : GLOBAL_VARIABLES.FALSE_STRING
+      }>
       {label}
-    </NavLink>
+    </CustomLinkRoot>
   )
 }
 

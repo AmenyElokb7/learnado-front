@@ -5,6 +5,7 @@ import { useTranslation } from 'react-i18next'
 import CustomIconButton from '../customIconButton/CustomIconButton'
 import flagEN from 'assets/logo/languages/us.png'
 import flagFR from 'assets/logo/languages/fr.png'
+import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
 
 const LanguageSwitcher = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -18,7 +19,6 @@ const LanguageSwitcher = () => {
   }
 
   const handleSelect = (lang: string) => {
-    console.log(`Changing language to: ${lang}`)
     i18n.changeLanguage(lang)
     handleClose()
   }
@@ -30,7 +30,8 @@ const LanguageSwitcher = () => {
         <TranslateIcon />
       </CustomIconButton>
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-        <MenuItem onClick={() => handleSelect('en')}>
+        <MenuItem
+          onClick={() => handleSelect(GLOBAL_VARIABLES.LANGUAGES.SHORT.EN)}>
           <Avatar
             src={flagEN}
             alt="English"
@@ -39,7 +40,8 @@ const LanguageSwitcher = () => {
           />
           {t('English')}
         </MenuItem>
-        <MenuItem onClick={() => handleSelect('fr')}>
+        <MenuItem
+          onClick={() => handleSelect(GLOBAL_VARIABLES.LANGUAGES.SHORT.FR)}>
           <Avatar
             src={flagFR}
             alt="Français"

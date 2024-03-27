@@ -1,9 +1,36 @@
-import { Theme } from '@mui/material/styles'
+import { styled } from '@mui/material'
 import { GREY } from 'config/colors/colors'
 import { StyleProps } from './customLink.style.type'
+import { NavLink } from 'react-router-dom'
+import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
 
-export const StyledLink = (theme: Theme, { isActive }: StyleProps) => ({
-  textDecoration: isActive ? 'underline' : 'none',
-  textDecorationColor: isActive ? theme.palette.primary.main : 'inherit',
-  color: isActive ? theme.palette.primary.main : GREY.main,
-})
+export const CustomLinkRoot = styled(NavLink)<StyleProps>(
+  ({ theme, isactive }) => ({
+    position: 'relative',
+    textDecoration: 'none',
+    borderBottom:
+      isactive === GLOBAL_VARIABLES.TRUE_STRING
+        ? `2px solid ${theme.palette.primary.main}`
+        : '',
+    color:
+      isactive === GLOBAL_VARIABLES.TRUE_STRING
+        ? theme.palette.primary.main
+        : GREY.main,
+    '&:hover': {
+      color: theme.palette.primary.main,
+      '&::after': {
+        width: '100%',
+      },
+    },
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      bottom: 0,
+      left: 0,
+      width: '0%',
+      height: '2px',
+      backgroundColor: theme.palette.primary.main,
+      transition: 'width .3s ease-in-out',
+    },
+  }),
+)

@@ -1,3 +1,3 @@
 export interface StyleProps {
-  isActive: boolean
+  isactive: string
 }

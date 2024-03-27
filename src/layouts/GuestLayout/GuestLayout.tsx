@@ -1,14 +1,18 @@
-import { TopBar } from 'components/home/topBar/Topbar'
-import { ItemsMain } from 'components/home/topBar/topBarMenu'
+import { Stack } from '@mui/system'
+import FallbackLoader from 'components/fallback/FallbackLoader'
+import { TopBar } from 'components/topBar/Topbar'
+import { ItemsMain } from 'components/topBar/topBarMenu'
+import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 
 function GuestLayout() {
   return (
-    <div>
-      <TopBar Items={ItemsMain} />
-
-      <Outlet />
-    </div>
+    <Stack>
+      <TopBar items={ItemsMain} />
+      <Suspense fallback={<FallbackLoader />}>
+        <Outlet />
+      </Suspense>
+    </Stack>
   )
 }
 
