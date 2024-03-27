@@ -24,18 +24,18 @@
 
     /*  PATHS  */
     "paths": {
-      "components/*": ["src/components/*"],
-      "config/*": ["src/config/*"],
-      "redux/*": ["src/redux/*"],
-      "utils/*": ["src/utils/*"],
-      "shared/*": ["src/shared/*"],
+      "@components/*": ["src/components/*"],
+      "@config/*": ["src/config/*"],
+      "@redux/*": ["src/redux/*"],
+      "@utils/*": ["src/utils/*"],
+      "@shared/*": ["src/shared/*"],
       "types/*": ["src/types/*"],
-      "assets/*": ["src/assets/*"],
-      "guards/*": ["src/guards/*"],
-      "features/*": ["src/features/*"],
-      "pages/*": ["src/pages/*"],
-      "layouts/*": ["src/layouts/*"],
-      "locales/*": ["src/locales/*"]
+      "@assets/*": ["src/assets/*"],
+      "@guards/*": ["src/guards/*"],
+      "@features/*": ["src/features/*"],
+      "@pages/*": ["src/pages/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@locales/*": ["src/locales/*"]
     }
   },
   "include": ["src", "i18n.ts"],

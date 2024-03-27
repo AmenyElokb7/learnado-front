@@ -1,5 +1,5 @@
 import { Stack, styled, Avatar, alpha } from '@mui/material'
-import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { TopBarContainerProps } from './topbar.type'
 
 export const DrawerHeader = styled('div')(({ theme }) => ({

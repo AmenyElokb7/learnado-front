@@ -1,14 +1,14 @@
 import { HeaderContainer, HeaderContent, HeaderImage } from './hero.style'
-import SearchInput from 'components/Inputs/heroSearchInput/HeroSearchInput'
+import SearchInput from '@components/Inputs/heroSearchInput/HeroSearchInput'
 import { useTranslation } from 'react-i18next'
 
-import header from 'assets/images/header.png'
-import courses from 'assets/images/courses.webp'
-import online from 'assets/images/online.webp'
-import students from 'assets/images/students.png'
-import teachers from 'assets/images/teachers.webp'
+import header from '@assets/images/header.png'
+import courses from '@assets/images/courses.webp'
+import online from '@assets/images/online.webp'
+import students from '@assets/images/students.png'
+import teachers from '@assets/images/teachers.webp'
 
-import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import StatsticsCard from './statisticsCard/StatisticsCard'
 import { StatsCardsContainer } from './statisticsCard/statisticsCard.style'
 

@@ -1,4 +1,4 @@
-import { PATHS } from 'config/constants/paths'
+import { PATHS } from '@config/constants/paths'
 
 export interface Item {
   id: number

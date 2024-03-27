@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Alert } from 'types/interfaces/Alert'
-import { ErrorAlertObject } from 'config/constants/alerts.constants'
+import { ErrorAlertObject } from '@config/constants/alerts.constants'
 
 interface SnackbarState {
   alert: Alert | null

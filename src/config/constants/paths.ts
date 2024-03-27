@@ -10,6 +10,10 @@ export const PATHS = {
     ROOT: 'learning-path',
   },
 
+  CATEGORIES: {
+    ROOT: 'categories',
+  },
+
   INSTUCTORS: 'instructors',
   ABOUT_US: 'aboutUs',
   AUTH: {

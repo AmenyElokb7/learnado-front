@@ -1,8 +1,8 @@
 import { styled } from '@mui/material'
-import { GREY } from 'config/colors/colors'
+import { GREY } from '@config/colors/colors'
 import { StyleProps } from './customLink.style.type'
 import { NavLink } from 'react-router-dom'
-import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 export const CustomLinkRoot = styled(NavLink)(
   ({ theme }) =>

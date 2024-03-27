@@ -2,11 +2,11 @@ import { Drawer, Box, Avatar, Divider, Button, Stack } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { useNavigate } from 'react-router-dom'
 import DrawerItem from './DrawerItem/DrawerItem'
-import { ItemsMain } from 'components/topBar/topBarMenu'
-import lernado from 'assets/logo/lernado.png'
-import { PATHS } from 'config/constants/paths'
+import { ItemsMain } from '@components/topBar/topBarMenu'
+import lernado from '@assets/logo/lernado.png'
+import { PATHS } from '@config/constants/paths'
 import { TopbarDrawerProps } from './TopbarDrawer.type'
-import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 const TopbarDrawer = ({ open, toggleDrawer }: TopbarDrawerProps) => {
   const { t } = useTranslation()

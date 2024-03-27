@@ -15,7 +15,7 @@ const SearchInput = () => {
         <StyledIconButton>
           <SearchIcon />
         </StyledIconButton>
-        <SearchInputText placeholder={t('home.search') + '...'} />
+        <SearchInputText placeholder={t('home.search_for_courses')} />
       </SearchWrapper>
     </Stack>
   )

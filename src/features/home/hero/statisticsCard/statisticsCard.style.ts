@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles'
 import { Stack, Typography } from '@mui/material'
-import { GREY } from 'config/colors/colors'
+import { GREY } from '@config/colors/colors'
 
 export const StatsCardRoot = styled(Stack)(({ theme }) => ({
   width: '300px',
