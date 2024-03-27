@@ -2,6 +2,7 @@ export const GLOBAL_VARIABLES = {
   TRUE_STRING: 'true',
   FALSE_STRING: 'false',
   EMPTY_STRING: '',
+  APP_NAME: 'Learnado',
 
   APP_LAYOUT: { DRAWER_WIDTH: 240 },
   PAGINATION: {
@@ -13,5 +14,15 @@ export const GLOBAL_VARIABLES = {
     SHORT: 500,
     MEDIUM: 700,
     LONG: 1000,
+  },
+  LANGUAGES: {
+    SHORT: {
+      EN: 'en',
+      FR: 'fr',
+    },
+    LONG: {
+      ENGLISH: 'english',
+      FRENCH: 'french',
+    },
   },
 }

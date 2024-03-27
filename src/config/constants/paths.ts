@@ -5,7 +5,8 @@ export const PATHS = {
     ROOT: 'courses',
     COURSES_DETAIL: 'courses/:courseId',
   },
-
+  INSTUCTORS: 'instructors',
+  ABOUT_US: 'aboutUs',
   AUTH: {
     ROOT: 'auth',
     LOGIN: 'login',
