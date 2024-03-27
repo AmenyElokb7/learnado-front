@@ -4,7 +4,7 @@ import { TopBarContainerProps } from './topbar.type'
 
 export const TopbarRoot = styled(Stack)(
   ({ theme }) =>
-    ({ isscrolled }: { isscrolled: string }) => ({
+    ({ isscrolled }: TopBarContainerProps) => ({
       position: 'fixed',
       padding: isscrolled === GLOBAL_VARIABLES.TRUE_STRING ? '5px' : '5px',
       display: isscrolled === GLOBAL_VARIABLES.TRUE_STRING ? 'none' : 'flex',
@@ -20,22 +20,21 @@ export const TopbarRoot = styled(Stack)(
     }),
 )
 
-export const StyledScrolledAppBar = styled(Stack)(
-  ({ theme }) =>
-    ({ isscrolled }: { isscrolled: string }) => ({
-      position: 'fixed',
-      top: 0,
-      left: 0,
-      right: 0,
-      animation:
-        isscrolled === GLOBAL_VARIABLES.TRUE_STRING
-          ? `${slideDown} 0.5s ease-out forwards`
-          : `${slideTop} 0.5s ease-out forwards`,
-      background: theme.palette.common.white,
-      height: '100px',
-      width: '100%',
-      transform: 'translateY(-100%)',
-    }),
+export const StyledScrolledAppBar = styled(Stack)<TopBarContainerProps>(
+  ({ theme, isscrolled }) => ({
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    right: 0,
+    animation:
+      isscrolled === GLOBAL_VARIABLES.TRUE_STRING
+        ? `${slideDown} 0.5s ease-out forwards`
+        : `${slideTop} 0.5s ease-out forwards`,
+    background: theme.palette.common.white,
+    height: '100px',
+    width: '100%',
+    transform: 'translateY(-100%)',
+  }),
 )
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
@@ -46,8 +45,8 @@ export const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }))
 
-export const TopBarContainer = styled(Stack)(
-  ({ theme, isScrolled, isHomePage }: TopBarContainerProps) => ({
+export const TopBarContainer = styled(Stack)<TopBarContainerProps>(
+  ({ theme, isscrolled, ishomepage }) => ({
     height: '70px',
     flexDirection: 'row',
     paddingRight: theme?.spacing(2),
@@ -59,7 +58,10 @@ export const TopBarContainer = styled(Stack)(
     top: 0,
     zIndex: 1000,
     backgroundColor:
-      isScrolled || !isHomePage ? theme?.palette.common.white : 'transparent',
+      isscrolled === GLOBAL_VARIABLES.TRUE_STRING ||
+      ishomepage === GLOBAL_VARIABLES.FALSE_STRING
+        ? theme?.palette.common.white
+        : 'transparent',
   }),
 )
 

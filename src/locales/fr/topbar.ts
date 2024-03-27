@@ -1,8 +1,10 @@
 export const topbar = {
-  Home: 'Accueil',
-  Instructors: 'Enseignants',
-  AboutUs: 'A propos de nous',
-  Courses: 'Cours',
-  Signup: 'Créer compte',
-  Login: 'Connexion',
+  home: 'Accueil',
+  instructors: 'Enseignants',
+  aboutUs: 'A propos de nous',
+  courses: 'Cours',
+  signup: 'Créer compte',
+  login: 'Connexion',
+  english: 'Anglais',
+  french: 'Français',
 }

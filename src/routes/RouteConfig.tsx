@@ -1,7 +1,8 @@
 import { RouteObject } from 'react-router-dom'
 import { PATHS } from 'config/constants/paths'
 import GuestLayout from 'layouts/GuestLayout/GuestLayout'
-import HomePage from 'pages/home/HomePage'
+import { lazy } from 'react'
+const HomePage = lazy(() => import('src/pages/home/HomePage'))
 
 export const ROUTE_CONFIG: RouteObject[] = [
   {

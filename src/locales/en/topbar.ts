@@ -1,8 +1,10 @@
 export const topbar = {
-  Home: 'Home',
-  Instructors: 'Instructors',
-  AboutUs: 'About us',
-  Courses: 'Courses',
-  Signup: 'Signup',
-  Login: 'Login',
+  home: 'Home',
+  instructors: 'Instructors',
+  aboutUs: 'About us',
+  courses: 'Courses',
+  signup: 'Signup',
+  login: 'Login',
+  english: 'English',
+  french: 'French',
 }

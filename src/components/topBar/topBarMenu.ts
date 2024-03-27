@@ -7,8 +7,8 @@ export interface Item {
 }
 
 export const ItemsMain: Item[] = [
-  { id: 1, label: 'topbar.Home', path: PATHS.ROOT },
-  { id: 2, label: 'topbar.Courses', path: PATHS.COURSES.ROOT },
-  { id: 3, label: 'topbar.Instructors', path: PATHS.INSTUCTORS },
-  { id: 4, label: 'topbar.AboutUs', path: PATHS.ABOUT_US },
+  { id: 1, label: 'topbar.home', path: PATHS.ROOT },
+  { id: 2, label: 'topbar.courses', path: PATHS.COURSES.ROOT },
+  { id: 3, label: 'topbar.instructors', path: PATHS.INSTUCTORS },
+  { id: 4, label: 'topbar.aboutUs', path: PATHS.ABOUT_US },
 ]

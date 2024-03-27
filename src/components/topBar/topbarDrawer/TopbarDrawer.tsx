@@ -6,6 +6,7 @@ import { ItemsMain } from 'components/topBar/topBarMenu'
 import lernado from 'assets/logo/lernado.png'
 import { PATHS } from 'config/constants/paths'
 import { TopbarDrawerProps } from './TopbarDrawer.type'
+import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
 
 const TopbarDrawer = ({ open, toggleDrawer }: TopbarDrawerProps) => {
   const { t } = useTranslation()
@@ -19,7 +20,7 @@ const TopbarDrawer = ({ open, toggleDrawer }: TopbarDrawerProps) => {
         onClick={() => toggleDrawer(false)}>
         <Stack direction="row" justifyContent="center" sx={{ p: 2 }}>
           <Avatar
-            alt="Lernado"
+            alt={GLOBAL_VARIABLES.APP_NAME}
             src={lernado}
             variant="square"
             sx={{ width: 120, height: 'auto' }}
@@ -42,12 +43,12 @@ const TopbarDrawer = ({ open, toggleDrawer }: TopbarDrawerProps) => {
 
         <Stack spacing={2} sx={{ p: 4 }}>
           <Button variant="outlined" onClick={() => navigate(PATHS.AUTH.LOGIN)}>
-            {t('topbar.Login')}
+            {t('topbar.login')}
           </Button>
           <Button
             variant="outlined"
             onClick={() => navigate(PATHS.AUTH.SIGNUP)}>
-            {t('topbar.Signup')}
+            {t('topbar.signup')}
           </Button>
         </Stack>
       </Box>

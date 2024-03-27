@@ -32,23 +32,18 @@ const LanguageSwitcher = () => {
       <Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
         <MenuItem
           onClick={() => handleSelect(GLOBAL_VARIABLES.LANGUAGES.SHORT.EN)}>
-          <Avatar
-            src={flagEN}
-            alt="English"
-            variant="square"
-            sx={{ width: '30px', height: '20px', mr: '10px' }}
-          />
-          {t('English')}
+          <Avatar src={flagEN} alt={t('alt.english')} variant="square" />
+          {t('topbar.english')}
         </MenuItem>
         <MenuItem
           onClick={() => handleSelect(GLOBAL_VARIABLES.LANGUAGES.SHORT.FR)}>
           <Avatar
             src={flagFR}
-            alt="Français"
+            alt={t('alt.french')}
             variant="square"
             sx={{ width: '30px', height: '20px', mr: '10px' }}
           />
-          {t('French')}
+          {t('topbar.french')}
         </MenuItem>
       </Menu>
     </div>
