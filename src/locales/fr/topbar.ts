@@ -7,4 +7,5 @@ export const topbar = {
   login: 'Connexion',
   english: 'Anglais',
   french: 'Français',
+  learning_path: 'Parcours',
 }

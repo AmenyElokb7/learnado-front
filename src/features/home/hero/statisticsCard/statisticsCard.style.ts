@@ -2,7 +2,7 @@ import { styled } from '@mui/material/styles'
 import { Stack, Typography } from '@mui/material'
 import { GREY } from 'config/colors/colors'
 
-export const StatsCardContainer = styled(Stack)(({ theme }) => ({
+export const StatsCardRoot = styled(Stack)(({ theme }) => ({
   width: '300px',
   display: 'flex',
   alignItems: 'center',
@@ -21,6 +21,7 @@ export const StatsCardContainer = styled(Stack)(({ theme }) => ({
     width: 'auto',
     margin: '15px',
     padding: '100px',
+    height: '150px',
   },
   '&:hover': {
     transform: 'translateY(-10px)',

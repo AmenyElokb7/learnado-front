@@ -13,7 +13,7 @@ export const HeaderContainer = styled(Box)(({ theme }) => ({
       ? `linear-gradient(0.25turn, ${theme.palette.primary.light},${theme.palette.primary.light}, ${theme.palette.secondary.light},${theme.palette.primary.light})`
       : `linear-gradient(to bottom, ${theme.palette.background.paper}, ${theme.palette.primary.light})`,
   color: theme.palette.common.white,
-  height: '120vh',
+  height: '90vh',
   zIndex: 0,
   [theme.breakpoints.down('sm')]: {
     display: 'block',
@@ -56,8 +56,8 @@ export const HeaderContent = styled(Stack)(({ theme }) => ({
 }))
 
 export const HeaderImage = styled('img')(({ theme }) => ({
-  height: '90%',
-  width: '40%',
+  height: '110%',
+  width: '35%',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     marginTop: '10vh',

@@ -1,3 +1,3 @@
 export interface TitleProps {
-  content: string
+  children: string
 }

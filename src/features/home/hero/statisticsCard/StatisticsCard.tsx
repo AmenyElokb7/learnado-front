@@ -1,5 +1,5 @@
 import {
-  StatsCardContainer,
+  StatsCardRoot,
   StatsTypography,
   StyledCardImage,
 } from './statisticsCard.style'
@@ -11,10 +11,10 @@ export default function StatsticsCard({
   label,
 }: StatsticsCardProps) {
   return (
-    <StatsCardContainer>
+    <StatsCardRoot>
       <StyledCardImage src={image} alt={label} />
       <StatsTypography variant="h5">{number}</StatsTypography>
       <StatsTypography>{label}</StatsTypography>
-    </StatsCardContainer>
+    </StatsCardRoot>
   )
 }

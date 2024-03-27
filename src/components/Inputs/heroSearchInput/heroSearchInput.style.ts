@@ -18,6 +18,7 @@ export const SearchWrapper = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down('sm')]: {
     width: '100%',
+    padding: theme.spacing(1),
   },
 }))
 export const StyledIconButton = styled(IconButton)(({ theme }) => ({
