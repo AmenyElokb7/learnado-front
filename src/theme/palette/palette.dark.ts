@@ -1,8 +1,8 @@
-import { PaletteOptions } from "@mui/material";
-import { DARK_COLORS } from "config/colors/colors";
+import { PaletteOptions } from '@mui/material'
+import { DARK_COLORS } from '@config/colors/colors'
 
 const darkPalette: PaletteOptions = {
-  mode: "dark",
+  mode: 'dark',
   primary: DARK_COLORS.primary,
   secondary: DARK_COLORS.secondary,
   error: DARK_COLORS.error,
@@ -11,6 +11,6 @@ const darkPalette: PaletteOptions = {
   success: DARK_COLORS.success,
   common: DARK_COLORS.common,
   background: DARK_COLORS.background,
-};
+}
 
-export default darkPalette;
+export default darkPalette

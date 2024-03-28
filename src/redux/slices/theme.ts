@@ -1,6 +1,6 @@
 import { PaletteMode } from '@mui/material'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
-import { ThemeModeEnum } from 'config/enums/theme.enum'
+import { ThemeModeEnum } from '@config/enums/theme.enum'
 
 interface ThemeSlice {
   mode: PaletteMode

@@ -5,18 +5,18 @@ import MenuIcon from '@mui/icons-material/Menu'
 import { Link, useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
-import { PATHS } from 'config/constants/paths'
-import CustomLink from 'components/customLink/CustomLink'
-import CustomIconButton from 'components/customIconButton/CustomIconButton'
-import LanguageSwitcher from 'components/languageSwitcher/LanguageSwitcher'
+import { PATHS } from '@config/constants/paths'
+import CustomLink from '@components/customLink/CustomLink'
+import CustomIconButton from '@components/customIconButton/CustomIconButton'
+import LanguageSwitcher from '@components/languageSwitcher/LanguageSwitcher'
 
-import lernado_dark from 'assets/logo/lernado-dark.png'
-import lernado from 'assets/logo/lernado.png'
-import { ThemeModeEnum } from 'config/enums/theme.enum'
+import lernado_dark from '@assets/logo/lernado-dark.png'
+import lernado from '@assets/logo/lernado.png'
+import { ThemeModeEnum } from '@config/enums/theme.enum'
 import TopbarDrawer from './topbarDrawer/TopbarDrawer'
 import { TopBarProps } from './topbar.type'
 import { LogoAvatar, TopBarContainer } from './Topbar.style'
-import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 export const TopBar = ({ items }: TopBarProps) => {
   const [isScrolled, setIsScrolled] = useState(false)

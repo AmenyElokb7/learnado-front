@@ -1,6 +1,6 @@
 import { Box } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-import CustomLink from 'components/customLink/CustomLink'
+import CustomLink from '@components/customLink/CustomLink'
 import { DrawerItemProps } from './DrawerItem.type'
 
 const DrawerItem = ({ item, toggleDrawer }: DrawerItemProps) => {
