@@ -1,11 +1,11 @@
 import Hero from '@features/home/hero/Hero'
-import CategorySection from '@features/home/homeCategories/categorySection/CategorySection'
+import HomeCategries from '@features/home/homeCategories/HomeCategries'
 
 function HomePage() {
   return (
     <>
       <Hero />
-      <CategorySection />
+      <HomeCategries />
     </>
   )
 }

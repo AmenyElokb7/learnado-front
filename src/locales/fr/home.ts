@@ -10,4 +10,6 @@ export const home = {
     "Explorez nos Catégories Principales pour découvrir un monde d'apprentissage adapté à toutes les ambitions et intérêts",
   category_section_title: 'Meilleures Categories ',
   view_all: 'Afficher tous',
+  no_dta_found: 'Données non trouvées',
+  no_category_found: 'Categorie non trouvée',
 }

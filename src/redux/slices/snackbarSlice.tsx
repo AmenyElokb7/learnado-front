@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { Alert } from 'types/interfaces/Alert'
 import { ErrorAlertObject } from '@config/constants/alerts.constants'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { AlertType } from '@config/enums/alertType.enum'
 
 interface SnackbarState {
   alert: Alert | null
@@ -9,8 +11,8 @@ interface SnackbarState {
 const initialState: SnackbarState = {
   alert: {
     open: false,
-    message: '',
-    type: 'success',
+    message: GLOBAL_VARIABLES.EMPTY_STRING,
+    type: AlertType.SUCCESS,
   },
 }
 
@@ -24,7 +26,7 @@ export const snackbarSlice = createSlice({
           ...state.alert,
           open: true,
           message: action.payload,
-          type: 'success',
+          type: AlertType.SUCCESS,
         }
       }
     },

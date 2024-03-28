@@ -4,11 +4,14 @@ export const GLOBAL_VARIABLES = {
   EMPTY_STRING: '',
   APP_NAME: 'Learnado',
 
+  SUCCESS: 'success',
+  ERROR: 'error',
+
   APP_LAYOUT: { DRAWER_WIDTH: 240 },
   PAGINATION: {
     FIRST_PAGE: 1,
     CHUNK_ROWS_PER_PAGE: 6,
-    ROWS_PER_PAGE: 15,
+    ROWS_PER_PAGE: 10,
   },
   DEBOUNCE_TIME: {
     SHORT: 500,

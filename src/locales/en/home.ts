@@ -10,4 +10,6 @@ export const home = {
     'Explore our Top Categories to discover a world of learning tailored to every ambition and interest',
   category_section_title: 'Top Categories',
   view_all: 'View all',
+  no_data_found: 'No data found',
+  no_category_found: 'No category found',
 }

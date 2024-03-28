@@ -1,6 +1,6 @@
 export interface Category {
   id: number
   title: string
-  url?: string
-  nbrOfLessons?: number
+  url: string
+  nbrOfLessons: number
 }
