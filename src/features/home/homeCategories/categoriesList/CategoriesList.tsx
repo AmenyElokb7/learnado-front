@@ -16,7 +16,7 @@ function CategoriesList() {
 
   const { t } = useTranslation()
 
-  if (categories?.length !== 0)
+  if (categories?.length === 0)
     return <NoDataFound message={t('home.no_category_found')} />
 
   if (isLoading) return <CategoriesListSkeleton />
