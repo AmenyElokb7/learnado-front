@@ -1,4 +1,4 @@
-import { Item } from 'components/topBar/topBarMenu'
+import { Item } from '@components/topBar/topBarMenu'
 
 export interface DrawerItemProps {
   item: Item

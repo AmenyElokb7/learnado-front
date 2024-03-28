@@ -3,9 +3,9 @@ import { Avatar, Menu, MenuItem } from '@mui/material'
 import TranslateIcon from '@mui/icons-material/Translate'
 import { useTranslation } from 'react-i18next'
 import CustomIconButton from '../customIconButton/CustomIconButton'
-import flagEN from 'assets/logo/languages/us.png'
-import flagFR from 'assets/logo/languages/fr.png'
-import { GLOBAL_VARIABLES } from 'config/constants/globalVariables'
+import flagEN from '@assets/logo/languages/us.png'
+import flagFR from '@assets/logo/languages/fr.png'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 const LanguageSwitcher = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)

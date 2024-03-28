@@ -1,5 +1,5 @@
 import { IconButton, styled } from '@mui/material'
-import { ThemeModeEnum } from 'config/enums/theme.enum'
+import { ThemeModeEnum } from '@config/enums/theme.enum'
 
 export const CustomIconButtonRoot = styled(IconButton)(({ theme }) => ({
   backgroundColor:

@@ -5,6 +5,15 @@ export const PATHS = {
     ROOT: 'courses',
     COURSES_DETAIL: 'courses/:courseId',
   },
+
+  LEARNING_PATH: {
+    ROOT: 'learning-path',
+  },
+
+  CATEGORIES: {
+    ROOT: 'categories',
+  },
+
   INSTUCTORS: 'instructors',
   ABOUT_US: 'aboutUs',
   AUTH: {

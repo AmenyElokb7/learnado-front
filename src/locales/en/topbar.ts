@@ -7,4 +7,5 @@ export const topbar = {
   login: 'Login',
   english: 'English',
   french: 'French',
+  learning_path: 'Learning Path',
 }

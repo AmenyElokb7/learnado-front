@@ -1,6 +1,6 @@
 import { RouteObject } from 'react-router-dom'
-import { PATHS } from 'config/constants/paths'
-import GuestLayout from 'layouts/GuestLayout/GuestLayout'
+import { PATHS } from '@config/constants/paths'
+import GuestLayout from '@layouts/GuestLayout/GuestLayout'
 import { lazy } from 'react'
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 

@@ -1,4 +1,3 @@
-
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 import { CategoryApi } from './categoriesApi.type'

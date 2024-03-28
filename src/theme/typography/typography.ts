@@ -1,5 +1,5 @@
 import { TypographyOptions } from '@mui/material/styles/createTypography'
-import { APP_FONT_FAMILY } from 'config/constants/fonts.config'
+import { APP_FONT_FAMILY } from '@config/constants/fonts.config'
 
 const typography: TypographyOptions = {
   fontFamily: APP_FONT_FAMILY,

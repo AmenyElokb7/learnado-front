@@ -1,0 +1,3 @@
+interface NoDataFoundProps {
+  message: string
+}
