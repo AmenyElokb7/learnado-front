@@ -1,15 +1,20 @@
-import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { QueryParams } from 'types/interfaces/QueryParams'
+import { toSnakeCase } from './string.helpers'
 
-export function QueryParamInjector(
-  url: string,
-  page: number,
-  rowsPerPage: number,
-  search: string,
-  filter: string,
-) {
-  return `${url}?page=${page}&rowsPerPage=${rowsPerPage}${search}${filter}`
-}
+export const injectPaginationParamsToUrl = (
+  baseUrl: string,
+  paginationParams: QueryParams,
+): string => {
+  // Get all the keys from the paginationParams object
+  const entries = Object.entries(paginationParams)
+  // Iterate over the entries
+  const params = entries
+    //Filter out the keys with undefined values
+    .filter(([, value]) => value !== undefined)
+    //Map the key value pairs to a string
+    .map(([key, value]) => `${toSnakeCase(key)}=${value}`)
+    //Join the strings with an ampersand
+    .join('&')
 
-export function searchQueryInjector(search: string, param2: string) {
-  return search ? `${param2}=${search}` : GLOBAL_VARIABLES.EMPTY_STRING
+  return `${baseUrl}?${params}`
 }

@@ -13,8 +13,3 @@ export interface CategoriesApiResponse {
   data: CategoryApi[]
   message: string
 }
-export interface PaginationParams {
-  search?: string
-  filter?: string
-  paginator?: { page: number; rowsPerPage: number }
-}

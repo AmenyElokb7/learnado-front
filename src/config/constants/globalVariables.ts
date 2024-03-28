@@ -3,6 +3,7 @@ export const GLOBAL_VARIABLES = {
   FALSE_STRING: 'false',
   EMPTY_STRING: '',
   APP_NAME: 'Learnado',
+  SINGLE_SPACE: ' ',
 
   SUCCESS: 'success',
   ERROR: 'error',
