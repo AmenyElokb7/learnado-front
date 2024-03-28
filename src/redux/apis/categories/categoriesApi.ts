@@ -6,7 +6,7 @@ import { PATHS } from '@config/constants/paths'
 
 import { ApiPaginationResponse } from '../type'
 import { transformFetchCategoryResponse } from './categoriesApi.transform'
-import { QueryParamInjector } from '@utils/helpers/queryParamInjector'
+import { injectPaginationParamsToUrl } from '@utils/helpers/queryParamInjector'
 import { MethodsEnum } from '@config/enums/method.enum'
 import { baseQueryConfig } from '@redux/baseQueryConfig'
 import { QueryParams } from 'types/interfaces/QueryParams'
@@ -18,7 +18,7 @@ export const categoriesApi = createApi({
     getCategories: builder.query<PaginationResponse<Category>, QueryParams>({
       query: (params) => {
         return {
-          url: QueryParamInjector(PATHS.CATEGORIES.ROOT, params),
+          url: injectPaginationParamsToUrl(PATHS.CATEGORIES.ROOT, params),
           method: MethodsEnum.GET,
         }
       },
