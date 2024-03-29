@@ -18,5 +18,8 @@ export const home = {
   no_course_found: 'No course found',
   buy_button: 'Buy Now',
   enroll_button: 'Enroll Now',
-  free : 'Free',
+  free: 'Free',
+  page_not_found: 'Oh No! Error 404',
+  page_not_found_description:
+    'This page you requested counld not found. May the force be with you!',
 }

@@ -19,4 +19,7 @@ export const home = {
   buy_button: 'Acheter maintenant',
   enroll_button: "S'inscrire maintenant",
   free: 'Gratuit',
+  page_not_found: 'Oh non! Erreur 404',
+  page_not_found_description:
+    'Cette page que vous avez demandée n’a pas été trouvée. Que la force soit avec vous!',
 }
