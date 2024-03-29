@@ -36,4 +36,7 @@ export const StyledCardImage = styled('img')(({ theme }) => ({
   [theme.breakpoints.down('sm')]: {
     width: '50px',
   },
+  [theme.breakpoints.down('md')]: {
+    width: '100px',
+  },
 }))

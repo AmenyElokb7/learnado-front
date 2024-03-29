@@ -13,7 +13,7 @@ export interface CourseApi {
   is_paid: 0 | 1
   price: number
   discount: number
-  duration: number
+  duration: string
   is_public: 0 | 1
   is_sequential: 0 | 1
   teaching_type: number

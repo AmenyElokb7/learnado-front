@@ -28,7 +28,7 @@ export const courseApi = createApi({
       query(id) {
         return {
           url: `${PATHS.COURSES}/${id}`,
-          method: 'GET',
+          method: MethodsEnum.GET,
         }
       },
     }),

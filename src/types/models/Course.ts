@@ -13,7 +13,7 @@ export interface Course {
   isPaid: boolean
   price: number
   discount: number
-  duration: number
+  duration: string
   isPublic: boolean
   isSequential: boolean
   teachingType: number

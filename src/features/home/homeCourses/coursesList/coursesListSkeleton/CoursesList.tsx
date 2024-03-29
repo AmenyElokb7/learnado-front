@@ -41,7 +41,7 @@ function CoursesList() {
             courseTitle={course.title}
             coursePrice={course.price.toString()}
             lessonsCount={course.lessonsCount}
-            duration={`${course.duration} Min`}
+            duration={course.duration}
             isPaid={course.isPaid}
           />
         ))}

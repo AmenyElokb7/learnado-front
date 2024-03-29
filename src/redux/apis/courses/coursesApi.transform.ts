@@ -6,6 +6,7 @@ import { generatePictureSrc } from '@utils/helpers/string.helpers'
 import { ModuleApi } from '../modules/moduleApi'
 import { Module } from 'types/models/Module'
 import { transformMedia } from '../transform'
+import { transformCourseDuration } from '@utils/helpers/date.helpers'
 
 export const transformFetchCoursesResponse = (
   response: ApiPaginationResponse<CourseApi>,
@@ -31,7 +32,7 @@ const transformCourses = (data: CourseApi[]): Course[] => {
     isPaid: course.is_paid === 1,
     price: course.price,
     discount: course.discount,
-    duration: course.duration,
+    duration: transformCourseDuration(parseInt(course.duration)),
     isPublic: course.is_public === 1,
     isSequential: course.is_sequential === 1,
     teachingType: course.teaching_type,
