@@ -2,15 +2,20 @@ import { configureStore } from '@reduxjs/toolkit'
 import snackbarReducer from './slices/snackbarSlice'
 import themeReducer from './slices/theme'
 import { categoriesApi } from './apis/categories/categoriesApi'
+import { courseApi } from './apis/courses/coursesApi'
 
 export const store = configureStore({
   reducer: {
     theme: themeReducer,
     snackbar: snackbarReducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,
+    [courseApi.reducerPath]: courseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(categoriesApi.middleware),
+    getDefaultMiddleware().concat(
+      categoriesApi.middleware,
+      courseApi.middleware,
+    ),
 })
 
 export type RootState = ReturnType<typeof store.getState>

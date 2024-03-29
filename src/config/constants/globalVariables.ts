@@ -4,8 +4,6 @@ export const GLOBAL_VARIABLES = {
   EMPTY_STRING: '',
   APP_NAME: 'Learnado',
   SINGLE_SPACE: ' ',
-  ZERO_STRING: '0.00',
-  FREE : 'FREE',
 
   SUCCESS: 'success',
   ERROR: 'error',

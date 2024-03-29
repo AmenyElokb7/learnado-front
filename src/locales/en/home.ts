@@ -15,6 +15,8 @@ export const home = {
   view_all: 'View all',
   no_data_found: 'No data found',
   no_category_found: 'No category found',
+  no_course_found: 'No course found',
   buy_button: 'Buy Now',
   enroll_button: 'Enroll Now',
+  free : 'Free',
 }

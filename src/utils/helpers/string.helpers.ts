@@ -1,3 +1,5 @@
+import noImage from '@assets/images/image_not_available.png'
+import { ConfigEnv } from '@config/configEnv'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 export const toSnakeCase = (str: string): string => {
@@ -35,4 +37,9 @@ export const ToCamelCase = (str: string): string => {
     }
   }
   return result
+}
+
+export const generatePictureSrc = (fileName?: string): string => {
+  if (!fileName) return noImage
+  return `${ConfigEnv.MEDIA_BASE_URL}/${fileName}`
 }

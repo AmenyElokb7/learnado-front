@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Bloc from '@components/bloc/Bloc'
 import { PATHS } from '@config/constants/paths'
 import CoursesList from './coursesList/coursesListSkeleton/CoursesList'
-import { BlocBackground } from './coursesCard/courseCardSkeleton/courseCard.style'
+import { BlocBackground } from './coursesCard/courseCard.style'
 
 function HomeCourses() {
   const navigate = useNavigate()

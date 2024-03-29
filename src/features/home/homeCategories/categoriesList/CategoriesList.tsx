@@ -10,17 +10,13 @@ import { useGetCategoriesQuery } from '@redux/apis/categories/categoriesApi'
 import NoDataFound from '@components/noDataFound/NoDataFound'
 import CategoriesListSkeleton from './categoriesListSkeleton/CategoriesListSkeleton'
 import usePagination from 'src/hooks/usePagination'
-import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { Category } from 'types/models/Category'
 
 function CategoriesList() {
   const { queryParams } = usePagination()
-  const { data: response, isLoading } = useGetCategoriesQuery({
-    keyword: queryParams.keyword || GLOBAL_VARIABLES.EMPTY_STRING,
-    page: queryParams.page,
-    perPage: queryParams.perPage,
-  })
+  const { data: response, isLoading } = useGetCategoriesQuery(queryParams)
 
-  const categories = response?.data
+  const categories = response?.data as Category[]
 
   const { t } = useTranslation()
 

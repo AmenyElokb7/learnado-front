@@ -1,9 +1,11 @@
 export interface CourseCardProps {
+  id: number
   image: string
   instructorName: string
   instructorAvatar: string
   courseTitle: string
+  isPaid: boolean
   coursePrice: string
-  lessonCount: number
+  lessonsCount: number
   duration: string
 }

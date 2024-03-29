@@ -1,5 +1,5 @@
 import { Avatar, Skeleton, Stack } from '@mui/material'
-import { CourseCardContainer } from './courseCard.style'
+import { CourseCardContainer } from '../courseCard.style'
 
 function CoursesCardSkeleton() {
   return (

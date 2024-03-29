@@ -15,6 +15,8 @@ export const home = {
   view_all: 'Afficher tous',
   no_dta_found: 'Données non trouvées',
   no_category_found: 'Categorie non trouvée',
+  no_course_found: 'Cours non trouvé',
   buy_button: 'Acheter maintenant',
   enroll_button: "S'inscrire maintenant",
+  free: 'Gratuit',
 }
