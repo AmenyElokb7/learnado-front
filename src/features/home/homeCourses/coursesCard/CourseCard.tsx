@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
-import { Divider, Stack, Typography } from '@mui/material'
+import { Divider, Stack, Tooltip, Typography } from '@mui/material'
 import MenuBookOutlinedIcon from '@mui/icons-material/MenuBookOutlined'
 import TimerOutlinedIcon from '@mui/icons-material/TimerOutlined'
 
@@ -12,14 +12,17 @@ import {
   CourseImage,
   CourseImageContainer,
   CourseTitle,
+  DiscountLabel,
   InstructorAvatar,
   InstructorInfo,
   InstructorJob,
   InstructorTitle,
   PriceLabel,
+  StyledDiscountedPrice,
 } from './courseCard.style'
 import { PATHS } from '@config/constants/paths'
 import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
+import { Discount } from '@mui/icons-material'
 
 const CourseCard = ({
   id,
@@ -28,6 +31,7 @@ const CourseCard = ({
   instructorAvatar,
   courseTitle,
   coursePrice,
+  discount,
   isPaid,
   lessonsCount,
   duration,
@@ -43,11 +47,20 @@ const CourseCard = ({
     <CourseCardContainer onClick={() => navigateToCourseDetailPage(id)}>
       <CourseImageContainer>
         <CourseImage src={image} alt={courseTitle} />
-        <PriceLabel>
-          <Typography variant="body2" fontWeight="bold">
-            {!isPaid ? t('home.free') : coursePrice}
-          </Typography>
-        </PriceLabel>
+        {discount !== '0DT' ? (
+          <DiscountLabel>
+            <Typography fontSize="20px" fontWeight="bold">
+              {discount}
+            </Typography>
+            <StyledDiscountedPrice>{coursePrice}</StyledDiscountedPrice>
+          </DiscountLabel>
+        ) : (
+          <PriceLabel>
+            <Typography variant="body2" fontWeight="bold">
+              {!isPaid ? t('home.free') : coursePrice}
+            </Typography>
+          </PriceLabel>
+        )}
       </CourseImageContainer>
 
       <InstructorInfo>
@@ -59,7 +72,9 @@ const CourseCard = ({
       </InstructorInfo>
 
       <CourseContent>
-        <CourseTitle variant="h3">{courseTitle}</CourseTitle>
+        <Tooltip title={courseTitle} placement="top">
+          <CourseTitle variant="h3">{courseTitle}</CourseTitle>
+        </Tooltip>
         <Stack direction={'row'} justifyContent={'space-between'} mt={1} mb={1}>
           <LabelWithIcon
             label={t('course.number_of_lessons', { count: lessonsCount })}

@@ -16,12 +16,15 @@ export const transformMedia = (medias: MediaApi[]): Media[] => {
 export function transformPaginationResponse<T>(
   paginationResponse: ApiPaginationResponse<T>,
 ) {
+  const { message, meta } = paginationResponse
+  const { current_page, per_page, total } = meta
   return {
-    message: paginationResponse.message,
+    message: message,
     meta: {
-      currentPage: paginationResponse.meta.current_page,
-      perPage: paginationResponse.meta.per_page,
-      total: paginationResponse.meta.total,
+      currentPage: current_page,
+      perPage: per_page,
+      total: total,
+      count: Math.ceil(total / per_page),
     },
   }
 }

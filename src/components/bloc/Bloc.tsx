@@ -10,16 +10,24 @@ import Title from '@components/typographies/title/Title'
 import { DescriptionStyled } from '@components/typographies/description/description.style'
 import { useTranslation } from 'react-i18next'
 
-function Bloc({ children, description, title, onClick }: BlocSectionProps) {
+function Bloc({
+  children,
+  description,
+  title,
+  hasButton,
+  onClick,
+}: BlocSectionProps) {
   const { t } = useTranslation()
   return (
     <BlocContainer>
       <ViewAllContainer>
         <FirstBloc spacing={2}>
           <Title>{t(title)}</Title>
-          <Button variant="outlined" onClick={onClick}>
-            {t('home.view_all')}
-          </Button>
+          {hasButton && (
+            <Button variant="outlined" onClick={onClick}>
+              {t('home.view_all')}
+            </Button>
+          )}
         </FirstBloc>
         <SecondBloc>
           <DescriptionStyled>{t(description)}</DescriptionStyled>

@@ -5,5 +5,6 @@ export interface PaginationResponse<T> {
     currentPage: number
     perPage: number
     total: number
+    count: number
   }
 }

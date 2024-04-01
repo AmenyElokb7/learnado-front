@@ -1,7 +1,7 @@
 export const topbar = {
   home: 'Home',
   instructors: 'Instructors',
-  aboutUs: 'About us',
+  about_us: 'About us',
   courses: 'Courses',
   signup: 'Signup',
   login: 'Login',

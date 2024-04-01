@@ -1,6 +1,5 @@
 import {
   Button,
-  Input,
   InputAdornment,
   Stack,
   TextField,
@@ -12,8 +11,6 @@ import { FOOTER_COLUMNS } from './Footer.constants'
 import { useTranslation } from 'react-i18next'
 import { useEffect, useRef, useState } from 'react'
 import { BLUE } from '@config/colors/colors'
-import { Link } from 'react-router-dom'
-import { PATHS } from '@config/constants/paths'
 import CustomLink from '@components/customLink/CustomLink'
 import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
@@ -46,7 +43,11 @@ function Footer() {
   return (
     <FooterContainer ref={footerRef} direction="row">
       <RotatingImage
-        isFooterVisible={isFooterVisible}
+        isfootervisible={
+          isFooterVisible
+            ? GLOBAL_VARIABLES.TRUE_STRING
+            : GLOBAL_VARIABLES.FALSE_STRING
+        }
         src={FooterImage}
         alt={GLOBAL_VARIABLES.APP_NAME}
         height="300px"

@@ -11,5 +11,5 @@ export const ItemsMain: Item[] = [
   { id: 2, label: 'topbar.courses', path: PATHS.COURSES.ROOT },
   { id: 3, label: 'topbar.instructors', path: PATHS.INSTUCTORS },
   { id: 4, label: 'topbar.learning_path', path: PATHS.LEARNING_PATH.ROOT },
-  { id: 5, label: 'topbar.aboutUs', path: PATHS.ABOUT_US },
+  { id: 5, label: 'topbar.about_us', path: PATHS.ABOUT_US },
 ]

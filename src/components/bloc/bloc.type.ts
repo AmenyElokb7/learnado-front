@@ -1,8 +1,9 @@
 import { ReactNode } from 'react'
 
 export interface BlocSectionProps {
-  children: ReactNode
+  children?: ReactNode
   title: string
   description: string
-  onClick: () => void
+  onClick?: () => void
+  hasButton?: boolean
 }

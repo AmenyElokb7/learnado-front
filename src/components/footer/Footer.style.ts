@@ -1,5 +1,6 @@
 import { styled, Stack } from '@mui/material'
 import { RotatingImageProps } from './Footer.type'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 export const FooterContainer = styled(Stack)(({ theme }) => ({
   backgroundColor: theme.palette.common.white,
@@ -21,15 +22,17 @@ export const FooterContainer = styled(Stack)(({ theme }) => ({
 
 export const RotatingImage = styled('img')(
   ({ theme }) =>
-    ({ isFooterVisible }: RotatingImageProps) => ({
-      animation: isFooterVisible ? 'spin 2s' : 'none',
+    ({ isfootervisible }: RotatingImageProps) => ({
+      marginRight: '100px',
+      animation:
+        isfootervisible === GLOBAL_VARIABLES.TRUE_STRING ? 'spin 2s' : 'none',
+      [theme.breakpoints.down('md')]: {
+        display: 'none',
+      },
+
       '@keyframes spin': {
         from: { transform: 'rotate(0deg)' },
         to: { transform: 'rotate(360deg)' },
       },
-      [theme.breakpoints.down('md')]: {
-        display: 'none',
-      },
-      marginRight: '100px',
     }),
 )

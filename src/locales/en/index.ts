@@ -3,6 +3,7 @@ import { alt } from './alt'
 import { topbar } from './../en/topbar'
 import { course } from './course'
 import { footer } from './footer'
+import {pagination} from './pagination'
 
 const en = {
   topbar,
@@ -10,5 +11,6 @@ const en = {
   home,
   course,
   footer,
+  pagination
 }
 export default en

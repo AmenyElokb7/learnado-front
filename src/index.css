@@ -1,5 +1,17 @@
 body {
   margin: 0;
+}
+* {
+  animation: fade-in 0.5s linear;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
 }

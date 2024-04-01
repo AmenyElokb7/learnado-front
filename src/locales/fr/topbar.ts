@@ -1,7 +1,7 @@
 export const topbar = {
   home: 'Accueil',
   instructors: 'Enseignants',
-  aboutUs: 'A propos de nous',
+  about_us: 'A propos de nous',
   courses: 'Cours',
   signup: 'Créer compte',
   login: 'Connexion',

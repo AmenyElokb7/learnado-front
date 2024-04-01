@@ -17,6 +17,7 @@ export const FirstBloc = styled(Stack)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   justifyContent: 'space-between',
+  marginBottom: '16px',
   [theme.breakpoints.down('sm')]: {
     display: 'bloc',
     flexDirection: 'column',

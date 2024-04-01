@@ -2,46 +2,51 @@ export const PATHS = {
   ROOT: '/',
 
   COURSES: {
-    ROOT: 'courses',
-    COURSES_DETAIL: 'courses/:courseId',
+    ROOT: '/courses',
+    COURSES_DETAIL: '/courses/:courseId',
   },
 
   LEARNING_PATH: {
-    ROOT: 'learning-path',
+    ROOT: '/learning-path',
   },
 
   CATEGORIES: {
-    ROOT: 'categories',
+    ROOT: '/categories',
   },
 
-  INSTUCTORS: 'instructors',
-  ABOUT_US: 'aboutUs',
+  INSTUCTORS: '/instructors',
+  ABOUT_US: '/aboutUs',
   AUTH: {
-    ROOT: 'auth',
-    LOGIN: 'login',
-    SIGNUP: 'signup',
-    FORGET_PASSWORD: 'forget-password',
-    RESET_PASSWORD: 'reset-password',
+    ROOT: '/auth',
+    LOGIN: '/auth/login',
+    SIGNUP: '/auth/signup',
+    FORGET_PASSWORD: '/auth/forget-password',
+    RESET_PASSWORD: '/auth/reset-password',
   },
 
   DASHBOARD: {
-    ROOT: 'dashboard',
+    ROOT: '/dashboard',
     ADMIN: {
-      ROOT: 'admin',
-      STUDENTS: 'students',
-      DESIGNERS: 'designers',
-      FACILITATORS: 'facilitators',
-      POSTS: 'posts',
-      EDIT_USER: 'students/:id',
-      ADD_USER: 'add',
+      ROOT: '/dashboard/admin',
+      STUDENTS: '/dashboard/admin/students',
+      DESIGNERS: '/dashboard/admin/designers',
+      FACILITATORS: '/dashboard/admin/facilitators',
+      POSTS: '/dashboard/admin/posts',
+      EDIT_USER: '/dashboard/admin/users/:id',
+      ADD_USER: '/dashboard/admin/add',
     },
   },
+  INSTRUCTOR_DASHBOARD: '/instructor-dashboard',
+  INSTRUCTOR_SUPPORT: '/instructor-support',
+  STUDENT_DASHBOARD: '/student-dashboard',
+  STUDENT_SUPPORT: '/student-support',
+
   MAIN: {
     HOME: '',
     ERROR: {
-      P_500: '500',
-      P_404: '404',
-      P_403: '403',
+      P_500: '/500',
+      P_404: '/404',
+      P_403: '/403',
     },
   },
   ANY: '*',

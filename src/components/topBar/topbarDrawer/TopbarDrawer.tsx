@@ -29,10 +29,12 @@ const TopbarDrawer = ({ open, toggleDrawer }: TopbarDrawerProps) => {
         <Divider />
 
         {ItemsMain.map((item) => (
-          <Stack m={2} key={item.id}>
-            <DrawerItem item={item} toggleDrawer={toggleDrawer} />
+          <>
+            <Stack m={2} key={item.id}>
+              <DrawerItem item={item} toggleDrawer={toggleDrawer} />
+            </Stack>
             <Divider />
-          </Stack>
+          </>
         ))}
 
         <Stack spacing={2} sx={{ p: 4 }}>

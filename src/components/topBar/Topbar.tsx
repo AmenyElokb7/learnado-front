@@ -12,13 +12,17 @@ import LanguageSwitcher from '@components/languageSwitcher/LanguageSwitcher'
 
 import lernado_dark from '@assets/logo/lernado-dark.png'
 import lernado from '@assets/logo/lernado.png'
+
 import { ThemeModeEnum } from '@config/enums/theme.enum'
 import TopbarDrawer from './topbarDrawer/TopbarDrawer'
 import { TopBarProps } from './topbar.type'
 import { LogoAvatar, TopBarContainer } from './Topbar.style'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { useLocation } from 'react-router-dom'
 
 export const TopBar = ({ items }: TopBarProps) => {
+  const location = useLocation()
+
   const [isScrolled, setIsScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
@@ -35,8 +39,7 @@ export const TopBar = ({ items }: TopBarProps) => {
       setIsScrolled(false)
     }
   }
-
-  const isHomePage = window.location.pathname === PATHS.ROOT
+  const isHomePage = location.pathname === PATHS.ROOT
 
   const toggleDrawer = (open: boolean) => {
     setOpen(open)
@@ -80,7 +83,7 @@ export const TopBar = ({ items }: TopBarProps) => {
               key={item.id}
               label={t(item.label)}
               to={item.path}
-              isActive={item.path === window.location.pathname}
+              isActive={item.path === location.pathname}
             />
           ))}
         </Stack>
