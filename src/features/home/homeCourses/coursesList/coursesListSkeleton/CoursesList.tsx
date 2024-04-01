@@ -1,21 +1,13 @@
-import { Grid } from '@mui/material'
+import { Stack } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 
-import { useGetCoursesQuery } from '@redux/apis/courses/coursesApi'
-import usePagination from 'src/hooks/usePagination'
-
 import CoursesListSkeleton from './CoursesListSkeleton'
-import { Course } from 'types/models/Course'
 import NoDataFound from '@components/noDataFound/NoDataFound'
 import CourseCard from '../../coursesCard/CourseCard'
+import { CoursesListProps } from './coursesList.type'
 
-function CoursesList() {
-  const { queryParams } = usePagination()
+function CoursesList({ courses, isLoading }: CoursesListProps) {
   const { t } = useTranslation()
-
-  const { data: coursesResponse, isLoading } = useGetCoursesQuery(queryParams)
-
-  const courses = coursesResponse?.data as Course[]
 
   if (courses?.length === 0)
     return <NoDataFound message={t('home.no_course_found')} />
@@ -23,13 +15,13 @@ function CoursesList() {
   if (isLoading) return <CoursesListSkeleton />
 
   return (
-    <Grid
-      item
-      container
-      spacing={2}
-      sx={{ alignContent: 'center', justifyContent: 'center' }}>
+    <Stack
+      direction={'row'}
+      flexWrap={'wrap'}
+      alignItems={'center'}
+      justifyContent={'center'}>
       {Boolean(courses) &&
-        courses.map((course) => (
+        courses?.map((course) => (
           <CourseCard
             key={course.id}
             id={course.id}
@@ -38,6 +30,7 @@ function CoursesList() {
             instructorAvatar={
               course?.facilitator?.media?.[0]?.fileName as string
             }
+            discount={course.discount}
             courseTitle={course.title}
             coursePrice={course.price.toString()}
             lessonsCount={course.lessonsCount}
@@ -45,7 +38,8 @@ function CoursesList() {
             isPaid={course.isPaid}
           />
         ))}
-    </Grid>
+        
+    </Stack>
   )
 }
 

@@ -10,8 +10,8 @@ import {
 import { BLUE, GREY } from '@config/colors/colors'
 
 export const CourseCardContainer = styled(Box)(({ theme }) => ({
-  width: '55vh',
-  margin: '0 15px 15px',
+  width: '50vh',
+  margin: '10px auto',
   borderRadius: 16,
   overflow: 'hidden',
   display: 'flex',
@@ -28,7 +28,7 @@ export const CourseCardContainer = styled(Box)(({ theme }) => ({
     },
   },
   [theme.breakpoints.down('sm')]: {
-    width: 'auto',
+    width: '40vh',
   },
 }))
 
@@ -48,6 +48,29 @@ export const PriceLabel = styled(Box)(({ theme }) => ({
   position: 'absolute',
   bottom: 10,
   right: 10,
+}))
+export const DiscountLabel = styled(Box)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  alignItems: 'center',
+  justifyItems: 'center',
+  backgroundColor: theme.palette.background.paper,
+  color: theme.palette.primary.main,
+  padding: theme.spacing(1, 2),
+  borderRadius: 16,
+  position: 'absolute',
+  bottom: 10,
+  right: 10,
+}))
+export const StyledDiscountedPrice = styled('span')(({ theme }) => ({
+  textDecoration: 'line-through',
+  color: theme.palette.text.secondary,
+  marginLeft: theme.spacing(1),
+  fontSize: '12px',
+  fontWeight: 'bold',
+  [theme.breakpoints.down('sm')]: {
+    fontSize: '12px',
+  },
 }))
 
 export const CourseImage = styled('img')({
@@ -89,6 +112,9 @@ export const CourseContent = styled(Stack)(() => ({
 export const CourseTitle = styled(Typography)(({ theme }) => ({
   color: BLUE.main,
   fontWeight: 'bold',
+  textOverflow: 'ellipsis',
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
   '&:hover': {
     color: theme.palette.primary.main,
   },

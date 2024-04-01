@@ -11,8 +11,8 @@ export interface Course {
   description: string
   language: Language
   isPaid: boolean
-  price: number
-  discount: number
+  price: string
+  discount: string
   duration: string
   isPublic: boolean
   isSequential: boolean

@@ -2,20 +2,20 @@ export const PATHS = {
   ROOT: '/',
 
   COURSES: {
-    ROOT: 'courses',
+    ROOT: '/courses',
     COURSES_DETAIL: 'courses/:courseId',
   },
 
   LEARNING_PATH: {
-    ROOT: 'learning-path',
+    ROOT: '/learning-path',
   },
 
   CATEGORIES: {
-    ROOT: 'categories',
+    ROOT: '/categories',
   },
 
-  INSTUCTORS: 'instructors',
-  ABOUT_US: 'aboutUs',
+  INSTUCTORS: '/instructors',
+  ABOUT_US: '/aboutUs',
   AUTH: {
     ROOT: 'auth',
     LOGIN: 'login',

@@ -12,6 +12,7 @@ function HomeCategries() {
     <Bloc
       title="home.category_section_title"
       description="home.category_section_description"
+      hasButton={true}
       onClick={navigateToCategoriesPage}>
       <CategoriesList />
     </Bloc>

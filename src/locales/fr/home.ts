@@ -22,4 +22,17 @@ export const home = {
   page_not_found: 'Oh non! Erreur 404',
   page_not_found_description:
     'Cette page que vous avez demandée n’a pas été trouvée. Que la force soit avec vous!',
+  share_knowledge:
+    'Vous voulez partager vos connaissances? Rejoignez-nous en tant que mentor',
+  share_knowledge_description:
+    'Transformez votre expertise en un catalyseur de changement en devenant mentor. Partagez vos connaissances et votre expérience précieuses, guidez les professionnels en herbe et ayez un impact durable dans votre domaine. Rejoignez notre communauté de mentors et contribuez à façonner les carrières des leaders de demain.',
+  service_title: 'Maîtrisez les compétences pour faire avancer votre carrière',
+  service_description:
+    'Améliorez votre trajectoire professionnelle en acquérant les compétences très demandées sur le marché du travail d’aujourd’hui. Élevez votre expertise, débloquez de nouvelles opportunités et propulsez votre carrière vers l’avant avec un apprentissage ciblé conçu pour faire avancer votre parcours professionnel.',
+  service_description_1: 'Restez motivé avec des instructeurs engageants',
+  service_description_2: 'Apprenez à votre rythme avec des vidéos à la demande',
+  service_description_3:
+    'Engagez-vous avec une communauté mondiale d’apprenants',
+  service_description_4:
+    'Obtenez des certificats partageables à la fin du cours',
 }

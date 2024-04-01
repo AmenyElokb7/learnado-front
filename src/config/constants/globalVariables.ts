@@ -12,7 +12,8 @@ export const GLOBAL_VARIABLES = {
   PAGINATION: {
     FIRST_PAGE: 1,
     CHUNK_ROWS_PER_PAGE: 6,
-    ROWS_PER_PAGE: 10,
+    ROWS_PER_PAGE: 9,
+    TOTAL_ITEMS: 0,
   },
   DEBOUNCE_TIME: {
     SHORT: 500,

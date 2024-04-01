@@ -1,3 +1,4 @@
+import { transformPaginationResponse } from '@redux/apis/transform'
 import { PaginationResponse } from 'types/interfaces/Pagination'
 import { Course } from 'types/models/Course'
 import { ApiPaginationResponse } from '../type'
@@ -7,31 +8,30 @@ import { ModuleApi } from '../modules/moduleApi'
 import { Module } from 'types/models/Module'
 import { transformMedia } from '../transform'
 import { transformCourseDuration } from '@utils/helpers/date.helpers'
+import {
+  formatPrice,
+  formatPriceWithDiscount,
+} from '@utils/helpers/price.helpers'
 
 export const transformFetchCoursesResponse = (
   response: ApiPaginationResponse<CourseApi>,
 ): PaginationResponse<Course> => {
   return {
-    message: response.message,
-    meta: {
-      currentPage: response.meta.current_page,
-      perPage: response.meta.per_page,
-      total: response.meta.total,
-    },
-    data: transformCourses(response.data),
+    ...transformPaginationResponse(response),
+    data: transformCourses(Object.values(response?.data)),
   }
 }
 
 const transformCourses = (data: CourseApi[]): Course[] => {
-  return data.map((course) => ({
+  return data?.map((course) => ({
     id: course.id,
     title: course.title,
     category: course.category_id,
     description: course.description,
     language: course.language_id,
     isPaid: course.is_paid === 1,
-    price: course.price,
-    discount: course.discount,
+    price: formatPrice(course.price),
+    discount: formatPriceWithDiscount(course.price, course.discount),
     duration: transformCourseDuration(parseInt(course.duration)),
     isPublic: course.is_public === 1,
     isSequential: course.is_sequential === 1,

@@ -21,6 +21,7 @@ function usePagination() {
   const handleSearchChange = (keyword: string) => {
     setQueryParams({ ...queryParams, keyword })
   }
+
   return {
     queryParams,
     handlePageChange,
