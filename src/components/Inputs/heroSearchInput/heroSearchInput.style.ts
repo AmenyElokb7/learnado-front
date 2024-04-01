@@ -14,7 +14,7 @@ export const SearchWrapper = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.common.white,
 
   [theme.breakpoints.down('md')]: {
-    width: 'auto',
+    width: '100%',
   },
   [theme.breakpoints.down('sm')]: {
     width: '100%',

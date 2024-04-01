@@ -22,6 +22,8 @@ export const HeaderContainer = styled(Box)(({ theme }) => ({
   },
   [theme.breakpoints.down('md')]: {
     width: 'auto',
+    display: 'block',
+    height: '130vh',
   },
 }))
 
@@ -57,13 +59,13 @@ export const HeaderContent = styled(Stack)(({ theme }) => ({
 
 export const HeaderImage = styled('img')(({ theme }) => ({
   height: '100%',
-  width: '35%',
   [theme.breakpoints.down('sm')]: {
     width: '100%',
     marginTop: '10vh',
     height: 'auto',
   },
   [theme.breakpoints.down('md')]: {
-    width: '100%',
+    marginTop: '10vh',
+    height: 'auto',
   },
 }))

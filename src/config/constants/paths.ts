@@ -25,10 +25,24 @@ export const PATHS = {
   },
 
   DASHBOARD: {
-    ROOT: '/dashboard',
+    ROOT: 'dashboard',
+    ADMIN: {
+      ROOT: 'admin',
+      STUDENTS: 'students',
+      DESIGNERS: 'designers',
+      FACILITATORS: 'facilitators',
+      POSTS: 'posts',
+      EDIT_USER: 'students/:id',
+      ADD_USER: 'add',
+    },
   },
-
+  MAIN: {
+    HOME: '',
+    ERROR: {
+      P_500: '500',
+      P_404: '404',
+      P_403: '403',
+    },
+  },
   ANY: '*',
-  NOT_FOUND: '404',
-  INTERNAL_SERVER_ERROR: '500',
 }

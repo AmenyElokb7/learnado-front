@@ -9,10 +9,14 @@ import { SliderSettings } from './categoriesList.constants'
 import { useGetCategoriesQuery } from '@redux/apis/categories/categoriesApi'
 import NoDataFound from '@components/noDataFound/NoDataFound'
 import CategoriesListSkeleton from './categoriesListSkeleton/CategoriesListSkeleton'
+import usePagination from 'src/hooks/usePagination'
+import { Category } from 'types/models/Category'
 
 function CategoriesList() {
-  const { data: response, isLoading } = useGetCategoriesQuery({})
-  const categories = response?.data
+  const { queryParams } = usePagination()
+  const { data: response, isLoading } = useGetCategoriesQuery(queryParams)
+
+  const categories = response?.data as Category[]
 
   const { t } = useTranslation()
 

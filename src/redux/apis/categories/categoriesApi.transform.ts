@@ -4,17 +4,13 @@ import { PaginationResponse } from 'types/interfaces/Pagination'
 import { Category } from 'types/models/Category'
 import { CategoryApi } from './categoriesApi.type'
 import { ConfigEnv } from '@config/configEnv'
+import { transformPaginationResponse } from '@redux/apis/transform'
 
 export const transformFetchCategoryResponse = (
   response: ApiPaginationResponse<CategoryApi>,
 ): PaginationResponse<Category> => {
   return {
-    message: response.message,
-    meta: {
-      currentPage: response.meta.current_page,
-      perPage: response.meta.per_page,
-      total: response.meta.total,
-    },
+    ...transformPaginationResponse(response),
     data: transformCategories(response.data),
   }
 }

@@ -11,7 +11,7 @@ export interface Media {
 export interface MediaApi {
   id: number
   model_type: string
-  Model_id: number
+  model_id: number
   file_name: string
   mime_type: string
   external_url?: string
