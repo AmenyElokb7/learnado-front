@@ -11,18 +11,25 @@ import CustomPagination from '@components/customPagination/CustomTablePagination
 import usePagination from 'src/hooks/usePagination'
 import { useGetCoursesQuery } from '@redux/apis/courses/coursesApi'
 import FilterHeader from './filterSection/filterHeader/FilterHeader'
+import useDebounce from 'src/hooks/useDebounce'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 const Courses = () => {
-  const { queryParams, handlePageChange } = usePagination()
-  const { isFetching, data } = useGetCoursesQuery(
-    { ...queryParams },
-    { refetchOnMountOrArgChange: true },
+  const { queryParams, handlePageChange, handleSearchChange } = usePagination()
+
+  const debouncedSearchQuery = useDebounce(
+    queryParams.keyword,
+    GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
   )
+  const { isFetching, data } = useGetCoursesQuery({
+    ...queryParams,
+    keyword: debouncedSearchQuery,
+  })
 
   return (
     <StackWithBackground>
       <Header />
-      <FilterHeader />
+      <FilterHeader total={data?.meta.total as number} />
 
       <Grid container mt={4}>
         <Grid item lg={9}>
@@ -37,7 +44,10 @@ const Courses = () => {
           </Stack>
         </Grid>
         <Grid item lg={3}>
-          <SearchSection />
+          <SearchSection
+            handleSearchChange={handleSearchChange}
+            seachValue={queryParams.keyword}
+          />
           <FilterCategories />
           <FilterPrice />
           <FilterTeachingType />

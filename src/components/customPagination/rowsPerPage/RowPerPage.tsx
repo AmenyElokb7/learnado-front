@@ -15,7 +15,7 @@ const RowsPerPage = ({
   onRowsPerPageChange,
 }: RowsPerPageProps) => {
   const handleRowsPerPageChange = (event: SelectChangeEvent) => {
-    onRowsPerPageChange(Number(event.target.value))
+    onRowsPerPageChange?.(Number(event.target.value))
   }
 
   return (

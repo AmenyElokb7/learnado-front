@@ -22,7 +22,7 @@ function CustomPagination({
           rowsPerPage={rowsPerPage}
           isLoading={isLoading}
           onRowsPerPageChange={
-            handleRowsPerPageChange as (newRowsPerPage: number) => void
+            handleRowsPerPageChange 
           }
         />
       )}
