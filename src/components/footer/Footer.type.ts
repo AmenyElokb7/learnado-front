@@ -15,5 +15,5 @@ export interface FooterItem {
 }
 
 export interface RotatingImageProps {
-  isFooterVisible: boolean
+  isfootervisible: string
 }

@@ -4,6 +4,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn'
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk'
 import AlternateEmailIcon from '@mui/icons-material/AlternateEmail'
 import { PATHS } from '@config/constants/paths'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 export const FOOTER_COLUMNS: FooterColumn[] = [
   {
     id: 1,
@@ -17,12 +18,12 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: 2,
         title: 'footer.instructor_dashboard',
-        path: '/instructor-dashboard',
+        path: PATHS.INSTRUCTOR_DASHBOARD,
       },
       {
         id: 3,
         title: 'footer.instructor_support',
-        path: '/instructor-support',
+        path: PATHS.INSTRUCTOR_SUPPORT,
       },
     ],
   },
@@ -43,7 +44,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: 3,
         title: 'footer.student_support',
-        path: '/student-support',
+        path: PATHS.STUDENT_SUPPORT,
       },
     ],
   },
@@ -59,12 +60,12 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       },
       {
         id: 2,
-        title: '+123456789',
+        title: GLOBAL_VARIABLES.PHONE_NUMBER,
         icon: <PhoneInTalkIcon />,
       },
       {
         id: 3,
-        title: 'learnado@gmail.com',
+        title: GLOBAL_VARIABLES.APP_EMAIL,
         icon: <AlternateEmailIcon />,
       },
     ],

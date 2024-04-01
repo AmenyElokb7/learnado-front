@@ -4,6 +4,8 @@ export const GLOBAL_VARIABLES = {
   EMPTY_STRING: '',
   APP_NAME: 'Learnado',
   SINGLE_SPACE: ' ',
+  PHONE_NUMBER: '+1234567890',
+  APP_EMAIL: "'learnado@gmail.com'",
 
   SUCCESS: 'success',
   ERROR: 'error',
