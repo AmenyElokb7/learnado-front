@@ -22,8 +22,7 @@ function ServiceSection() {
         alignItems="center">
         <Bloc
           title={t('home.service_title')}
-          description={t('home.service_description')}
-          hasButton={false}>
+          description={t('home.service_description')}>
           <Grid container ml={{ lg: 16 }}>
             {serviceCardsData.map((card, index) => (
               <Stack direction={{ sm: 'column', lg: 'row' }} key={index}>
@@ -46,7 +45,6 @@ function ServiceSection() {
           <Bloc
             title={t('home.share_knowledge')}
             description={t('home.share_knowledge_description')}
-            hasButton={false}
           />
         </Stack>
       </BlocBackground>

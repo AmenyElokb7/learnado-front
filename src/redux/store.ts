@@ -3,7 +3,7 @@ import snackbarReducer from './slices/snackbarSlice'
 import themeReducer from './slices/theme'
 import { categoriesApi } from './apis/categories/categoriesApi'
 import { courseApi } from './apis/courses/coursesApi'
-import searchQueryReducer from './slices/searchQuerySlice'
+import searchQueryReducer from './slices/appSlice'
 
 export const store = configureStore({
   reducer: {
