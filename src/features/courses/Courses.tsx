@@ -22,8 +22,10 @@ const Courses = () => {
     queryParams,
     handlePageChange,
     handleSearchChange,
-    handleFilterChange,
+    handleFiltersChange,
+    handleSortChange,
   } = usePagination()
+  console.log(queryParams)
 
   const debouncedSearchQuery = useDebounce(
     queryParams.keyword,
@@ -47,7 +49,10 @@ const Courses = () => {
   return (
     <StackWithBackground>
       <Header />
-      <FilterHeader total={data?.meta.total as number} />
+      <FilterHeader
+        total={data?.meta.total as number}
+        handleOrderChange={handleSortChange}
+      />
 
       <Grid container mt={4}>
         <Grid item lg={9}>
@@ -66,19 +71,9 @@ const Courses = () => {
             handleSearchChange={handleSearchChange}
             searchValue={queryParams.keyword}
           />
-          <FilterCategories
-            onCategoryChange={(categoryName) =>
-              handleFilterChange('category', categoryName)
-            }
-          />
-          <FilterPrice
-            onPriceChange={(isPaid) => handleFilterChange('isPaid', isPaid)}
-          />
-          <FilterTeachingType
-            onTeachingTypeChange={(teachinType) =>
-              handleFilterChange('teachingType', teachinType)
-            }
-          />
+          <FilterCategories handleFiltersChange={handleFiltersChange} />
+          <FilterPrice handleFiltersChange={handleFiltersChange} />
+          <FilterTeachingType handleFiltersChange={handleFiltersChange} />
         </Grid>
       </Grid>
     </StackWithBackground>

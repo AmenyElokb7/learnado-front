@@ -1,5 +1,5 @@
 import { FiltersOption } from 'types/interfaces/QueryParams'
 
-export interface FilterPriceProps {
+export interface FilterCategoriesProps {
   handleFiltersChange: (filter: FiltersOption) => void
 }

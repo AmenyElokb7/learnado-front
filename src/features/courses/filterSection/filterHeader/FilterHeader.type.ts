@@ -1,4 +1,4 @@
 export interface FilterHeaderProps {
-    total : number
-    
+  total: number
+  handleOrderChange: (orderDirection: string, orderBy: string) => void
 }

@@ -15,13 +15,24 @@ import { GREY } from '@config/colors/colors'
 import { filterOptions } from './FilterHeader.constants'
 import { FilterHeaderProps } from './FilterHeader.type'
 
-function FilterHeader({ total }: FilterHeaderProps) {
+function FilterHeader({ total, handleOrderChange }: FilterHeaderProps) {
   const { t } = useTranslation()
 
-  const [options, setOptions] = useState('newest')
+  const [selectedOption, setSelectedOption] = useState<number>(1)
 
   const handleChange = (event: SelectChangeEvent) => {
-    setOptions(event.target.value)
+    const selectedId = Number(event.target.value)
+    setSelectedOption(selectedId)
+
+    const selectedOptionDetails = filterOptions.find(
+      (option) => option.id === selectedId,
+    )
+    if (selectedOptionDetails) {
+      handleOrderChange(
+        selectedOptionDetails.direction,
+        selectedOptionDetails.orderBy,
+      )
+    }
   }
 
   return (
@@ -37,12 +48,12 @@ function FilterHeader({ total }: FilterHeaderProps) {
       <Stack direction={'row'} spacing={2} alignItems={'center'}>
         <FormControl sx={{ m: 1, width: 300 }}>
           <Select
-            value={options}
+            value={selectedOption.toString()} // Ensure the value is a string
             onChange={handleChange}
             input={<OutlinedInput />}>
-            {Object.entries(filterOptions).map(([key, value]) => (
-              <MenuItem key={key} value={key}>
-                {t(value)}
+            {filterOptions.map((option) => (
+              <MenuItem key={option.id} value={option.id}>
+                {t(option.label)}
               </MenuItem>
             ))}
           </Select>

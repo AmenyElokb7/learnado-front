@@ -1,3 +1,5 @@
+import { FiltersOption } from 'types/interfaces/QueryParams'
+
 export interface FilterTeachingTypeProps {
-  onTeachingTypeChange: (teachingType: string) => void
+  handleFiltersChange: (filter: FiltersOption) => void
 }

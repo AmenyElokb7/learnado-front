@@ -2,7 +2,7 @@ import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { useAppSelector } from '@redux/hooks'
 import { useState } from 'react'
 
-import { QueryParams } from 'types/interfaces/QueryParams'
+import { FiltersOption, QueryParams } from 'types/interfaces/QueryParams'
 
 function usePagination() {
   const searchQuery = useAppSelector((state) => state.appSlice.searchQuery)
@@ -15,6 +15,7 @@ function usePagination() {
 
   const handlePageChange = (newPage: number) => {
     setQueryParams({ ...queryParams, page: newPage })
+    window.scrollTo(300, 300)
   }
 
   const handleRowsPerPageChange = (newRowsPerPage: number) => {
@@ -25,8 +26,24 @@ function usePagination() {
     setQueryParams({ ...queryParams, keyword })
   }
 
-  const handleFilterChange = (filterName: string, value: string) => {
-    setQueryParams({ ...queryParams, [filterName]: value })
+  const handleFiltersChange = (filter: FiltersOption) => {
+    // Check if the filter already exists in the queryParams
+    if (queryParams.filters?.some((item) => item.id === filter.id)) {
+      // Remove the filter from the queryParams
+      setQueryParams({
+        ...queryParams,
+        filters: queryParams.filters?.filter((item) => item.id !== filter.id),
+      })
+      return
+    }
+    setQueryParams({
+      ...queryParams,
+      filters: [...(queryParams.filters ?? []), filter],
+    })
+  }
+
+  const handleSortChange = (direction: string, orderBy: string) => {
+    setQueryParams({ ...queryParams, direction, orderBy })
   }
 
   return {
@@ -34,7 +51,8 @@ function usePagination() {
     handlePageChange,
     handleRowsPerPageChange,
     handleSearchChange,
-    handleFilterChange,
+    handleFiltersChange,
+    handleSortChange,
   }
 }
 export default usePagination
