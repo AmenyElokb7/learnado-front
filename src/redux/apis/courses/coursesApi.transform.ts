@@ -19,7 +19,8 @@ export const transformFetchCoursesResponse = (
   return {
     ...transformPaginationResponse(response),
     data: transformCourses(Object.values(response?.data)),
-  }
+  };
+  
 }
 
 const transformCourses = (data: CourseApi[]): Course[] => {

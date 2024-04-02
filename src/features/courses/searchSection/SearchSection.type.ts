@@ -1,4 +1,4 @@
 export interface SearchSectionProps {
-  seachValue: string
+  searchValue: string
   handleSearchChange: (keyword: string) => void
 }

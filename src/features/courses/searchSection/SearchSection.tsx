@@ -3,12 +3,15 @@ import { CardRoot } from '../courses.style'
 import { InputAdornment, TextField } from '@mui/material'
 import { SearchSectionProps } from './SearchSection.type'
 
-function SearchSection({ seachValue, handleSearchChange }: SearchSectionProps) {
+function SearchSection({
+  searchValue,
+  handleSearchChange,
+}: SearchSectionProps) {
   return (
     <CardRoot>
       <TextField
         placeholder="search"
-        value={seachValue}
+        value={searchValue}
         onChange={(e) => handleSearchChange(e.target.value)}
         InputProps={{
           startAdornment: (

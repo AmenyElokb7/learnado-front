@@ -22,7 +22,6 @@ import {
 } from './courseCard.style'
 import { PATHS } from '@config/constants/paths'
 import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
-import { Discount } from '@mui/icons-material'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 const CourseCard = ({

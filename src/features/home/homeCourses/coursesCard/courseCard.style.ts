@@ -11,7 +11,7 @@ import { BLUE, GREY } from '@config/colors/colors'
 
 export const CourseCardContainer = styled(Box)(({ theme }) => ({
   width: '50vh',
-  margin: '10px auto',
+  margin: '10px',
   borderRadius: 16,
   overflow: 'hidden',
   display: 'flex',

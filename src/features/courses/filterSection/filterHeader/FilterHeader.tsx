@@ -31,7 +31,6 @@ function FilterHeader({ total }: FilterHeaderProps) {
       m={4}>
       <Stack direction={'row'} spacing={2} alignItems={'center'}>
         <Typography variant="h3" color={GREY.main}>
-          {/* TODO: from pagination */}
           {t('course.showing_total_courses', { total })}
         </Typography>
       </Stack>

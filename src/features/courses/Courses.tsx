@@ -7,7 +7,7 @@ import SearchSection from './searchSection/SearchSection'
 import FilterCategories from './filterSection/filterCategories/FilterCategories'
 import FilterPrice from './filterSection/filterPrice/FilterPrice'
 import FilterTeachingType from './filterSection/filterTeachingType/FilterTeachingType'
-import CustomPagination from '@components/customPagination/CustomTablePagination'
+import CustomPagination from '@components/customPagination/CustomPagination'
 import usePagination from 'src/hooks/usePagination'
 import { useGetCoursesQuery } from '@redux/apis/courses/coursesApi'
 import FilterHeader from './filterSection/filterHeader/FilterHeader'
@@ -16,8 +16,14 @@ import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { RootState } from '@redux/store'
+
 const Courses = () => {
-  const { queryParams, handlePageChange, handleSearchChange } = usePagination()
+  const {
+    queryParams,
+    handlePageChange,
+    handleSearchChange,
+    handleFilterChange,
+  } = usePagination()
 
   const debouncedSearchQuery = useDebounce(
     queryParams.keyword,
@@ -29,8 +35,9 @@ const Courses = () => {
   })
 
   const searchQuery = useSelector(
-    (state: RootState) => state.searchQuery.searchQuery,
+    (state: RootState) => state.appSlice.searchQuery,
   )
+
   useEffect(() => {
     if (searchQuery !== queryParams.keyword) {
       handleSearchChange(searchQuery)
@@ -57,11 +64,21 @@ const Courses = () => {
         <Grid item lg={3}>
           <SearchSection
             handleSearchChange={handleSearchChange}
-            seachValue={queryParams.keyword}
+            searchValue={queryParams.keyword}
           />
-          <FilterCategories />
-          <FilterPrice />
-          <FilterTeachingType />
+          <FilterCategories
+            onCategoryChange={(categoryName) =>
+              handleFilterChange('category', categoryName)
+            }
+          />
+          <FilterPrice
+            onPriceChange={(isPaid) => handleFilterChange('isPaid', isPaid)}
+          />
+          <FilterTeachingType
+            onTeachingTypeChange={(teachinType) =>
+              handleFilterChange('teachingType', teachinType)
+            }
+          />
         </Grid>
       </Grid>
     </StackWithBackground>

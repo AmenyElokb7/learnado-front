@@ -7,7 +7,7 @@ import searchQueryReducer from './slices/appSlice'
 
 export const store = configureStore({
   reducer: {
-    searchQuery: searchQueryReducer,
+    appSlice: searchQueryReducer,
     theme: themeReducer,
     snackbar: snackbarReducer,
     [categoriesApi.reducerPath]: categoriesApi.reducer,

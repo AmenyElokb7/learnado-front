@@ -1,14 +1,14 @@
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { PayloadAction, createSlice } from '@reduxjs/toolkit'
 
-export interface SearchState {
+export interface AppState {
   searchQuery: string
 }
-const initialState: SearchState = {
+const initialState: AppState = {
   searchQuery: GLOBAL_VARIABLES.EMPTY_STRING,
 }
 export const searchQuerySlice = createSlice({
-  name: 'searchQuery',
+  name: 'appSlice',
   initialState,
   reducers: {
     setSearchQuery: (state, action: PayloadAction<string>) => {

@@ -8,5 +8,5 @@ export const course = {
   online: 'Online',
   on_a_place: 'On a place',
   teaching_type: 'Course Type',
-  showing_total_courses: 'Showing {{total}} courses',
+  showing_total_courses: 'Total courses : {{total}}',
 }

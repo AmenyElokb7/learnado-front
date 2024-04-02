@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 * {
-  animation: fade-in 0.5s linear;
+  animation: fade-in 0.3s ease-in;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

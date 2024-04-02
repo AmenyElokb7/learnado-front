@@ -21,9 +21,7 @@ function CustomPagination({
         <RowsPerPage
           rowsPerPage={rowsPerPage}
           isLoading={isLoading}
-          onRowsPerPageChange={
-            handleRowsPerPageChange 
-          }
+          onRowsPerPageChange={handleRowsPerPageChange}
         />
       )}
 
