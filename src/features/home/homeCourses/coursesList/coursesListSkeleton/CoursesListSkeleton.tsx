@@ -3,8 +3,12 @@ import CoursesCardSkeleton from '../../coursesCard/courseCardSkeleton/CourseCard
 
 function CoursesListSkeleton() {
   return (
-    <Stack direction="row" spacing={4}>
-      {[...Array(3)].map((_, index) => (
+    <Stack
+      direction={'row'}
+      flexWrap={'wrap'}
+      alignItems={'center'}
+      justifyContent={'center'}>
+      {[...Array(9)].map((_, index) => (
         <CoursesCardSkeleton key={index} />
       ))}
     </Stack>

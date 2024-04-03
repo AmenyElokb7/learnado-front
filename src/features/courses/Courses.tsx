@@ -7,22 +7,47 @@ import SearchSection from './searchSection/SearchSection'
 import FilterCategories from './filterSection/filterCategories/FilterCategories'
 import FilterPrice from './filterSection/filterPrice/FilterPrice'
 import FilterTeachingType from './filterSection/filterTeachingType/FilterTeachingType'
-import CustomPagination from '@components/customPagination/CustomTablePagination'
+import CustomPagination from '@components/customPagination/CustomPagination'
 import usePagination from 'src/hooks/usePagination'
 import { useGetCoursesQuery } from '@redux/apis/courses/coursesApi'
 import FilterHeader from './filterSection/filterHeader/FilterHeader'
+import useDebounce from 'src/hooks/useDebounce'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { RootState } from '@redux/store'
 
 const Courses = () => {
-  const { queryParams, handlePageChange } = usePagination()
-  const { isFetching, data } = useGetCoursesQuery(
-    { ...queryParams },
-    { refetchOnMountOrArgChange: true },
+  const {
+    queryParams,
+    handlePageChange,
+    handleSearchChange,
+    handleFilterChange,
+  } = usePagination()
+
+  const debouncedSearchQuery = useDebounce(
+    queryParams.keyword,
+    GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
   )
+  const { isFetching, data } = useGetCoursesQuery({
+    ...queryParams,
+    keyword: debouncedSearchQuery,
+  })
+
+  const searchQuery = useSelector(
+    (state: RootState) => state.appSlice.searchQuery,
+  )
+
+  useEffect(() => {
+    if (searchQuery !== queryParams.keyword) {
+      handleSearchChange(searchQuery)
+    }
+  }, [searchQuery])
 
   return (
     <StackWithBackground>
       <Header />
-      <FilterHeader />
+      <FilterHeader total={data?.meta.total as number} />
 
       <Grid container mt={4}>
         <Grid item lg={9}>
@@ -37,10 +62,23 @@ const Courses = () => {
           </Stack>
         </Grid>
         <Grid item lg={3}>
-          <SearchSection />
-          <FilterCategories />
-          <FilterPrice />
-          <FilterTeachingType />
+          <SearchSection
+            handleSearchChange={handleSearchChange}
+            searchValue={queryParams.keyword}
+          />
+          <FilterCategories
+            onCategoryChange={(categoryName) =>
+              handleFilterChange('category', categoryName)
+            }
+          />
+          <FilterPrice
+            onPriceChange={(isPaid) => handleFilterChange('isPaid', isPaid)}
+          />
+          <FilterTeachingType
+            onTeachingTypeChange={(teachinType) =>
+              handleFilterChange('teachingType', teachinType)
+            }
+          />
         </Grid>
       </Grid>
     </StackWithBackground>

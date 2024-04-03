@@ -13,8 +13,9 @@ import { useState } from 'react'
 import { useTranslation } from 'react-i18next'
 import { GREY } from '@config/colors/colors'
 import { filterOptions } from './FilterHeader.constants'
+import { FilterHeaderProps } from './FilterHeader.type'
 
-function FilterHeader() {
+function FilterHeader({ total }: FilterHeaderProps) {
   const { t } = useTranslation()
 
   const [options, setOptions] = useState('newest')
@@ -30,8 +31,7 @@ function FilterHeader() {
       m={4}>
       <Stack direction={'row'} spacing={2} alignItems={'center'}>
         <Typography variant="h3" color={GREY.main}>
-          {/* TODO: from pagination */}
-          Showing 1–9 of 21 courses
+          {t('course.showing_total_courses', { total })}
         </Typography>
       </Stack>
       <Stack direction={'row'} spacing={2} alignItems={'center'}>

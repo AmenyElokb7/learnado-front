@@ -60,7 +60,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       },
       {
         id: 2,
-        title: GLOBAL_VARIABLES.PHONE_NUMBER,
+        title: GLOBAL_VARIABLES.APP_PHONE_NUMBER,
         icon: <PhoneInTalkIcon />,
       },
       {

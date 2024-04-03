@@ -4,8 +4,9 @@ export const GLOBAL_VARIABLES = {
   EMPTY_STRING: '',
   APP_NAME: 'Learnado',
   SINGLE_SPACE: ' ',
-  PHONE_NUMBER: '+1234567890',
+  APP_PHONE_NUMBER: '+1234567890',
   APP_EMAIL: "'learnado@gmail.com'",
+  FREE_CURRENCY: '0DT',
 
   SUCCESS: 'success',
   ERROR: 'error',
@@ -13,7 +14,7 @@ export const GLOBAL_VARIABLES = {
   APP_LAYOUT: { DRAWER_WIDTH: 240 },
   PAGINATION: {
     FIRST_PAGE: 1,
-    CHUNK_ROWS_PER_PAGE: 6,
+    CHUNK_ROWS_PER_PAGE: 8,
     ROWS_PER_PAGE: 9,
     TOTAL_ITEMS: 0,
   },

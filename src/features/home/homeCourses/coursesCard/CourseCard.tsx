@@ -22,7 +22,7 @@ import {
 } from './courseCard.style'
 import { PATHS } from '@config/constants/paths'
 import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
-import { Discount } from '@mui/icons-material'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 const CourseCard = ({
   id,
@@ -47,7 +47,7 @@ const CourseCard = ({
     <CourseCardContainer onClick={() => navigateToCourseDetailPage(id)}>
       <CourseImageContainer>
         <CourseImage src={image} alt={courseTitle} />
-        {discount !== '0DT' ? (
+        {discount !== GLOBAL_VARIABLES.FREE_CURRENCY ? (
           <DiscountLabel>
             <Typography fontSize="20px" fontWeight="bold">
               {discount}

@@ -19,7 +19,7 @@ function CoursesList({ courses, isLoading }: CoursesListProps) {
       direction={'row'}
       flexWrap={'wrap'}
       alignItems={'center'}
-      justifyContent={'center'}>
+      justifyContent={'flex-start'}>
       {Boolean(courses) &&
         courses?.map((course) => (
           <CourseCard
@@ -38,7 +38,6 @@ function CoursesList({ courses, isLoading }: CoursesListProps) {
             isPaid={course.isPaid}
           />
         ))}
-        
     </Stack>
   )
 }

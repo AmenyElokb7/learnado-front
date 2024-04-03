@@ -26,6 +26,7 @@ export const RotatingImage = styled('img')(
       marginRight: '100px',
       animation:
         isfootervisible === GLOBAL_VARIABLES.TRUE_STRING ? 'spin 2s' : 'none',
+
       [theme.breakpoints.down('md')]: {
         display: 'none',
       },

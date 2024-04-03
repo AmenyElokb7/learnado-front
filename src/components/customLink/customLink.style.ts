@@ -20,7 +20,7 @@ export const CustomLinkRoot = styled(NavLink)(
       '&:hover': {
         color: theme.palette.primary.main,
         '&::after': {
-          width: '100%',
+          width: isactive === GLOBAL_VARIABLES.TRUE_STRING ? 0 : '100%',
         },
       },
       '&::after': {
@@ -29,7 +29,7 @@ export const CustomLinkRoot = styled(NavLink)(
         bottom: 0,
         left: 0,
         width: '0%',
-        height: '2px',
+        height: '3px',
         backgroundColor: theme.palette.primary.main,
         transition: 'width .3s ease-in-out',
       },
