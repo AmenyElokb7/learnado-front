@@ -4,28 +4,36 @@ import { useGetCategoriesQuery } from '@redux/apis/categories/categoriesApi'
 import { Category } from 'types/models/Category'
 import usePagination from 'src/hooks/usePagination'
 import {
-  Checkbox,
+  Collapse,
   FormControlLabel,
+  IconButton,
   Radio,
   RadioGroup,
   Stack,
   Typography,
-  FormControl,
-  FormLabel,
-  FormHelperText,
 } from '@mui/material'
-import { BLUE, GREY } from '@config/colors/colors'
+import { BLUE } from '@config/colors/colors'
 import FilterCategoriesSkeleton from './FilterCategoriesSkeleton'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { FilterCategoriesProps } from './FilterCategories.type'
 
-function FilterCategories({ handleFiltersChange }: FilterCategoriesProps) {
+import { useState } from 'react'
+import { StyledExpandIcon } from '@components/styledExpandIcon/styledExpandIcon.style'
+
+function FilterCategories({
+  filtersQueryParams,
+  handleFiltersChange,
+}: FilterCategoriesProps) {
   const { t } = useTranslation()
   const { queryParams } = usePagination()
   const { data: response, isLoading } = useGetCategoriesQuery({
     ...queryParams,
     keyword: GLOBAL_VARIABLES.EMPTY_STRING,
   })
+
+  const [isOpened, setIsOpened] = useState(true)
+
+  const onCollapseClick = () => setIsOpened((prev) => !prev)
 
   const categories = response?.data as Category[]
 
@@ -34,26 +42,49 @@ function FilterCategories({ handleFiltersChange }: FilterCategoriesProps) {
   if (isLoading) return <FilterCategoriesSkeleton />
 
   return (
-    <CardRoot>
-      <Typography variant="h3" color={BLUE.main}>
-        {t('course.categories')}
-      </Typography>
-
-      {categories?.map((category) => (
-        <Stack key={category.id} color={GREY.main}>
-          <FormControlLabel
-            control={
-              <Checkbox
-                onChange={() =>
-                  handleFiltersChange({ id: category.id, name: 'category' })
-                }
-                name={category.title}
-              />
+    <CardRoot onClick={onCollapseClick}>
+      <Stack
+        direction="row"
+        justifyContent={'space-between'}
+        alignItems={'center'}>
+        <Typography variant="h3" color={BLUE.main}>
+          {t('course.categories')}
+        </Typography>
+        <IconButton>
+          <StyledExpandIcon
+            isopened={
+              isOpened
+                ? GLOBAL_VARIABLES.TRUE_STRING
+                : GLOBAL_VARIABLES.FALSE_STRING
             }
-            label={category.title}
           />
-        </Stack>
-      ))}
+        </IconButton>
+      </Stack>
+      <Collapse in={isOpened} timeout={700}>
+        <RadioGroup>
+          {categories?.map((category) => {
+            const isChecked = filtersQueryParams.filters?.some(
+              (item) => item.id === category.id,
+            )
+            return (
+              <FormControlLabel
+                key={category.id}
+                control={
+                  <Radio
+                    checked={isChecked ? true : false}
+                    value={category.id}
+                    onChange={() =>
+                      handleFiltersChange({ id: category.id, name: 'category' })
+                    }
+                    name={category.title}
+                  />
+                }
+                label={category.title}
+              />
+            )
+          })}
+        </RadioGroup>{' '}
+      </Collapse>
     </CardRoot>
   )
 }

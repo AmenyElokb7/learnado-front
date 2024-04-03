@@ -1,7 +1,7 @@
 import { MediaApi } from 'types/models/Media'
 import { Language } from 'types/models/Language'
 import { Category } from 'types/models/Category'
-import { UserApi } from '../auth/userApi.type'
+import { UserApi } from '../auth/usersApi.type'
 import { ModuleApi } from '../modules/moduleApi'
 
 export interface CourseApi {

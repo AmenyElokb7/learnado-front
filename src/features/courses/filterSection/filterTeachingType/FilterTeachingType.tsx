@@ -1,14 +1,19 @@
-import { Checkbox, FormControlLabel, Stack, Typography } from '@mui/material'
-import { CardRoot } from '../../courses.style'
-import { BLUE, GREY } from '@config/colors/colors'
-import { useTranslation } from 'react-i18next'
 import {
-  TeachingTypeEnum,
-  TeachingTypeFilterEnum,
-} from '@config/enums/teachingType.enum'
+  FormControlLabel,
+  Radio,
+  RadioGroup,
+  Typography,
+} from '@mui/material'
+import { CardRoot } from '../../courses.style'
+import { BLUE } from '@config/colors/colors'
+import { useTranslation } from 'react-i18next'
 import { FilterTeachingTypeProps } from './FilterTeachingType.type'
+import { TEACHING_TYPE_FILTERS } from './FiltersTeachingType.constants'
 
-function FilterTeachingType({ handleFiltersChange }: FilterTeachingTypeProps) {
+function FilterTeachingType({
+  filtersQueryParams,
+  handleFiltersChange,
+}: FilterTeachingTypeProps) {
   const { t } = useTranslation()
 
   return (
@@ -16,35 +21,33 @@ function FilterTeachingType({ handleFiltersChange }: FilterTeachingTypeProps) {
       <Typography variant="h3" color={BLUE.main}>
         {t('course.teaching_type')}
       </Typography>
-      <Stack spacing={1} color={GREY.main}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() =>
-                handleFiltersChange({
-                  id: TeachingTypeFilterEnum.ON_A_PLACE,
-                  name: 'teachingType',
-                })
+
+      <RadioGroup>
+        {TEACHING_TYPE_FILTERS.map((teachingType) => {
+          const isChecked = filtersQueryParams.filters?.some(
+            (item) => item.id === Number(teachingType.id),
+          )
+          return (
+            <FormControlLabel
+              key={teachingType.id}
+              control={
+                <Radio
+                  checked={isChecked ? true : false}
+                  value={teachingType.id}
+                  onChange={() =>
+                    handleFiltersChange({
+                      id: Number(teachingType.id),
+                      name: 'teachingType',
+                    })
+                  }
+                  name={teachingType.label}
+                />
               }
-              name="onAPlace"
+              label={t(teachingType.label)}
             />
-          }
-          label={t(`course.${TeachingTypeEnum.ON_A_PLACE}`)}
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() =>
-                handleFiltersChange({
-                  id: TeachingTypeFilterEnum.ONLINE,
-                  name: 'teachingType',
-                })
-              }
-            />
-          }
-          label={t(`course.${TeachingTypeEnum.ONLINE}`)}
-        />
-      </Stack>
+          )
+        })}
+      </RadioGroup>
     </CardRoot>
   )
 }

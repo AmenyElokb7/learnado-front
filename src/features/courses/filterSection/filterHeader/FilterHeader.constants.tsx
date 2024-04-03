@@ -1,3 +1,5 @@
+import { OrderDirectionEnum } from '@config/enums/orderDirection.enum'
+
 export const filterOptions = [
   {
     id: 1,
@@ -9,30 +11,30 @@ export const filterOptions = [
     id: 2,
     label: 'pagination.oldest',
     orderBy: 'created_at',
-    direction: 'asc',
+    direction: OrderDirectionEnum.ASC,
   },
   {
     id: 3,
     label: 'pagination.price_asc',
     orderBy: 'final_price',
-    direction: 'asc',
+    direction: OrderDirectionEnum.ASC,
   },
   {
     id: 4,
     label: 'pagination.price_desc',
     orderBy: 'final_price',
-    direction: 'desc',
+    direction: OrderDirectionEnum.DESC,
   },
   {
     id: 5,
     label: 'pagination.title_asc',
     orderBy: 'title',
-    direction: 'asc',
+    direction: OrderDirectionEnum.ASC,
   },
   {
     id: 6,
     label: 'pagination.title_desc',
     orderBy: 'title',
-    direction: 'desc',
+    direction: OrderDirectionEnum.DESC,
   },
 ]

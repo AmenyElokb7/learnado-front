@@ -1,11 +1,15 @@
-import { Checkbox, FormControlLabel, Stack, Typography } from '@mui/material'
+import { FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material'
 import { CardRoot } from '../../courses.style'
-import { BLUE, GREY } from '@config/colors/colors'
+import { BLUE } from '@config/colors/colors'
 import { useTranslation } from 'react-i18next'
 import { FilterPriceProps } from './FilterPrice.type'
-import { FilterPriceEnum } from '@config/enums/filterPrice.enum'
 
-function FilterPrice({ handleFiltersChange }: FilterPriceProps) {
+import { PRICE_FILTERS } from './FilterPrice.constants'
+
+function FilterPrice({
+  filtersQueryParams,
+  handleFiltersChange,
+}: FilterPriceProps) {
   const { t } = useTranslation()
 
   return (
@@ -13,36 +17,33 @@ function FilterPrice({ handleFiltersChange }: FilterPriceProps) {
       <Typography variant="h3" color={BLUE.main}>
         {t('course.price')}
       </Typography>
-      <Stack spacing={1} color={GREY.main}>
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() =>
-                handleFiltersChange({
-                  id: FilterPriceEnum.isPaid,
-                  name: 'isPaid',
-                })
+
+      <RadioGroup>
+        {PRICE_FILTERS.map((price) => {
+          const isChecked = filtersQueryParams.filters?.some(
+            (item) => item.id === Number(price.id),
+          )
+          return (
+            <FormControlLabel
+              key={price.id}
+              control={
+                <Radio
+                  checked={isChecked ? true : false}
+                  value={price.id}
+                  onChange={() =>
+                    handleFiltersChange({
+                      id: Number(price.id),
+                      name: 'price',
+                    })
+                  }
+                  name={price.label}
+                />
               }
-              name="isPaid"
+              label={t(price.label)}
             />
-          }
-          label={t('course.paid')}
-        />
-        <FormControlLabel
-          control={
-            <Checkbox
-              onChange={() =>
-                handleFiltersChange({
-                  id: FilterPriceEnum.isFree,
-                  name: 'isPaid',
-                })
-              }
-              name="isFree"
-            />
-          }
-          label={t('course.free')}
-        />
-      </Stack>
+          )
+        })}
+      </RadioGroup>
     </CardRoot>
   )
 }
