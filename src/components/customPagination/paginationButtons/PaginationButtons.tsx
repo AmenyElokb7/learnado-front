@@ -17,6 +17,7 @@ const PaginationButtons = ({
       <Pagination
         count={count}
         page={page}
+        sx={{ '& .MuiPaginationItem-root': { borderRadius: 2 } }}
         onChange={(_, value) => onPageChange(value)}
         variant="outlined"
         color="primary"

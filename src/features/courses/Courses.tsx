@@ -1,4 +1,4 @@
-import { Grid, Stack } from '@mui/material'
+import { Button, Grid, Stack } from '@mui/material'
 
 import CoursesList from '@features/home/homeCourses/coursesList/coursesListSkeleton/CoursesList'
 import { StackWithBackground } from '@components/stackWithBackground/stackWithBackground.style'
@@ -16,14 +16,19 @@ import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { RootState } from '@redux/store'
+import { useTranslation } from 'react-i18next'
 
 const Courses = () => {
   const {
     queryParams,
     handlePageChange,
     handleSearchChange,
-    handleFilterChange,
+    handleFiltersChange,
+    handleSortChange,
+    handleResetFilters,
   } = usePagination()
+
+  const { t } = useTranslation()
 
   const debouncedSearchQuery = useDebounce(
     queryParams.keyword,
@@ -47,7 +52,16 @@ const Courses = () => {
   return (
     <StackWithBackground>
       <Header />
-      <FilterHeader total={data?.meta.total as number} />
+      <FilterHeader
+        hasFilter={GLOBAL_VARIABLES.TRUE_STRING}
+        total={data?.meta.total as number}
+        handleOrderChange={handleSortChange}
+      />
+      <Stack alignItems="flex-end" justifyContent="flex-end" padding={1}>
+        <Button onClick={handleResetFilters}>
+          {t('pagination.reset_filters')}
+        </Button>
+      </Stack>
 
       <Grid container mt={4}>
         <Grid item lg={9}>
@@ -67,17 +81,16 @@ const Courses = () => {
             searchValue={queryParams.keyword}
           />
           <FilterCategories
-            onCategoryChange={(categoryName) =>
-              handleFilterChange('category', categoryName)
-            }
+            filtersQueryParams={queryParams}
+            handleFiltersChange={handleFiltersChange}
           />
           <FilterPrice
-            onPriceChange={(isPaid) => handleFilterChange('isPaid', isPaid)}
+            filtersQueryParams={queryParams}
+            handleFiltersChange={handleFiltersChange}
           />
           <FilterTeachingType
-            onTeachingTypeChange={(teachinType) =>
-              handleFilterChange('teachingType', teachinType)
-            }
+            filtersQueryParams={queryParams}
+            handleFiltersChange={handleFiltersChange}
           />
         </Grid>
       </Grid>

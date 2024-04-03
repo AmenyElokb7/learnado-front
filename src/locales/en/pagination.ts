@@ -7,4 +7,6 @@ export const pagination = {
   price_asc: 'Price (Low to High)',
   price_desc: 'Price (High to Low)',
   filter: 'Filters',
+  showing_total: 'Showing {{total}} results',
+  reset_filters: 'Reset filters',
 }

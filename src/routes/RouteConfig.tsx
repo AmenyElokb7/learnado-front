@@ -5,6 +5,7 @@ import { lazy } from 'react'
 import NotFound from '@pages/notFound/NotFound'
 import Courses from '@features/courses/Courses'
 import AboutUsPage from '@pages/about/AboutUsPage'
+import InstructorsPage from '@pages/instructors/InstructorsPage'
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 
 export const ROUTE_CONFIG: RouteObject[] = [
@@ -23,6 +24,10 @@ export const ROUTE_CONFIG: RouteObject[] = [
       {
         path: PATHS.ABOUT_US,
         element: <AboutUsPage />,
+      },
+      {
+        path: PATHS.INSTRUCTORS,
+        element: <InstructorsPage />,
       },
       { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
       {

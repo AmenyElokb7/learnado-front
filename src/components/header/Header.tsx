@@ -8,13 +8,18 @@ import Title from '@components/typographies/title/Title'
 import { DescriptionStyled } from '@components/typographies/description/description.style'
 import { PATHS } from '@config/constants/paths'
 import { HeaderRoot, PathStyled } from './header.style'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 const Header = () => {
   const { t } = useTranslation()
   const location = useLocation()
 
-  const pathname = location.pathname.split('/')
-  const title = pathname[pathname.length - 1]
+  const title = (
+    location.pathname.split('/').pop() || GLOBAL_VARIABLES.EMPTY_STRING
+  )
+    .replace(/([A-Z])/g, ' $1')
+    .trim()
+    .replace(/^./, (str) => str.toUpperCase())
 
   return (
     <HeaderRoot>
