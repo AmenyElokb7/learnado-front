@@ -94,10 +94,7 @@ export const TopBar = ({ items }: TopBarProps) => {
 
         {!isMobile && (
           <>
-            <Button
-              variant="contained"
-              component={Link}
-              to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`}>
+            <Button variant="contained" component={Link} to={PATHS.AUTH.SIGNUP}>
               {t('topbar.signup')}
             </Button>
             <Button
