@@ -97,10 +97,7 @@ export const TopBar = ({ items }: TopBarProps) => {
             <Button variant="contained" component={Link} to={PATHS.AUTH.SIGNUP}>
               {t('topbar.signup')}
             </Button>
-            <Button
-              variant="outlined"
-              component={Link}
-              to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`}>
+            <Button variant="outlined" component={Link} to={PATHS.AUTH.LOGIN}>
               {t('topbar.login')}
             </Button>
           </>

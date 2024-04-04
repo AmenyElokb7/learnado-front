@@ -2,15 +2,15 @@ import { InputConfig, InputOption } from '../../../types/interfaces/InputConfig'
 
 export const SIGNUP_USER_TYPES: InputOption[] = [
   {
-    label: 'auth.facilitator',
+    label: 'Facilitator',
     value: 2,
   },
   {
-    label: 'auth.student',
+    label: 'Student',
     value: 0,
   },
   {
-    label: 'auth.designer',
+    label: 'Designer',
     value: 3,
   },
 ]

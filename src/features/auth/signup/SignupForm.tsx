@@ -8,18 +8,37 @@ import CustomRadioButton from '@components/customRadioButton/CustomRadioButton'
 import CustomTextField from '@components/customTextField/CustomTextField'
 import CustomPasswordTextField from '@components/customPasswordTextField/CustomPasswordTextField'
 import { useTranslation } from 'react-i18next'
+import { useAppDispatch } from '@redux/hooks'
+import { useNavigate } from 'react-router-dom'
+import { showError, showSuccess } from '@redux/slices/snackbarSlice'
+import { useSignupMutation } from '@redux/apis/auth/usersApi'
 
 export default function SignUpForm() {
   const RegisterFormMethods = useForm<RegisterBody>({
     mode: 'onChange',
     shouldFocusError: true,
   })
-  const { watch } = RegisterFormMethods
-
-  const password = watch('password')
+  const dispatch = useAppDispatch()
+  const navigate = useNavigate()
+  const { reset, watch } = RegisterFormMethods
 
   const { t } = useTranslation()
 
+  const [registerApiAction, { isLoading }] = useSignupMutation()
+
+  const onSubmit = RegisterFormMethods.handleSubmit(async (values) => {
+    try {
+      await registerApiAction(values).unwrap()
+      dispatch(showSuccess(t('auth.registration_success')))
+      reset()
+      navigate('/login')
+    } catch (error) {
+      console.error(t('auth.registration_failed'), error)
+      dispatch(showError('Registration failed'))
+    }
+  })
+
+  const password = watch('password')
   return (
     <FormProvider {...RegisterFormMethods}>
       <Stack spacing={3} width={'100%'}>
@@ -55,6 +74,8 @@ export default function SignUpForm() {
         </Grid>
         <Stack alignItems={'center'}>
           <Button
+            onClick={onSubmit}
+            disabled={isLoading}
             variant="contained"
             fullWidth
             sx={{ padding: 1.5, margin: '0px 30px' }}>
@@ -64,11 +85,7 @@ export default function SignUpForm() {
 
         <Typography variant="body2" textAlign={'center'}>
           {t('auth.already_have_account')}
-          <CustomLink
-            to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`}
-            label="Login"
-            isActive={false}
-          />
+          <CustomLink to={PATHS.AUTH.LOGIN} label="Login" isActive={false} />
         </Typography>
       </Stack>
     </FormProvider>
