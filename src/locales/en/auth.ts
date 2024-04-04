@@ -6,4 +6,6 @@ export const auth = {
   facilitator: 'Facilitator',
   student: 'Student',
   designer: 'Designer',
+  login: 'Login',
+  dont_have_account: "Don't have an account? ",
 }

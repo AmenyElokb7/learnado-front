@@ -13,7 +13,8 @@ const InstructorsPage = lazy(
   () => import('src/pages/instructors/InstructorsPage'),
 )
 const NotFound = lazy(() => import('src/pages/notFound/NotFound'))
-const SignUp = lazy(() => import('src/pages/auth/signupPage'))
+const SignUpPage = lazy(() => import('src/pages/auth/signup/signupPage'))
+const LoginPage = lazy(() => import('src/pages/auth/login/LoginPage'))
 
 export const ROUTE_CONFIG: RouteObject[] = [
   {
@@ -47,7 +48,11 @@ export const ROUTE_CONFIG: RouteObject[] = [
       },
       {
         path: PATHS.AUTH.SIGNUP,
-        element: <SignUp />,
+        element: <SignUpPage />,
+      },
+      {
+        path: PATHS.AUTH.LOGIN,
+        element: <LoginPage />,
       },
     ],
   },

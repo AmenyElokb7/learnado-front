@@ -1,6 +1,6 @@
 import { styled } from '@mui/material/styles'
 import { Stack } from '@mui/material'
-import image from '@assets/images/footer-image.png'
+import image from '@assets/logo/school.png'
 
 export const WelcomeContainer = styled('div')(({ theme }) => ({
   flex: 1,
@@ -24,10 +24,8 @@ export const WelcomeContainer = styled('div')(({ theme }) => ({
     top: '50%',
     left: '50%',
     transform: 'translate(-50%, -50%)',
-    width: '60%',
-    height: '60%',
-    maxWidth: '600px',
-    maxHeight: '600px',
+    width: '40%',
+    height: '40%',
     background: `url(${image}) center/contain no-repeat`,
     backgroundBlendMode: 'overlay',
   },

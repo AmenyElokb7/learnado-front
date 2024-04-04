@@ -6,7 +6,7 @@ import SignUpForm from '@features/auth/signup/SignupForm'
 export const signupPage = () => {
   const { t } = useTranslation()
   return (
-    <Stack direction={'row'} marginTop={5}>
+    <Stack direction={'row'} marginTop={8}>
       <WelcomeContainer />
       <StyledPaper>
         <Stack direction="column" spacing={2}>
