@@ -9,4 +9,5 @@ export interface CourseCardProps {
   discount: string
   lessonsCount: number
   duration: string
+  createdAt: string
 }

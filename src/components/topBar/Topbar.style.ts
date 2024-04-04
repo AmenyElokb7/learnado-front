@@ -30,9 +30,10 @@ export const TopBarContainer = styled(Stack)(
       top: 0,
       zIndex: 1000,
       backgroundColor:
-        isscrolled === GLOBAL_VARIABLES.TRUE_STRING ||
-        ishomepage === GLOBAL_VARIABLES.FALSE_STRING
+        isscrolled === GLOBAL_VARIABLES.TRUE_STRING
           ? alpha(theme.palette.background.default, 0.3)
+          : ishomepage === GLOBAL_VARIABLES.FALSE_STRING
+          ? theme.palette.common.white
           : 'transparent',
     }),
 )

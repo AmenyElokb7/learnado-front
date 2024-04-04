@@ -1,16 +1,16 @@
-import { Button, Grid, Stack } from '@mui/material'
+import { Grid, Stack, Typography } from '@mui/material'
 
 import CoursesList from '@features/home/homeCourses/coursesList/coursesListSkeleton/CoursesList'
 import { StackWithBackground } from '@components/stackWithBackground/stackWithBackground.style'
 import Header from '@components/header/Header'
-import SearchSection from './searchSection/SearchSection'
-import FilterCategories from './filterSection/filterCategories/FilterCategories'
-import FilterPrice from './filterSection/filterPrice/FilterPrice'
-import FilterTeachingType from './filterSection/filterTeachingType/FilterTeachingType'
+import SearchSection from '../../features/courses/searchSection/SearchSection'
+import FilterCategories from '../../features/courses/filterSection/filterCategories/FilterCategories'
+import FilterPrice from '../../features/courses/filterSection/filterPrice/FilterPrice'
+import FilterTeachingType from '../../features/courses/filterSection/filterTeachingType/FilterTeachingType'
 import CustomPagination from '@components/customPagination/CustomPagination'
 import usePagination from 'src/hooks/usePagination'
 import { useGetCoursesQuery } from '@redux/apis/courses/coursesApi'
-import FilterHeader from './filterSection/filterHeader/FilterHeader'
+import FilterHeader from '../../features/courses/filterSection/filterHeader/FilterHeader'
 import useDebounce from 'src/hooks/useDebounce'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { useSelector } from 'react-redux'
@@ -53,16 +53,19 @@ const Courses = () => {
     <StackWithBackground>
       <Header />
       <FilterHeader
-        hasFilter={GLOBAL_VARIABLES.TRUE_STRING}
+        hasFilter
         total={data?.meta.total as number}
         handleOrderChange={handleSortChange}
       />
-      <Stack alignItems="flex-end" justifyContent="flex-end" padding={1}>
-        <Button onClick={handleResetFilters}>
+      <Stack alignItems={'flex-end'} mr={2}>
+        <Typography
+          color="primary"
+          fontWeight="medium"
+          onClick={handleResetFilters}
+          sx={{ cursor: 'pointer' }}>
           {t('pagination.reset_filters')}
-        </Button>
+        </Typography>
       </Stack>
-
       <Grid container mt={4}>
         <Grid item lg={9}>
           <CoursesList isLoading={isFetching} courses={data?.data} />
@@ -80,6 +83,7 @@ const Courses = () => {
             handleSearchChange={handleSearchChange}
             searchValue={queryParams.keyword}
           />
+
           <FilterCategories
             filtersQueryParams={queryParams}
             handleFiltersChange={handleFiltersChange}

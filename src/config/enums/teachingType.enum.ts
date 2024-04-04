@@ -1,6 +1,6 @@
 export enum TeachingTypeEnum {
-  ONLINE = 'online',
-  ON_A_PLACE = 'on_a_place',
+  ONLINE = 'course.online',
+  ON_A_PLACE = 'course.on_a_place',
 }
 
 export enum TeachingTypeFilterEnum {

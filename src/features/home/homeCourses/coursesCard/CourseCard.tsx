@@ -23,6 +23,7 @@ import {
 import { PATHS } from '@config/constants/paths'
 import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { DateRange } from '@mui/icons-material'
 
 const CourseCard = ({
   id,
@@ -35,6 +36,7 @@ const CourseCard = ({
   isPaid,
   lessonsCount,
   duration,
+  createdAt,
 }: CourseCardProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -62,14 +64,20 @@ const CourseCard = ({
           </PriceLabel>
         )}
       </CourseImageContainer>
-
-      <InstructorInfo>
-        <InstructorAvatar src={instructorAvatar} alt={instructorName} />
-        <Stack>
-          <InstructorTitle>{instructorName}</InstructorTitle>
-          <InstructorJob>{t('course.instructor')}</InstructorJob>
-        </Stack>
-      </InstructorInfo>
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        mr={3}>
+        <InstructorInfo>
+          <InstructorAvatar src={instructorAvatar} alt={instructorName} />
+          <Stack>
+            <InstructorTitle>{instructorName}</InstructorTitle>
+            <InstructorJob>{t('course.instructor')}</InstructorJob>
+          </Stack>
+        </InstructorInfo>
+        <LabelWithIcon label={createdAt} icon={<DateRange />} />
+      </Stack>
 
       <CourseContent>
         <Tooltip title={courseTitle} placement="top">

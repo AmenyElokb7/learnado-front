@@ -1,10 +1,5 @@
-import {
-  FormControlLabel,
-  Radio,
-  RadioGroup,
-  Typography,
-} from '@mui/material'
-import { CardRoot } from '../../courses.style'
+import { FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material'
+import { CardRoot } from '../../../../pages/courses/courses.style'
 import { BLUE } from '@config/colors/colors'
 import { useTranslation } from 'react-i18next'
 import { FilterTeachingTypeProps } from './FilterTeachingType.type'
@@ -25,7 +20,7 @@ function FilterTeachingType({
       <RadioGroup>
         {TEACHING_TYPE_FILTERS.map((teachingType) => {
           const isChecked = filtersQueryParams.filters?.some(
-            (item) => item.id === Number(teachingType.id),
+            (item) => item.id === Number(teachingType.id) && item.name === 'teachingType',
           )
           return (
             <FormControlLabel

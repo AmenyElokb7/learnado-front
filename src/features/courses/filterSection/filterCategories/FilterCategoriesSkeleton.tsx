@@ -1,5 +1,5 @@
 import CategoriesListSkeleton from './FilterCategoriesListSkeleton'
-import { CardRoot } from '../../courses.style'
+import { CardRoot } from '../../../../pages/courses/courses.style'
 import { Typography } from '@mui/material'
 import { BLUE } from '@config/colors/colors'
 import { useTranslation } from 'react-i18next'

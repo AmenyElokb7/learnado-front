@@ -36,6 +36,7 @@ function CoursesList({ courses, isLoading }: CoursesListProps) {
             lessonsCount={course.lessonsCount}
             duration={course.duration}
             isPaid={course.isPaid}
+            createdAt={course.createdAt}
           />
         ))}
     </Stack>
