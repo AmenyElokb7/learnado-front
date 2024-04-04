@@ -14,7 +14,6 @@ import { useTranslation } from 'react-i18next'
 import { GREY } from '@config/colors/colors'
 import { filterOptions } from './FilterHeader.constants'
 import { FilterHeaderProps } from './FilterHeader.type'
-import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 function FilterHeader({
   total,
@@ -50,7 +49,7 @@ function FilterHeader({
           {t('pagination.showing_total', { total })}
         </Typography>
       </Stack>
-      {hasFilter === GLOBAL_VARIABLES.TRUE_STRING && (
+      {hasFilter  && (
         <Stack direction={'row'} spacing={2} alignItems={'center'}>
           <FormControl sx={{ m: 1, width: 300 }}>
             <Select

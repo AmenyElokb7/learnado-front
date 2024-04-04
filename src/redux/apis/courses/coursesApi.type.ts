@@ -1,15 +1,15 @@
 import { MediaApi } from 'types/models/Media'
 import { Language } from 'types/models/Language'
-import { Category } from 'types/models/Category'
 import { UserApi } from '../auth/usersApi.type'
 import { ModuleApi } from '../modules/moduleApi'
 
 export interface CourseApi {
   id: number
   title: string
-  category_id: Category
+  category_id: number
   description: string
-  language_id: Language
+  language_id: number
+  language: Language
   is_paid: 0 | 1
   price: number
   discount: number
@@ -26,9 +26,9 @@ export interface CourseApi {
   media: MediaApi[]
   steps: ModuleApi[]
   lessons_count: number
+  subscribed_users_count: number
 }
 export interface SingleCourseResponseData {
-  status: number
   data: CourseApi
   message: string
 }

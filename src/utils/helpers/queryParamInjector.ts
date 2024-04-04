@@ -7,7 +7,6 @@ export const injectPaginationParamsToUrl = (
 ): string => {
   // Get all the keys from the paginationParams object
   const entries = Object.entries(paginationParams)
-  console.log('🚀 ~ entries:', entries)
   // Iterate over the entries
   const params = entries
     //Filter out the keys with undefined values
@@ -15,7 +14,9 @@ export const injectPaginationParamsToUrl = (
     //Map the key value pairs to a string
     .map(([key, value]) => {
       if (Array.isArray(value)) {
-        return value.map((item) => `${toSnakeCase(item.name)}=${item.id}`).join('&')
+        return value
+          .map((item) => `${toSnakeCase(item.name)}=${item.id}`)
+          .join('&')
       }
       return `${toSnakeCase(key)}=${value}`
     })

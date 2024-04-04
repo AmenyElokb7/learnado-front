@@ -3,9 +3,10 @@ import { PATHS } from '@config/constants/paths'
 import GuestLayout from '@layouts/GuestLayout/GuestLayout'
 import { lazy } from 'react'
 import NotFound from '@pages/notFound/NotFound'
-import Courses from '@features/courses/Courses'
+import Courses from '@pages/courses/Courses'
 import AboutUsPage from '@pages/about/AboutUsPage'
 import InstructorsPage from '@pages/instructors/InstructorsPage'
+import CourseDetail from '@pages/courses/courseDetails/CourseDetail'
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 
 export const ROUTE_CONFIG: RouteObject[] = [
@@ -20,6 +21,10 @@ export const ROUTE_CONFIG: RouteObject[] = [
       {
         path: PATHS.COURSES.ROOT,
         element: <Courses />,
+      },
+      {
+        path: PATHS.COURSES.COURSES_DETAIL,
+        element: <CourseDetail />,
       },
       {
         path: PATHS.ABOUT_US,

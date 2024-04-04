@@ -9,4 +9,11 @@ export const course = {
   on_a_place: 'Sur place',
   teaching_type: 'Type de cours',
   showing_total_courses: 'Totale des cours : {{total}}',
+  duration: 'Durée : {{duration}}',
+  enrolled_students: 'Étudiants inscrits : {{count}}',
+  modules: 'Contenu du cours',
+  about_instructor: "À propos de l'instructeur",
+  bo_steps_found: 'Aucune étape trouvée',
+  map: 'Vous pouvez nous trouver ici',
+  about: "Plus d'informations sur le cours",
 }

@@ -3,7 +3,7 @@ import { styled, Stack } from '@mui/material'
 
 export const IconWithLabelRoot = styled(Stack)(({ theme }) => ({
   '& svg': {
-    fontSize: '18px',
+    fontSize: '20px',
     color: BLUE.main,
   },
   '&:hover': {

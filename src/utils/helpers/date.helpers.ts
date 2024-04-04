@@ -3,7 +3,7 @@ import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 dayjs.extend(duration)
 
-export const transformCourseDuration = (durationInMinutes: number): string => {
+export const transformDuration = (durationInMinutes: number): string => {
   const dur = dayjs.duration(durationInMinutes, 'minutes')
   const hours = dur.hours()
   const minutes = dur.minutes()
@@ -12,4 +12,12 @@ export const transformCourseDuration = (durationInMinutes: number): string => {
       ? GLOBAL_VARIABLES.SINGLE_SPACE
       : GLOBAL_VARIABLES.EMPTY_STRING
   }${minutes > 0 ? `${minutes}m` : GLOBAL_VARIABLES.EMPTY_STRING}`
+}
+
+export const transformDateFormat = (date: string): string => {
+  return dayjs(date).format('DD/MM/YYYY')
+}
+
+export const transformDateTimeFormat = (date: string | undefined): string => {
+  return dayjs(date).format('DD/MM/YYYY HH:mm')
 }

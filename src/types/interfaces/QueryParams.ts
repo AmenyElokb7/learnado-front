@@ -1,4 +1,4 @@
-export interface QueryParams {
+  export interface QueryParams {
   page: number
   perPage: number
   keyword: string

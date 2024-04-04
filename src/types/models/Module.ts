@@ -5,10 +5,9 @@ export interface Module {
   id: number
   title: string
   description: string
-  duration: number
+  duration: string
   courseId: number
   createdAt: string
   media: Media[]
-  // TODO: Quiz is not optional
   quiz?: Quiz[]
 }

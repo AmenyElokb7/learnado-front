@@ -12,11 +12,11 @@ export const transformFetchUsersResponse = (
 ): PaginationResponse<User> => {
   return {
     ...transformPaginationResponse(response),
-    data: transformCourses(Object.values(response?.data)),
+    data: transformUsers(Object.values(response?.data)),
   }
 }
 
-const transformCourses = (data: UserApi[]): User[] => {
+const transformUsers = (data: UserApi[]): User[] => {
   return data?.map((user) => ({
     id: user.id,
     firstName: user.first_name,
@@ -33,7 +33,7 @@ const transformCourses = (data: UserApi[]): User[] => {
         ]
       : [
           {
-            modelId: null,
+            modelId: user.media[0]?.model_id,
             fileName: noUser,
           },
         ],

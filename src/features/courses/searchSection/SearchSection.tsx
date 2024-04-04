@@ -1,5 +1,5 @@
 import { Search } from '@mui/icons-material'
-import { CardRoot } from '../courses.style'
+import { CardRoot } from '../../../pages/courses/courses.style'
 import { InputAdornment, TextField } from '@mui/material'
 import { SearchSectionProps } from './SearchSection.type'
 

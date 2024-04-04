@@ -8,5 +8,12 @@ export const course = {
   online: 'Online',
   on_a_place: 'On a place',
   teaching_type: 'Course Type',
-  showing_total_courses: 'Total courses : {{total}}',
+  showing_total_courses: '{{total}} total courses ',
+  duration: 'Duration  {{duration}}',
+  enrolled_students: ' {{count}} enrolled students ',
+  modules: 'Course Content',
+  about_instructor: 'About the Instructor',
+  no_steps_found: 'No steps found',
+  map: 'You can find us here',
+  about: 'More information about the course',
 }

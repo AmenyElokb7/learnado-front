@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next'
-import { CardRoot } from '../../courses.style'
+import { CardRoot } from '../../../../pages/courses/courses.style'
 import { useGetCategoriesQuery } from '@redux/apis/categories/categoriesApi'
 import { Category } from 'types/models/Category'
 import usePagination from 'src/hooks/usePagination'
@@ -42,7 +42,7 @@ function FilterCategories({
   if (isLoading) return <FilterCategoriesSkeleton />
 
   return (
-    <CardRoot onClick={onCollapseClick}>
+    <CardRoot>
       <Stack
         direction="row"
         justifyContent={'space-between'}
@@ -50,7 +50,7 @@ function FilterCategories({
         <Typography variant="h3" color={BLUE.main}>
           {t('course.categories')}
         </Typography>
-        <IconButton>
+        <IconButton onClick={onCollapseClick}>
           <StyledExpandIcon
             isopened={
               isOpened
@@ -64,7 +64,7 @@ function FilterCategories({
         <RadioGroup>
           {categories?.map((category) => {
             const isChecked = filtersQueryParams.filters?.some(
-              (item) => item.id === category.id,
+              (item) => item.id === category.id && item.name === 'category',
             )
             return (
               <FormControlLabel
@@ -83,7 +83,7 @@ function FilterCategories({
               />
             )
           })}
-        </RadioGroup>{' '}
+        </RadioGroup>
       </Collapse>
     </CardRoot>
   )

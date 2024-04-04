@@ -1,5 +1,5 @@
 import { FormControlLabel, Radio, RadioGroup, Typography } from '@mui/material'
-import { CardRoot } from '../../courses.style'
+import { CardRoot } from '../../../../pages/courses/courses.style'
 import { BLUE } from '@config/colors/colors'
 import { useTranslation } from 'react-i18next'
 import { FilterPriceProps } from './FilterPrice.type'
@@ -21,7 +21,7 @@ function FilterPrice({
       <RadioGroup>
         {PRICE_FILTERS.map((price) => {
           const isChecked = filtersQueryParams.filters?.some(
-            (item) => item.id === Number(price.id),
+            (item) => item.id === Number(price.id) && item.name === 'price',
           )
           return (
             <FormControlLabel

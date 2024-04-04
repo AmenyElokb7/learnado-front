@@ -7,8 +7,9 @@ import { Language } from './Language'
 export interface Course {
   id: number
   title: string
-  category: Category
+  category: number
   description: string
+  language_id: number
   language: Language
   isPaid: boolean
   price: string
@@ -26,4 +27,5 @@ export interface Course {
   modules: Module[]
   media: Media[]
   lessonsCount: number
+  subscribedUsersCount: number
 }
