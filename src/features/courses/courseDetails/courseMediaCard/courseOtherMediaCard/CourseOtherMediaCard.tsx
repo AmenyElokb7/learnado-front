@@ -2,6 +2,7 @@ import RectangularCard from '@components/rectangularCard/RectangularCard'
 import { CourseOtherMediaCardProps } from './courseOtherMediaCard.type'
 import { ImageList, ImageListItem } from '@mui/material'
 import { useTranslation } from 'react-i18next'
+import { FilesMimeTypeEnum } from '@config/enums/fileMimeType.enum'
 
 function CourseOtherMediaCard({ medias }: CourseOtherMediaCardProps) {
   const { t } = useTranslation()
@@ -10,7 +11,7 @@ function CourseOtherMediaCard({ medias }: CourseOtherMediaCardProps) {
       <ImageList cols={2}>
         {medias.map((item) => (
           <ImageListItem key={item.id}>
-            {item.mimeType === 'video/mp4' ? (
+            {item.mimeType === FilesMimeTypeEnum.VIDEO ? (
               <video
                 controls
                 loop

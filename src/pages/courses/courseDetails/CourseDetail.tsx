@@ -27,8 +27,6 @@ export const CourseDetail = () => {
 
   if (!data?.data) return <NoDataFound message={t('course.not_found')} />
 
-  console.log('course', data.data)
-
   const stepsWithMedia = data.data?.modules?.map((module) => {
     return {
       ...module,
@@ -37,7 +35,6 @@ export const CourseDetail = () => {
   })
 
   const course = data?.data
-  console.log(course.description)
 
   return (
     <StackWithBackground>

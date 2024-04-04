@@ -6,6 +6,7 @@ import {
   styled,
 } from '@mui/material'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 export const StyledAccordion = styled(Accordion)({
   boxShadow: 'none',
@@ -40,7 +41,10 @@ export const StyledListItem = styled(ListItem)(({ theme }) => ({
 export const StyledExpandIcon = styled(KeyboardArrowDownOutlinedIcon)(
   () =>
     ({ isopened }: { isopened: string }) => ({
-      transform: isopened === 'true' ? 'rotate(180deg)' : 'rotate(0deg)',
+      transform:
+        isopened === GLOBAL_VARIABLES.TRUE_STRING
+          ? 'rotate(180deg)'
+          : 'rotate(0deg)',
       transition: 'transform 0.2 ease-in',
     }),
 )

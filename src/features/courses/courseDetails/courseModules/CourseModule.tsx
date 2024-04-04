@@ -18,16 +18,9 @@ import { PATHS } from '@config/constants/paths'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 import play from '@assets/logo/play.svg'
+import { CourseModuleProps } from './courseModule.type'
 
-function CourseLModule({
-  title,
-  media,
-  duration,
-}: {
-  title: string
-  media: { id: number; title: string }[]
-  duration: string
-}) {
+function CourseModule({ title, media, duration }: CourseModuleProps) {
   const [isOpened, setIsOpened] = useState(false)
 
   const onCollapseClick = () => setIsOpened((prev) => !prev)
@@ -93,4 +86,4 @@ function CourseLModule({
   )
 }
 
-export default CourseLModule
+export default CourseModule

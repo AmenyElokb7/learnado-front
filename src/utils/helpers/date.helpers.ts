@@ -19,5 +19,5 @@ export const transformDateFormat = (date: string): string => {
 }
 
 export const transformDateTimeFormat = (date: string | undefined): string => {
-  return dayjs(date).format('DD/MM/YYYY HH:mm')
+  return dayjs(date).format(GLOBAL_VARIABLES.DATES_FORMAT.DATE_TIME)
 }

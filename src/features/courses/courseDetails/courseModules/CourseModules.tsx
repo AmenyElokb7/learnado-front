@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next'
-import CourseLModule from './CourseLModule'
-import { CourseContentProps } from './courseModule.type'
+import CourseModule from './CourseModule'
+import { CourseContentProps } from './courseModules.type'
 import RectangularCard from '@components/rectangularCard/RectangularCard'
 
 export const CourseModules = ({ steps }: CourseContentProps) => {
@@ -8,7 +8,7 @@ export const CourseModules = ({ steps }: CourseContentProps) => {
   return (
     <RectangularCard title={t('course.modules')}>
       {steps.map((step) => (
-        <CourseLModule
+        <CourseModule
           key={step.id}
           title={step.title}
           media={step.media}

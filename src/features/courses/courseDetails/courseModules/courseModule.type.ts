@@ -1,5 +1,5 @@
-import { Module } from 'types/models/Module'
-
-export interface CourseContentProps {
-  steps: Module[]
+export interface CourseModuleProps {
+  title: string
+  media: { id: number; title: string }[]
+  duration: string
 }
