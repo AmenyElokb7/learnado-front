@@ -1,6 +1,5 @@
 import { Typography, Button, Stack, Grid } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
-import { SIGNUP_FORM_CONFIG } from './SignupForm.constants'
 import { RegisterBody } from './SignupForm.type'
 import CustomLink from '@components/customLink/CustomLink'
 import { PATHS } from '@config/constants/paths'
@@ -10,8 +9,10 @@ import CustomPasswordTextField from '@components/customPasswordTextField/CustomP
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '@redux/hooks'
 import { useNavigate } from 'react-router-dom'
-import { showError, showSuccess } from '@redux/slices/snackbarSlice'
+import { showError } from '@redux/slices/snackbarSlice'
 import { useSignupMutation } from '@redux/apis/auth/usersApi'
+import { SIGNUP_FORM_CONFIG } from './SignupForm.constants'
+import { AlertType } from '@config/enums/alertType.enum'
 
 export default function SignUpForm() {
   const RegisterFormMethods = useForm<RegisterBody>({
@@ -20,7 +21,7 @@ export default function SignUpForm() {
   })
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
-  const { reset, watch } = RegisterFormMethods
+  const { watch } = RegisterFormMethods
 
   const { t } = useTranslation()
 
@@ -28,13 +29,12 @@ export default function SignUpForm() {
 
   const onSubmit = RegisterFormMethods.handleSubmit(async (values) => {
     try {
-      await registerApiAction(values).unwrap()
-      dispatch(showSuccess(t('auth.registration_success')))
-      reset()
-      navigate('/login')
-    } catch (error) {
-      console.error(t('auth.registration_failed'), error)
-      dispatch(showError('Registration failed'))
+      const response = await registerApiAction(values).unwrap()
+      navigate(PATHS.AUTH.LOGIN, {
+        state: { message: response.message, severity: AlertType.SUCCESS },
+      })
+    } catch (error: any) {
+      dispatch(showError(error.data.message as string))
     }
   })
 

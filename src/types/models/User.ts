@@ -5,7 +5,7 @@ export interface User {
   email: string
   role: number
   coursesCount?: number
-  media: {
+  media?: {
     modelId: number
     fileName: string
   }[]

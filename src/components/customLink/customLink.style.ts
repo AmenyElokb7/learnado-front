@@ -11,7 +11,7 @@ export const CustomLinkRoot = styled(NavLink)(
       textDecoration: 'none',
       borderBottom:
         isactive === GLOBAL_VARIABLES.TRUE_STRING
-          ? `3px solid ${theme.palette.primary.main}`
+          ? `2px solid ${theme.palette.primary.main}`
           : GLOBAL_VARIABLES.EMPTY_STRING,
       color:
         isactive === GLOBAL_VARIABLES.TRUE_STRING
@@ -29,7 +29,7 @@ export const CustomLinkRoot = styled(NavLink)(
         bottom: 0,
         left: 0,
         width: '0%',
-        height: '3px',
+        height: '2px',
         backgroundColor: theme.palette.primary.main,
         transition: 'width .3s ease-in-out',
       },

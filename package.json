@@ -17,6 +17,7 @@
     "@types/datejs": "^0.0.36",
     "@types/i18next": "^13.0.0",
     "@types/mapbox-gl": "^3.1.0",
+    "@types/node": "^20.12.4",
     "crypto-js": "^4.2.0",
     "dayjs": "^1.11.10",
     "i18next": "^23.9.0",

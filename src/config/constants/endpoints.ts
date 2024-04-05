@@ -3,4 +3,5 @@ export const ENDPOINTS = {
   COURSES: 'courses',
   FACILITATORS: 'facilitators',
   REGISTER: 'register',
+  LOGIN: 'login',
 }

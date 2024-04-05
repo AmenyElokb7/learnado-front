@@ -40,7 +40,11 @@ export const snackbarSlice = createSlice({
       }
     },
     clearSnackbarState: (state) => {
-      state.alert = null
+      state.alert = {
+        open: false,
+        message: GLOBAL_VARIABLES.EMPTY_STRING,
+        type: AlertType.SUCCESS,
+      }
     },
   },
 })
