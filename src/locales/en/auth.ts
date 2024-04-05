@@ -8,7 +8,7 @@ export const auth = {
   designer: 'Designer',
   login: 'Login',
   dont_have_account: "Don't have an account? ",
-  login_failed: "Login failed",
+  login_failed: 'Login failed',
   first_name: 'First Name',
   last_name: 'Last Name',
   password: 'Password',
@@ -25,6 +25,10 @@ export const auth = {
   email_required: 'Email is required',
   email_invalid: 'Invalid email',
   password_required: 'Password is required',
-  password_pattern: 'Password must be at least 8 characters long, including an uppercase, a lowercase, and a number',
-  
+  password_pattern:
+    'Password must be at least 8 characters long, including an uppercase, a lowercase, and a number',
+  email: 'Email Address',
+  password_placeholder: 'Enter your password',
+  confirm_password_placeholder: 'Confirm your password',
+  forget_password: 'Forget Password',
 }

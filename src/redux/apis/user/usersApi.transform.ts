@@ -1,13 +1,11 @@
 import { transformPaginationResponse } from '@redux/apis/transform'
 import { PaginationResponse } from 'types/interfaces/Pagination'
 import { ApiPaginationResponse } from '../type'
-import { RegisterBodyApi, UserApi } from './usersApi.type'
+import { UserApi } from './usersApi.type'
 import { User } from 'types/models/User'
 import { generatePictureSrc } from '@utils/helpers/string.helpers'
 
 import noUser from '@assets/images/noUser.png'
-import { RegisterBody } from '@features/auth/signup/SignupForm.type'
-import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 export const transformFetchUsersResponse = (
@@ -16,15 +14,6 @@ export const transformFetchUsersResponse = (
   return {
     ...transformPaginationResponse(response),
     data: transformUsers(Object.values(response?.data)),
-  }
-}
-
-export const transformRegisterResponse = (
-  response: ItemDetailsResponse<UserApi>,
-): ItemDetailsResponse<User> => {
-  return {
-    ...response,
-    data: transformSingleUser(response.data),
   }
 }
 
@@ -55,17 +44,5 @@ export const transformSingleUser = (data: UserApi): User => {
             fileName: noUser,
           },
         ],
-  }
-}
-
-export function signupEncoder(user: RegisterBody): RegisterBodyApi {
-  const { firstName, lastName, email, password, confirmPassword, role } = user
-  return {
-    first_name: firstName,
-    last_name: lastName,
-    email: email,
-    password: password,
-    password_confirmation: confirmPassword,
-    role: role,
   }
 }

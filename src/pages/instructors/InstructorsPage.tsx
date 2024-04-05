@@ -6,7 +6,7 @@ import FilterHeader from '@features/courses/filterSection/filterHeader/FilterHea
 import SearchSection from '@features/courses/searchSection/SearchSection'
 import InstructorsList from '@features/instructors/instructorCardSkeleton/instructorsList/InstructorsList'
 import { Stack } from '@mui/material'
-import { useGetFacilitatorsQuery } from '@redux/apis/auth/usersApi'
+import { useGetFacilitatorsQuery } from '@redux/apis/user/usersApi'
 import { useAppSelector } from '@redux/hooks'
 import { useEffect } from 'react'
 import useDebounce from 'src/hooks/useDebounce'

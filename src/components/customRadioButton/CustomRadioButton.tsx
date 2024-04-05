@@ -1,4 +1,4 @@
-import { Controller, useFormContext } from "react-hook-form";
+import { Controller, useFormContext } from 'react-hook-form'
 import {
   FormControl,
   RadioGroup,
@@ -10,17 +10,20 @@ import {
   Typography,
   useTheme,
   useMediaQuery,
-} from "@mui/material";
-import { CustomRadioButtonProps } from "./CustomRadioButton.type";
-import { StyledErrorIcon } from "./CustomRadioButton.style";
+} from '@mui/material'
+import { CustomRadioButtonProps } from './CustomRadioButton.type'
+import { StyledErrorIcon } from './CustomRadioButton.style'
+import { useTranslation } from 'react-i18next'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 function CustomRadioButton({ config }: CustomRadioButtonProps) {
-  const { control } = useFormContext();
-  const { name, label, defaultValue, options, disabled, rules } = config;
+  const { t } = useTranslation()
+  const { control } = useFormContext()
+  const { name, label, defaultValue, options, disabled, rules } = config
 
-  const theme = useTheme();
+  const theme = useTheme()
 
-  const isMobile = useMediaQuery(theme.breakpoints.down("md"));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   return (
     <FormControl component="fieldset">
@@ -32,12 +35,13 @@ function CustomRadioButton({ config }: CustomRadioButtonProps) {
         render={({ field, fieldState }) => (
           <>
             <Stack direction="row" spacing={1} alignItems="center">
-              <Typography variant="h6">{label}</Typography>
+              <Typography variant="h6">{t(label)}</Typography>
               {fieldState.error && (
                 <Tooltip
-                  title={fieldState.error?.message || "Error"}
-                  placement="right"
-                >
+                  title={t(
+                    fieldState.error?.message || GLOBAL_VARIABLES.EMPTY_STRING,
+                  )}
+                  placement="right">
                   <IconButton>
                     <StyledErrorIcon />
                   </IconButton>
@@ -47,14 +51,13 @@ function CustomRadioButton({ config }: CustomRadioButtonProps) {
             <RadioGroup
               value={field.value}
               onChange={field.onChange}
-              row={isMobile ? false : true}
-            >
+              row={isMobile ? false : true}>
               {options?.map((option, index) => (
                 <FormControlLabel
                   key={index}
                   value={option?.value.toString()}
                   control={<Radio disabled={disabled} />}
-                  label={option.label}
+                  label={t(option.label)}
                 />
               ))}
             </RadioGroup>
@@ -62,7 +65,7 @@ function CustomRadioButton({ config }: CustomRadioButtonProps) {
         )}
       />
     </FormControl>
-  );
+  )
 }
 
-export default CustomRadioButton;
+export default CustomRadioButton

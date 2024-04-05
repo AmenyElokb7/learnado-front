@@ -27,4 +27,8 @@ export const auth = {
   password_required: 'Mot de passe requis',
   password_pattern:
     'Le mot de passe doit comporter au moins 8 caractères, y compris une majuscule, une minuscule et un chiffre',
+  password_placeholder: 'Entrez votre mot de passe',
+  confirm_password_placeholder: 'Confirmez votre mot de passe',
+  email: 'Adresse E-mail',
+  forget_password: 'Mot de passe oublié',
 }

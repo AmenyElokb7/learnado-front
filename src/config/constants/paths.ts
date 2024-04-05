@@ -18,11 +18,11 @@ export const PATHS = {
 
   ABOUT_US: '/AboutUs',
   AUTH: {
-    ROOT: '/auth',
-    LOGIN: '/auth/login',
-    SIGNUP: '/auth/signup',
-    FORGET_PASSWORD: '/auth/forget-password',
-    RESET_PASSWORD: '/auth/reset-password',
+    ROOT: 'auth',
+    LOGIN: 'login',
+    SIGNUP: 'signup',
+    FORGET_PASSWORD: 'forget-password',
+    RESET_PASSWORD: 'reset-password',
   },
 
   DASHBOARD: {
@@ -41,6 +41,8 @@ export const PATHS = {
   INSTRUCTOR_SUPPORT: '/instructor-support',
   STUDENT_DASHBOARD: '/student-dashboard',
   STUDENT_SUPPORT: '/student-support',
+  PROFILE: '/profile',
+  MY_PROGRAM: '/my-program',
 
   MAIN: {
     HOME: '',

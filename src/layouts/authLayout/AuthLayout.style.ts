@@ -1,11 +1,9 @@
-import { styled } from '@mui/material/styles'
-import { Stack } from '@mui/material'
-import image from '@assets/images/home-bg-1-img.png'
+import { styled } from '@mui/material'
 
+import image from '@assets/images/home-bg-1-img.png'
 export const WelcomeContainer = styled('div')(({ theme }) => ({
   flex: 1,
   background: `linear-gradient(0.25turn, ${theme.palette.secondary.light} ,${theme.palette.primary.light}, ${theme.palette.primary.light})`,
-
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
@@ -42,12 +40,6 @@ export const WelcomeContainer = styled('div')(({ theme }) => ({
     },
   },
 }))
-
-export const FormSection = styled(Stack)({
-  justifyContent: 'center',
-  alignItems: 'center',
-})
-
 export const StyledPaper = styled('div')(({ theme }) => ({
   padding: theme.spacing(6),
   width: '700px',

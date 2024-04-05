@@ -1,16 +1,17 @@
-import { Button, Stack, Grid } from '@mui/material'
+import { Button, Stack, Grid, Box, Typography } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'
-
-import CustomTextField from '@components/customTextField/CustomTextField'
-import CustomPasswordTextField from '@components/customPasswordTextField/CustomPasswordTextField'
+import CustomTextField from '@components/Inputs/customTextField/CustomTextField'
+import CustomPasswordTextField from '@components/Inputs/customPasswordTextField/CustomPasswordTextField'
 import { SIGNUP_FORM_CONFIG } from '../signup/SignupForm.constants'
 import { LoginOptions } from './Login.type'
 import { useTranslation } from 'react-i18next'
 import { useAppDispatch } from '@redux/hooks'
 import { useNavigate } from 'react-router-dom'
-import { useLoginMutation } from '@redux/apis/auth/usersApi'
 import { showError } from '@redux/slices/snackbarSlice'
 import { PATHS } from '@config/constants/paths'
+import CustomLink from '@components/customLink/CustomLink'
+import { useLoginMutation } from '@redux/apis/auth/authApi'
+import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
 export default function LoginForm() {
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
@@ -42,17 +43,20 @@ export default function LoginForm() {
             <CustomPasswordTextField config={SIGNUP_FORM_CONFIG.password} />
           </Grid>
         </Grid>
-        <Stack spacing={2} mt={4}>
-          <Button
-            fullWidth
-            variant="contained"
-            color="primary"
-            onClick={onSubmit}
-            disabled={isLoading}>
-            {t('auth.login')}
-          </Button>
-        </Stack>
+        <CustomLoadingButton isLoading={isLoading} onClick={onSubmit}>
+          {t('auth.login')}
+        </CustomLoadingButton>
       </Stack>
+      <Box textAlign="center" marginTop={2}>
+        <Typography variant="body2">
+          {t('auth.dont_have_account')}
+          <CustomLink
+            to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`}
+            label={t('auth.signup')}
+            isActive={false}
+          />
+        </Typography>
+      </Box>
     </FormProvider>
   )
 }

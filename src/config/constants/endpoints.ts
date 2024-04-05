@@ -4,4 +4,5 @@ export const ENDPOINTS = {
   FACILITATORS: 'facilitators',
   REGISTER: 'register',
   LOGIN: 'login',
+  LOGOUT: 'logout',
 }

@@ -2,6 +2,8 @@ import { Navigate, RouteObject } from 'react-router-dom'
 import { PATHS } from '@config/constants/paths'
 import GuestLayout from '@layouts/GuestLayout/GuestLayout'
 import { lazy } from 'react'
+import { GuestGuard } from '@guards/GuestGuard'
+import AuthLayout from '@layouts/authLayout/AuthLayout'
 
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 const Courses = lazy(() => import('src/pages/courses/Courses'))
@@ -17,6 +19,20 @@ const SignUpPage = lazy(() => import('src/pages/auth/signup/signupPage'))
 const LoginPage = lazy(() => import('src/pages/auth/login/LoginPage'))
 
 export const ROUTE_CONFIG: RouteObject[] = [
+  {
+    path: PATHS.AUTH.ROOT,
+    element: <AuthLayout />,
+    children: [
+      {
+        path: PATHS.AUTH.LOGIN,
+        element: <LoginPage />,
+      },
+      {
+        path: PATHS.AUTH.SIGNUP,
+        element: <SignUpPage />,
+      },
+    ],
+  },
   {
     path: PATHS.ROOT,
     element: <GuestLayout />,
@@ -41,19 +57,11 @@ export const ROUTE_CONFIG: RouteObject[] = [
         path: PATHS.INSTRUCTORS,
         element: <InstructorsPage />,
       },
-      { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
-      {
-        path: PATHS.ANY,
-        element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
-      },
-      {
-        path: PATHS.AUTH.SIGNUP,
-        element: <SignUpPage />,
-      },
-      {
-        path: PATHS.AUTH.LOGIN,
-        element: <LoginPage />,
-      },
     ],
+  },
+  { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
+  {
+    path: PATHS.ANY,
+    element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
   },
 ]

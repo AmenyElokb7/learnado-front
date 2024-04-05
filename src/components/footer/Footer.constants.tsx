@@ -13,7 +13,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: 1,
         title: 'footer.become_instructor',
-        path: PATHS.AUTH.SIGNUP,
+        path: `/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`,
       },
       {
         id: 2,
@@ -34,7 +34,7 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: 1,
         title: 'footer.become_student',
-        path: PATHS.AUTH.SIGNUP,
+        path: `/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`,
       },
       {
         id: 2,

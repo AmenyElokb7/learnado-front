@@ -1,13 +1,21 @@
-import { useState, useEffect } from 'react'
-import { Stack, Button, useMediaQuery, useTheme } from '@mui/material'
+import { useState, useEffect, MouseEvent } from 'react'
+import {
+  Stack,
+  Button,
+  useMediaQuery,
+  useTheme,
+  Menu,
+  MenuItem,
+  IconButton,
+} from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useTranslation } from 'react-i18next'
 
 import { PATHS } from '@config/constants/paths'
 import CustomLink from '@components/customLink/CustomLink'
-import CustomIconButton from '@components/customIconButton/CustomIconButton'
+import CustomIconButton from '@components/buttons/customIconButton/CustomIconButton'
 import LanguageSwitcher from '@components/languageSwitcher/LanguageSwitcher'
 
 import lernado_dark from '@assets/logo/lernado-dark.png'
@@ -19,14 +27,19 @@ import { TopBarProps } from './topbar.type'
 import { LogoAvatar, TopBarContainer } from './Topbar.style'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { useLocation } from 'react-router-dom'
+import { useAppDispatch, useAppSelector } from '@redux/hooks'
+import { logout, selectAuth } from '@redux/slices/authSlice'
+import { InstructorAvatar } from '@features/home/homeCourses/coursesCard/courseCard.style'
+import { UserRoleEnum } from '@config/enums/role.enum'
 
-export const TopBar = ({ items }: TopBarProps) => {
+export const TopBar = ({ items, authItems }: TopBarProps) => {
+  const navigate = useNavigate()
   const location = useLocation()
 
   const [isScrolled, setIsScrolled] = useState(false)
   const [open, setOpen] = useState(false)
 
-  const navigate = useNavigate()
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
 
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'))
@@ -50,6 +63,19 @@ export const TopBar = ({ items }: TopBarProps) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  const { isAuthenticated, user } = useAppSelector(selectAuth)
+
+  console.log(isAuthenticated)
+
+  const dispatch = useAppDispatch()
+
+  const handleMenuOpen = (event: MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  const handleMenuClose = () => {
+    setAnchorEl(null)
+  }
   return (
     <TopBarContainer
       isscrolled={
@@ -92,14 +118,54 @@ export const TopBar = ({ items }: TopBarProps) => {
       <Stack direction="row" alignItems="center" spacing={2}>
         <LanguageSwitcher />
 
-        {!isMobile && (
+        {isAuthenticated ? (
           <>
-            <Button variant="contained" component={Link} to={PATHS.AUTH.SIGNUP}>
-              {t('topbar.signup')}
-            </Button>
-            <Button variant="outlined" component={Link} to={PATHS.AUTH.LOGIN}>
-              {t('topbar.login')}
-            </Button>
+            <IconButton onClick={handleMenuOpen}>
+              <InstructorAvatar
+                alt={user?.firstName}
+                src={user?.media?.[0].fileName}
+              />
+            </IconButton>
+            <Menu
+              anchorEl={anchorEl}
+              open={Boolean(anchorEl)}
+              onClose={handleMenuClose}>
+              {user?.role === UserRoleEnum.USER && (
+                <>
+                  {authItems?.map((item) => (
+                    <MenuItem key={item.id} onClick={() => navigate(item.path)}>
+                      {t(item.label)}
+                    </MenuItem>
+                  ))}
+                </>
+              )}
+              <MenuItem onClick={() => dispatch(logout())} />
+            </Menu>
+          </>
+        ) : (
+          <>
+            {!isMobile && (
+              <>
+                <Button
+                  variant="contained"
+                  onClick={() =>
+                    navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`, {
+                      replace: true,
+                    })
+                  }>
+                  {t('topbar.signup')}
+                </Button>
+                <Button
+                  variant="outlined"
+                  onClick={() =>
+                    navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`, {
+                      replace: true,
+                    })
+                  }>
+                  {t('topbar.login')}
+                </Button>
+              </>
+            )}
           </>
         )}
       </Stack>
