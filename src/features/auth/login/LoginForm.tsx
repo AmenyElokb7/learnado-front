@@ -15,7 +15,8 @@ import { LoginRequest } from '@redux/apis/auth/authApi.type'
 import { IError } from 'types/interfaces/Error'
 import { HttpStatusEnum } from '@config/enums/httpStatus.enum'
 import { useState } from 'react'
-import CustomErrorDialog from '@components/dialogs/customErrorDialog/CustomErrorDialog'
+import CustomDialog from '@components/dialogs/CustomDialog'
+import errorImage from '@assets/images/error.gif'
 export default function LoginForm() {
   const dispatch = useAppDispatch()
 
@@ -76,8 +77,10 @@ export default function LoginForm() {
           />
         </Box>
       </FormProvider>
-      <CustomErrorDialog
-        content={t('errors.account_not_verified')}
+      <CustomDialog
+        children={errorImage}
+        onButtonClick={() => setOpenModal(false)}
+        title={t('errors.account_not_verified')}
         open={openModal}
         onClose={() => setOpenModal(false)}
       />

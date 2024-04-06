@@ -1,14 +1,20 @@
-import { DialogActions, Typography } from '@mui/material'
+import { Button, DialogActions, Typography } from '@mui/material'
 import {
   StyledDialog,
   StyledDialogContent,
   StyledImage,
-} from '../CustomDialog.style'
-import { CustomDialogProps } from '../CustomDialog.type'
-import success from '@assets/logo/success.gif'
+} from './CustomDialog.style'
+import { CustomDialogProps } from './CustomDialog.type'
 import { Close } from '@mui/icons-material'
+import { t } from 'i18next'
 
-function CustomSuccessDialog({ open, onClose, content }: CustomDialogProps) {
+function CustomDialog({
+  open,
+  onClose,
+  title,
+  children,
+  onButtonClick,
+}: CustomDialogProps) {
   return (
     <StyledDialog open={open} onClose={onClose}>
       <DialogActions>
@@ -20,12 +26,15 @@ function CustomSuccessDialog({ open, onClose, content }: CustomDialogProps) {
       </DialogActions>
       <StyledDialogContent>
         <Typography variant="h3" fontWeight={'medium'} lineHeight={2}>
-          {content}
+          {title}
         </Typography>
-        <StyledImage src={success} />
+        <StyledImage src={children} />
+        <Button variant="outlined" onClick={onButtonClick}>
+          {t('auth.ok')}
+        </Button>
       </StyledDialogContent>
     </StyledDialog>
   )
 }
 
-export default CustomSuccessDialog
+export default CustomDialog

@@ -39,4 +39,5 @@ export const auth = {
     "Votre compte a été créé avec succès, veuillez attendre que l'administrateur approuve votre compte",
   dashboard: 'Tableau de bord',
   account_not_approved: 'Votre compte n est pas encore approuvé',
+  ok: 'OK',
 }

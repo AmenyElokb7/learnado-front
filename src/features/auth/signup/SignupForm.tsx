@@ -10,10 +10,11 @@ import CustomPasswordTextField from '@components/Inputs/customPasswordTextField/
 import { useTranslation } from 'react-i18next'
 import { SIGNUP_FORM_CONFIG } from './SignupForm.constants'
 import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
-import CustomSuccessDialog from '@components/dialogs/customSuccessDialog/CustomSuccessDialog'
 import { useSignupMutation } from '@redux/apis/auth/authApi'
 import { IError } from 'types/interfaces/Error'
 import useError from 'src/hooks/useError'
+import CustomDialog from '@components/dialogs/CustomDialog'
+import successImage from '@assets/logo/success.gif'
 
 export default function SignUpForm() {
   const [openModal, setOpenModal] = useState(false)
@@ -98,10 +99,12 @@ export default function SignUpForm() {
           />
         </Box>
       </FormProvider>
-      <CustomSuccessDialog
-        content={t('auth.success_signup')}
+      <CustomDialog
+        children={successImage}
+        title={t('auth.success_signup')}
         open={openModal}
         onClose={() => setOpenModal(false)}
+        onButtonClick={() => setOpenModal(false)}
       />
     </>
   )
