@@ -4,9 +4,11 @@ import {
   Button,
   useMediaQuery,
   useTheme,
-  Menu,
-  MenuItem,
   IconButton,
+  Divider,
+  Typography,
+  ListItemIcon,
+  ListItemText,
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 
@@ -24,15 +26,25 @@ import lernado from '@assets/logo/lernado.png'
 import { ThemeModeEnum } from '@config/enums/theme.enum'
 import TopbarDrawer from './topbarDrawer/TopbarDrawer'
 import { TopBarProps } from './topbar.type'
-import { LogoAvatar, TopBarContainer } from './Topbar.style'
+import {
+  LogoAvatar,
+  StyledMenu,
+  StyledMenuItem,
+  TopBarContainer,
+  UserTitle,
+} from './Topbar.style'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { useLocation } from 'react-router-dom'
-import { useAppDispatch, useAppSelector } from '@redux/hooks'
-import { logout, selectAuth } from '@redux/slices/authSlice'
+import { useAppDispatch } from '@redux/hooks'
+import { logout } from '@redux/slices/authSlice'
 import { InstructorAvatar } from '@features/home/homeCourses/coursesCard/courseCard.style'
-import { UserRoleEnum } from '@config/enums/role.enum'
+import { getUserRole } from '@utils/helpers/userRole.helpers'
+import { getUserFromLocalStorage } from '@utils/localStorage/storage'
+import { getUserInitials } from '@utils/helpers/string.helpers'
+import { GREY } from '@config/colors/colors'
+import { Dashboard, Logout } from '@mui/icons-material'
 
-export const TopBar = ({ items, authItems }: TopBarProps) => {
+export const TopBar = ({ items }: TopBarProps) => {
   const navigate = useNavigate()
   const location = useLocation()
 
@@ -63,10 +75,6 @@ export const TopBar = ({ items, authItems }: TopBarProps) => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  const { isAuthenticated, user } = useAppSelector(selectAuth)
-
-  console.log(isAuthenticated)
-
   const dispatch = useAppDispatch()
 
   const handleMenuOpen = (event: MouseEvent<HTMLElement>) => {
@@ -76,6 +84,9 @@ export const TopBar = ({ items, authItems }: TopBarProps) => {
   const handleMenuClose = () => {
     setAnchorEl(null)
   }
+
+  const user = getUserFromLocalStorage()
+
   return (
     <TopBarContainer
       isscrolled={
@@ -118,29 +129,47 @@ export const TopBar = ({ items, authItems }: TopBarProps) => {
       <Stack direction="row" alignItems="center" spacing={2}>
         <LanguageSwitcher />
 
-        {isAuthenticated ? (
+        {!!user ? (
           <>
-            <IconButton onClick={handleMenuOpen}>
+            <IconButton onClick={handleMenuOpen} sx={{ height: 40, width: 40 }}>
               <InstructorAvatar
                 alt={user?.firstName}
-                src={user?.media?.[0].fileName}
-              />
+                src={user?.media?.[0]?.fileName}
+                sx={{ cursor: 'pointer' }}>
+                {getUserInitials(user)}
+              </InstructorAvatar>
             </IconButton>
-            <Menu
+
+            <StyledMenu
               anchorEl={anchorEl}
               open={Boolean(anchorEl)}
               onClose={handleMenuClose}>
-              {user?.role === UserRoleEnum.USER && (
-                <>
-                  {authItems?.map((item) => (
-                    <MenuItem key={item.id} onClick={() => navigate(item.path)}>
-                      {t(item.label)}
-                    </MenuItem>
-                  ))}
-                </>
-              )}
-              <MenuItem onClick={() => dispatch(logout())} />
-            </Menu>
+              <UserTitle>{user?.firstName}</UserTitle>
+              <Typography color={GREY.main} fontSize={'0.75rem'} margin={1}>
+                {t(getUserRole(user?.role))}
+              </Typography>
+              <Divider />
+
+              <StyledMenuItem
+                onClick={() => {
+                  navigate(`/${PATHS.DASHBOARD.ROOT}`)
+                }}>
+                <ListItemIcon>
+                  <Dashboard />
+                </ListItemIcon>
+                <ListItemText>{t('auth.dashboard')}</ListItemText>
+              </StyledMenuItem>
+              <StyledMenuItem
+                onClick={() => {
+                  dispatch(logout())
+                  navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`)
+                }}>
+                <ListItemIcon>
+                  <Logout />
+                </ListItemIcon>
+                <ListItemText>{t('auth.logout')}</ListItemText>
+              </StyledMenuItem>
+            </StyledMenu>
           </>
         ) : (
           <>

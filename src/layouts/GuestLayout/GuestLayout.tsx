@@ -1,6 +1,6 @@
 import FallbackLoader from '@components/fallback/FallbackLoader'
 import { TopBar } from '@components/topBar/Topbar'
-import { ItemsAuth, ItemsMain } from '@components/topBar/topBarMenu'
+import { ItemsMain } from '@components/topBar/topBarMenu'
 import { Suspense } from 'react'
 import { Outlet } from 'react-router-dom'
 import Footer from '@components/footer/Footer'
@@ -8,7 +8,7 @@ import Footer from '@components/footer/Footer'
 function GuestLayout() {
   return (
     <>
-      <TopBar items={ItemsMain} authItems={ItemsAuth} />
+      <TopBar items={ItemsMain} />
       <Suspense fallback={<FallbackLoader />}>
         <Outlet />
       </Suspense>

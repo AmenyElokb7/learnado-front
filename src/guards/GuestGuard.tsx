@@ -12,7 +12,7 @@ export function GuestGuard({ children }: GuestGuardProps) {
   const { isAuthenticated } = useSelector(selectAuth)
 
   if (isAuthenticated) {
-    return <Navigate to={PATHS.ROOT} replace />
+    return <Navigate to={PATHS.DASHBOARD.ROOT} replace />
   }
   return <>{children}</>
 }

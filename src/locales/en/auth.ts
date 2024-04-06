@@ -31,4 +31,11 @@ export const auth = {
   password_placeholder: 'Enter your password',
   confirm_password_placeholder: 'Confirm your password',
   forget_password: 'Forget Password',
+  admin: 'Admin',
+  user: 'Student',
+  instructor: 'Instrutor',
+  logout: 'Logout',
+  success_signup: 'Your account has been created successfully, please wait for the admin to approve your account',
+  dashboard: 'Dashboard',
+  account_not_approved: 'Your account is not approved yet',
 }

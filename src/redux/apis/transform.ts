@@ -2,7 +2,11 @@ import { Media, MediaApi } from 'types/models/Media'
 import { ApiPaginationResponse } from './type'
 import { generatePictureSrc } from '@utils/helpers/string.helpers'
 export const transformMedia = (medias: MediaApi[]): Media[] => {
-  return medias.map((media) => ({
+  return medias.map((media) => transformSingleMedia(media))
+}
+
+export const transformSingleMedia = (media: MediaApi): Media => {
+  return {
     id: media.id,
     fileName: generatePictureSrc(media.file_name),
     ModelId: media.model_id,
@@ -10,7 +14,7 @@ export const transformMedia = (medias: MediaApi[]): Media[] => {
     modelType: media.model_type,
     title: media.title,
     externalUrl: media?.external_url,
-  }))
+  }
 }
 
 export function transformPaginationResponse<T>(

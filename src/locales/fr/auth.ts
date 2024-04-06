@@ -31,4 +31,12 @@ export const auth = {
   confirm_password_placeholder: 'Confirmez votre mot de passe',
   email: 'Adresse E-mail',
   forget_password: 'Mot de passe oublié',
+  admin: 'Administrateur',
+  user: 'Etudiant',
+  instructor: 'Instructeur',
+  logout: 'Déconnexion',
+  success_signup:
+    "Votre compte a été créé avec succès, veuillez attendre que l'administrateur approuve votre compte",
+  dashboard: 'Tableau de bord',
+  account_not_approved: 'Votre compte n est pas encore approuvé',
 }

@@ -1,3 +1,4 @@
+import { errors } from './errors'
 import { home } from './home'
 import { alt } from './alt'
 import { topbar } from './../en/topbar'
@@ -14,5 +15,6 @@ const en = {
   footer,
   pagination,
   auth,
+  errors,
 }
 export default en

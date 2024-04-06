@@ -2,7 +2,6 @@ import { LocalStorageKeysEnum } from '@config/enums/localStorage.enum'
 import { authApi } from '@redux/apis/auth/authApi'
 import { RootState } from '@redux/store'
 import { createSlice } from '@reduxjs/toolkit'
-import { decodeToken } from '@utils/localStorage/decodeToken'
 import {
   getUserFromLocalStorage,
   removeFromLocalStorage,
@@ -23,6 +22,7 @@ const authSlice = createSlice({
       state.isAuthenticated = false
       removeFromLocalStorage(LocalStorageKeysEnum.AccessToken)
       removeFromLocalStorage(LocalStorageKeysEnum.RefreshToken)
+      removeFromLocalStorage(LocalStorageKeysEnum.User)
     },
   },
   extraReducers: (builder) => {
@@ -30,17 +30,12 @@ const authSlice = createSlice({
       .addMatcher(
         authApi.endpoints.login.matchFulfilled,
         (state, { payload }) => {
-          const decodedToken = decodeToken(payload.data.accessToken)
-          state.user = decodedToken
+          const { accessToken, refreshToken, user } = payload.data
+          state.user = user
           state.isAuthenticated = true
-          setToLocalStorage(
-            LocalStorageKeysEnum.AccessToken,
-            payload.data.accessToken,
-          )
-          setToLocalStorage(
-            LocalStorageKeysEnum.RefreshToken,
-            payload.data.refreshToken,
-          )
+          setToLocalStorage(LocalStorageKeysEnum.AccessToken, accessToken)
+          setToLocalStorage(LocalStorageKeysEnum.RefreshToken, refreshToken)
+          setToLocalStorage(LocalStorageKeysEnum.User, JSON.stringify(user))
         },
       )
 
@@ -48,6 +43,8 @@ const authSlice = createSlice({
         state.user = null
         state.isAuthenticated = false
         removeFromLocalStorage(LocalStorageKeysEnum.AccessToken)
+        removeFromLocalStorage(LocalStorageKeysEnum.RefreshToken)
+        removeFromLocalStorage(LocalStorageKeysEnum.User)
       })
   },
 })

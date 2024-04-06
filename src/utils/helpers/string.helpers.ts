@@ -1,3 +1,4 @@
+import { User } from 'types/models/User'
 import noImage from '@assets/images/image_not_available.png'
 import { ConfigEnv } from '@config/configEnv'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
@@ -42,4 +43,9 @@ export const ToCamelCase = (str: string): string => {
 export const generatePictureSrc = (fileName?: string): string => {
   if (!fileName) return noImage
   return `${ConfigEnv.MEDIA_BASE_URL}/${fileName}`
+}
+
+export const getUserInitials = (user: User): string => {
+  const initials = `${user.firstName[0]}${user.lastName[0]}`
+  return initials.toUpperCase()
 }

@@ -5,10 +5,10 @@ import {
   StyledImage,
 } from '../CustomDialog.style'
 import { CustomDialogProps } from '../CustomDialog.type'
-import success from '@assets/logo/success.gif'
 import { Close } from '@mui/icons-material'
+import error from '@assets/images/error.gif'
 
-function CustomSuccessDialog({ open, onClose, content }: CustomDialogProps) {
+function CustomErrorDialog({ open, onClose, content }: CustomDialogProps) {
   return (
     <StyledDialog open={open} onClose={onClose}>
       <DialogActions>
@@ -22,10 +22,10 @@ function CustomSuccessDialog({ open, onClose, content }: CustomDialogProps) {
         <Typography variant="h3" fontWeight={'medium'} lineHeight={2}>
           {content}
         </Typography>
-        <StyledImage src={success} />
+        <StyledImage src={error} />
       </StyledDialogContent>
     </StyledDialog>
   )
 }
 
-export default CustomSuccessDialog
+export default CustomErrorDialog

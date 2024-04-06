@@ -13,7 +13,6 @@ export const StyledDialog = styled(Dialog)(({ theme }) => ({
 export const StyledDialogContent = styled(DialogContent)(({ theme }) => ({
   justifyContent: 'center',
   alignItems: 'center',
-  padding: '40px',
   [theme.breakpoints.down('sm')]: {
     padding: '10px',
   },
@@ -21,7 +20,7 @@ export const StyledDialogContent = styled(DialogContent)(({ theme }) => ({
 
 export const StyledImage = styled('img')(({ theme }) => ({
   width: '240px',
-  marginBottom: '20px',
+  margin: '40px',
   [theme.breakpoints.down('sm')]: {
     width: '100px',
   },

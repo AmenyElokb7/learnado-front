@@ -2,7 +2,7 @@ body {
   margin: 0;
 }
 * {
-  animation: fade-in 0.3s ease-in;
+  animation: grow 1s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -13,5 +13,13 @@ body {
   }
   to {
     opacity: 1;
+  }
+}
+@keyframes grow {
+  0% {
+    transform: scale(0.9);
+  }
+  100% {
+    transform: scale(1);
   }
 }

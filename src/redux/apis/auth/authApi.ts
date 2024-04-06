@@ -6,7 +6,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 import { RegisterBody } from '@features/auth/signup/SignupForm.type'
 import { UserApi } from '../user/usersApi.type'
-import { LoginRequest, LoginResponse } from './authApi.type'
+import { LoginRequest, LoginResponse, LoginResponseApi } from './authApi.type'
 import {
   decodeLoginResponse,
   signupEncoder,
@@ -33,7 +33,7 @@ export const authApi = createApi({
         method: MethodsEnum.POST,
         body: LoginRequest,
       }),
-      transformResponse: (response: LoginResponse) =>
+      transformResponse: (response: LoginResponseApi): LoginResponse =>
         decodeLoginResponse(response),
     }),
     logout: builder.mutation<void, void>({

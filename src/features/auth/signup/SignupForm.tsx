@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Typography, Stack, Grid } from '@mui/material'
+import { Typography, Stack, Grid, Box } from '@mui/material'
 import { RegisterBody } from './SignupForm.type'
 import CustomLink from '@components/customLink/CustomLink'
 import { PATHS } from '@config/constants/paths'
@@ -8,37 +8,35 @@ import CustomRadioButton from '@components/customRadioButton/CustomRadioButton'
 import CustomTextField from '@components/Inputs/customTextField/CustomTextField'
 import CustomPasswordTextField from '@components/Inputs/customPasswordTextField/CustomPasswordTextField'
 import { useTranslation } from 'react-i18next'
-import { useAppDispatch } from '@redux/hooks'
-import { showError } from '@redux/slices/snackbarSlice'
 import { SIGNUP_FORM_CONFIG } from './SignupForm.constants'
 import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
 import CustomSuccessDialog from '@components/dialogs/customSuccessDialog/CustomSuccessDialog'
-import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { useSignupMutation } from '@redux/apis/auth/authApi'
+import { IError } from 'types/interfaces/Error'
+import useError from 'src/hooks/useError'
 
 export default function SignUpForm() {
   const [openModal, setOpenModal] = useState(false)
-  const [successMessage, setSuccessMessage] = useState(
-    GLOBAL_VARIABLES.EMPTY_STRING,
-  )
 
-  const RegisterFormMethods = useForm<RegisterBody>({
+  const RegisterFormMethods = useForm({
     mode: 'onChange',
     shouldFocusError: true,
   })
-  const dispatch = useAppDispatch()
   const { watch } = RegisterFormMethods
 
+  const { getError } = useError({
+    formMethods: RegisterFormMethods,
+  })
   const { t } = useTranslation()
   const [registerApiAction, { isLoading }] = useSignupMutation()
 
   const onSubmit = RegisterFormMethods.handleSubmit(async (values) => {
     try {
-      const res = await registerApiAction(values).unwrap()
-      setSuccessMessage(res?.message)
+      await registerApiAction(values as RegisterBody).unwrap()
       setOpenModal(true)
-    } catch (error: any) {
-      dispatch(showError(error.data.message as string))
+      RegisterFormMethods.reset()
+    } catch (error) {
+      getError(error as IError)
     }
   })
 
@@ -92,9 +90,16 @@ export default function SignUpForm() {
             />
           </Typography>
         </Stack>
+        <Box textAlign="center" marginTop={2}>
+          <CustomLink
+            to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.FORGET_PASSWORD}`}
+            label={t('auth.forget_password')}
+            isActive={false}
+          />
+        </Box>
       </FormProvider>
       <CustomSuccessDialog
-        content={successMessage}
+        content={t('auth.success_signup')}
         open={openModal}
         onClose={() => setOpenModal(false)}
       />

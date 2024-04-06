@@ -1,8 +1,7 @@
-import { ReactNode, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useSelector } from 'react-redux'
-import { selectAuth } from '@redux/slices/authSlice'
+import { ReactNode } from 'react'
+import { Navigate } from 'react-router-dom'
 import { PATHS } from '@config/constants/paths'
+import { getUserFromLocalStorage } from '@utils/localStorage/storage'
 
 interface RoleBasedGuardProps {
   accessibleRoles: number[]
@@ -13,18 +12,19 @@ export function RoleBasedGuard({
   accessibleRoles,
   children,
 }: RoleBasedGuardProps) {
-  const { user } = useSelector(selectAuth)
-  const navigate = useNavigate()
+  const user = getUserFromLocalStorage()
 
-  useEffect(() => {
-    if (!user || !accessibleRoles.includes(user.role)) {
-      navigate(PATHS.MAIN.ERROR.P_403, { replace: true })
-    }
-  }, [user, accessibleRoles, navigate])
-
-  if (!user || !accessibleRoles.includes(user.role)) {
-    return null
+  if (!user) {
+    return <Navigate to={PATHS.ROOT} replace />
   }
 
-  return <>{children}</>
+  return (
+    <>
+      {!accessibleRoles.includes(user.role) ? (
+        <Navigate to={PATHS.MAIN.ERROR.P_403} replace />
+      ) : (
+        <>{children}</>
+      )}
+    </>
+  )
 }
