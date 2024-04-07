@@ -7,7 +7,6 @@ import AuthLayout from '@layouts/authLayout/AuthLayout'
 import DashboardLayout from '@layouts/dashboardLayout/DashboardLayout'
 import { AuthGuard } from '@guards/AuthGuard'
 
-
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 const Courses = lazy(() => import('src/pages/courses/Courses'))
 const CourseDetail = lazy(
@@ -56,7 +55,7 @@ export const ROUTE_CONFIG: RouteObject[] = [
     ),
     children: [
       { path: PATHS.DASHBOARD.ROOT, element: <DashboardPage /> },
-      { path: PATHS.DASHBOARD.PROFILE, element: <ProfilePage /> },
+      { path: PATHS.DASHBOARD.PROFILE.ROOT, element: <ProfilePage /> },
     ],
   },
   { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },

@@ -5,7 +5,7 @@ import background from '@assets/images/background.jpg'
 
 export const HeaderRoot = styled(Box)(() => ({
   backgroundImage: `url(${background})`,
-  height: 300,
+  height: 270,
   backgroundSize: 'cover',
   textAlign: 'center',
   padding: 100,

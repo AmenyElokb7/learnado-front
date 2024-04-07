@@ -27,7 +27,10 @@ export const PATHS = {
 
   DASHBOARD: {
     ROOT: '/dashboard',
-    PROFILE: 'dashboard/profile',
+    PROFILE: {
+      ROOT: '/dashboard/profile',
+      SETTINGS: '/dashboard/profile/settings',
+    },
     ADMIN: {
       ROOT: '/dashboard/admin',
       STUDENTS: '/dashboard/admin/students',

@@ -1,10 +1,12 @@
-import ProfileCard from '@components/profileCard/ProfileCard'
 import { StackWithBackground } from '@components/stackWithBackground/stackWithBackground.style'
+import { Stack } from '@mui/material'
 
 function DashboardPage() {
   return (
     <StackWithBackground>
-      <ProfileCard />
+      <Stack >
+      
+      </Stack>
     </StackWithBackground>
   )
 }
