@@ -1,4 +1,4 @@
-import { Grid, Stack, Typography } from '@mui/material'
+import { Grid, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { useGetCourseByIdQuery } from '@redux/apis/courses/coursesApi'
 import { ConfigEnv } from '@config/configEnv'
@@ -11,7 +11,7 @@ import NoDataFound from '@components/noDataFound/NoDataFound'
 import { useTranslation } from 'react-i18next'
 import { getTeachingType } from '@utils/helpers/course.helpers'
 import { StackWithBackground } from '@components/stackWithBackground/stackWithBackground.style'
-import RectangularCard from '@components/rectangularCard/RectangularCard'
+import RectangularCard from '@components/cards/rectangularCard/RectangularCard'
 import { CardRoot } from '../courses.style'
 import { InstructorTitle } from '@features/home/homeCourses/coursesCard/courseCard.style'
 import { StyledAvatar } from '@features/instructors/InstructorCard/instructorCard.style'
@@ -72,7 +72,6 @@ export const CourseDetail = () => {
             mapboxAccessToken={ConfigEnv.MAPBOX_ACCESS_TOKEN}
           />
 
-          {/* TODO: course medias */}
         </Grid>
         <Grid
           item
@@ -93,7 +92,10 @@ export const CourseDetail = () => {
             <InstructorTitle>
               {course.facilitator.firstName} {course.facilitator.lastName}
             </InstructorTitle>
-            <LabelWithIcon icon={<Email />} label={course.facilitator.email} />
+            <LabelWithIcon
+              icon={<Email />}
+              label={course.facilitator.email ?? GLOBAL_VARIABLES.EMPTY_STRING}
+            />
           </CardRoot>
         </Grid>
       </Grid>

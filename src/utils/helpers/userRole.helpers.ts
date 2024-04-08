@@ -6,7 +6,7 @@ export const getUserRole = (role: UserRoleEnum) => {
     case UserRoleEnum.ADMIN:
       return 'auth.admin'
     case UserRoleEnum.FACILITATOR:
-      return 'auth.instuctor'
+      return 'auth.facilitator'
     case UserRoleEnum.USER:
       return 'auth.user'
     case UserRoleEnum.DESIGNER:

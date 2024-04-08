@@ -1,7 +1,7 @@
 import FallbackLoader from '@components/fallback/FallbackLoader'
 import Footer from '@components/footer/Footer'
 import Header from '@components/header/Header'
-import ProfileCard from '@components/profileCard/ProfileCard'
+import ProfileCard from '@components/cards/profileCard/ProfileCard'
 import Sidebar from '@components/sidebar/Sidebar'
 import { ItemsSidebar } from '@components/sidebar/SidebarMenu'
 import { StackWithBackground } from '@components/stackWithBackground/stackWithBackground.style'

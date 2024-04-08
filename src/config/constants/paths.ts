@@ -33,9 +33,10 @@ export const PATHS = {
     },
     ADMIN: {
       ROOT: '/dashboard/admin',
-      STUDENTS: '/dashboard/admin/students',
-      DESIGNERS: '/dashboard/admin/designers',
-      FACILITATORS: '/dashboard/admin/facilitators',
+      USERS: '/dashboard/admin/users',
+      CATEGORY: '/dashboard/admin/categories',
+      LANGUAGE: '/dashboard/admin/languages',
+      PENDING_USERS: '/dashboard/admin/pending-users',
       POSTS: '/dashboard/admin/posts',
       EDIT_USER: '/dashboard/admin/users/:id',
       ADD_USER: '/dashboard/admin/add',

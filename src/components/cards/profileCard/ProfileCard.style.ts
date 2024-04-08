@@ -41,7 +41,7 @@ export const StyledContentCard = styled(Stack)(({ theme }) => ({
     width: '100%',
   },
 }))
-export const ProfileGroup = styled(Stack)(({ theme }) => ({
+export const ProfileGroup = styled(Stack)(() => ({
   padding: 8,
   marginTop: '50px',
   alignItems: 'center',

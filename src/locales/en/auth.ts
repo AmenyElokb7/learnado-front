@@ -38,5 +38,7 @@ export const auth = {
   success_signup: 'Your account has been created successfully, please wait for the admin to approve your account',
   dashboard: 'Dashboard',
   account_not_approved: 'Your account is not approved yet',
-  ok: "OK"
+  ok: "OK",
+  image: 'Image',
+  action: 'Action',
 }

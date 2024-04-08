@@ -7,6 +7,10 @@ import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined'
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined'
 import WorkspacePremiumOutlinedIcon from '@mui/icons-material/WorkspacePremiumOutlined'
 import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined'
+import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
+import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined'
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
+import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined'
 export interface SidebarItem {
   id: number
   label: string
@@ -67,5 +71,33 @@ export const ItemsSidebar: SidebarItem[] = [
     path: PATHS.DASHBOARD.STUDENT.MY_CALENDAR,
     icon: CalendarMonthOutlinedIcon,
     accessibleRoles: [UserRoleEnum.USER, UserRoleEnum.FACILITATOR],
+  },
+  {
+    id: 7,
+    label: 'sidebar.users',
+    path: PATHS.DASHBOARD.ADMIN.USERS,
+    icon: ManageAccountsOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.ADMIN],
+  },
+  {
+    id: 8,
+    label: 'sidebar.pending_users',
+    path: PATHS.DASHBOARD.ADMIN.PENDING_USERS,
+    icon: PendingOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.ADMIN],
+  },
+  {
+    id: 9,
+    label: 'sidebar.language',
+    path: PATHS.DASHBOARD.ADMIN.LANGUAGE,
+    icon: TranslateOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.ADMIN],
+  },
+  {
+    id: 10,
+    label: 'sidebar.category',
+    path: PATHS.DASHBOARD.ADMIN.CATEGORY,
+    icon: CategoryOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.ADMIN],
   },
 ]

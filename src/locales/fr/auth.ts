@@ -40,4 +40,6 @@ export const auth = {
   dashboard: 'Tableau de bord',
   account_not_approved: 'Votre compte n est pas encore approuvé',
   ok: 'OK',
+  image: 'Image',
+  action: 'Action',
 }

@@ -22,6 +22,14 @@ export const userApi = createApi({
       transformResponse: (response: ApiPaginationResponse<UserApi>) =>
         transformFetchUsersResponse(response),
     }),
+    getUsersForAdmin: builder.query<PaginationResponse<User>, QueryParams>({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.ADMIN, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: ApiPaginationResponse<UserApi>) =>
+        transformFetchUsersResponse(response),
+    }),
   }),
 })
-export const { useGetFacilitatorsQuery } = userApi
+export const { useGetFacilitatorsQuery, useGetUsersForAdminQuery } = userApi

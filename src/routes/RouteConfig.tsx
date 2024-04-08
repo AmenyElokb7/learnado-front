@@ -6,6 +6,8 @@ import { GuestGuard } from '@guards/GuestGuard'
 import AuthLayout from '@layouts/authLayout/AuthLayout'
 import DashboardLayout from '@layouts/dashboardLayout/DashboardLayout'
 import { AuthGuard } from '@guards/AuthGuard'
+import { RoleBasedGuard } from '@guards/RoleBasedGuard'
+import { UserRoleEnum } from '@config/enums/role.enum'
 
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 const Courses = lazy(() => import('src/pages/courses/Courses'))
@@ -21,7 +23,9 @@ const SignUpPage = lazy(() => import('src/pages/auth/signup/signupPage'))
 const LoginPage = lazy(() => import('src/pages/auth/login/LoginPage'))
 const ProfilePage = lazy(() => import('src/pages/profile/ProfilePage'))
 const DashboardPage = lazy(() => import('src/pages/dashboard/DashboardPage'))
-
+const UsersPage = lazy(
+  () => import('src/pages/dashboard/admin/users/UsersPage'),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -56,6 +60,14 @@ export const ROUTE_CONFIG: RouteObject[] = [
     children: [
       { path: PATHS.DASHBOARD.ROOT, element: <DashboardPage /> },
       { path: PATHS.DASHBOARD.PROFILE.ROOT, element: <ProfilePage /> },
+      {
+        path: PATHS.DASHBOARD.ADMIN.USERS,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <UsersPage />
+          </RoleBasedGuard>
+        ),
+      },
     ],
   },
   { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
