@@ -8,4 +8,8 @@ export const topbar = {
   english: 'English',
   french: 'French',
   learning_path: 'Learning Path',
+  profile: 'Profile',
+  my_program: 'My Program',
+  student_dashboard: 'Student Dashboard',
+  
 }

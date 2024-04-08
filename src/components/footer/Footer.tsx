@@ -77,7 +77,7 @@ function Footer() {
               />
             )}
             {column.items.map((item) => (
-              <>
+              <Stack key={item.id}>
                 {item.path ? (
                   <CustomLink
                     isActive={item.path === window.location.pathname}
@@ -88,7 +88,7 @@ function Footer() {
                 ) : (
                   <LabelWithIcon icon={item.icon} label={t(item.title)} />
                 )}
-              </>
+              </Stack>
             ))}
           </Stack>
         ))}

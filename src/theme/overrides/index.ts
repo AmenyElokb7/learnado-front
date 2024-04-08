@@ -5,6 +5,7 @@ import textField from './textField'
 import tooltip from './tooltip'
 import divider from './divider'
 import avatar from './avatar'
+import menu from './menu'
 
 export default function overridesMUIComponents(theme: Theme) {
   const components = Object.assign({
@@ -13,6 +14,7 @@ export default function overridesMUIComponents(theme: Theme) {
     MuiTooltip: tooltip(theme),
     MuiDivider: divider(theme),
     MuiAvatar: avatar(),
+    MuiMenu: menu(theme),
   })
 
   return components

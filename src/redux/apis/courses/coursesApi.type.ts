@@ -1,6 +1,6 @@
 import { MediaApi } from 'types/models/Media'
 import { Language } from 'types/models/Language'
-import { UserApi } from '../auth/usersApi.type'
+import { UserApi } from '../user/usersApi.type'
 import { ModuleApi } from '../modules/moduleApi'
 
 export interface CourseApi {

@@ -1,8 +1,9 @@
 import i18n from 'i18next'
 import { initReactI18next } from 'react-i18next'
+
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import en from '@locales/en'
 import fr from '@locales/fr'
-import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 const resources = {
   en: {

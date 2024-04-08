@@ -11,10 +11,14 @@ import NoDataFound from '@components/noDataFound/NoDataFound'
 import CategoriesListSkeleton from './categoriesListSkeleton/CategoriesListSkeleton'
 import usePagination from 'src/hooks/usePagination'
 import { Category } from 'types/models/Category'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 function CategoriesList() {
   const { queryParams } = usePagination()
-  const { data: response, isLoading } = useGetCategoriesQuery(queryParams)
+  const { data: response, isLoading } = useGetCategoriesQuery({
+    ...queryParams,
+    keyword: GLOBAL_VARIABLES.EMPTY_STRING,
+  })
 
   const categories = response?.data as Category[]
 

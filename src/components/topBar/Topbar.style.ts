@@ -1,6 +1,16 @@
-import { Stack, styled, Avatar, alpha } from '@mui/material'
+import { width } from './../../../node_modules/@mui/lab/node_modules/@mui/system/index.d'
+import {
+  Stack,
+  styled,
+  Avatar,
+  alpha,
+  Typography,
+  MenuItem,
+  Menu,
+} from '@mui/material'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { TopBarContainerProps } from './topbar.type'
+import { BLUE, GREY } from '@config/colors/colors'
 
 export const DrawerHeader = styled('div')(({ theme }) => ({
   display: 'flex',
@@ -48,10 +58,30 @@ export const LogoAvatar = styled(Avatar)(({ theme }) => ({
   },
 }))
 
-export const ActionButtons = styled(Stack)({
-  flexDirection: 'row',
-  alignItems: 'center',
-  spacing: 2,
-  borderRadius: 8,
-  marginLeft: 1,
-})
+export const UserTitle = styled(Typography)(({ theme }) => ({
+  display: 'none',
+  fontWeight: 'bold',
+  color: BLUE.main,
+  fontSize: '1rem',
+  margin: theme.spacing(1),
+  [theme.breakpoints.up('md')]: {
+    display: 'block',
+  },
+}))
+
+export const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
+  lineHeight: '1.5rem',
+  color: GREY.main,
+  '&:hover': {
+    color: theme.palette.primary.main,
+    backgroundColor: 'transparent',
+  },
+}))
+export const StyledMenu = styled(Menu)(({ theme }) => ({
+  '& .MuiPaper-root': {
+    borderRadius: '10px',
+    padding: theme.spacing(1),
+    width: '200px',
+    background: theme.palette.common.white,
+  },
+}))

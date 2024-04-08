@@ -5,6 +5,7 @@ import { CssBaseline, ThemeProvider } from '@mui/material'
 import { useAppSelector } from './redux/hooks'
 import { Routers } from './routes/Routers'
 import { BrowserRouter } from 'react-router-dom'
+import AppAlert from '@components/appAlert/AppAlert'
 
 function App() {
   const { mode } = useAppSelector((state) => state.theme)
@@ -13,7 +14,7 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-
+      <AppAlert />
       <BrowserRouter>
         <Routers />
       </BrowserRouter>

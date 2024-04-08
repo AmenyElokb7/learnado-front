@@ -13,17 +13,17 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: 1,
         title: 'footer.become_instructor',
-        path: PATHS.AUTH.SIGNUP,
+        path: `/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`,
       },
       {
         id: 2,
         title: 'footer.instructor_dashboard',
-        path: PATHS.INSTRUCTOR_DASHBOARD,
+        path: PATHS.DASHBOARD.INSTRUCTOR.ROOT,
       },
       {
         id: 3,
         title: 'footer.instructor_support',
-        path: PATHS.INSTRUCTOR_SUPPORT,
+        path: PATHS.DASHBOARD.INSTRUCTOR.MY_SUPPORT,
       },
     ],
   },
@@ -34,17 +34,17 @@ export const FOOTER_COLUMNS: FooterColumn[] = [
       {
         id: 1,
         title: 'footer.become_student',
-        path: PATHS.AUTH.SIGNUP,
+        path: `/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`,
       },
       {
         id: 2,
         title: 'footer.student_dashboard',
-        path: '/student-dashboard',
+        path: PATHS.DASHBOARD.STUDENT.ROOT,
       },
       {
         id: 3,
         title: 'footer.student_support',
-        path: PATHS.STUDENT_SUPPORT,
+        path: PATHS.DASHBOARD.STUDENT.MY_SUPPORT,
       },
     ],
   },

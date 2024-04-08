@@ -70,7 +70,7 @@ export const transformSingleCourse = (course: CourseApi): Course => {
       firstName: course.facilitator.first_name,
       lastName: course.facilitator.last_name,
       email: course.facilitator.email,
-      media: course.facilitator.media.length
+      media: course?.facilitator?.media?.length
         ? [
             {
               fileName: generatePictureSrc(

@@ -18,15 +18,16 @@ export const PATHS = {
 
   ABOUT_US: '/AboutUs',
   AUTH: {
-    ROOT: '/auth',
-    LOGIN: '/auth/login',
-    SIGNUP: '/auth/signup',
-    FORGET_PASSWORD: '/auth/forget-password',
-    RESET_PASSWORD: '/auth/reset-password',
+    ROOT: 'auth',
+    LOGIN: 'login',
+    SIGNUP: 'signup',
+    FORGET_PASSWORD: 'forget-password',
+    RESET_PASSWORD: 'reset-password',
   },
 
   DASHBOARD: {
     ROOT: '/dashboard',
+    PROFILE: 'dashboard/profile',
     ADMIN: {
       ROOT: '/dashboard/admin',
       STUDENTS: '/dashboard/admin/students',
@@ -36,11 +37,23 @@ export const PATHS = {
       EDIT_USER: '/dashboard/admin/users/:id',
       ADD_USER: '/dashboard/admin/add',
     },
+    STUDENT: {
+      ROOT: '/dashboard/student',
+      MY_PROGRAM: '/dashboard/student/my-program',
+      MY_CERTIFICATES: '/dashboard/student/my-certificates',
+      MY_QUIZZES: '/dashboard/student/my-quizzes',
+      MY_CALENDAR: '/dashboard/student/my-calendar',
+      MY_SUPPORT: '/dashboard/student/my-support',
+    },
+    INSTRUCTOR: {
+      ROOT: '/dashboard/instructor',
+      MY_COURSES: '/dashboard/instructor/my-courses',
+      MY_STUDENTS: '/dashboard/instructor/my-students',
+      MY_CALENDAR: '/dashboard/instructor/my-calendar',
+      MY_QUIZZES: '/dashboard/instructor/my-quizzes',
+      MY_SUPPORT: '/dashboard/instructor/my-support',
+    },
   },
-  INSTRUCTOR_DASHBOARD: '/instructor-dashboard',
-  INSTRUCTOR_SUPPORT: '/instructor-support',
-  STUDENT_DASHBOARD: '/student-dashboard',
-  STUDENT_SUPPORT: '/student-support',
 
   MAIN: {
     HOME: '',
