@@ -7,4 +7,5 @@ export const ENDPOINTS = {
   LOGOUT: 'logout',
   USERS: 'admin/users',
   PENDING_USERS: 'admin/pending-users',
+  ADD_USER: 'admin/create-user',
 }

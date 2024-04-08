@@ -7,6 +7,8 @@ import { footer } from './footer'
 import { pagination } from './pagination'
 import { auth } from './auth'
 import { sidebar } from './sidebar'
+import { common } from './common'
+import { users } from './users'
 
 const en = {
   topbar,
@@ -18,5 +20,7 @@ const en = {
   auth,
   errors,
   sidebar,
+  common,
+  users,
 }
 export default en

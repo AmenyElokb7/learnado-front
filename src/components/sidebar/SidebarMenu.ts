@@ -10,7 +10,6 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined'
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
-import PendingOutlinedIcon from '@mui/icons-material/PendingOutlined'
 export interface SidebarItem {
   id: number
   label: string
@@ -75,26 +74,19 @@ export const ItemsSidebar: SidebarItem[] = [
   {
     id: 7,
     label: 'sidebar.users',
-    path: PATHS.DASHBOARD.ADMIN.USERS,
+    path: PATHS.DASHBOARD.ADMIN.USERS.ALL,
     icon: ManageAccountsOutlinedIcon,
     accessibleRoles: [UserRoleEnum.ADMIN],
   },
   {
     id: 8,
-    label: 'sidebar.pending_users',
-    path: PATHS.DASHBOARD.ADMIN.PENDING_USERS,
-    icon: PendingOutlinedIcon,
-    accessibleRoles: [UserRoleEnum.ADMIN],
-  },
-  {
-    id: 9,
     label: 'sidebar.language',
     path: PATHS.DASHBOARD.ADMIN.LANGUAGE,
     icon: TranslateOutlinedIcon,
     accessibleRoles: [UserRoleEnum.ADMIN],
   },
   {
-    id: 10,
+    id: 9,
     label: 'sidebar.category',
     path: PATHS.DASHBOARD.ADMIN.CATEGORY,
     icon: CategoryOutlinedIcon,

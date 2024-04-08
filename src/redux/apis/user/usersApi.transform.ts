@@ -3,10 +3,11 @@ import { PaginationResponse } from 'types/interfaces/Pagination'
 import { ApiPaginationResponse } from '../type'
 import { UserApi } from './usersApi.type'
 import { User } from 'types/models/User'
-import { generatePictureSrc } from '@utils/helpers/string.helpers'
+import { generatePictureSrc, toSnakeCase } from '@utils/helpers/string.helpers'
 
 import noUser from '@assets/images/noUser.png'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { FieldValues } from 'react-hook-form'
 
 export const transformFetchUsersResponse = (
   response: ApiPaginationResponse<UserApi>,
@@ -45,4 +46,12 @@ export const transformSingleUser = (data: UserApi): User => {
           },
         ],
   }
+}
+
+export const encodeUser = (values: FieldValues): FormData => {
+  const formData = new FormData()
+  Object.keys(values).forEach((key) => {
+    formData.append(toSnakeCase(key), values[key])
+  })
+  return formData
 }

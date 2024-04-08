@@ -33,13 +33,16 @@ export const PATHS = {
     },
     ADMIN: {
       ROOT: '/dashboard/admin',
-      USERS: '/dashboard/admin/users',
+      USERS: {
+        ROOT: '/dashboard/admin/users',
+        ALL: '/dashboard/admin/users/all',
+        PENDING: '/dashboard/admin/users/pending',
+        EDIT_USER: '/dashboard/admin/users/:id',
+        ADD_USER: '/dashboard/admin/addUser',
+      },
       CATEGORY: '/dashboard/admin/categories',
       LANGUAGE: '/dashboard/admin/languages',
-      PENDING_USERS: '/dashboard/admin/pendingUsers',
       POSTS: '/dashboard/admin/posts',
-      EDIT_USER: '/dashboard/admin/users/:id',
-      ADD_USER: '/dashboard/admin/add',
     },
     STUDENT: {
       ROOT: '/dashboard/student',

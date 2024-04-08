@@ -44,5 +44,6 @@ export const auth = {
   action: 'Action',
   pending_users: 'Utilisateurs en attente',
   users: 'Utilisateurs',
-  add_user: 'Ajouter un utilisateur',
+  profile_picture: 'Photo de profil',
+  accout_created: 'Compte créé avec succès',
 }

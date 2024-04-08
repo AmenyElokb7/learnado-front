@@ -22,12 +22,12 @@ function useError({ formMethods }: UseErrorProps) {
 
     switch (status) {
       case HttpStatusEnum.UNPROCESSABLE_CONTENT:
-        for (const [key, value] of Object.entries(data.message)) {
+        for (const [key, value] of Object.entries(data.errors)) {
           setInputError(key, value)
         }
         break
       case HttpStatusEnum.UNAUTHORIZED:
-        for (const [key, value] of Object.entries(data.message)) {
+        for (const [key, value] of Object.entries(data.errors)) {
           setInputError(key, value)
         }
         break

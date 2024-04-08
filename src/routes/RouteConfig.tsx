@@ -8,6 +8,7 @@ import DashboardLayout from '@layouts/dashboardLayout/DashboardLayout'
 import { AuthGuard } from '@guards/AuthGuard'
 import { RoleBasedGuard } from '@guards/RoleBasedGuard'
 import { UserRoleEnum } from '@config/enums/role.enum'
+import AllUsersTable from '@pages/dashboard/admin/users/allUsersTable/AllUsersTable'
 
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 const Courses = lazy(() => import('src/pages/courses/Courses'))
@@ -26,8 +27,14 @@ const DashboardPage = lazy(() => import('src/pages/dashboard/DashboardPage'))
 const UsersPage = lazy(
   () => import('src/pages/dashboard/admin/users/UsersPage'),
 )
-const PendingUsersPage = lazy(
-  () => import('src/pages/dashboard/admin/users/pendingUsers/PendingUsersPage'),
+const PendingUsersTable = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/admin/users/pendingUsersTable/PendingUsersTable'
+    ),
+)
+const AddUserPages = lazy(
+  () => import('src/pages/dashboard/admin/users/addUser/AddUserPages'),
 )
 export const ROUTE_CONFIG: RouteObject[] = [
   {
@@ -64,18 +71,33 @@ export const ROUTE_CONFIG: RouteObject[] = [
       { path: PATHS.DASHBOARD.ROOT, element: <DashboardPage /> },
       { path: PATHS.DASHBOARD.PROFILE.ROOT, element: <ProfilePage /> },
       {
-        path: PATHS.DASHBOARD.ADMIN.USERS,
+        path: PATHS.DASHBOARD.ADMIN.USERS.ROOT,
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
             <UsersPage />
           </RoleBasedGuard>
         ),
+        children: [
+          {
+            path: PATHS.DASHBOARD.ADMIN.USERS.ROOT,
+            element: <Navigate to={PATHS.DASHBOARD.ADMIN.USERS.ALL} />,
+          },
+          {
+            path: PATHS.DASHBOARD.ADMIN.USERS.ALL,
+            element: <AllUsersTable />,
+          },
+          {
+            path: PATHS.DASHBOARD.ADMIN.USERS.PENDING,
+            element: <PendingUsersTable />,
+          },
+        ],
       },
+
       {
-        path: PATHS.DASHBOARD.ADMIN.PENDING_USERS,
+        path: PATHS.DASHBOARD.ADMIN.USERS.ADD_USER,
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
-            <PendingUsersPage />
+            <AddUserPages />
           </RoleBasedGuard>
         ),
       },

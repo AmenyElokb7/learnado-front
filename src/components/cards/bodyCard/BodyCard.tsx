@@ -6,13 +6,7 @@ import {
 } from './BodyCard.style'
 import { BodyCardProps } from './BodyCard.type'
 
-function BodyCard({
-  children,
-  title,
-  onClick,
-  button,
-  hasButton,
-}: BodyCardProps) {
+function BodyCard({ children, title, onClick, buttonText }: BodyCardProps) {
   return (
     <StyledBodyCardRoot>
       <Stack
@@ -21,18 +15,20 @@ function BodyCard({
         width={'100%'}
         alignItems={'center'}>
         <StyledBodyCardTitle>{title}</StyledBodyCardTitle>
-        {hasButton && (
+        {onClick && (
           <Button
             sx={{ marginRight: '20px' }}
             variant="outlined"
             onClick={onClick}>
-            {button}
+            {buttonText}
           </Button>
         )}
       </Stack>
       <StyledBodyCardContent>
         <Divider />
-        {children}
+        <Stack padding={2} direction={'column'} spacing={2}>
+          {children}
+        </Stack>
       </StyledBodyCardContent>
     </StyledBodyCardRoot>
   )

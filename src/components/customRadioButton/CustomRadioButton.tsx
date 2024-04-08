@@ -15,6 +15,7 @@ import { CustomRadioButtonProps } from './CustomRadioButton.type'
 import { StyledErrorIcon } from './CustomRadioButton.style'
 import { useTranslation } from 'react-i18next'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { BLUE } from '@config/colors/colors'
 
 function CustomRadioButton({ config }: CustomRadioButtonProps) {
   const { t } = useTranslation()
@@ -35,7 +36,9 @@ function CustomRadioButton({ config }: CustomRadioButtonProps) {
         render={({ field, fieldState }) => (
           <>
             <Stack direction="row" spacing={1} alignItems="center">
-              <Typography variant="h6">{t(label)}</Typography>
+              <Typography variant="h6" sx={{ color: BLUE.main }}>
+                {t(label)}
+              </Typography>
               {fieldState.error && (
                 <Tooltip
                   title={t(

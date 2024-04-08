@@ -1,41 +1,20 @@
 import BodyCard from '@components/cards/bodyCard/BodyCard'
-import CustomPagination from '@components/customPagination/CustomPagination'
-import UsersList from '@features/users/UsersList'
-import { Stack } from '@mui/material'
-import { useGetUsersForAdminQuery } from '@redux/apis/user/usersApi'
+import { PATHS } from '@config/constants/paths'
 import { useTranslation } from 'react-i18next'
-import usePagination from 'src/hooks/usePagination'
+import { Outlet, useNavigate } from 'react-router-dom'
+import UsersTabs from './usersTabs/UsersTabs'
 
 function UsersPage() {
-  const { queryParams, handlePageChange, handleRowsPerPageChange } =
-    usePagination()
-
-  const { isFetching, data, isLoading } = useGetUsersForAdminQuery({
-    ...queryParams,
-  })
   const { t } = useTranslation()
+  const navigate = useNavigate()
   return (
-    <Stack>
-      <BodyCard
-        title={t('auth.users')}
-        button={t('auth.add_user')}
-        onClick={() => {}}
-        hasButton>
-        <UsersList
-          isLoading={isLoading}
-          isFetching={isFetching}
-          users={data?.data || []}
-        />
-      </BodyCard>
-      <CustomPagination
-        page={queryParams.page}
-        count={data?.meta.count || 0}
-        rowsPerPage={queryParams.perPage}
-        isLoading={isLoading}
-        handlePageChange={handlePageChange}
-        handleRowsPerPageChange={handleRowsPerPageChange}
-      />
-    </Stack>
+    <BodyCard
+      title={t('auth.users')}
+      buttonText={t('auth.add_user')}
+      onClick={() => navigate(PATHS.DASHBOARD.ADMIN.USERS.ADD_USER)}>
+      <UsersTabs />
+      <Outlet />
+    </BodyCard>
   )
 }
 

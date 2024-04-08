@@ -44,4 +44,6 @@ export const auth = {
   pending_users: 'Pending Users',
   users: 'Users',
   add_user: 'Add User',
+  profile_picture: 'Profile Picture',
+  accout_created: 'Account created successfully',
 }

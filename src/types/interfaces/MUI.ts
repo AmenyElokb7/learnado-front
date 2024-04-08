@@ -5,7 +5,5 @@ export type MUIDefaultColors =
   | 'error'
   | 'warning'
   | 'info'
-  | 'default'
-  | 'inherit'
 
 export type MUIDefaultSizes = 'small' | 'large' | 'medium'

@@ -2,6 +2,6 @@ export interface IError {
   status: number
   data: {
     status: number
-    message: Record<string, string>
+    errors: Record<string, string>
   }
 }

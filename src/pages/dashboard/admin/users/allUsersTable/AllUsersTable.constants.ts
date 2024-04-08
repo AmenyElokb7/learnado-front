@@ -1,6 +1,6 @@
 import { ColumnHeader } from 'types/interfaces/ColumHeader'
 
-export const UserTableHeaders: ColumnHeader[] = [
+export const AllUserTableHeaders: ColumnHeader[] = [
   {
     id: 1,
     label: 'auth.image',
