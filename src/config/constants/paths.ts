@@ -36,7 +36,7 @@ export const PATHS = {
       USERS: '/dashboard/admin/users',
       CATEGORY: '/dashboard/admin/categories',
       LANGUAGE: '/dashboard/admin/languages',
-      PENDING_USERS: '/dashboard/admin/pending-users',
+      PENDING_USERS: '/dashboard/admin/pendingUsers',
       POSTS: '/dashboard/admin/posts',
       EDIT_USER: '/dashboard/admin/users/:id',
       ADD_USER: '/dashboard/admin/add',

@@ -5,5 +5,6 @@ export const ENDPOINTS = {
   REGISTER: 'register',
   LOGIN: 'login',
   LOGOUT: 'logout',
-  ADMIN: 'admin/users',
+  USERS: 'admin/users',
+  PENDING_USERS: 'admin/pending-users',
 }

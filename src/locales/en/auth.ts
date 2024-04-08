@@ -41,4 +41,7 @@ export const auth = {
   ok: "OK",
   image: 'Image',
   action: 'Action',
+  pending_users: 'Pending Users',
+  users: 'Users',
+  add_user: 'Add User',
 }

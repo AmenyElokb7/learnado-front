@@ -24,7 +24,15 @@ export const userApi = createApi({
     }),
     getUsersForAdmin: builder.query<PaginationResponse<User>, QueryParams>({
       query: (params) => ({
-        url: injectPaginationParamsToUrl(ENDPOINTS.ADMIN, params),
+        url: injectPaginationParamsToUrl(ENDPOINTS.USERS, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: ApiPaginationResponse<UserApi>) =>
+        transformFetchUsersResponse(response),
+    }),
+    getPendingUsers: builder.query<PaginationResponse<User>, QueryParams>({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.PENDING_USERS, params),
         method: MethodsEnum.GET,
       }),
       transformResponse: (response: ApiPaginationResponse<UserApi>) =>
@@ -32,4 +40,8 @@ export const userApi = createApi({
     }),
   }),
 })
-export const { useGetFacilitatorsQuery, useGetUsersForAdminQuery } = userApi
+export const {
+  useGetFacilitatorsQuery,
+  useGetUsersForAdminQuery,
+  useGetPendingUsersQuery,
+} = userApi

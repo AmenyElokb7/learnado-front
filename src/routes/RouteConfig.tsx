@@ -26,6 +26,9 @@ const DashboardPage = lazy(() => import('src/pages/dashboard/DashboardPage'))
 const UsersPage = lazy(
   () => import('src/pages/dashboard/admin/users/UsersPage'),
 )
+const PendingUsersPage = lazy(
+  () => import('src/pages/dashboard/admin/users/pendingUsers/PendingUsersPage'),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -65,6 +68,14 @@ export const ROUTE_CONFIG: RouteObject[] = [
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
             <UsersPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.ADMIN.PENDING_USERS,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <PendingUsersPage />
           </RoleBasedGuard>
         ),
       },
