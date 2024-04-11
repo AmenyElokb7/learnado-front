@@ -110,7 +110,7 @@ export const TopBar = ({ items }: TopBarProps) => {
       />
 
       {isMobile ? (
-        <CustomIconButton color="inherit" onClick={() => toggleDrawer(true)}>
+        <CustomIconButton color="primary" onClick={() => toggleDrawer(true)}>
           <MenuIcon />
         </CustomIconButton>
       ) : (
@@ -152,12 +152,12 @@ export const TopBar = ({ items }: TopBarProps) => {
 
               <StyledMenuItem
                 onClick={() => {
-                  navigate(`/${PATHS.DASHBOARD.ROOT}`)
+                  navigate(PATHS.DASHBOARD.ROOT)
                 }}>
                 <ListItemIcon>
                   <Dashboard />
                 </ListItemIcon>
-                <ListItemText>{t('auth.dashboard')}</ListItemText>
+                <ListItemText>{t('dashboard.dashboard')}</ListItemText>
               </StyledMenuItem>
               <StyledMenuItem
                 onClick={() => {

@@ -19,7 +19,7 @@ function AppAlert() {
         onClose={handleClose}
         severity={alert?.type}
         variant="filled"
-        sx={{ width: '100%' }}>
+        sx={{ width: '100%', color: 'white' }}>
         {alert?.message}
       </Alert>
     </Snackbar>

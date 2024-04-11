@@ -12,6 +12,7 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff'
 import { CustomPasswordTextFieldProps } from './CustomPasswordTextField.type'
 import { useTranslation } from 'react-i18next'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { BLUE } from '@config/colors/colors'
 
 function CustomPasswordTextField({ config }: CustomPasswordTextFieldProps) {
   const { t } = useTranslation()
@@ -31,7 +32,9 @@ function CustomPasswordTextField({ config }: CustomPasswordTextFieldProps) {
       rules={rules}
       render={({ field, fieldState }) => (
         <Stack spacing={1}>
-          <Typography variant="h6">{t(label)}</Typography>
+          <Typography variant="h6" color={BLUE.main}>
+            {t(label)}
+          </Typography>
           <TextField
             type={showPassword ? 'text' : 'password'}
             value={field.value}

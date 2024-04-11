@@ -3,4 +3,8 @@ export const common = {
   edit: 'Edit',
   accept: 'Accept',
   reject: 'Reject',
+  ok: 'OK',
+  action: 'Action',
+  cancel: 'Cancel',
+
 }

@@ -7,4 +7,8 @@ export const CustomTableRoot = styled(Stack)(({ theme }) => ({
   border: `1px solid ${GREY.light}`,
   margin: '20px',
   maxWidth: '100%',
+  [theme.breakpoints.down('sm')]: {
+    margin: '10px',
+    width: 'auto',
+  },
 }))

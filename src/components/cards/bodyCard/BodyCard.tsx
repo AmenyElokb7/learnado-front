@@ -24,6 +24,7 @@ function BodyCard({ children, title, onClick, buttonText }: BodyCardProps) {
           </Button>
         )}
       </Stack>
+
       <StyledBodyCardContent>
         <Divider />
         <Stack padding={2} direction={'column'} spacing={2}>

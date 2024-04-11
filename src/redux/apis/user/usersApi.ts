@@ -53,6 +53,33 @@ export const userApi = createApi({
         transformRegisterResponse(response),
       invalidatesTags: ['Users'],
     }),
+    deleteUser: builder.mutation<ItemDetailsResponse<User>, number>({
+      query: (id) => ({
+        url: `${ENDPOINTS.DELETE_USER}/${id}`,
+        method: MethodsEnum.DELETE,
+      }),
+      transformResponse: (response: ItemDetailsResponse<UserApi>) =>
+        transformRegisterResponse(response),
+      invalidatesTags: ['Users'],
+    }),
+    validateUser: builder.mutation<ItemDetailsResponse<User>, number>({
+      query: (id) => ({
+        url: `${ENDPOINTS.VALIDATE_USER}/${id}`,
+        method: MethodsEnum.POST,
+      }),
+      transformResponse: (response: ItemDetailsResponse<UserApi>) =>
+        transformRegisterResponse(response),
+      invalidatesTags: ['Users'],
+    }),
+    rejectUser: builder.mutation<ItemDetailsResponse<User>, number>({
+      query: (id) => ({
+        url: `${ENDPOINTS.REJECT_USER}/${id}`,
+        method: MethodsEnum.POST,
+      }),
+      transformResponse: (response: ItemDetailsResponse<UserApi>) =>
+        transformRegisterResponse(response),
+      invalidatesTags: ['Users'],
+    }),
   }),
 })
 export const {
@@ -60,4 +87,7 @@ export const {
   useGetUsersForAdminQuery,
   useGetPendingUsersQuery,
   useCreateUserMutation,
+  useDeleteUserMutation,
+  useValidateUserMutation,
+  useRejectUserMutation,
 } = userApi

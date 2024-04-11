@@ -7,11 +7,17 @@ export const StyledBodyCardTitle = styled(Typography)(() => ({
   color: BLUE.main,
   padding: '20px',
 }))
-export const StyledBodyCardContent = styled(Typography)(() => ({
+export const StyledBodyCardContent = styled(Typography)(({ theme }) => ({
   fontSize: '16px',
   color: GREY.main,
   marginBottom: '20px',
   width: '71vw',
+  [theme.breakpoints.down('sm')]: {
+    width: '100%',
+  },
+  [theme.breakpoints.down('md')]: {
+    width: '100%',
+  },
 }))
 export const StyledBodyCardRoot = styled(Stack)(({ theme }) => ({
   display: 'flex',

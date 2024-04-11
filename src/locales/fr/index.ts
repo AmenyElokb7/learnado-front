@@ -9,6 +9,7 @@ import { auth } from './auth'
 import { sidebar } from './sidebar'
 import { common } from './common'
 import { users } from './users'
+import { dashboard } from './dashboard'
 
 const fr = {
   topbar,
@@ -22,5 +23,6 @@ const fr = {
   sidebar,
   common,
   users,
+  dashboard
 }
 export default fr

@@ -4,4 +4,8 @@ export const users = {
   all_users: 'All Users',
   pending_users: 'Pending Users',
   accepted_users: 'Accepted Users',
+  delete_user: 'Are you sure you want to delete this user?',
+  delete_user_success: 'User deleted successfully',
+  confirm_validate_user: 'Are you sure you want to validate this user?',
+  confirm_reject_user: 'Are you sure you want to reject this user?',
 }

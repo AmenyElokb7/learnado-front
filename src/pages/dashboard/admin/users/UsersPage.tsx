@@ -9,8 +9,8 @@ function UsersPage() {
   const navigate = useNavigate()
   return (
     <BodyCard
-      title={t('auth.users')}
-      buttonText={t('auth.add_user')}
+      title={t('users.all_users')}
+      buttonText={t('users.add_user')}
       onClick={() => navigate(PATHS.DASHBOARD.ADMIN.USERS.ADD_USER)}>
       <UsersTabs />
       <Outlet />

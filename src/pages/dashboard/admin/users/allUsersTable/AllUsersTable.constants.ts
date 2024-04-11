@@ -33,7 +33,7 @@ export const AllUserTableHeaders: ColumnHeader[] = [
   },
   {
     id: 6,
-    label: 'auth.action',
+    label: 'common.action',
     minWidth: 200,
     align: 'left',
   },
