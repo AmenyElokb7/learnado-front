@@ -43,6 +43,14 @@ export const userApi = createApi({
       transformResponse: (response: ApiPaginationResponse<UserApi>) =>
         transformFetchUsersResponse(response),
     }),
+    getAcceptedUsers: builder.query<PaginationResponse<User>, QueryParams>({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.ACCEPTED_USERS, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: ApiPaginationResponse<UserApi>) =>
+        transformFetchUsersResponse(response),
+    }),
     createUser: builder.mutation<ItemDetailsResponse<User>, FieldValues>({
       query: (user) => ({
         url: ENDPOINTS.ADD_USER,
@@ -80,6 +88,15 @@ export const userApi = createApi({
         transformRegisterResponse(response),
       invalidatesTags: ['Users'],
     }),
+    suspendUser: builder.mutation<ItemDetailsResponse<User>, number>({
+      query: (id) => ({
+        url: `${ENDPOINTS.SUSPEND_USER}/${id}`,
+        method: MethodsEnum.POST,
+      }),
+      transformResponse: (response: ItemDetailsResponse<UserApi>) =>
+        transformRegisterResponse(response),
+      invalidatesTags: ['Users'],
+    }),
   }),
 })
 export const {
@@ -90,4 +107,6 @@ export const {
   useDeleteUserMutation,
   useValidateUserMutation,
   useRejectUserMutation,
+  useGetAcceptedUsersQuery,
+  useSuspendUserMutation,
 } = userApi

@@ -37,6 +37,7 @@ export const PATHS = {
         ROOT: '/dashboard/admin/users',
         ALL: '/dashboard/admin/users/all',
         PENDING: '/dashboard/admin/users/pending',
+        ACCEPTED: '/dashboard/admin/users/accepted',
         EDIT_USER: '/dashboard/admin/users/:id',
         ADD_USER: '/dashboard/admin/addUser',
       },

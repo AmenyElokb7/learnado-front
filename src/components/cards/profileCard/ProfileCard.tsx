@@ -19,7 +19,7 @@ const ProfileCard = () => {
       {user && (
         <>
           <StyledContentCard>
-            <StyledAvatar src={user?.media?.[0].fileName} alt="avatar" />
+            <StyledAvatar src={user?.media?.[0]?.fileName} alt="avatar" />
           </StyledContentCard>
           <ProfileGroup>
             <ProfileName variant="h6">

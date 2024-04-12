@@ -14,7 +14,7 @@ export const UserTabSteps: UserTabStep[] = [
   },
   {
     label: 'users.accepted_users',
-    path: PATHS.DASHBOARD.ADMIN.USERS.ROOT,
+    path: PATHS.DASHBOARD.ADMIN.USERS.ACCEPTED,
     value: 2,
   },
 ]

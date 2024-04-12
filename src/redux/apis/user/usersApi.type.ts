@@ -9,6 +9,6 @@ export interface UserApi {
   password_confirmation: string
   role: UserRoleEnum
   courses_count?: number
-
+  is_valid?: 0 | 1
   media?: { model_id: number; file_name: string }[]
 }

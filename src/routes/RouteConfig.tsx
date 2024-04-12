@@ -36,6 +36,12 @@ const PendingUsersTable = lazy(
 const AddUserPages = lazy(
   () => import('src/pages/dashboard/admin/users/addUser/AddUserPages'),
 )
+const AcceptedUsersTable = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/admin/users/acceptedUsersTable/AcceptedUsersTable'
+    ),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -89,6 +95,10 @@ export const ROUTE_CONFIG: RouteObject[] = [
           {
             path: PATHS.DASHBOARD.ADMIN.USERS.PENDING,
             element: <PendingUsersTable />,
+          },
+          {
+            path: PATHS.DASHBOARD.ADMIN.USERS.ACCEPTED,
+            element: <AcceptedUsersTable />,
           },
         ],
       },

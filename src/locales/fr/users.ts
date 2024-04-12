@@ -8,5 +8,7 @@ export const users = {
   delete_user_success: 'Utilisateur supprimé avec succès',
   confirm_validate_user: 'Êtes-vous sûr de vouloir valider cet utilisateur?',
   confirm_reject_user: 'Êtes-vous sûr de vouloir rejeter cet utilisateur?',
-
+  suspend_user: 'Êtes-vous sûr de vouloir suspendre cet utilisateur?',
+  suspend_user_success: 'Utilisateur suspendu avec succès',
+  suspend: 'Suspendre',
 }

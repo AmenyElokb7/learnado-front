@@ -9,6 +9,7 @@ import { useState } from 'react'
 import { useAppDispatch } from '@redux/hooks'
 import { showError, showSuccess } from '@redux/slices/snackbarSlice'
 import CustomDialogActions from '@components/dialogs/customDialogActions/CustomDialogActions'
+import UserStatusChip from '@features/users/userStatusChip/userStatusChip'
 
 function AllUsersRow({ user }: AllUserRowProps) {
   const [deleteUser] = useDeleteUserMutation()
@@ -19,9 +20,9 @@ function AllUsersRow({ user }: AllUserRowProps) {
 
   const handleDeleteUser = async (id: number) => {
     try {
-      await deleteUser(id).unwrap()
-      dispatch(showSuccess(t('users.delete_user_success')))
       setOpen(false)
+      deleteUser(id).unwrap()
+      dispatch(showSuccess(t('users.delete_user_success')))
     } catch (error) {
       dispatch(
         showError(
@@ -46,6 +47,9 @@ function AllUsersRow({ user }: AllUserRowProps) {
         <TableCell>{user.email}</TableCell>
         <TableCell>
           <UserRoleChip roleId={user.role} />
+        </TableCell>
+        <TableCell>
+          <UserStatusChip status={user?.isValid} />
         </TableCell>
         <TableCell>
           <Stack direction={'row'} spacing={2}>

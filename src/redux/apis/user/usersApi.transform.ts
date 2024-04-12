@@ -30,6 +30,7 @@ export const transformSingleUser = (data: UserApi): User => {
     email: data.email,
     role: data.role,
     coursesCount: data.courses_count,
+    isValid: data.is_valid,
     media: data?.media?.length
       ? [
           {

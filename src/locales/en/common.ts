@@ -6,5 +6,6 @@ export const common = {
   ok: 'OK',
   action: 'Action',
   cancel: 'Cancel',
+  status: 'Status',
 
 }

@@ -9,6 +9,7 @@ import {
   RegisterBodyApi,
 } from './authApi.type'
 import { generatePictureSrc } from '@utils/helpers/string.helpers'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 export const transformRegisterResponse = (
   response: ItemDetailsResponse<UserApi>,
@@ -37,12 +38,21 @@ export function decodeLoginResponse(response: LoginResponseApi): LoginResponse {
       refreshToken: response.data.refresh_token,
       user: {
         ...transformSingleUser(response.data.user),
-        media: [
-          {
-            modelId: response.data.media.model_id ?? response.data.user.id,
-            fileName: generatePictureSrc(response.data.media.file_name),
-          },
-        ],
+        media: response.data.user?.media?.length
+          ? [
+              {
+                modelId: response.data.media.model_id,
+                fileName: generatePictureSrc(response.data.media.file_name),
+              },
+            ]
+          : [
+              {
+                modelId: response.data.user.id,
+                fileName: GLOBAL_VARIABLES.EMPTY_STRING,
+              },
+            ],
+
+        //
       },
     },
   }
