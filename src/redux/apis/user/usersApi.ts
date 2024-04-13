@@ -6,8 +6,12 @@ import { PaginationResponse } from 'types/interfaces/Pagination'
 import { QueryParams } from 'types/interfaces/QueryParams'
 import { ApiPaginationResponse } from '../type'
 import { MethodsEnum } from '@config/enums/method.enum'
-import { UserApi } from './usersApi.type'
-import { encodeUser, transformFetchUsersResponse } from './usersApi.transform'
+import { SingleUserResponseData, UserApi } from './usersApi.type'
+import {
+  encodeUser,
+  transformFetchUsersResponse,
+  transformUserResponse,
+} from './usersApi.transform'
 import { createApi } from '@reduxjs/toolkit/query/react'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 import { transformRegisterResponse } from '../auth/authApi.transform'
@@ -16,7 +20,7 @@ import { FieldValues } from 'react-hook-form'
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: baseQueryConfig,
-  tagTypes: ['Users'],
+  tagTypes: ['Users', 'User'],
   endpoints: (builder) => ({
     getFacilitators: builder.query<PaginationResponse<User>, QueryParams>({
       query: (params) => ({
@@ -35,6 +39,16 @@ export const userApi = createApi({
         transformFetchUsersResponse(response),
       providesTags: ['Users'],
     }),
+    getUserById: builder.query<ItemDetailsResponse<User>, string>({
+      query: (id) => ({
+        url: ENDPOINTS.USERS + `/${id}`,
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: SingleUserResponseData) =>
+        transformUserResponse(response),
+      providesTags: ['User'],
+    }),
+
     getPendingUsers: builder.query<PaginationResponse<User>, QueryParams>({
       query: (params) => ({
         url: injectPaginationParamsToUrl(ENDPOINTS.PENDING_USERS, params),
@@ -42,7 +56,9 @@ export const userApi = createApi({
       }),
       transformResponse: (response: ApiPaginationResponse<UserApi>) =>
         transformFetchUsersResponse(response),
+      providesTags: ['Users'],
     }),
+
     getAcceptedUsers: builder.query<PaginationResponse<User>, QueryParams>({
       query: (params) => ({
         url: injectPaginationParamsToUrl(ENDPOINTS.ACCEPTED_USERS, params),
@@ -50,7 +66,9 @@ export const userApi = createApi({
       }),
       transformResponse: (response: ApiPaginationResponse<UserApi>) =>
         transformFetchUsersResponse(response),
+      providesTags: ['Users'],
     }),
+
     createUser: builder.mutation<ItemDetailsResponse<User>, FieldValues>({
       query: (user) => ({
         url: ENDPOINTS.ADD_USER,
@@ -61,40 +79,46 @@ export const userApi = createApi({
         transformRegisterResponse(response),
       invalidatesTags: ['Users'],
     }),
+
+    editUser: builder.mutation<void, { id: number; user: FieldValues }>({
+      query: ({ id, user }) => ({
+        url: `${ENDPOINTS.EDIT_USER}/${id}`,
+        method: MethodsEnum.POST,
+        body: encodeUser(user),
+      }),
+
+      invalidatesTags: ['Users', 'User'],
+    }),
+
     deleteUser: builder.mutation<ItemDetailsResponse<User>, number>({
       query: (id) => ({
         url: `${ENDPOINTS.DELETE_USER}/${id}`,
         method: MethodsEnum.DELETE,
       }),
-      transformResponse: (response: ItemDetailsResponse<UserApi>) =>
-        transformRegisterResponse(response),
       invalidatesTags: ['Users'],
     }),
+
     validateUser: builder.mutation<ItemDetailsResponse<User>, number>({
       query: (id) => ({
         url: `${ENDPOINTS.VALIDATE_USER}/${id}`,
         method: MethodsEnum.POST,
       }),
-      transformResponse: (response: ItemDetailsResponse<UserApi>) =>
-        transformRegisterResponse(response),
       invalidatesTags: ['Users'],
     }),
+
     rejectUser: builder.mutation<ItemDetailsResponse<User>, number>({
       query: (id) => ({
         url: `${ENDPOINTS.REJECT_USER}/${id}`,
         method: MethodsEnum.POST,
       }),
-      transformResponse: (response: ItemDetailsResponse<UserApi>) =>
-        transformRegisterResponse(response),
       invalidatesTags: ['Users'],
     }),
+
     suspendUser: builder.mutation<ItemDetailsResponse<User>, number>({
       query: (id) => ({
         url: `${ENDPOINTS.SUSPEND_USER}/${id}`,
         method: MethodsEnum.POST,
       }),
-      transformResponse: (response: ItemDetailsResponse<UserApi>) =>
-        transformRegisterResponse(response),
       invalidatesTags: ['Users'],
     }),
   }),
@@ -109,4 +133,6 @@ export const {
   useRejectUserMutation,
   useGetAcceptedUsersQuery,
   useSuspendUserMutation,
+  useEditUserMutation,
+  useGetUserByIdQuery,
 } = userApi

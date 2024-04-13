@@ -5,20 +5,35 @@ import CustomPagination from '@components/customPagination/CustomPagination'
 import { UserTableHeaders } from '../allUsersTable/AllUsersTable.constants'
 import AcceptedUsersRow from './acceptedUsersRow/AcceptedUsersRow'
 import { useGetAcceptedUsersQuery } from '@redux/apis/user/usersApi'
+import useDebounce from 'src/hooks/useDebounce'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 function AcceptedUsersTable() {
-  const { queryParams, handlePageChange, handleRowsPerPageChange } =
-    usePagination()
+  const {
+    queryParams,
+    handlePageChange,
+    handleRowsPerPageChange,
+    handleSearchChange,
+  } = usePagination()
 
-  const { isFetching, data, isLoading } = useGetAcceptedUsersQuery(queryParams)
+  const debouncedSearchQuery = useDebounce(
+    queryParams.keyword,
+    GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
+  )
+
+  const { isFetching, data, isLoading } = useGetAcceptedUsersQuery({
+    ...queryParams,
+    keyword: debouncedSearchQuery,
+  })
 
   return (
     <Stack direction={'column'} spacing={2}>
       <CustomTable
         columns={UserTableHeaders}
         isLoading={isLoading}
-        isFetching={isFetching}>
-        {/* Table body */}
+        isFetching={isFetching}
+        queryParams={queryParams}
+        handleSearchChange={handleSearchChange}>
         {data?.data?.map((user) => (
           <AcceptedUsersRow key={user.id} user={user} />
         ))}

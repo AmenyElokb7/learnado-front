@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom'
 import { InstructorAvatar } from '@features/home/homeCourses/coursesCard/courseCard.style'
 import UserRoleChip from '@features/users/userRoleChip/UserRoleChip'
 import { Delete, Edit } from '@mui/icons-material'
@@ -10,6 +11,7 @@ import { useAppDispatch } from '@redux/hooks'
 import { showError, showSuccess } from '@redux/slices/snackbarSlice'
 import CustomDialogActions from '@components/dialogs/customDialogActions/CustomDialogActions'
 import UserStatusChip from '@features/users/userStatusChip/userStatusChip'
+import { PATHS } from '@config/constants/paths'
 
 function AllUsersRow({ user }: AllUserRowProps) {
   const [deleteUser] = useDeleteUserMutation()
@@ -17,22 +19,23 @@ function AllUsersRow({ user }: AllUserRowProps) {
   const [open, setOpen] = useState(false)
 
   const dispatch = useAppDispatch()
+  const { t } = useTranslation()
+  const navigate = useNavigate()
 
   const handleDeleteUser = async (id: number) => {
     try {
-      setOpen(false)
       deleteUser(id).unwrap()
       dispatch(showSuccess(t('users.delete_user_success')))
     } catch (error) {
-      dispatch(
-        showError(
-          (error as { data: { errors: string } }).data.errors.toString(),
-        ),
-      )
+      dispatch(showError(t('errors.general_error')))
+    } finally {
+      setOpen(false)
     }
   }
 
-  const { t } = useTranslation()
+  const navigateToUserDetailPage = (id: number) => {
+    return navigate(`${PATHS.DASHBOARD.ADMIN.USERS.ROOT}/${id}`)
+  }
   return (
     <>
       <TableRow key={user.id}>
@@ -54,7 +57,11 @@ function AllUsersRow({ user }: AllUserRowProps) {
         <TableCell>
           <Stack direction={'row'} spacing={2}>
             <Tooltip title={t('common.edit')}>
-              <Edit color="info" cursor="pointer" />
+              <Edit
+                color="info"
+                cursor="pointer"
+                onClick={() => navigateToUserDetailPage(user.id)}
+              />
             </Tooltip>
             <Tooltip title={t('common.delete')}>
               <Delete

@@ -10,7 +10,3 @@ export type RegisterBody = {
   role: UserRoleEnum
   media: MediaApi[]
 }
-export type SignupUserType = {
-  id: number
-  label: string
-}

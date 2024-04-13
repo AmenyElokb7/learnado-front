@@ -1,5 +1,4 @@
 import { User } from 'types/models/User'
-import noImage from '@assets/images/image_not_available.png'
 import { ConfigEnv } from '@config/configEnv'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
@@ -41,7 +40,7 @@ export const ToCamelCase = (str: string): string => {
 }
 
 export const generatePictureSrc = (fileName?: string): string => {
-  if (!fileName) return noImage
+  if (!fileName) return GLOBAL_VARIABLES.EMPTY_STRING
   return `${ConfigEnv.MEDIA_BASE_URL}/${fileName}`
 }
 

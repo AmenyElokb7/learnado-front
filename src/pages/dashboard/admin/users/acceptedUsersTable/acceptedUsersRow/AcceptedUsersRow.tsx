@@ -18,15 +18,12 @@ function AcceptedUsersRow({ user }: AcceptedUserRowProps) {
 
   const handleSuspendUser = (id: number) => {
     try {
-      setOpen(false)
       suspendUser(id).unwrap()
       dispatch(showSuccess(t('users.suspend_user_success')))
     } catch (error) {
-      dispatch(
-        showError(
-          (error as { data: { errors: string } }).data.errors.toString(),
-        ),
-      )
+      dispatch(showError(t('errors.general_error')))
+    } finally {
+      setOpen(false)
     }
   }
 
@@ -50,6 +47,7 @@ function AcceptedUsersRow({ user }: AcceptedUserRowProps) {
             color="secondary"
             cursor="pointer"
             onClick={() => setOpen(true)}
+            fontSize="large"
           />
         </Tooltip>
       </TableCell>

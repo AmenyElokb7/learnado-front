@@ -1,23 +1,46 @@
 import CustomPagination from '@components/customPagination/CustomPagination'
 import CustomTable from '@components/customTable/CustomTable'
-import { Stack } from '@mui/material'
+import { Stack, Typography } from '@mui/material'
 import { useGetUsersForAdminQuery } from '@redux/apis/user/usersApi'
 import usePagination from 'src/hooks/usePagination'
-import { AllUserTableHeaders } from './AllUsersTable.constants'
+import {
+  AllUserTableHeaders,
+  FiltersByRoleOptions,
+} from './AllUsersTable.constants'
 import AllUsersRow from './allUsersRow/AllUsersRow'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import useDebounce from 'src/hooks/useDebounce'
+import { useTranslation } from 'react-i18next'
 
 function AllUsersTable() {
-  const { queryParams, handlePageChange, handleRowsPerPageChange } =
-    usePagination()
+  const {
+    queryParams,
+    handlePageChange,
+    handleRowsPerPageChange,
+    handleSearchChange,
+  } = usePagination()
 
-  const { isFetching, data, isLoading } = useGetUsersForAdminQuery(queryParams)
+  const { t } = useTranslation()
+
+  const debouncedSearchQuery = useDebounce(
+    queryParams.keyword,
+    GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
+  )
+
+  const { isFetching, data, isLoading } = useGetUsersForAdminQuery({
+    ...queryParams,
+    keyword: debouncedSearchQuery,
+  })
+
   return (
     <Stack direction={'column'} spacing={2}>
       <CustomTable
         columns={AllUserTableHeaders}
         isLoading={isLoading}
-        isFetching={isFetching}>
-        {/* Table body */}
+        isFetching={isFetching}
+        queryParams={queryParams}
+        filters={FiltersByRoleOptions}
+        handleSearchChange={handleSearchChange}>
         {data?.data?.map((user) => (
           <AllUsersRow key={user.id} user={user} />
         ))}

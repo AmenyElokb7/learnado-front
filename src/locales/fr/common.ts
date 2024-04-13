@@ -7,4 +7,7 @@ export const common = {
   ok: 'OK',
   cancel: 'Annuler',
   status: 'Statut',
+  go_back_home: "Retour à la page d'accueil",
+  all: 'Tous',
+  no_data_found: 'Aucune donnée trouvée',
 }

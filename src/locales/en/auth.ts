@@ -40,4 +40,7 @@ export const auth = {
   image: 'Image',
   profile_picture: 'Profile Picture',
   accout_created: 'Account created successfully',
+  password_set_success: 'Password set successfully',
+  invalid_token: 'Token is invalid or expired',
+  set_password: 'Set Password',
 }

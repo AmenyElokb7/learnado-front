@@ -30,7 +30,7 @@ function CustomDialog({
         </Typography>
         <StyledImage src={children} />
         <Button variant="outlined" onClick={onButtonClick}>
-          {t('auth.ok')}
+          {t('common.ok')}
         </Button>
       </StyledDialogContent>
     </StyledDialog>

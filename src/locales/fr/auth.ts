@@ -41,4 +41,7 @@ export const auth = {
   image: 'Image',
   profile_picture: 'Photo de profil',
   accout_created: 'Compte créé avec succès',
+  password_set_success: 'Mot de passe défini avec succès',
+  invalid_token: 'Le jeton est invalide ou a expiré',
+  set_password: 'Définir votre mot de passe',
 }

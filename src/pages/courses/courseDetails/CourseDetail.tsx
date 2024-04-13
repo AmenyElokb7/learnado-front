@@ -18,12 +18,12 @@ import { StyledAvatar } from '@features/instructors/InstructorCard/instructorCar
 import { Email } from '@mui/icons-material'
 import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
 import CourseOtherMediaCard from '@features/courses/courseDetails/courseMediaCard/courseOtherMediaCard/CourseOtherMediaCard'
+import FallbackLoader from '@components/fallback/FallbackLoader'
 export const CourseDetail = () => {
   const { t } = useTranslation()
   const { courseId } = useParams<string>()
   const { data, isLoading } = useGetCourseByIdQuery(courseId as string)
-
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <FallbackLoader />
 
   if (!data?.data) return <NoDataFound message={t('course.not_found')} />
 
@@ -71,7 +71,6 @@ export const CourseDetail = () => {
             longitude={course.long ?? null}
             mapboxAccessToken={ConfigEnv.MAPBOX_ACCESS_TOKEN}
           />
-
         </Grid>
         <Grid
           item

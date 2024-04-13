@@ -4,36 +4,35 @@ import {
   StyledSidebarMenu,
 } from './Sidebar.style'
 import { useTranslation } from 'react-i18next'
-import { SidebarProps } from './Sidebar.type'
+import { SidebarItemsProps } from './SidebarItems.type'
 import { getUserFromLocalStorage } from '@utils/localStorage/storage'
 import { UserRoleEnum } from '@config/enums/role.enum'
 import { Logout, Settings } from '@mui/icons-material'
 import { PATHS } from '@config/constants/paths'
 import CustomSidebarLink from '@components/customLink/customSidebarLink/CustomSidebarLink'
 
-function Sidebar({ sidebarItem }: SidebarProps) {
+function Sidebar({ sidebarItem }: SidebarItemsProps) {
   const { t } = useTranslation()
   const user = getUserFromLocalStorage()
   return (
     <StyledSidebarCard>
       <SidebarTitle>{t('sidebar.dashboard')}</SidebarTitle>
-      {sidebarItem.map((item) => {
-        if (
-          item.accessibleRoles &&
-          item.accessibleRoles.includes(user?.role as UserRoleEnum)
-        ) {
-          return (
-            <StyledSidebarMenu key={item.id}>
-              <item.icon />
-              <CustomSidebarLink
-                to={item.path}
-                label={t(item.label)}
-                isActive={item.path === window.location.pathname}
-              />
-            </StyledSidebarMenu>
-          )
-        }
-      })}
+
+      {sidebarItem
+        .filter((item) =>
+          item.accessibleRoles?.includes(user?.role as UserRoleEnum),
+        )
+        .map((item) => (
+          <StyledSidebarMenu key={item.id}>
+            <item.icon />
+            <CustomSidebarLink
+              to={item.path}
+              label={t(item.label)}
+              isActive={item.path === window.location.pathname}
+            />
+          </StyledSidebarMenu>
+        ))}
+
       <SidebarTitle>{t('sidebar.account_settings')}</SidebarTitle>
       <StyledSidebarMenu>
         <Settings />

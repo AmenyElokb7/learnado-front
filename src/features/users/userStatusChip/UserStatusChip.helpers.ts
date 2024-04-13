@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next'
 import { UserStatusColorProps } from './UserStatusChip.type'
 
 export const gerUserStatusChipColor = (
@@ -31,6 +32,7 @@ export const gerUserStatusChipColor = (
 }
 
 export const getUserStatus = (isActive: 0 | 1): string => {
-  if (isActive) return 'Active'
-  return 'Pending'
+  const { t } = useTranslation()
+  if (isActive) return t('users.active')
+  return t('users.Pending')
 }

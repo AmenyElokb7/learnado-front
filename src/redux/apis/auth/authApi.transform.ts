@@ -30,6 +30,16 @@ export function signupEncoder(user: RegisterBody): RegisterBodyApi {
     role: role,
   }
 }
+export function setPasswordEncoder(data: {
+  password: string
+  confirmPassword: string
+}): { password: string; password_confirmation: string } {
+  return {
+    password: data.password,
+    password_confirmation: data.confirmPassword,
+  }
+}
+
 export function decodeLoginResponse(response: LoginResponseApi): LoginResponse {
   return {
     message: response.message,

@@ -43,7 +43,7 @@ const TopbarDrawer = ({ open, toggleDrawer }: TopbarDrawerProps) => {
           </Button>
           <Button
             variant="outlined"
-            onClick={() => navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.SIGNUP}`)}>
+            onClick={() => navigate(PATHS.AUTH.SIGNUP)}>
             {t('topbar.signup')}
           </Button>
         </Stack>

@@ -1,4 +1,6 @@
+import { UserRoleEnum } from '@config/enums/role.enum'
 import { ColumnHeader } from 'types/interfaces/ColumHeader'
+import { FiltersOption } from 'types/interfaces/QueryParams'
 
 export const AllUserTableHeaders: ColumnHeader[] = [
   {
@@ -82,5 +84,24 @@ export const UserTableHeaders: ColumnHeader[] = [
     label: 'common.action',
     minWidth: 200,
     align: 'left',
+  },
+]
+
+export const FiltersByRoleOptions: FiltersOption[] = [
+  {
+    id: 6,
+    name: 'common.all',
+  },
+  {
+    id: UserRoleEnum.DESIGNER,
+    name: 'auth.designer',
+  },
+  {
+    id: UserRoleEnum.FACILITATOR,
+    name: 'auth.facilitator',
+  },
+  {
+    id: UserRoleEnum.USER,
+    name: 'auth.user',
   },
 ]

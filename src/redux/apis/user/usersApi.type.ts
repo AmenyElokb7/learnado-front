@@ -12,3 +12,7 @@ export interface UserApi {
   is_valid?: 0 | 1
   media?: { model_id: number; file_name: string }[]
 }
+export interface SingleUserResponseData {
+  message: string
+  data: UserApi
+}

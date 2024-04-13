@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEvent, useState } from 'react'
+import { ChangeEvent, MouseEvent, useEffect, useState } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 
 interface IUseUploadFile {
@@ -12,7 +12,7 @@ const useUploadFile = ({
   initPreview,
   fieldName,
 }: IUseUploadFile) => {
-  const [preview, setPreview] = useState<null | string>(initPreview)
+  const [preview, setPreview] = useState<null | string>(null)
 
   const handleOnChange = (event: ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0]
@@ -24,8 +24,15 @@ const useUploadFile = ({
 
   const handleResetPreview = (event: MouseEvent<SVGSVGElement>) => {
     event.stopPropagation()
+    formMethods.setValue(fieldName, null)
     setPreview(null)
   }
+
+  useEffect(() => {
+    if (initPreview) {
+      setPreview(initPreview)
+    }
+  }, [initPreview])
 
   return { preview, handleOnChange, handleResetPreview }
 }
