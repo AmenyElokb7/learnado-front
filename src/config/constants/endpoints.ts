@@ -15,4 +15,5 @@ export const ENDPOINTS = {
   SUSPEND_USER: 'admin/suspend-account',
   EDIT_USER: 'admin/update-user-account',
   SET_PASSWORD: 'password-set/?token=',
+  SEND_RESET_PASSWORD_EMAIL: 'send-password-reset-mail',
 }

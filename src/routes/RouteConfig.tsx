@@ -44,11 +44,15 @@ const AcceptedUsersTable = lazy(
 const SetPasswordPage = lazy(
   () => import('src/pages/auth/setPassword/SetPasswordpage'),
 )
-
 const AllUsersTable = lazy(
   () => import('src/pages/dashboard/admin/users/allUsersTable/AllUsersTable'),
 )
-
+const EmailConfirmationPage = lazy(
+  () =>
+    import(
+      'src/pages/auth/forgetPassword/emailConfirmationPage/EmailConfirmationPage'
+    ),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -61,6 +65,7 @@ export const ROUTE_CONFIG: RouteObject[] = [
       { path: PATHS.AUTH.LOGIN, element: <LoginPage /> },
       { path: PATHS.AUTH.SIGNUP, element: <SignUpPage /> },
       { path: PATHS.AUTH.SET_PASSWORD, element: <SetPasswordPage /> },
+      { path: PATHS.AUTH.FORGET_PASSWORD, element: <EmailConfirmationPage /> },
     ],
   },
   {
@@ -129,9 +134,9 @@ export const ROUTE_CONFIG: RouteObject[] = [
       },
     ],
   },
-  { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
-  {
-    path: PATHS.ANY,
-    element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
-  },
+   { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
+   {
+     path: PATHS.ANY,
+     element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
+   },
 ]

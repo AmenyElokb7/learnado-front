@@ -53,6 +53,13 @@ export const authApi = createApi({
         body: setPasswordEncoder(data),
       }),
     }),
+    sendResetPasswordEmail: builder.mutation<void, { email: string }>({
+      query: ({ email }) => ({
+        url: ENDPOINTS.SEND_RESET_PASSWORD_EMAIL,
+        method: MethodsEnum.POST,
+        body: { email },
+      }),
+    }),
   }),
 })
 export const {
@@ -60,4 +67,5 @@ export const {
   useSignupMutation,
   useLogoutMutation,
   useSetPasswordMutation,
+  useSendResetPasswordEmailMutation,
 } = authApi

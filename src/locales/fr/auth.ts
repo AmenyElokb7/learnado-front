@@ -44,4 +44,6 @@ export const auth = {
   password_set_success: 'Mot de passe défini avec succès',
   invalid_token: 'Le jeton est invalide ou a expiré',
   set_password: 'Définir votre mot de passe',
+  confirm_email: 'Confirmez votre email',
+  send_email: 'Envoyer un email',
 }

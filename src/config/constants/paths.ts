@@ -22,7 +22,6 @@ export const PATHS = {
     LOGIN: 'login',
     SIGNUP: 'signup',
     FORGET_PASSWORD: 'forget-password',
-    RESET_PASSWORD: 'reset-password',
     SET_PASSWORD: 'password-set',
   },
 
