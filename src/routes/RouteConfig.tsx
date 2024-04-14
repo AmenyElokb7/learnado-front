@@ -53,6 +53,9 @@ const EmailConfirmationPage = lazy(
       'src/pages/auth/forgetPassword/emailConfirmationPage/EmailConfirmationPage'
     ),
 )
+const CoursesPage = lazy(
+  () => import('src/pages/dashboard/designer/courses/CoursesPage'),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -132,11 +135,19 @@ export const ROUTE_CONFIG: RouteObject[] = [
           </RoleBasedGuard>
         ),
       },
+      {
+        path: PATHS.DASHBOARD.DESIGNER.MY_COURSES.ROOT,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.DESIGNER]}>
+            <CoursesPage />
+          </RoleBasedGuard>
+        ),
+      },
     ],
   },
-   { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
-   {
-     path: PATHS.ANY,
-     element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
-   },
+  { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
+  {
+    path: PATHS.ANY,
+    element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
+  },
 ]

@@ -62,7 +62,7 @@ export const transformSingleUser = (data: UserApi): User => {
 export const encodeUser = (values: FieldValues): FormData => {
   const formData = new FormData()
   if (values.profilePicture === null) {
-    values.profilePicture = ''
+    values.profilePicture = GLOBAL_VARIABLES.EMPTY_STRING
   }
   Object.keys(values).forEach((key) => {
     formData.append(toSnakeCase(key), values[key])

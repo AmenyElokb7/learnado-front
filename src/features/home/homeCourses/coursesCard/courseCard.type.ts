@@ -7,7 +7,10 @@ export interface CourseCardProps {
   isPaid: boolean
   coursePrice: string
   discount: string
+  hasDiscount?: boolean
   lessonsCount: number
   duration: string
   createdAt: string
+  isInstructor?: boolean
+  width?: string
 }

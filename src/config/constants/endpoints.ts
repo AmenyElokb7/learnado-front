@@ -16,4 +16,6 @@ export const ENDPOINTS = {
   EDIT_USER: 'admin/update-user-account',
   SET_PASSWORD: 'password-set/?token=',
   SEND_RESET_PASSWORD_EMAIL: 'send-password-reset-mail',
+  DESIGNER_COURSES: 'designer/courses',
+  DELETE_COURSE: 'designer/delete-course',
 }

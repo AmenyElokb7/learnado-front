@@ -16,4 +16,9 @@ export const course = {
   bo_steps_found: 'Aucune étape trouvée',
   map: 'Vous pouvez nous trouver ici',
   about: "Plus d'informations sur le cours",
+  all_courses: 'Tous les cours',
+  add_course: 'Ajouter un cours',
+  delete_course_confirm: 'Êtes-vous sûr de vouloir supprimer ce cours ?',
+  delete_course: 'Supprimer ce cours ?',
+  delete_course_success: 'Cours supprimé avec succès',
 }

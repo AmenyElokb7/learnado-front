@@ -18,6 +18,7 @@ import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 export const courseApi = createApi({
   reducerPath: 'courseApi',
   baseQuery: baseQueryConfig,
+  tagTypes: ['Courses'],
   endpoints: (builder) => ({
     getCourses: builder.query<PaginationResponse<Course>, QueryParams>({
       query: (params) => ({
@@ -37,7 +38,28 @@ export const courseApi = createApi({
       transformResponse: (response: SingleCourseResponseData) =>
         transformFetchCourseResponse(response),
     }),
+    getDesignerCourses: builder.query<PaginationResponse<Course>, QueryParams>({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.DESIGNER_COURSES, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: ApiPaginationResponse<CourseApi>) =>
+        transformFetchCoursesResponse(response),
+      providesTags: ['Courses'],
+    }),
+    deleteCourse: builder.mutation<void, number>({
+      query: (id) => ({
+        url: ENDPOINTS.DELETE_COURSE + `/${id}`,
+        method: MethodsEnum.DELETE,
+      }),
+      invalidatesTags: ['Courses'],
+    }),
   }),
 })
 
-export const { useGetCoursesQuery, useGetCourseByIdQuery } = courseApi
+export const {
+  useGetCoursesQuery,
+  useGetCourseByIdQuery,
+  useGetDesignerCoursesQuery,
+  useDeleteCourseMutation,
+} = courseApi

@@ -1,19 +1,17 @@
-import { Stack } from '@mui/material'
 import { useTranslation } from 'react-i18next'
-
-import CoursesListSkeleton from './CoursesListSkeleton'
+import { AllCoursesListProps } from './AllCoursesList.type'
 import NoDataFound from '@components/noDataFound/NoDataFound'
-import CourseCard from '../../coursesCard/CourseCard'
-import { CoursesListProps } from './coursesList.type'
+import CoursesListSkeleton from '@features/home/homeCourses/coursesList/coursesListSkeleton/CoursesListSkeleton'
+import CourseCard from '@features/home/homeCourses/coursesCard/CourseCard'
+import { Stack } from '@mui/material'
 
-function CoursesList({ courses, isLoading }: CoursesListProps) {
+function AllCoursesList({ courses, isLoading }: AllCoursesListProps) {
   const { t } = useTranslation()
 
   if (courses?.length === 0)
     return <NoDataFound message={t('home.no_course_found')} />
 
   if (isLoading) return <CoursesListSkeleton />
-
   return (
     <Stack
       direction={'row'}
@@ -23,7 +21,7 @@ function CoursesList({ courses, isLoading }: CoursesListProps) {
       {Boolean(courses) &&
         courses?.map((course) => (
           <CourseCard
-            width="50vh"
+            width="45vh"
             key={course.id}
             id={course.id}
             image={course.media[0]?.fileName}
@@ -38,10 +36,11 @@ function CoursesList({ courses, isLoading }: CoursesListProps) {
             duration={course.duration}
             isPaid={course.isPaid}
             createdAt={course.createdAt}
+            isInstructor
           />
         ))}
     </Stack>
   )
 }
 
-export default CoursesList
+export default AllCoursesList

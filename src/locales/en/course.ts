@@ -16,4 +16,9 @@ export const course = {
   no_steps_found: 'No steps found',
   map: 'You can find us here',
   about: 'More information about the course',
+  all_courses: 'All courses',
+  add_course: 'Add course',
+  delete_course_confirm: 'Are you sure you want to delete this course?',
+  delete_course: 'Delete This Course?',
+  delete_course_success: 'Course deleted successfully',
 }

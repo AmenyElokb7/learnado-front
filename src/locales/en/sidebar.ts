@@ -10,4 +10,6 @@ export const sidebar = {
   language: 'Manage Languages',
   category: 'Manage Categories',
   pending_users: 'Pending Users',
+  courses: 'My Courses',
+  learning_path: 'My Learning Paths',
 }

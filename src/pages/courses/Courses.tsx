@@ -78,11 +78,14 @@ const Courses = () => {
             />
           </Stack>
         </Grid>
+
         <Grid item lg={3}>
-          <SearchSection
-            handleSearchChange={handleSearchChange}
-            searchValue={queryParams.keyword}
-          />
+          <Stack p={2}>
+            <SearchSection
+              handleSearchChange={handleSearchChange}
+              searchValue={queryParams.keyword}
+            />
+          </Stack>
 
           <FilterCategories
             filtersQueryParams={queryParams}

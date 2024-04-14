@@ -4,7 +4,7 @@ export const users = {
   all_users: 'All Users',
   pending_users: 'Pending Users',
   accepted_users: 'Accepted Users',
-  delete_user: 'Are you sure you want to delete this user?',
+  delete_user: 'Are you sure you want to delete this user permanently from the site? Please confirm your choice.',
   delete_user_success: 'User deleted successfully',
   confirm_validate_user: 'Are you sure you want to validate this user?',
   confirm_reject_user: 'Are you sure you want to reject this user?',
@@ -15,4 +15,8 @@ export const users = {
   update_user: 'Update User',
   active: 'Active',
   Pending: 'Pending',
+  delete_user_confirm: 'Delete This User?',
+  suspend_user_confirm: 'Suspend This User?',
+  validate_user: 'Validate This User?',
+  reject_user: 'Reject This User?',
 }
