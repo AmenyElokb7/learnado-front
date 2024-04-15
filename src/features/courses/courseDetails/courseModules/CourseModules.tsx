@@ -1,7 +1,7 @@
 import { useTranslation } from 'react-i18next'
 import CourseModule from './CourseModule'
 import { CourseContentProps } from './courseModules.type'
-import RectangularCard from '@components/rectangularCard/RectangularCard'
+import RectangularCard from '@components/cards/rectangularCard/RectangularCard'
 
 export const CourseModules = ({ steps }: CourseContentProps) => {
   const { t } = useTranslation()

@@ -6,7 +6,9 @@ import { GuestGuard } from '@guards/GuestGuard'
 import AuthLayout from '@layouts/authLayout/AuthLayout'
 import DashboardLayout from '@layouts/dashboardLayout/DashboardLayout'
 import { AuthGuard } from '@guards/AuthGuard'
-
+import { RoleBasedGuard } from '@guards/RoleBasedGuard'
+import { UserRoleEnum } from '@config/enums/role.enum'
+import AllUsersTable from '@pages/dashboard/admin/users/allUsersTable/AllUsersTable'
 
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 const Courses = lazy(() => import('src/pages/courses/Courses'))
@@ -22,7 +24,24 @@ const SignUpPage = lazy(() => import('src/pages/auth/signup/signupPage'))
 const LoginPage = lazy(() => import('src/pages/auth/login/LoginPage'))
 const ProfilePage = lazy(() => import('src/pages/profile/ProfilePage'))
 const DashboardPage = lazy(() => import('src/pages/dashboard/DashboardPage'))
-
+const UsersPage = lazy(
+  () => import('src/pages/dashboard/admin/users/UsersPage'),
+)
+const PendingUsersTable = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/admin/users/pendingUsersTable/PendingUsersTable'
+    ),
+)
+const AddUserPages = lazy(
+  () => import('src/pages/dashboard/admin/users/addUser/AddUserPages'),
+)
+const AcceptedUsersTable = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/admin/users/acceptedUsersTable/AcceptedUsersTable'
+    ),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -56,7 +75,42 @@ export const ROUTE_CONFIG: RouteObject[] = [
     ),
     children: [
       { path: PATHS.DASHBOARD.ROOT, element: <DashboardPage /> },
-      { path: PATHS.DASHBOARD.PROFILE, element: <ProfilePage /> },
+      { path: PATHS.DASHBOARD.PROFILE.ROOT, element: <ProfilePage /> },
+      {
+        path: PATHS.DASHBOARD.ADMIN.USERS.ROOT,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <UsersPage />
+          </RoleBasedGuard>
+        ),
+        children: [
+          {
+            path: PATHS.DASHBOARD.ADMIN.USERS.ROOT,
+            element: <Navigate to={PATHS.DASHBOARD.ADMIN.USERS.ALL} />,
+          },
+          {
+            path: PATHS.DASHBOARD.ADMIN.USERS.ALL,
+            element: <AllUsersTable />,
+          },
+          {
+            path: PATHS.DASHBOARD.ADMIN.USERS.PENDING,
+            element: <PendingUsersTable />,
+          },
+          {
+            path: PATHS.DASHBOARD.ADMIN.USERS.ACCEPTED,
+            element: <AcceptedUsersTable />,
+          },
+        ],
+      },
+
+      {
+        path: PATHS.DASHBOARD.ADMIN.USERS.ADD_USER,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <AddUserPages />
+          </RoleBasedGuard>
+        ),
+      },
     ],
   },
   { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },

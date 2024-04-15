@@ -1,4 +1,4 @@
-import RectangularCard from '@components/rectangularCard/RectangularCard'
+import RectangularCard from '@components/cards/rectangularCard/RectangularCard'
 import { CourseOtherMediaCardProps } from './courseOtherMediaCard.type'
 import { ImageList, ImageListItem } from '@mui/material'
 import { useTranslation } from 'react-i18next'

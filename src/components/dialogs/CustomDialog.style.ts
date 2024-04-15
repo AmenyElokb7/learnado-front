@@ -12,6 +12,8 @@ export const StyledDialog = styled(Dialog)(({ theme }) => ({
 
 export const StyledDialogContent = styled(DialogContent)(({ theme }) => ({
   justifyContent: 'center',
+  lineHeight: '1.5',
+
   alignItems: 'center',
   [theme.breakpoints.down('sm')]: {
     padding: '10px',

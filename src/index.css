@@ -2,7 +2,6 @@ body {
   margin: 0;
 }
 * {
-  animation: grow 1s;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }

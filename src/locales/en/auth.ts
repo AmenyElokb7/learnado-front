@@ -36,7 +36,8 @@ export const auth = {
   instructor: 'Instrutor',
   logout: 'Logout',
   success_signup: 'Your account has been created successfully, please wait for the admin to approve your account',
-  dashboard: 'Dashboard',
   account_not_approved: 'Your account is not approved yet',
-  ok: "OK"
+  image: 'Image',
+  profile_picture: 'Profile Picture',
+  accout_created: 'Account created successfully',
 }

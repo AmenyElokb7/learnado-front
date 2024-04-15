@@ -6,7 +6,7 @@ import { MapCardContainer } from './courseMapCard.style'
 
 import { ConfigEnv } from '@config/configEnv'
 import { useTranslation } from 'react-i18next'
-import RectangularCard from '@components/rectangularCard/RectangularCard'
+import RectangularCard from '@components/cards/rectangularCard/RectangularCard'
 
 const CourseMapCard = ({
   latitude,

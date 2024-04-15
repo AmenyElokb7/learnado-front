@@ -7,7 +7,7 @@ import {
   Stack,
 } from '@mui/material'
 import { RowsPerPageProps } from './rowPerPage.type'
-import { t } from 'i18next'
+import { useTranslation } from 'react-i18next'
 
 const RowsPerPage = ({
   rowsPerPage,
@@ -17,6 +17,7 @@ const RowsPerPage = ({
   const handleRowsPerPageChange = (event: SelectChangeEvent) => {
     onRowsPerPageChange?.(Number(event.target.value))
   }
+  const { t } = useTranslation()
 
   return (
     <Stack
@@ -31,12 +32,12 @@ const RowsPerPage = ({
           </InputLabel>
           <Select
             labelId="rows-per-page-label"
-            label="Rows per page"
+            label={t('pagination.rows_per_page')}
             value={rowsPerPage.toString()}
             onChange={handleRowsPerPageChange}
             disabled={isLoading}>
-            {[5, 10, 15, 20].map((rowsOption) => (
-              <MenuItem key={rowsOption} value={rowsOption}>
+            {[9, 18, 27, 36].map((rowsOption) => (
+              <MenuItem key={rowsOption} value={rowsOption} aria-checked>
                 {rowsOption}
               </MenuItem>
             ))}

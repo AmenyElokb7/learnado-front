@@ -37,7 +37,8 @@ export const auth = {
   logout: 'Déconnexion',
   success_signup:
     "Votre compte a été créé avec succès, veuillez attendre que l'administrateur approuve votre compte",
-  dashboard: 'Tableau de bord',
   account_not_approved: 'Votre compte n est pas encore approuvé',
-  ok: 'OK',
+  image: 'Image',
+  profile_picture: 'Photo de profil',
+  accout_created: 'Compte créé avec succès',
 }

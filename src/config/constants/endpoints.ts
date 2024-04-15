@@ -5,4 +5,12 @@ export const ENDPOINTS = {
   REGISTER: 'register',
   LOGIN: 'login',
   LOGOUT: 'logout',
+  USERS: 'admin/users',
+  PENDING_USERS: 'admin/pending-users',
+  ACCEPTED_USERS: 'admin/accepted-users',
+  ADD_USER: 'admin/create-user',
+  DELETE_USER: 'admin/delete-user-account',
+  VALIDATE_USER: 'admin/validate-user-account',
+  REJECT_USER: 'admin/reject-user-account',
+  SUSPEND_USER: 'admin/suspend-account',
 }

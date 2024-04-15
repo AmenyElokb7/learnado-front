@@ -6,6 +6,10 @@ import { course } from './course'
 import { footer } from './footer'
 import { pagination } from './pagination'
 import { auth } from './auth'
+import { sidebar } from './sidebar'
+import { common } from './common'
+import { users } from './users'
+import { dashboard } from './dashboard'
 
 const en = {
   topbar,
@@ -16,5 +20,9 @@ const en = {
   pagination,
   auth,
   errors,
+  sidebar,
+  common,
+  users,
+  dashboard,
 }
 export default en
