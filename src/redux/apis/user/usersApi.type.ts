@@ -1,4 +1,5 @@
 import { UserRoleEnum } from '@config/enums/role.enum'
+import { User } from 'types/models/User'
 
 export interface UserApi {
   id: number
@@ -15,4 +16,14 @@ export interface UserApi {
 export interface SingleUserResponseData {
   message: string
   data: UserApi
+}
+
+export interface APIFacilitatorsResponse {
+  message: string
+  data: UserApi[]
+}
+
+export interface FacilitatorsResponse {
+  facilitators: User[]
+  message: string
 }

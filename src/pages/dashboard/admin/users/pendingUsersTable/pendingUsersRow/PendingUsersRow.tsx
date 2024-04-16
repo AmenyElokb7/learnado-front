@@ -15,6 +15,7 @@ import {
 import validate from '@assets/logo/validate.png'
 const reject = require('@assets/logo/reject.webp')
 import { GREY } from '@config/colors/colors'
+import { UserActionsEnum } from '@config/enums/userActions.enum'
 
 function PendingUsersRow({ user }: PendingUserRowProps) {
   const { t } = useTranslation()
@@ -31,11 +32,11 @@ function PendingUsersRow({ user }: PendingUserRowProps) {
 
   const handleUserAction = async (id: number) => {
     try {
-      if (actionType === 'validate') {
-        validateUser(id).unwrap()
+      if (actionType === UserActionsEnum.VALIDATE) {
+        await validateUser(id).unwrap()
         dispatch(showSuccess(t('users.validate_user_success')))
-      } else if (actionType === 'reject') {
-        rejectUser(id).unwrap()
+      } else if (actionType === UserActionsEnum.REJECT) {
+        await rejectUser(id).unwrap()
         dispatch(showSuccess(t('users.reject_user_success')))
       }
       setActionType(null)

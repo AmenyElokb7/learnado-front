@@ -32,6 +32,8 @@ function CustomTextField({ config }: CustomTextFieldProps) {
               }
               fullWidth
               disabled={disabled}
+              multiline={type === 'textarea'}
+              rows={4}
             />
           </Stack>
         )

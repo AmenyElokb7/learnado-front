@@ -10,4 +10,14 @@ export const common = {
   go_back_home: "Retour à la page d'accueil",
   all: 'Tous',
   no_data_found: 'Aucune donnée trouvée',
+  finish: 'Terminer',
+  next: 'Suivant',
+  yes: 'Oui',
+  no: 'Non',
+  search_placeholder: 'Rechercher...',
+  back: 'Précédent',
+  languages: {
+    en: 'Anglais',
+    fr: 'Français',
+  },
 }

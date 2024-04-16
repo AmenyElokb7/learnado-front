@@ -1,15 +1,10 @@
-  export interface QueryParams {
+export interface QueryParams {
   page: number
   perPage: number
   keyword: string
   orderBy?: string
   direction?: string
-  category?: string
-  teachingType?: string
-  isPaid?: string
-  title?: string
-  finalPrice?: string
-  createdAt?: string
+  pagination?: boolean
   filters?: FiltersOption[]
 }
 export interface FiltersOption {

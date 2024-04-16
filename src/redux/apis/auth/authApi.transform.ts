@@ -48,7 +48,7 @@ export function decodeLoginResponse(response: LoginResponseApi): LoginResponse {
       refreshToken: response.data.refresh_token,
       user: {
         ...transformSingleUser(response.data.user),
-        media: response.data.user?.media?.length
+        media: response.data.media
           ? [
               {
                 modelId: response.data.media.model_id,
@@ -61,8 +61,6 @@ export function decodeLoginResponse(response: LoginResponseApi): LoginResponse {
                 fileName: GLOBAL_VARIABLES.EMPTY_STRING,
               },
             ],
-
-        //
       },
     },
   }

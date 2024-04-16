@@ -5,13 +5,26 @@ import { Category } from 'types/models/Category'
 import { CategoryApi } from './categoriesApi.type'
 import { ConfigEnv } from '@config/configEnv'
 import { transformPaginationResponse } from '@redux/apis/transform'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 export const transformFetchCategoryResponse = (
   response: ApiPaginationResponse<CategoryApi>,
 ): PaginationResponse<Category> => {
+  if (response.meta) {
+    return {
+      ...transformPaginationResponse(response),
+      data: transformCategories(response.data),
+    }
+  }
   return {
-    ...transformPaginationResponse(response),
+    message: response.message,
     data: transformCategories(response.data),
+    meta: {
+      currentPage: GLOBAL_VARIABLES.PAGINATION.FIRST_PAGE,
+      perPage: GLOBAL_VARIABLES.PAGINATION.ROWS_PER_PAGE,
+      total: GLOBAL_VARIABLES.PAGINATION.TOTAL_ITEMS,
+      count: GLOBAL_VARIABLES.PAGINATION.TOTAL_ITEMS,
+    },
   }
 }
 

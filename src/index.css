@@ -22,3 +22,10 @@ body {
     transform: scale(1);
   }
 }
+
+.map-container {
+  width: 300px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}

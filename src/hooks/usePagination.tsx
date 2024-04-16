@@ -10,6 +10,7 @@ function usePagination() {
     page: GLOBAL_VARIABLES.PAGINATION.FIRST_PAGE,
     perPage: GLOBAL_VARIABLES.PAGINATION.ROWS_PER_PAGE,
     keyword: searchQuery ?? GLOBAL_VARIABLES.EMPTY_STRING,
+    pagination: true,
   }
   const [queryParams, setQueryParams] =
     useState<QueryParams>(INITIAL_QUERY_PARAMS)

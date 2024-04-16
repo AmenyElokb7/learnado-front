@@ -18,4 +18,7 @@ export const ENDPOINTS = {
   SEND_RESET_PASSWORD_EMAIL: 'send-password-reset-mail',
   DESIGNER_COURSES: 'designer/courses',
   DELETE_COURSE: 'designer/delete-course',
+  LANGUAGES: 'languages',
+  ACTIVE_USERS: 'designer/users',
+  CREATE_COURSE: 'designer/create-course',
 }

@@ -10,10 +10,12 @@ import { injectPaginationParamsToUrl } from '@utils/helpers/queryParamInjector'
 import { ENDPOINTS } from '@config/constants/endpoints'
 import { ApiPaginationResponse } from '../type'
 import {
+  encodeCourse,
   transformFetchCourseResponse,
   transformFetchCoursesResponse,
 } from './coursesApi.transform'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
+import { FieldValues } from 'react-hook-form'
 
 export const courseApi = createApi({
   reducerPath: 'courseApi',
@@ -54,6 +56,14 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ['Courses'],
     }),
+    createCourse: builder.mutation<ItemDetailsResponse<Course>, FieldValues>({
+      query: (course) => ({
+        url: ENDPOINTS.CREATE_COURSE,
+        method: MethodsEnum.POST,
+        body: encodeCourse(course),
+      }),
+      invalidatesTags: ['Courses'],
+    }),
   }),
 })
 
@@ -62,4 +72,5 @@ export const {
   useGetCourseByIdQuery,
   useGetDesignerCoursesQuery,
   useDeleteCourseMutation,
+  useCreateCourseMutation,
 } = courseApi

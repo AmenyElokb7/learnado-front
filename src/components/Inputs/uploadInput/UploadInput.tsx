@@ -11,7 +11,12 @@ import {
 } from './UploadInput.style'
 import { UploadInputProps } from './UploadInput.type'
 
-function UploadInput({ preview, onChange, onDelete }: UploadInputProps) {
+function UploadInput({
+  preview,
+  onChange,
+  onDelete,
+  multiple,
+}: UploadInputProps) {
   const { t } = useTranslation()
   const ref = useRef<HTMLInputElement>(null)
 
@@ -43,6 +48,7 @@ function UploadInput({ preview, onChange, onDelete }: UploadInputProps) {
         ref={ref}
         onChange={onChange}
         style={{ display: 'none' }}
+        multiple={multiple}
       />
     </>
   )

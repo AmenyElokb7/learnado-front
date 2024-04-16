@@ -46,4 +46,8 @@ export const auth = {
   set_password: 'Définir votre mot de passe',
   confirm_email: 'Confirmez votre email',
   send_email: 'Envoyer un email',
+  languages: {
+    en: 'Anglais',
+    fr: 'Français',
+  },
 }

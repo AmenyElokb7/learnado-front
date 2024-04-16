@@ -37,4 +37,8 @@ export const GLOBAL_VARIABLES = {
     DATE: 'DD/MM/YYYY',
     DATE_TIME: 'DD/MM/YYYY HH:mm',
   },
+  DEFAULT_LOCALIZATION: {
+    LAT: 36.806389,
+    LNG: 10.181667,
+  },
 }

@@ -65,7 +65,7 @@ function SetPasswordForm() {
           }}
         />
         <Button onClick={onSubmit} variant="outlined">
-          Set Password
+          {t('auth.set_password')}
         </Button>
       </Stack>
     </FormProvider>
