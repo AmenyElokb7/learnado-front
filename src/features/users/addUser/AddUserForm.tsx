@@ -7,18 +7,35 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useTranslation } from 'react-i18next'
 import useError from 'src/hooks/useError'
 import { IError } from 'types/interfaces/Error'
-import { useCreateUserMutation } from '@redux/apis/user/usersApi'
+import {
+  useCreateUserMutation,
+  useEditUserMutation,
+  useGetUserByIdQuery,
+} from '@redux/apis/user/usersApi'
 import UploadInput from '@components/Inputs/uploadInput/UploadInput'
 import useUploadFile from 'src/hooks/useUploadFile'
 import { useAppDispatch } from '@redux/hooks'
 import { showSuccess } from '@redux/slices/snackbarSlice'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { PATHS } from '@config/constants/paths'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import AddUserSkeleton from './addUserSkeleton/AddUserSkeleton'
 
 export default function AddUserForm() {
-  const dispatch = useAppDispatch()
+  const { userId } = useParams<string>()
+
+  const isEditMode = Boolean(userId)
   const navigate = useNavigate()
 
+  const { data: userData, isLoading: isLoadingUser } = useGetUserByIdQuery(
+    userId as string,
+    {
+      skip: !isEditMode,
+    },
+  )
+  const user = userData?.data
+
+  const dispatch = useAppDispatch()
   const { t } = useTranslation()
   const RegisterFormMethods = useForm({
     mode: 'onChange',
@@ -28,40 +45,74 @@ export default function AddUserForm() {
   const { getError } = useError({
     formMethods: RegisterFormMethods,
   })
-  const [createUserApiAction, { isLoading }] = useCreateUserMutation()
+  const [createUserApiAction, { isLoading: isCreating }] =
+    useCreateUserMutation()
+
+  const [updateUserApiAction, { isLoading: isUpdating }] = useEditUserMutation()
+
+  const { preview, handleOnChange, handleResetPreview } = useUploadFile({
+    formMethods: RegisterFormMethods,
+    fieldName: 'profilePicture',
+    initPreview: String(user?.media?.[0]?.fileName),
+  })
 
   const onSubmit = RegisterFormMethods.handleSubmit(async (values) => {
     try {
-      await createUserApiAction(values).unwrap()
+      if (isEditMode) {
+        await updateUserApiAction({ id: Number(userId), user: values }).unwrap()
+        dispatch(showSuccess(t('users.update_user_success')))
+      } else {
+        await createUserApiAction(values).unwrap()
+        dispatch(showSuccess(t('users.add_user_success')))
+      }
       RegisterFormMethods.reset()
-      dispatch(showSuccess(t('user.add_user_success')))
       navigate(PATHS.DASHBOARD.ADMIN.USERS.ALL)
     } catch (error) {
       getError(error as IError)
     }
   })
+  if (isLoadingUser) return <AddUserSkeleton />
 
-  const { preview, handleOnChange, handleResetPreview } = useUploadFile({
-    formMethods: RegisterFormMethods,
-    fieldName: 'profilePicture',
-    initPreview: null,
-  })
+  if (!user && !isLoadingUser && isEditMode)
+    return navigate(PATHS.MAIN.ERROR.P_403, { replace: true })
 
   return (
     <FormProvider {...RegisterFormMethods}>
       <Stack spacing={8} p={5}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
-            <CustomRadioButton config={SIGNUP_FORM_CONFIG.userRole} />
+            <CustomRadioButton
+              config={{
+                ...SIGNUP_FORM_CONFIG.userRole,
+                defaultValue:
+                  String(user?.role) ?? GLOBAL_VARIABLES.EMPTY_STRING,
+              }}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <CustomTextField config={SIGNUP_FORM_CONFIG.email} />
+            <CustomTextField
+              config={{
+                ...SIGNUP_FORM_CONFIG.email,
+                disabled: isEditMode,
+                defaultValue: user?.email ?? GLOBAL_VARIABLES.EMPTY_STRING,
+              }}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <CustomTextField config={SIGNUP_FORM_CONFIG.firstName} />
+            <CustomTextField
+              config={{
+                ...SIGNUP_FORM_CONFIG.firstName,
+                defaultValue: user?.firstName ?? GLOBAL_VARIABLES.EMPTY_STRING,
+              }}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <CustomTextField config={SIGNUP_FORM_CONFIG.lastName} />
+            <CustomTextField
+              config={{
+                ...SIGNUP_FORM_CONFIG.lastName,
+                defaultValue: user?.lastName ?? GLOBAL_VARIABLES.EMPTY_STRING,
+              }}
+            />
           </Grid>
           <Grid item xs={12} sm={6}>
             <Stack spacing={1}>
@@ -74,8 +125,10 @@ export default function AddUserForm() {
           </Grid>
         </Grid>
         <Stack alignItems={'center'}>
-          <CustomLoadingButton isLoading={isLoading} onClick={onSubmit}>
-            {t('auth.create_account')}
+          <CustomLoadingButton
+            isLoading={isCreating || isUpdating}
+            onClick={onSubmit}>
+            {isEditMode ? t('users.update_user') : t('auth.create_account')}
           </CustomLoadingButton>
         </Stack>
       </Stack>

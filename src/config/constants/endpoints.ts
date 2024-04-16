@@ -13,4 +13,7 @@ export const ENDPOINTS = {
   VALIDATE_USER: 'admin/validate-user-account',
   REJECT_USER: 'admin/reject-user-account',
   SUSPEND_USER: 'admin/suspend-account',
+  EDIT_USER: 'admin/update-user-account',
+  SET_PASSWORD: 'password-set/?token=',
+  SEND_RESET_PASSWORD_EMAIL: 'send-password-reset-mail',
 }

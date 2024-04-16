@@ -5,20 +5,35 @@ import usePagination from 'src/hooks/usePagination'
 import CustomPagination from '@components/customPagination/CustomPagination'
 import { UserTableHeaders } from '../allUsersTable/AllUsersTable.constants'
 import PendingUsersRow from './pendingUsersRow/PendingUsersRow'
+import useDebounce from 'src/hooks/useDebounce'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 function PendingUsersTable() {
-  const { queryParams, handlePageChange, handleRowsPerPageChange } =
-    usePagination()
+  const {
+    queryParams,
+    handlePageChange,
+    handleRowsPerPageChange,
+    handleSearchChange,
+  } = usePagination()
 
-  const { isFetching, data, isLoading } = useGetPendingUsersQuery(queryParams)
+  const debouncedSearchQuery = useDebounce(
+    queryParams.keyword,
+    GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
+  )
+
+  const { isFetching, data, isLoading } = useGetPendingUsersQuery({
+    ...queryParams,
+    keyword: debouncedSearchQuery,
+  })
 
   return (
-    <Stack direction={'column'} spacing={2}>
+    <Stack spacing={2}>
       <CustomTable
         columns={UserTableHeaders}
         isLoading={isLoading}
-        isFetching={isFetching}>
-        {/* Table body */}
+        isFetching={isFetching}
+        queryParams={queryParams}
+        handleSearchChange={handleSearchChange}>
         {data?.data?.map((user) => (
           <PendingUsersRow key={user.id} user={user} />
         ))}

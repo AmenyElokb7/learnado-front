@@ -11,4 +11,8 @@ export const users = {
   suspend_user: 'Are you sure you want to suspend this user?',
   suspend_user_success: 'User suspended successfully',
   suspend: 'Suspend',
+  update_user_success: 'User updated successfully',
+  update_user: 'Update User',
+  active: 'Active',
+  Pending: 'Pending',
 }

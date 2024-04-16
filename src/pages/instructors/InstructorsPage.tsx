@@ -36,7 +36,7 @@ const InstructorsPage = () => {
     <StackWithBackground>
       <Header />
       <FilterHeader total={Number(data?.meta.total)} />
-      <Stack alignItems={'flex-end'} mr={12}>
+      <Stack alignItems={'flex-end'} mr={15}>
         <SearchSection
           handleSearchChange={handleSearchChange}
           searchValue={queryParams.keyword}

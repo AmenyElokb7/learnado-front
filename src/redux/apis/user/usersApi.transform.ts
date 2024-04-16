@@ -1,13 +1,14 @@
 import { transformPaginationResponse } from '@redux/apis/transform'
 import { PaginationResponse } from 'types/interfaces/Pagination'
 import { ApiPaginationResponse } from '../type'
-import { UserApi } from './usersApi.type'
+import { SingleUserResponseData, UserApi } from './usersApi.type'
 import { User } from 'types/models/User'
 import { generatePictureSrc, toSnakeCase } from '@utils/helpers/string.helpers'
 
 import noUser from '@assets/images/noUser.png'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { FieldValues } from 'react-hook-form'
+import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 
 export const transformFetchUsersResponse = (
   response: ApiPaginationResponse<UserApi>,
@@ -15,6 +16,15 @@ export const transformFetchUsersResponse = (
   return {
     ...transformPaginationResponse(response),
     data: transformUsers(Object.values(response?.data)),
+  }
+}
+
+export const transformUserResponse = (
+  response: SingleUserResponseData,
+): ItemDetailsResponse<User> => {
+  return {
+    message: response.message,
+    data: transformSingleUser(response.data),
   }
 }
 
@@ -51,6 +61,9 @@ export const transformSingleUser = (data: UserApi): User => {
 
 export const encodeUser = (values: FieldValues): FormData => {
   const formData = new FormData()
+  if (values.profilePicture === null) {
+    values.profilePicture = ''
+  }
   Object.keys(values).forEach((key) => {
     formData.append(toSnakeCase(key), values[key])
   })

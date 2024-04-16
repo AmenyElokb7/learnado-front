@@ -27,22 +27,19 @@ function PendingUsersRow({ user }: PendingUserRowProps) {
   const [rejectUser] = useRejectUserMutation()
 
   const handleUserAction = async (id: number) => {
-    setOpen(false)
     try {
       if (actionType === 'validate') {
-        await validateUser(id).unwrap()
+        validateUser(id).unwrap()
         dispatch(showSuccess(t('users.validate_user_success')))
       } else if (actionType === 'reject') {
-        await rejectUser(id).unwrap()
+        rejectUser(id).unwrap()
         dispatch(showSuccess(t('users.reject_user_success')))
       }
       setActionType(null)
     } catch (error) {
-      dispatch(
-        showError(
-          (error as { data: { errors: string } }).data.errors.toString(),
-        ),
-      )
+      dispatch(showError(t('errors.general_error')))
+    } finally {
+      setOpen(false)
     }
   }
 

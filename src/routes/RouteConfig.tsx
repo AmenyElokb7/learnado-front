@@ -8,7 +8,6 @@ import DashboardLayout from '@layouts/dashboardLayout/DashboardLayout'
 import { AuthGuard } from '@guards/AuthGuard'
 import { RoleBasedGuard } from '@guards/RoleBasedGuard'
 import { UserRoleEnum } from '@config/enums/role.enum'
-import AllUsersTable from '@pages/dashboard/admin/users/allUsersTable/AllUsersTable'
 
 const HomePage = lazy(() => import('src/pages/home/HomePage'))
 const Courses = lazy(() => import('src/pages/courses/Courses'))
@@ -42,6 +41,18 @@ const AcceptedUsersTable = lazy(
       'src/pages/dashboard/admin/users/acceptedUsersTable/AcceptedUsersTable'
     ),
 )
+const SetPasswordPage = lazy(
+  () => import('src/pages/auth/setPassword/SetPasswordpage'),
+)
+const AllUsersTable = lazy(
+  () => import('src/pages/dashboard/admin/users/allUsersTable/AllUsersTable'),
+)
+const EmailConfirmationPage = lazy(
+  () =>
+    import(
+      'src/pages/auth/forgetPassword/emailConfirmationPage/EmailConfirmationPage'
+    ),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -53,6 +64,8 @@ export const ROUTE_CONFIG: RouteObject[] = [
     children: [
       { path: PATHS.AUTH.LOGIN, element: <LoginPage /> },
       { path: PATHS.AUTH.SIGNUP, element: <SignUpPage /> },
+      { path: PATHS.AUTH.SET_PASSWORD, element: <SetPasswordPage /> },
+      { path: PATHS.AUTH.FORGET_PASSWORD, element: <EmailConfirmationPage /> },
     ],
   },
   {
@@ -111,11 +124,19 @@ export const ROUTE_CONFIG: RouteObject[] = [
           </RoleBasedGuard>
         ),
       },
+      {
+        path: PATHS.DASHBOARD.ADMIN.USERS.EDIT_USER,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <AddUserPages />
+          </RoleBasedGuard>
+        ),
+      },
     ],
   },
-  { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
-  {
-    path: PATHS.ANY,
-    element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
-  },
+   { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
+   {
+     path: PATHS.ANY,
+     element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
+   },
 ]

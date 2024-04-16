@@ -22,7 +22,7 @@ export const PATHS = {
     LOGIN: 'login',
     SIGNUP: 'signup',
     FORGET_PASSWORD: 'forget-password',
-    RESET_PASSWORD: 'reset-password',
+    SET_PASSWORD: 'password-set',
   },
 
   DASHBOARD: {
@@ -38,7 +38,7 @@ export const PATHS = {
         ALL: '/dashboard/admin/users/all',
         PENDING: '/dashboard/admin/users/pending',
         ACCEPTED: '/dashboard/admin/users/accepted',
-        EDIT_USER: '/dashboard/admin/users/:id',
+        EDIT_USER: '/dashboard/admin/users/:userId',
         ADD_USER: '/dashboard/admin/addUser',
       },
       CATEGORY: '/dashboard/admin/categories',

@@ -35,9 +35,15 @@ export const auth = {
   user: 'Student',
   instructor: 'Instrutor',
   logout: 'Logout',
-  success_signup: 'Your account has been created successfully, please wait for the admin to approve your account',
+  success_signup:
+    'Your account has been created successfully, please wait for the admin to approve your account',
   account_not_approved: 'Your account is not approved yet',
   image: 'Image',
   profile_picture: 'Profile Picture',
   accout_created: 'Account created successfully',
+  password_set_success: 'Password set successfully',
+  invalid_token: 'Token is invalid or expired',
+  set_password: 'Set Password',
+  confirm_email: 'Confirm your Email',
+  send_email: 'Send Email',
 }
