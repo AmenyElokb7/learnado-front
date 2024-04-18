@@ -8,6 +8,7 @@ import searchQueryReducer from './slices/appSlice'
 import { userApi } from './apis/user/usersApi'
 import authReducer from './slices/authSlice'
 import { languagesApi } from './apis/languages/languagesApi'
+import { moduleApi } from './apis/modules/moduleApi'
 
 export const store = configureStore({
   reducer: {
@@ -18,6 +19,7 @@ export const store = configureStore({
     [categoriesApi.reducerPath]: categoriesApi.reducer,
     [languagesApi.reducerPath]: languagesApi.reducer,
     [courseApi.reducerPath]: courseApi.reducer,
+    [moduleApi.reducerPath]: moduleApi.reducer,
     [userApi.reducerPath]: userApi.reducer,
     [authApi.reducerPath]: authApi.reducer,
   },
@@ -26,6 +28,7 @@ export const store = configureStore({
       categoriesApi.middleware,
       languagesApi.middleware,
       courseApi.middleware,
+      moduleApi.middleware,
       userApi.middleware,
       authApi.middleware,
     ),

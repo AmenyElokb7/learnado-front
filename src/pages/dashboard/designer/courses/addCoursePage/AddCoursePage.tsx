@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 function AddCoursePage() {
   const { t } = useTranslation()
   return (
-    <BodyCard title={t('course.add_course')}>
+    <BodyCard  title={t('course.add_course')}>
       <AddCourseForm />
     </BodyCard>
   )

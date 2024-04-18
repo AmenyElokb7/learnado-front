@@ -20,4 +20,8 @@ export const common = {
     en: 'Anglais',
     fr: 'Français',
   },
+  add: 'Ajouter',
+  upload: 'Télécharger des fichiers',
+  true: 'Vrai',
+  false: 'Faux',
 }

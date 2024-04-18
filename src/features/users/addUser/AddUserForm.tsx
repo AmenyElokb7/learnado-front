@@ -1,6 +1,6 @@
 import CustomTextField from '@components/Inputs/customTextField/CustomTextField'
 import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
-import CustomRadioButton from '@components/customRadioButton/CustomRadioButton'
+import CustomRadioButton from '@components/Inputs/customRadioButton/CustomRadioButton'
 import { SIGNUP_FORM_CONFIG } from '@features/auth/signup/SignupForm.constants'
 import { Grid, Stack } from '@mui/material'
 import { FormProvider, useForm } from 'react-hook-form'

@@ -1,5 +1,5 @@
 import { UseFormReturn } from 'react-hook-form'
 
-export interface CreateCourseStepProps {
+export interface CourseFormProps {
   formMethods: UseFormReturn
 }
