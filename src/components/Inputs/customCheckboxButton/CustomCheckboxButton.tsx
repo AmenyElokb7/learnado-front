@@ -44,12 +44,18 @@ function CustomCheckboxButton({ config }: CustomCheckboxButtonProps) {
                 </Tooltip>
               )}
             </Stack>
-            <Checkbox value={field.value} onChange={field.onChange} />
             {options?.map((option, index) => (
               <FormControlLabel
                 key={index}
                 value={option?.value.toString()}
-                control={<Checkbox disabled={disabled} />}
+                control={
+                  <Checkbox
+                    checked={Boolean(field.value)}
+                    value={field.value}
+                    onChange={field.onChange}
+                    disabled={disabled}
+                  />
+                }
                 label={t(option.label)}
               />
             ))}

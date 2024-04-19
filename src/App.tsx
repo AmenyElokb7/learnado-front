@@ -1,11 +1,11 @@
+import CssBaseline from '@mui/material/CssBaseline'
 import { useMemo } from 'react'
-
 import { generateAppTheme } from './theme/theme'
-import { CssBaseline, ThemeProvider } from '@mui/material'
 import { useAppSelector } from './redux/hooks'
 import { Routers } from './routes/Routers'
 import { BrowserRouter } from 'react-router-dom'
 import AppAlert from '@components/appAlert/AppAlert'
+import { ThemeProvider } from '@mui/material'
 
 function App() {
   const { mode } = useAppSelector((state) => state.theme)

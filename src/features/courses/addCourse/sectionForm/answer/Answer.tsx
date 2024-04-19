@@ -4,11 +4,10 @@ import { AnswerProps } from './Answer.type'
 import CustomCheckboxButton from '@components/Inputs/customCheckboxButton/CustomCheckboxButton'
 import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
 import { useTranslation } from 'react-i18next'
+import { CREATE_STEP_FORM_CONFIG } from '../SectionForm.constants'
 
 function Answer({
-  answerTitleConfig,
-  answerIsValidConfig,
-  index,
+  sectionIndex,
   questionIndex,
   answerIndex,
   handleRemoveAnswer,
@@ -19,19 +18,29 @@ function Answer({
       <Grid item xs={12} lg={1}>
         <Tooltip title={t('section.quiz.correct_answer')}>
           <IconButton>
-            <CustomCheckboxButton config={answerIsValidConfig} />
+            <CustomCheckboxButton
+              config={{
+                ...CREATE_STEP_FORM_CONFIG.answerIsValid,
+                name: `sections.${sectionIndex}.quiz.questions.${questionIndex}.answers.${answerIndex}.isValid`
+              }}
+            />
           </IconButton>
         </Tooltip>
       </Grid>
 
       <Grid item xs={12} lg={10}>
-        <CustomTextField config={answerTitleConfig} />
+        <CustomTextField
+          config={{
+            ...CREATE_STEP_FORM_CONFIG.answerTitle,
+            name: `sections.${sectionIndex}.quiz.questions.${questionIndex}.answers.${answerIndex}.answer`,
+          }}
+        />
       </Grid>
       <Grid item xs={12} lg={1}>
         <Tooltip title={t('section.quiz.remove_answer')}>
           <IconButton
             onClick={() =>
-              handleRemoveAnswer(index, questionIndex, answerIndex)
+              handleRemoveAnswer(sectionIndex, questionIndex, answerIndex)
             }
             color="error">
             <DeleteOutlineOutlinedIcon />

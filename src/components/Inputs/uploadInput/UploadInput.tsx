@@ -58,7 +58,11 @@ function UploadInput({
         <StyledInputContainer onClick={handleOnContainerClick}>
           {preview ? (
             <StyledPreviewContainer>
-              {file && FilePreview(file)}
+              {file && FilePreview(file) ? (
+                FilePreview(file)
+              ) : (
+                <StyledPreviewImage src={preview} />
+              )}
               <Tooltip title={t('common.delete')} arrow>
                 <StyledDeleteIcon onClick={onDelete} />
               </Tooltip>

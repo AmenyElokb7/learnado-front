@@ -1,9 +1,5 @@
-import { InputConfig } from 'types/interfaces/InputConfig'
-
 export interface AnswerProps {
-  answerTitleConfig: InputConfig
-  answerIsValidConfig: InputConfig
-  index: number
+  sectionIndex: number
 
   questionIndex: number
   answerIndex: number

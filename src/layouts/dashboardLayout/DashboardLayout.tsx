@@ -25,8 +25,11 @@ function DashboardLayout() {
             <ProfileCard />
             <Sidebar sidebarItem={ItemsSidebar} />
           </Stack>
+
           <Suspense fallback={<FallbackLoader />}>
-            <Outlet />
+            <Stack direction="column" spacing={2} width={'100%'}>
+              <Outlet />
+            </Stack>
           </Suspense>
         </Stack>
       </StackWithBackground>

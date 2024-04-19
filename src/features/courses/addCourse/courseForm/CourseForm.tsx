@@ -12,6 +12,7 @@ import useCourseForm from './useCourseForm'
 import useUploadFile from 'src/hooks/useUploadFile'
 import { FormProvider } from 'react-hook-form'
 import FallbackLoader from '@components/fallback/FallbackLoader'
+import { useTranslation } from 'react-i18next'
 
 function CourseForm({ formMethods }: CourseFormProps) {
   const {
@@ -27,6 +28,8 @@ function CourseForm({ formMethods }: CourseFormProps) {
     handleLongitudeChange,
   } = useCourseForm({ formMethods })
 
+  const { t } = useTranslation()
+
   const { preview, handleOnChange, handleResetPreview } = useUploadFile({
     formMethods,
     fieldName: 'courseMedia',
@@ -41,20 +44,17 @@ function CourseForm({ formMethods }: CourseFormProps) {
       <Stack spacing={8} p={5}>
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
-            <CustomTextField config={CREATE_COURSE_FORM_CONFIG.title} />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <CustomTextField config={CREATE_COURSE_FORM_CONFIG.description} />
-          </Grid>
-          <Grid item xs={12} sm={6}>
-            <CustomSelectField
-              config={{
-                ...CREATE_COURSE_FORM_CONFIG.category,
-                options: categoryOptions,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} sm={6}>
+            <Stack mb={2}>
+              <CustomTextField config={CREATE_COURSE_FORM_CONFIG.title} />
+            </Stack>
+            <Stack mb={2}>
+              <CustomSelectField
+                config={{
+                  ...CREATE_COURSE_FORM_CONFIG.category,
+                  options: categoryOptions,
+                }}
+              />
+            </Stack>
             <CustomSelectField
               config={{
                 ...CREATE_COURSE_FORM_CONFIG.language,
@@ -62,6 +62,10 @@ function CourseForm({ formMethods }: CourseFormProps) {
               }}
             />
           </Grid>
+          <Grid item xs={12} sm={6}>
+            <CustomTextField config={CREATE_COURSE_FORM_CONFIG.description} />
+          </Grid>
+
           <Grid item xs={12} sm={6}>
             <CustomRadioButton config={CREATE_COURSE_FORM_CONFIG.isPaid} />
           </Grid>
@@ -170,7 +174,7 @@ function CourseForm({ formMethods }: CourseFormProps) {
                 onChange={handleOnChange}
                 onDelete={handleResetPreview}
                 preview={preview}
-                multiple={true}
+                label={t('course.upload_media')}
               />
             </Stack>
           </Grid>

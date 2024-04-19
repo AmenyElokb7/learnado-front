@@ -43,6 +43,12 @@ export default function AddCourseForm() {
           description: GLOBAL_VARIABLES.EMPTY_STRING,
           duration: GLOBAL_VARIABLES.EMPTY_STRING,
           hasQuiz: 0,
+          externalUrls: [
+            {
+              url: GLOBAL_VARIABLES.EMPTY_STRING,
+              title: GLOBAL_VARIABLES.EMPTY_STRING,
+            },
+          ],
           quiz: {
             questions: [
               {
@@ -51,7 +57,11 @@ export default function AddCourseForm() {
                 isValid: 0,
                 answers: [
                   {
-                    answers: GLOBAL_VARIABLES.EMPTY_STRING,
+                    answer: GLOBAL_VARIABLES.EMPTY_STRING,
+                    isValid: 0,
+                  },
+                  {
+                    answer: GLOBAL_VARIABLES.EMPTY_STRING,
                     isValid: 0,
                   },
                 ],

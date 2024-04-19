@@ -12,7 +12,7 @@ export const section = {
   hasQuiz_required: 'Sélectionnez si la section a un quiz ou non',
   hasQuiz_placeholder: '',
   section: 'Section {{index}}',
-  externalUrl: 'URL externe',
+  externalUrl: 'URL externe (Facultatif)',
   externalUrl_placeholder: "Entrez l'URL externe",
   externalUrlTitle: "Titre de l'URL externe",
   externalUrlTitle_placeholder: "Entrez le titre de l'URL externe",

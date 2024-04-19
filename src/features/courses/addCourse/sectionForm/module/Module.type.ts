@@ -19,6 +19,8 @@ export interface ModuleProps {
     answerIndex: number,
   ) => void
   handleRemoveModule: (index: number) => void
+  handleAddExternalUrl: (index: number) => void
+  handleRemoveExternalUrl: (index: number, externalUrlIndex: number) => void
 }
 
 export interface Section {
@@ -27,6 +29,10 @@ export interface Section {
   duration: string
   hasQuiz: 1 | 0
   quiz: Quiz
+  externalUrls: {
+    url: string
+    title: string
+  }[]
 }
 export interface FormValues {
   sections: Section[]

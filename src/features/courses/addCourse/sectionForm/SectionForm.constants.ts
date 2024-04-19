@@ -1,4 +1,4 @@
-import { Question } from 'types/models/Quiz'
+import { Answer, Question } from 'types/models/Quiz'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 import { InputConfig, InputOption } from 'types/interfaces/InputConfig'
@@ -11,6 +11,10 @@ export const BOOLEAN_OPTIONS: InputOption[] = [
 export const TRUE_FALSE_OPTIONS: InputOption[] = [
   { label: 'common.true', value: 1 },
   { label: 'common.false', value: 0 },
+]
+
+export const VALID_ANSWER_OPTIONS: InputOption[] = [
+  { label: GLOBAL_VARIABLES.EMPTY_STRING, value: 1 },
 ]
 
 export const QUESTION_TYPES = [
@@ -104,6 +108,12 @@ export const CREATE_STEP_FORM_CONFIG: Record<string, InputConfig> = {
     defaultValue: 0,
     label: GLOBAL_VARIABLES.EMPTY_STRING,
     placeholder: GLOBAL_VARIABLES.EMPTY_STRING,
+    options: [
+      {
+        label: GLOBAL_VARIABLES.EMPTY_STRING,
+        value: 0,
+      },
+    ],
   },
 }
 
@@ -112,6 +122,12 @@ export const DEFAULT_MODULE_OBJECT: Section = {
   description: GLOBAL_VARIABLES.EMPTY_STRING,
   duration: GLOBAL_VARIABLES.EMPTY_STRING,
   hasQuiz: 0,
+  externalUrls: [
+    {
+      url: GLOBAL_VARIABLES.EMPTY_STRING,
+      title: GLOBAL_VARIABLES.EMPTY_STRING,
+    },
+  ],
   quiz: {
     questions: [
       {
@@ -120,11 +136,11 @@ export const DEFAULT_MODULE_OBJECT: Section = {
         isValid: 0,
         answers: [
           {
-            answers: GLOBAL_VARIABLES.EMPTY_STRING,
+            answer: GLOBAL_VARIABLES.EMPTY_STRING,
             isValid: 0,
           },
           {
-            answers: GLOBAL_VARIABLES.EMPTY_STRING,
+            answer: GLOBAL_VARIABLES.EMPTY_STRING,
             isValid: 0,
           },
         ],
@@ -139,17 +155,17 @@ export const DEFAULT_QUESTION_OBJECT: Question = {
   isValid: 0,
   answers: [
     {
-      answers: GLOBAL_VARIABLES.EMPTY_STRING,
+      answer: GLOBAL_VARIABLES.EMPTY_STRING,
       isValid: 0,
     },
     {
-      answers: GLOBAL_VARIABLES.EMPTY_STRING,
+      answer: GLOBAL_VARIABLES.EMPTY_STRING,
       isValid: 0,
     },
   ],
 }
 
-export const DEFAULT_ANSWER_OBJECT = {
-  answers: GLOBAL_VARIABLES.EMPTY_STRING,
+export const DEFAULT_ANSWER_OBJECT: Answer = {
+  answer: GLOBAL_VARIABLES.EMPTY_STRING,
   isValid: 0,
 }

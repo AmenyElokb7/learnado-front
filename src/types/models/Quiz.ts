@@ -12,6 +12,6 @@ export interface Question {
 }
 
 export interface Answer {
-  answers: string
+  answer: string
   isValid: 0 | 1
 }

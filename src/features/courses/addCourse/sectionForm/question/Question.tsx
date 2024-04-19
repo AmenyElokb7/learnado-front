@@ -105,17 +105,9 @@ function Question({
           {answers?.map((_, answerIndex) => (
             <Grid item xs={12} key={answerIndex}>
               <Answer
-                index={answerIndex}
+                sectionIndex={sectionIndex}
                 questionIndex={questionIndex}
                 answerIndex={answerIndex}
-                answerTitleConfig={{
-                  ...CREATE_STEP_FORM_CONFIG.answerTitle,
-                  name: `sections.${sectionIndex}.quiz.questions.${questionIndex}.answers.${answerIndex}.answers`,
-                }}
-                answerIsValidConfig={{
-                  ...CREATE_STEP_FORM_CONFIG.answerIsValid,
-                  name: `sections.${sectionIndex}.quiz.questions.question.${questionIndex}.answers.${answerIndex}.isValid`,
-                }}
                 handleRemoveAnswer={handleRemoveAnswer}
               />
             </Grid>

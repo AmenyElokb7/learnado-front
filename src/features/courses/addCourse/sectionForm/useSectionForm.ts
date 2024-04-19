@@ -6,6 +6,7 @@ import {
   DEFAULT_QUESTION_OBJECT,
 } from './SectionForm.constants'
 import { FormValues } from './module/Module.type'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 interface UseSectionFormProps {
   sectionFormMethods: UseFormReturn<FormValues, any, undefined>
@@ -116,21 +117,55 @@ export default function useSectionForm({
     update(sectionIndex, {
       ...fieldToUpdate,
       quiz: {
-        ...fieldToUpdate.quiz,
-        questions: [
-          ...fieldToUpdate.quiz.questions.slice(0, questionIndex),
-          {
-            ...fieldToUpdate.quiz.questions[questionIndex],
-            answers: updatedAnswers.map((answer) => ({
-              ...answer,
-              isValid: answer.isValid ? 1 : 0,
-            })),
-          },
-          ...fieldToUpdate.quiz.questions.slice(questionIndex + 1),
-        ],
+        questions: fieldToUpdate.quiz.questions.map((question, index) => {
+          if (index === questionIndex) {
+            return {
+              ...question,
+              answers: updatedAnswers,
+            }
+          }
+          return question
+        }),
       },
     })
   }
+
+  // Add external URL to the module
+  const handleAddExternalUrl = (index: number) => {
+    const fieldToUpdate = sectionFormMethods.watch(`sections.${index}`)
+    if (!fieldToUpdate.externalUrls) {
+      fieldToUpdate.externalUrls = []
+      return
+    }
+    update(index, {
+      ...fieldToUpdate,
+      externalUrls: [
+        ...fieldToUpdate.externalUrls,
+        {
+          url: GLOBAL_VARIABLES.EMPTY_STRING,
+          title: GLOBAL_VARIABLES.EMPTY_STRING,
+        },
+      ],
+    })
+  }
+
+  // remove external URL from the module
+  const handleRemoveExternalUrl = (index: number, externalUrlIndex: number) => {
+    const fieldToUpdate = sectionFormMethods.watch(`sections.${index}`)
+    if (!fieldToUpdate.externalUrls) {
+      fieldToUpdate.externalUrls = []
+    }
+    const updatedExternalUrls = [
+      ...fieldToUpdate.externalUrls.slice(0, externalUrlIndex),
+      ...fieldToUpdate.externalUrls.slice(externalUrlIndex + 1),
+    ]
+
+    update(index, {
+      ...fieldToUpdate,
+      externalUrls: updatedExternalUrls,
+    })
+  }
+
   return {
     fields,
     handleAddModule,
@@ -140,5 +175,7 @@ export default function useSectionForm({
     handleRemoveQuestion,
     handleRemoveAnswer,
     handleAddAnswer,
+    handleAddExternalUrl,
+    handleRemoveExternalUrl,
   }
 }

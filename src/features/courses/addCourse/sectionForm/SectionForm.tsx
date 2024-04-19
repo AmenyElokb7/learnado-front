@@ -19,6 +19,8 @@ function SectionForm({
     handleRemoveAnswer,
     handleRemoveModule,
     handleRemoveQuestion,
+    handleAddExternalUrl,
+    handleRemoveExternalUrl,
     onDrop,
   } = useSectionForm({ sectionFormMethods })
 
@@ -40,6 +42,8 @@ function SectionForm({
             handleAddAnswer={handleAddAnswer}
             handleRemoveAnswer={handleRemoveAnswer}
             handleRemoveModule={handleRemoveModule}
+            handleAddExternalUrl={handleAddExternalUrl}
+            handleRemoveExternalUrl={handleRemoveExternalUrl}
           />
         ))}
         <Stack justifyContent={'center'} alignItems={'center'} mt={2}>

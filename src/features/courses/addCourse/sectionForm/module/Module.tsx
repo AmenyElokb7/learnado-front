@@ -7,6 +7,7 @@ import {
   Tooltip,
   Collapse,
   IconButton,
+  Divider,
 } from '@mui/material'
 import { CREATE_STEP_FORM_CONFIG } from '../SectionForm.constants'
 
@@ -21,6 +22,7 @@ import { Quiz } from 'types/models/Quiz'
 import Question from '../question/Question'
 import useDragAndDropModule from './useDragAndDropModule'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
+import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined'
 
 function Module({
   field,
@@ -35,12 +37,22 @@ function Module({
   handleAddAnswer,
   handleRemoveAnswer,
   handleRemoveModule,
+  handleAddExternalUrl,
+  handleRemoveExternalUrl,
 }: ModuleProps) {
   // Destructi,g the questions from the form
   const { questions } = field.quiz as Quiz
 
+  const externalUrls = field.externalUrls || [
+    {
+      url: GLOBAL_VARIABLES.EMPTY_STRING,
+      title: GLOBAL_VARIABLES.EMPTY_STRING,
+    },
+  ]
+
   // State Declaration
   const [expanded, setExpanded] = useState(true)
+
   const { t } = useTranslation()
 
   const hasQuiz = sectionFormMethods.watch(`sections.${index}.hasQuiz`)
@@ -136,6 +148,52 @@ function Module({
             setFiles={setFiles}
           />
 
+          {externalUrls.map((_, indexUrl) => (
+            <Grid
+              item
+              xs={12}
+              key={indexUrl}
+              direction={'row'}
+              alignItems={'center'}
+              display={'flex'}
+              gap={4}>
+              <Grid item xs={12} sm={6}>
+                <CustomTextField
+                  config={{
+                    ...CREATE_STEP_FORM_CONFIG.externalUrlTitle,
+                    name: `sections.${index}.externalUrls.${indexUrl}.title`,
+                  }}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <CustomTextField
+                  config={{
+                    ...CREATE_STEP_FORM_CONFIG.externalUrl,
+                    name: `sections.${index}.externalUrls.${indexUrl}.url`,
+                  }}
+                />
+              </Grid>
+
+              <Grid item xs={12} sm={1}>
+                <Tooltip title={t('common.add')}>
+                  <IconButton onClick={() => handleAddExternalUrl(index)}>
+                    <AddToPhotosOutlinedIcon color="info" />
+                  </IconButton>
+                </Tooltip>
+                <Tooltip title={t('common.delete')}>
+                  <IconButton
+                    disabled={externalUrls.length > 1 ? false : true}
+                    sx={{
+                      color: externalUrls.length === 1 ? 'inhirit' : 'red',
+                    }}
+                    onClick={() => handleRemoveExternalUrl(index, indexUrl)}>
+                    <DeleteOutlineOutlinedIcon />
+                  </IconButton>
+                </Tooltip>
+              </Grid>
+            </Grid>
+          ))}
+
           <Grid item xs={12}>
             <CustomRadioButton
               config={{
@@ -150,6 +208,7 @@ function Module({
                 <Typography color="primary" fontWeight={'medium'} variant="h2">
                   {t('section.quiz.questions')}
                 </Typography>
+
                 <Tooltip
                   title={t('section.quiz.add_question')}
                   placement="right">
@@ -160,6 +219,7 @@ function Module({
                   </IconButton>
                 </Tooltip>
               </Stack>
+              <Divider />
               {questions?.map((_, questionIndex) => {
                 return (
                   <Grid item xs={12} key={questionIndex} p={2}>
