@@ -71,6 +71,14 @@ const EditCoursePage = lazy(
 const AccountSettingsPage = lazy(
   () => import('src/pages/dashboard/accountSettings/AccountSettingsPage'),
 )
+
+const LanguagesPage = lazy(
+  () => import('src/pages/dashboard/admin/languages/LanguagesPage'),
+)
+
+const CategoriesPage = lazy(
+  () => import('src/pages/dashboard/admin/categories/CategoriesPage'),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -151,6 +159,22 @@ export const ROUTE_CONFIG: RouteObject[] = [
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
             <AddUserPages />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.ADMIN.LANGUAGES.ROOT,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <LanguagesPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.ADMIN.CATEGORY.ROOT,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <CategoriesPage />
           </RoleBasedGuard>
         ),
       },

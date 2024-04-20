@@ -12,6 +12,7 @@ import { ENDPOINTS } from '@config/constants/endpoints'
 export const categoriesApi = createApi({
   reducerPath: 'categoriesApi',
   baseQuery: baseQueryConfig,
+  tagTypes: ['Categories'],
   endpoints: (builder) => ({
     getCategories: builder.query<PaginationResponse<Category>, QueryParams>({
       query: (params) => {
@@ -25,8 +26,17 @@ export const categoriesApi = createApi({
       ): PaginationResponse<Category> => {
         return transformFetchCategoryResponse(response)
       },
+      providesTags: ['Categories'],
+    }),
+    deleteCategory: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `${ENDPOINTS.DELETE_CATEGORY}/${id}`,
+        method: MethodsEnum.DELETE,
+      }),
+      invalidatesTags: ['Categories'],
     }),
   }),
 })
 
-export const { useGetCategoriesQuery } = categoriesApi
+export const { useGetCategoriesQuery, useDeleteCategoryMutation } =
+  categoriesApi

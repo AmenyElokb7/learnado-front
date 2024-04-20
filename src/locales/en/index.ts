@@ -11,6 +11,8 @@ import { common } from './common'
 import { users } from './users'
 import { dashboard } from './dashboard'
 import { section } from './section'
+import { language } from './language'
+import { category } from './category'
 
 const en = {
   topbar,
@@ -25,6 +27,8 @@ const en = {
   common,
   users,
   dashboard,
-  section
+  section,
+  language,
+  category,
 }
 export default en

@@ -24,4 +24,6 @@ export const ENDPOINTS = {
   CREATE_MODULE: 'designer/create-step',
   USER_PROFILE: 'profile',
   UPDATE_PROFILE: 'update-profile',
+  DELETE_LANGUAGE: 'admin/delete-language',
+  DELETE_CATEGORY: 'admin/delete-category',
 }

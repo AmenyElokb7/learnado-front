@@ -12,6 +12,7 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 export const languagesApi = createApi({
   reducerPath: 'languagesApi',
   baseQuery: baseQueryConfig,
+  tagTypes: ['Languages'],
   endpoints: (builder) => ({
     getLanguages: builder.query<PaginationResponse<Language>, QueryParams>({
       query: (params) => {
@@ -20,13 +21,22 @@ export const languagesApi = createApi({
           method: MethodsEnum.GET,
         }
       },
+
       transformResponse: (
         response: ApiPaginationResponse<Language>,
       ): PaginationResponse<Language> => {
         return transformFetchLanguageResponse(response)
       },
+      providesTags: ['Languages'],
+    }),
+    deleteLanguage: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `${ENDPOINTS.DELETE_LANGUAGE}/${id}`,
+        method: MethodsEnum.DELETE,
+      }),
+      invalidatesTags: ['Languages'],
     }),
   }),
 })
 
-export const { useGetLanguagesQuery } = languagesApi
+export const { useGetLanguagesQuery, useDeleteLanguageMutation } = languagesApi

@@ -83,14 +83,14 @@ export const ItemsSidebar: SidebarItem[] = [
   {
     id: 8,
     label: 'sidebar.language',
-    path: PATHS.DASHBOARD.ADMIN.LANGUAGE,
+    path: PATHS.DASHBOARD.ADMIN.LANGUAGES.ROOT,
     icon: TranslateOutlinedIcon,
     accessibleRoles: [UserRoleEnum.ADMIN],
   },
   {
     id: 9,
     label: 'sidebar.category',
-    path: PATHS.DASHBOARD.ADMIN.CATEGORY,
+    path: PATHS.DASHBOARD.ADMIN.CATEGORY.ROOT,
     icon: CategoryOutlinedIcon,
     accessibleRoles: [UserRoleEnum.ADMIN],
   },
