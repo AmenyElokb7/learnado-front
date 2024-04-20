@@ -1,3 +1,5 @@
+import Error from '@components/error/Error'
+import FallbackLoader from '@components/fallback/FallbackLoader'
 import { BLUE } from '@config/colors/colors'
 import { Grid, Stack, Typography } from '@mui/material'
 import { useGetUserProfileQuery } from '@redux/apis/user/usersApi'
@@ -8,9 +10,9 @@ function UserProfile() {
 
   const { data, isLoading, isError } = useGetUserProfileQuery()
 
-  if (isError) return <div>Something went wrong</div>
+  if (isError) return <Error />
 
-  if (isLoading) return <div>Loading...</div>
+  if (isLoading) return <FallbackLoader />
 
   return (
     <Grid container p={2} gap={4}>

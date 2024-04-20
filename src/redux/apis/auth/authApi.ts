@@ -45,7 +45,10 @@ export const authApi = createApi({
     }),
     setPassword: builder.mutation<
       void,
-      { token: string; data: { password: string; confirmPassword: string } }
+      {
+        token: string
+        data: { password: string; passwordConfirmation: string }
+      }
     >({
       query: ({ token, data }) => ({
         url: `${ENDPOINTS.SET_PASSWORD}${token}`,

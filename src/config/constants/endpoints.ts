@@ -23,4 +23,5 @@ export const ENDPOINTS = {
   CREATE_COURSE: 'designer/create-course',
   CREATE_MODULE: 'designer/create-step',
   USER_PROFILE: 'profile',
+  UPDATE_PROFILE: 'update-profile',
 }

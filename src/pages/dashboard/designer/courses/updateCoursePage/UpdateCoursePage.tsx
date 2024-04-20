@@ -1,8 +1,9 @@
 import BodyCard from '@components/cards/bodyCard/BodyCard'
+import Error from '@components/error/Error'
+import FallbackLoader from '@components/fallback/FallbackLoader'
 import AddCourseForm from '@features/courses/addCourse/AddCourseForm'
-import { Typography } from '@mui/material'
 import { useGetCourseForDesignerByIdQuery } from '@redux/apis/courses/coursesApi'
-import { useTranslation } from 'react-i18next'
+import { useTranslation } from 'react-i18next' 
 import { useParams } from 'react-router-dom'
 
 function UpdateCoursePage() {
@@ -14,9 +15,9 @@ function UpdateCoursePage() {
     courseId as string,
   )
 
-  if (isError) return <Typography>Error</Typography>
+  if (isError) return <Error />
 
-  if (isLoading) return <Typography>Loading...</Typography>
+  if (isLoading) return <FallbackLoader />
 
   return (
     <BodyCard title={t('course.update_course')}>

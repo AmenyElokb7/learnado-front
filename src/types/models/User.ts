@@ -13,4 +13,6 @@ export interface User {
     fileName: string
   }[]
   createdAt?: string
+  password?: string
+  passwordConfirmation?: string
 }

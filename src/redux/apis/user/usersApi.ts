@@ -20,7 +20,7 @@ import { FieldValues } from 'react-hook-form'
 export const userApi = createApi({
   reducerPath: 'userApi',
   baseQuery: baseQueryConfig,
-  tagTypes: ['Users', 'User'],
+  tagTypes: ['Users', 'User', 'Profile'],
   endpoints: (builder) => ({
     getFacilitators: builder.query<PaginationResponse<User>, QueryParams>({
       query: (params) => ({
@@ -137,7 +137,15 @@ export const userApi = createApi({
       }),
       transformResponse: (response: SingleUserResponseData) =>
         transformUserResponse(response),
-      providesTags: ['User'],
+      providesTags: ['Profile'],
+    }),
+    updateProfile: builder.mutation<void, FieldValues>({
+      query: (data) => ({
+        url: ENDPOINTS.UPDATE_PROFILE,
+        method: MethodsEnum.POST,
+        body: encodeUser(data),
+      }),
+      invalidatesTags: ['Profile'],
     }),
   }),
 })
@@ -156,4 +164,5 @@ export const {
   useGetUserByIdQuery,
   useGetActiveUsersQuery,
   useGetUserProfileQuery,
+  useUpdateProfileMutation,
 } = userApi

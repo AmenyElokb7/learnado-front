@@ -1,3 +1,4 @@
+
 export const common = {
   delete: 'Delete',
   edit: 'Edit',
@@ -24,4 +25,5 @@ export const common = {
   upload: 'Upload files',
   true: 'True',
   false: 'False',
+  error: 'Error',
 }
