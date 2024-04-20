@@ -31,7 +31,7 @@ export default function AddCourseForm({
     courseDefaultValues?.media ? courseDefaultValues.media : {},
   )
   const [courseId, setCourseId] = useState<string | null>(null)
-  const [activeStep, setActiveStep] = useState(1)
+  const [activeStep, setActiveStep] = useState(0)
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({})
 
   const StepperFormMethods = useForm({

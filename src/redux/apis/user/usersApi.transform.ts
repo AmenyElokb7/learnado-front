@@ -14,6 +14,7 @@ import noUser from '@assets/images/noUser.png'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { FieldValues } from 'react-hook-form'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
+import { transformDateTimeFormat } from '@utils/helpers/date.helpers'
 
 export const transformFetchUsersResponse = (
   response: ApiPaginationResponse<UserApi>,
@@ -84,6 +85,7 @@ export const transformSingleUser = (data: UserApi): User => {
             fileName: noUser,
           },
         ],
+    createdAt: transformDateTimeFormat(data.created_at),
   }
 }
 

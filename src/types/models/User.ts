@@ -12,4 +12,5 @@ export interface User {
     modelId: number
     fileName: string
   }[]
+  createdAt?: string
 }

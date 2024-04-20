@@ -183,7 +183,7 @@ export const transformFetchCourseForDesignerResponse = (
       isPaid: data.is_paid,
       price: Number(data.price),
       discount: Number(data.discount),
-      facilitator_id: data.facilitator_id,
+      facilitatorId: data.facilitator_id,
       isPublic: data.is_public,
       latitude: data.latitude,
       longitude: data.longitude,

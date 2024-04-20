@@ -22,4 +22,5 @@ export const ENDPOINTS = {
   ACTIVE_USERS: 'designer/users',
   CREATE_COURSE: 'designer/create-course',
   CREATE_MODULE: 'designer/create-step',
+  USER_PROFILE: 'profile',
 }

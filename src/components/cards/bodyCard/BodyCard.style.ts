@@ -23,7 +23,7 @@ export const StyledBodyCardRoot = styled(Stack)(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
   borderRadius: '20px',
-  height: '100%',
+  height: 'auto',
   background: theme.palette.common.white,
   border: `1px solid ${GREY.light}`,
   alignItems: 'flex-start',

@@ -130,8 +130,18 @@ export const userApi = createApi({
         transformFetchUsersResponse(response),
       providesTags: ['Users'],
     }),
+    getUserProfile: builder.query<ItemDetailsResponse<User>, void>({
+      query: () => ({
+        url: ENDPOINTS.USER_PROFILE,
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: SingleUserResponseData) =>
+        transformUserResponse(response),
+      providesTags: ['User'],
+    }),
   }),
 })
+
 export const {
   useGetFacilitatorsQuery,
   useGetUsersForAdminQuery,
@@ -145,4 +155,5 @@ export const {
   useEditUserMutation,
   useGetUserByIdQuery,
   useGetActiveUsersQuery,
+  useGetUserProfileQuery,
 } = userApi

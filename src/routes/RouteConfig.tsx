@@ -21,7 +21,9 @@ const InstructorsPage = lazy(
 const NotFound = lazy(() => import('src/pages/notFound/NotFound'))
 const SignUpPage = lazy(() => import('src/pages/auth/signup/signupPage'))
 const LoginPage = lazy(() => import('src/pages/auth/login/LoginPage'))
-const ProfilePage = lazy(() => import('src/pages/profile/ProfilePage'))
+const ProfilePage = lazy(
+  () => import('src/pages/dashboard/profile/ProfilePage'),
+)
 const DashboardPage = lazy(() => import('src/pages/dashboard/DashboardPage'))
 const UsersPage = lazy(
   () => import('src/pages/dashboard/admin/users/UsersPage'),
@@ -66,6 +68,9 @@ const EditCoursePage = lazy(
       'src/pages/dashboard/designer/courses/updateCoursePage/UpdateCoursePage'
     ),
 )
+const AccountSettingsPage = lazy(
+  () => import('src/pages/dashboard/accountSettings/AccountSettingsPage'),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -102,6 +107,10 @@ export const ROUTE_CONFIG: RouteObject[] = [
     children: [
       { path: PATHS.DASHBOARD.ROOT, element: <DashboardPage /> },
       { path: PATHS.DASHBOARD.PROFILE.ROOT, element: <ProfilePage /> },
+      {
+        path: PATHS.DASHBOARD.PROFILE.SETTINGS,
+        element: <AccountSettingsPage />,
+      },
       {
         path: PATHS.DASHBOARD.ADMIN.USERS.ROOT,
         element: (

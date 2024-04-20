@@ -40,7 +40,7 @@ export interface CourseForDesigner {
   isPaid: 0 | 1
   price: number
   discount: number
-  facilitator_id: number
+  facilitatorId: number
   isPublic: 0 | 1
   latitude?: number | null
   longitude?: number | null

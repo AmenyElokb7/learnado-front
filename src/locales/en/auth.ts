@@ -46,4 +46,5 @@ export const auth = {
   set_password: 'Set Password',
   confirm_email: 'Confirm your Email',
   send_email: 'Send Email',
+  registration_date: 'Registration Date',
 }

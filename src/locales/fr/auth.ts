@@ -50,4 +50,5 @@ export const auth = {
     en: 'Anglais',
     fr: 'Français',
   },
+  registration_date: 'Date d enregistrement',
 }

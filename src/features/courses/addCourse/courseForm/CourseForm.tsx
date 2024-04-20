@@ -129,7 +129,16 @@ function CourseForm({
           )}
 
           <Grid item xs={12} sm={6}>
-            <CustomRadioButton config={CREATE_COURSE_FORM_CONFIG.isPublic} />
+            <CustomRadioButton
+              config={{
+                ...CREATE_COURSE_FORM_CONFIG.isPublic,
+                defaultValue: isEditMode
+                  ? defaultValues?.isPublic
+                    ? 1
+                    : 0
+                  : 0,
+              }}
+            />
           </Grid>
           {isPublic == 0 && (
             <Grid item xs={12} sm={6}>
@@ -138,6 +147,7 @@ function CourseForm({
                   ...CREATE_COURSE_FORM_CONFIG.selectedUserIds,
                   rules: { required: 'course.select_user_required' },
                   options: activeUsersOptions,
+                  defaultValue: isEditMode ? defaultValues?.subscribers : [],
                 }}
               />
             </Grid>
@@ -147,6 +157,9 @@ function CourseForm({
               config={{
                 ...CREATE_COURSE_FORM_CONFIG.facilitator,
                 options: facilitatorOptions,
+                defaultValue: isEditMode
+                  ? defaultValues?.facilitatorId
+                  : GLOBAL_VARIABLES.EMPTY_STRING,
               }}
             />
           </Grid>
@@ -161,7 +174,7 @@ function CourseForm({
               }}
             />
           </Grid>
-
+          {/* TODO: track the place when changing the state and get the default value if isEditMode */}
           {teachingType === TeachingTypeFilterEnum.ON_A_PLACE && (
             <Grid item xs={12}>
               <CourseMapCard
@@ -178,11 +191,14 @@ function CourseForm({
                 config={{
                   ...CREATE_COURSE_FORM_CONFIG.link,
                   rules: { required: 'course.link_required' },
+                  defaultValue: isEditMode
+                    ? defaultValues?.link
+                    : GLOBAL_VARIABLES.EMPTY_STRING,
                 }}
               />
             </Grid>
           )}
-
+  
           {(teachingType === TeachingTypeFilterEnum.ONLINE ||
             teachingType === TeachingTypeFilterEnum.ON_A_PLACE) && (
             <>
@@ -191,6 +207,9 @@ function CourseForm({
                   config={{
                     ...CREATE_COURSE_FORM_CONFIG.startTime,
                     rules: { required: 'course.start_time_required' },
+                    defaultValue: isEditMode
+                      ? defaultValues?.startTime
+                      : GLOBAL_VARIABLES.EMPTY_STRING,
                   }}
                 />
               </Grid>
@@ -201,6 +220,9 @@ function CourseForm({
                     rules: {
                       required: 'course.end_time_required',
                     },
+                    defaultValue: isEditMode
+                      ? defaultValues?.endTime
+                      : GLOBAL_VARIABLES.EMPTY_STRING,
                   }}
                 />
               </Grid>
@@ -208,7 +230,14 @@ function CourseForm({
           )}
           <Grid item xs={12} sm={6}>
             <CustomRadioButton
-              config={CREATE_COURSE_FORM_CONFIG.isSequential}
+              config={{
+                ...CREATE_COURSE_FORM_CONFIG.isSequential,
+                defaultValue: isEditMode
+                  ? defaultValues?.sequential
+                    ? 1
+                    : 0
+                  : 0,
+              }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>

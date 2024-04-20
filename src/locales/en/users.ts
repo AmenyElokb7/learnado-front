@@ -19,4 +19,6 @@ export const users = {
   suspend_user_confirm: 'Suspend This User?',
   validate_user: 'Validate This User?',
   reject_user: 'Reject This User?',
+  reject_user_success: 'User rejected successfully',
+  validate_user_success: 'User validated successfully',
 }
