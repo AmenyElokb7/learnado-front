@@ -60,6 +60,12 @@ const AddCoursePage = lazy(
   () =>
     import('src/pages/dashboard/designer/courses/addCoursePage/AddCoursePage'),
 )
+const EditCoursePage = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/designer/courses/updateCoursePage/UpdateCoursePage'
+    ),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -152,6 +158,14 @@ export const ROUTE_CONFIG: RouteObject[] = [
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.DESIGNER]}>
             <AddCoursePage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.DESIGNER.MY_COURSES.EDIT_COURSE,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.DESIGNER]}>
+            <EditCoursePage />
           </RoleBasedGuard>
         ),
       },

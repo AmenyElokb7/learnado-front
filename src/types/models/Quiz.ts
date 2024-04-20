@@ -1,10 +1,12 @@
 import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 
 export interface Quiz {
+  id?: number
   questions: Question[]
 }
 
 export interface Question {
+  id?: number
   question: string
   type: QuestionTypeEnum
   isValid: 0 | 1
@@ -12,6 +14,7 @@ export interface Question {
 }
 
 export interface Answer {
+  id?: number
   answer: string
   isValid: 0 | 1
 }

@@ -18,6 +18,7 @@ function UploadInput({
   multiple,
   label,
   file,
+  isEditMode,
   onChange,
   onDelete,
 }: UploadInputProps) {
@@ -29,10 +30,10 @@ function UploadInput({
   }
 
   const FilePreview = (file: File) => {
-    const fileURL = URL.createObjectURL(file)
+    const fileURL = isEditMode ? file.name : URL.createObjectURL(file)
 
     if (file.type.startsWith('image/')) {
-      return <StyledPreviewImage src={fileURL} alt="File preview" />
+      return <StyledPreviewImage src={preview ?? fileURL} alt="File preview" />
     } else if (file.type.startsWith('video/')) {
       return (
         <StyledPreviewVideo controls>

@@ -35,8 +35,61 @@ export interface SingleCourseResponseData {
 
 export interface CreateCourseResponse {
   message: string
-  data: {
-    course: CourseApi
-    media: MediaApi[]
+  data: CourseApi
+}
+
+export interface GetCourseForDesignerResponse {
+  message: string
+  data: {}
+}
+
+export interface CourseForDesignerApi {
+  id: number
+  title: string
+  description: string
+  category_id: number
+  language_id: number
+  is_paid: 0 | 1
+  price: string
+  discount: string
+  facilitator_id: number
+
+  is_public: 0 | 1
+  subscribers: number[]
+  sequential: 0 | 1
+  teaching_type: number
+  link: string
+  start_time: string
+  end_time: string
+  latitude: number
+  longitude: number
+  created_at: string
+  media: MediaApi[]
+  steps: ApiStep[]
+}
+
+export interface ApiStep {
+  id: number
+  title: string
+  description: string
+  duration: string
+  media: MediaApi[]
+  quiz: {
+    id: number
+    questions: ApiQuestion[]
   }
+}
+
+export interface ApiQuestion {
+  id: number
+  question: string
+  type: string
+  is_valid: 0 | 1
+  answers: ApiAnswer[]
+}
+
+export interface ApiAnswer {
+  id: number
+  answer: string
+  is_valid: 0 | 1
 }

@@ -8,6 +8,7 @@ export interface ModuleProps {
   index: number
   canDelete: boolean
   field: FieldArrayWithId<FormValues, 'sections', 'id'>
+  isEditMode?: boolean
   setFiles: Dispatch<SetStateAction<Record<number, File[]>>>
   onDrop: (e: React.DragEvent<HTMLDivElement>, index: number) => void
   handleAddQuestion: (index: number) => void
@@ -24,9 +25,10 @@ export interface ModuleProps {
 }
 
 export interface Section {
+  id?: number
   title: string
   description: string
-  duration: string
+  duration: number
   hasQuiz: 1 | 0
   quiz: Quiz
   externalUrls: {

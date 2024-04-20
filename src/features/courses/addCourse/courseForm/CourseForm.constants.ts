@@ -11,10 +11,7 @@ export const BOOLEAN_OPTIONS: InputOption[] = [
   { label: 'common.no', value: 0 },
 ]
 const TEACHING_TYPE_OPTIONS = [
-  {
-    label: 'course.no_type',
-    value: 0,
-  },
+  { label: TeachingTypeEnum.NO_TYPE, value: TeachingTypeFilterEnum.NO_TYPE },
   { label: TeachingTypeEnum.ONLINE, value: TeachingTypeFilterEnum.ONLINE },
   {
     label: TeachingTypeEnum.ON_A_PLACE,
@@ -113,6 +110,7 @@ export const CREATE_COURSE_FORM_CONFIG: Record<string, InputConfig> = {
     placeholder: GLOBAL_VARIABLES.EMPTY_STRING,
     defaultValue: GLOBAL_VARIABLES.EMPTY_STRING,
     label: 'course.selectedUserIds',
+    multiple: true,
     options: [],
   },
   long: {

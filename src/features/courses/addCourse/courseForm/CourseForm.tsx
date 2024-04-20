@@ -13,8 +13,13 @@ import useUploadFile from 'src/hooks/useUploadFile'
 import { FormProvider } from 'react-hook-form'
 import FallbackLoader from '@components/fallback/FallbackLoader'
 import { useTranslation } from 'react-i18next'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
-function CourseForm({ formMethods }: CourseFormProps) {
+function CourseForm({
+  formMethods,
+  isEditMode,
+  defaultValues,
+}: CourseFormProps) {
   const {
     isLoadingAdditinalData,
     isPaid,
@@ -45,13 +50,23 @@ function CourseForm({ formMethods }: CourseFormProps) {
         <Grid container spacing={3}>
           <Grid item xs={12} sm={6}>
             <Stack mb={2}>
-              <CustomTextField config={CREATE_COURSE_FORM_CONFIG.title} />
+              <CustomTextField
+                config={{
+                  ...CREATE_COURSE_FORM_CONFIG.title,
+                  defaultValue: isEditMode
+                    ? defaultValues?.title
+                    : GLOBAL_VARIABLES.EMPTY_STRING,
+                }}
+              />
             </Stack>
             <Stack mb={2}>
               <CustomSelectField
                 config={{
                   ...CREATE_COURSE_FORM_CONFIG.category,
                   options: categoryOptions,
+                  defaultValue: isEditMode
+                    ? defaultValues?.categoryId
+                    : GLOBAL_VARIABLES.EMPTY_STRING,
                 }}
               />
             </Stack>
@@ -59,23 +74,42 @@ function CourseForm({ formMethods }: CourseFormProps) {
               config={{
                 ...CREATE_COURSE_FORM_CONFIG.language,
                 options: languageOptions,
+                defaultValue: isEditMode
+                  ? defaultValues?.languageId
+                  : GLOBAL_VARIABLES.EMPTY_STRING,
               }}
             />
           </Grid>
           <Grid item xs={12} sm={6}>
-            <CustomTextField config={CREATE_COURSE_FORM_CONFIG.description} />
+            <CustomTextField
+              config={{
+                ...CREATE_COURSE_FORM_CONFIG.description,
+                defaultValue: isEditMode
+                  ? defaultValues?.description
+                  : GLOBAL_VARIABLES.EMPTY_STRING,
+              }}
+            />
           </Grid>
 
           <Grid item xs={12} sm={6}>
-            <CustomRadioButton config={CREATE_COURSE_FORM_CONFIG.isPaid} />
+            <CustomRadioButton
+              config={{
+                ...CREATE_COURSE_FORM_CONFIG.isPaid,
+                defaultValue: isEditMode ? (defaultValues?.isPaid ? 1 : 0) : 0,
+              }}
+            />
           </Grid>
-          {isPaid == 1 && (
+          {Number(isPaid) === 1 && (
             <>
               <Grid item xs={12} sm={6}>
                 <CustomTextField
                   config={{
                     ...CREATE_COURSE_FORM_CONFIG.price,
                     rules: { required: 'course.price_required' },
+                    defaultValue: isEditMode
+                      ? defaultValues?.price
+                      : GLOBAL_VARIABLES.EMPTY_STRING,
+                    ommitedFromSubmissionData: Number(isPaid) === 0,
                   }}
                 />
               </Grid>
@@ -84,6 +118,10 @@ function CourseForm({ formMethods }: CourseFormProps) {
                   config={{
                     ...CREATE_COURSE_FORM_CONFIG.discount,
                     rules: { required: 'course.discount_required' },
+                    defaultValue: isEditMode
+                      ? defaultValues?.discount
+                      : GLOBAL_VARIABLES.EMPTY_STRING,
+                    ommitedFromSubmissionData: Number(isPaid) === 0,
                   }}
                 />
               </Grid>
@@ -115,7 +153,12 @@ function CourseForm({ formMethods }: CourseFormProps) {
 
           <Grid item xs={12} sm={6}>
             <CustomSelectField
-              config={CREATE_COURSE_FORM_CONFIG.teachingType}
+              config={{
+                ...CREATE_COURSE_FORM_CONFIG.teachingType,
+                defaultValue: isEditMode
+                  ? defaultValues?.teachingType
+                  : TeachingTypeFilterEnum.NO_TYPE,
+              }}
             />
           </Grid>
 

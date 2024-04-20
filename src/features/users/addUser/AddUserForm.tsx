@@ -55,6 +55,7 @@ function AddUserForm() {
     formMethods: RegisterFormMethods,
     fieldName: 'profilePicture',
     initPreview: String(user?.media?.[0]?.fileName),
+    index: 0,
   })
 
   const onSubmit = RegisterFormMethods.handleSubmit(async (values) => {

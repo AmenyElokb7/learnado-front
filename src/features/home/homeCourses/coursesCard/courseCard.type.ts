@@ -13,4 +13,5 @@ export interface CourseCardProps {
   createdAt: string
   isInstructor?: boolean
   width?: string
+  navigateToEditCoursePage?: (id: number) => void
 }

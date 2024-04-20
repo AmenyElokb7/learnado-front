@@ -120,7 +120,7 @@ export const CREATE_STEP_FORM_CONFIG: Record<string, InputConfig> = {
 export const DEFAULT_MODULE_OBJECT: Section = {
   title: GLOBAL_VARIABLES.EMPTY_STRING,
   description: GLOBAL_VARIABLES.EMPTY_STRING,
-  duration: GLOBAL_VARIABLES.EMPTY_STRING,
+  duration: 0,
   hasQuiz: 0,
   externalUrls: [
     {

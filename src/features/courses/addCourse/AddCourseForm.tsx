@@ -3,7 +3,7 @@ import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
 import { Divider, Stack } from '@mui/material'
 import CustomStepper from '@components/CustomStepper/CustomStepper'
-import { STEPS } from './AddCourseForm.constants'
+import { DEFAULT_SECTIONS, STEPS } from './AddCourseForm.constants'
 import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
 import { GoBackButton } from './AddCourseForm.style'
 import { useForm } from 'react-hook-form'
@@ -16,15 +16,20 @@ import { PATHS } from '@config/constants/paths'
 import { useNavigate } from 'react-router-dom'
 import { useCreateModuleMutation } from '@redux/apis/modules/moduleApi'
 import { FormValues } from './sectionForm/module/Module.type'
-import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
-import { QuestionTypeEnum } from '@config/enums/questionType.enum'
-export default function AddCourseForm() {
+import { AddCourseFormProps } from './AddCourseForm.type'
+
+export default function AddCourseForm({
+  isEditMode,
+  courseDefaultValues,
+}: AddCourseFormProps) {
   const { t } = useTranslation()
 
   const dispatch = useAppDispatch()
   const navigate = useNavigate()
 
-  const [files, setFiles] = useState<Record<number, File[]>>({})
+  const [files, setFiles] = useState<Record<number, File[]>>(
+    courseDefaultValues?.media ? courseDefaultValues.media : {},
+  )
   const [courseId, setCourseId] = useState<string | null>(null)
   const [activeStep, setActiveStep] = useState(1)
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({})
@@ -37,43 +42,11 @@ export default function AddCourseForm() {
     mode: 'onChange',
     shouldFocusError: true,
     defaultValues: {
-      sections: [
-        {
-          title: GLOBAL_VARIABLES.EMPTY_STRING,
-          description: GLOBAL_VARIABLES.EMPTY_STRING,
-          duration: GLOBAL_VARIABLES.EMPTY_STRING,
-          hasQuiz: 0,
-          externalUrls: [
-            {
-              url: GLOBAL_VARIABLES.EMPTY_STRING,
-              title: GLOBAL_VARIABLES.EMPTY_STRING,
-            },
-          ],
-          quiz: {
-            questions: [
-              {
-                question: GLOBAL_VARIABLES.EMPTY_STRING,
-                type: QuestionTypeEnum.BINARY,
-                isValid: 0,
-                answers: [
-                  {
-                    answer: GLOBAL_VARIABLES.EMPTY_STRING,
-                    isValid: 0,
-                  },
-                  {
-                    answer: GLOBAL_VARIABLES.EMPTY_STRING,
-                    isValid: 0,
-                  },
-                ],
-              },
-            ],
-          },
-        },
-      ],
+      sections: courseDefaultValues
+        ? courseDefaultValues.sections
+        : DEFAULT_SECTIONS,
     },
   })
-
-  //TODO: GET the Course by ID
 
   const [createCourseActionApi, { isLoading }] = useCreateCourseMutation()
 
@@ -82,9 +55,13 @@ export default function AddCourseForm() {
 
   const handleAddCourse = StepperFormMethods.handleSubmit(async (values) => {
     try {
-      const courseResponse = await createCourseActionApi(values).unwrap()
-      setCourseId(String(courseResponse.data.course.id))
-      dispatch(showSuccess(t('course.add_course_success')))
+      if (isEditMode) {
+        // Handle Update Course
+      } else {
+        const courseResponse = await createCourseActionApi(values).unwrap()
+        setCourseId(String(courseResponse.data.id))
+        dispatch(showSuccess(t('course.add_course_success')))
+      }
       setCompleted({ ...completed, [activeStep]: true })
       setActiveStep((prev) => prev + 1)
     } catch (error) {
@@ -111,17 +88,31 @@ export default function AddCourseForm() {
   const renderStepContent = (step: number) => {
     switch (step) {
       case 0:
-        return <CourseForm formMethods={StepperFormMethods} />
+        return (
+          <CourseForm
+            formMethods={StepperFormMethods}
+            isEditMode={isEditMode}
+            defaultValues={courseDefaultValues}
+          />
+        )
       case 1:
         return (
           <SectionForm
             setFiles={setFiles}
             files={files}
             sectionFormMethods={SectionFormMethods}
+            isEditMode={isEditMode}
+            defaultValues={courseDefaultValues}
           />
         )
       default:
-        return <CourseForm formMethods={StepperFormMethods} />
+        return (
+          <CourseForm
+            formMethods={StepperFormMethods}
+            defaultValues={courseDefaultValues}
+            isEditMode={isEditMode}
+          />
+        )
     }
   }
 

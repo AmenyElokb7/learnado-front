@@ -1,8 +1,9 @@
 import { Media } from './Media'
 import { User } from './User'
 import { Module } from './Module'
-import { Category } from './Category'
 import { Language } from './Language'
+import { TeachingTypeFilterEnum } from '@config/enums/teachingType.enum'
+import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
 
 export interface Course {
   id: number
@@ -28,4 +29,27 @@ export interface Course {
   media: Media[]
   lessonsCount: number
   subscribedUsersCount: number
+}
+
+export interface CourseForDesigner {
+  id?: number
+  title: string
+  description: string
+  categoryId: number
+  languageId: number
+  isPaid: 0 | 1
+  price: number
+  discount: number
+  facilitator_id: number
+  isPublic: 0 | 1
+  latitude?: number | null
+  longitude?: number | null
+  link?: string
+  teachingType: TeachingTypeFilterEnum
+  subscribers: number[]
+  sequential: 0 | 1
+  startTime?: string
+  endTime?: string
+  sections: Section[]
+  media: Record<string, File[]>
 }

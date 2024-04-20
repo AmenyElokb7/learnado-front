@@ -1,5 +1,6 @@
 import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
+import { getQuestionTypeFilter } from '@utils/helpers/course.helpers'
 
 export const encodeModule = (
   sections: Section[],
@@ -31,9 +32,10 @@ export const encodeModule = (
         )
         formData.append(
           `steps[${index}][quiz][questions][${questionIndex}][type]`,
-          String(question.type),
+          getQuestionTypeFilter(question.type as number),
         )
-        if (String(question.type) === QuestionTypeEnum.BINARY) {
+
+        if (Number(question.type) === QuestionTypeEnum.BINARY) {
           formData.append(
             `steps[${index}][quiz][questions][${questionIndex}][is_valid]`,
             String(question.isValid),

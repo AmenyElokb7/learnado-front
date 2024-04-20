@@ -7,6 +7,7 @@ import { useTranslation } from 'react-i18next'
 function UploadMultipleFiles({
   files,
   index,
+  isEditMode,
   setFiles,
 }: UploadMultipleFilesProps) {
   const { t } = useTranslation()
@@ -56,9 +57,10 @@ function UploadMultipleFiles({
         {files?.map((file, fileIndex) => (
           <Grid item key={fileIndex} xs={12} sm={4}>
             <UploadInput
+              isEditMode={isEditMode}
               onChange={handleChange}
               onDelete={(e) => handleDeletePreview(e, fileIndex)}
-              preview={URL.createObjectURL(file)}
+              preview={isEditMode ? file.name : URL.createObjectURL(file)}
               file={file}
             />
           </Grid>

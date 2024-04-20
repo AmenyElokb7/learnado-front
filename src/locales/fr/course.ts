@@ -56,4 +56,5 @@ export const course = {
   select_user_required: 'Vous devez sélectionner des utilisateurs',
   upload_media: 'Télécharger l’image du cours',
   add_course_success: 'Cours ajouté avec succès',
+  facilitator_required: 'Facilitateur requis',
 }

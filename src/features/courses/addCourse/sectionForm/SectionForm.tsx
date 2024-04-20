@@ -9,6 +9,7 @@ import useSectionForm from './useSectionForm'
 function SectionForm({
   files,
   sectionFormMethods,
+  isEditMode,
   setFiles,
 }: SectionFormProps) {
   const {
@@ -35,6 +36,7 @@ function SectionForm({
             canDelete={fields.length > 1}
             key={field.id}
             index={index}
+            isEditMode={isEditMode}
             onDrop={onDrop}
             setFiles={setFiles}
             handleAddQuestion={handleAddQuestion}

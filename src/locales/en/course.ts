@@ -62,4 +62,6 @@ export const course = {
   no_facilitator: 'No facilitator',
   upload_media: 'Upload Course Image',
   add_course_success: 'Course added successfully',
+  update_course: 'Update Course',
+  update_course_success: 'Course updated successfully',
 }

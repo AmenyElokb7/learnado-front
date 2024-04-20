@@ -49,6 +49,7 @@ const CourseCard = ({
   createdAt,
   isInstructor,
   width,
+  navigateToEditCoursePage,
 }: CourseCardProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -118,6 +119,7 @@ const CourseCard = ({
           <LabelWithIcon
             label={t('course.number_of_lessons', { count: lessonsCount })}
             icon={<MenuBookOutlinedIcon />}
+            onClick={() => navigateToCourseDetailPage(id)}
           />
 
           <LabelWithIcon label={duration} icon={<TimerOutlinedIcon />} />
@@ -132,13 +134,15 @@ const CourseCard = ({
           </Stack>
         ) : (
           <Stack justifyContent={'space-between'} direction={'row'} p={1}>
-            <LabelWithIcon
-              onClick={() =>
-                navigate(PATHS.DASHBOARD.DESIGNER.MY_COURSES.EDIT_COURSE)
-              }
-              label={t('common.edit')}
-              icon={<EditNoteOutlinedIcon />}
-            />
+            {isInstructor && (
+              <LabelWithIcon
+                onClick={() =>
+                  navigateToEditCoursePage && navigateToEditCoursePage(id)
+                }
+                label={t('common.edit')}
+                icon={<EditNoteOutlinedIcon />}
+              />
+            )}
             <LabelWithIcon
               onClick={() => setOpen(true)}
               label={t('common.delete')}

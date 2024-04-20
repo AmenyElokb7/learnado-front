@@ -30,6 +30,7 @@ function Module({
   index,
   canDelete,
   sectionFormMethods,
+  isEditMode,
   setFiles,
   onDrop,
   handleAddQuestion,
@@ -146,6 +147,7 @@ function Module({
             files={Object.values(files)[index]}
             index={index}
             setFiles={setFiles}
+            isEditMode={isEditMode}
           />
 
           {externalUrls.map((_, indexUrl) => (
