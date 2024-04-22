@@ -10,4 +10,6 @@ export const sidebar = {
   language: 'Gérer les langues',
   category: 'Gérer les catégories',
   pending_users: 'Utilisateurs en attente',
+  courses: 'Mes cours',
+  learning_path: "Mes parcours d'apprentissage",
 }

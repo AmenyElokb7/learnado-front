@@ -32,10 +32,16 @@ function CustomDialogActions({
             spacing={2}
             alignItems={'center'}
             justifyContent={'center'}>
-            <Button variant="contained" onClick={onAccept}>
+            <Button
+              variant="contained"
+              sx={{ borderRadius: '5px', padding: '10px' }}
+              onClick={onAccept}>
               {t('common.ok')}
             </Button>
-            <Button variant="outlined" onClick={onCancel}>
+            <Button
+              variant="outlined"
+              sx={{ borderRadius: '5px', padding: '10px' }}
+              onClick={onCancel}>
               {t('common.cancel')}
             </Button>
           </Stack>

@@ -24,6 +24,15 @@ import { PATHS } from '@config/constants/paths'
 import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { DateRange } from '@mui/icons-material'
+import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined'
+import EditNoteOutlinedIcon from '@mui/icons-material/EditNoteOutlined'
+import { useState } from 'react'
+import CustomDialogActions from '@components/dialogs/customDialogActions/CustomDialogActions'
+import { GREY } from '@config/colors/colors'
+import { useAppDispatch } from '@redux/hooks'
+import { showError, showSuccess } from '@redux/slices/snackbarSlice'
+import { useDeleteCourseMutation } from '@redux/apis/courses/coursesApi'
+import trash from '@assets/logo/icon-trash.svg'
 
 const CourseCard = ({
   id,
@@ -33,20 +42,42 @@ const CourseCard = ({
   courseTitle,
   coursePrice,
   discount,
+  hasDiscount,
   isPaid,
   lessonsCount,
   duration,
   createdAt,
+  isInstructor,
+  width,
 }: CourseCardProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
+
+  const [open, setOpen] = useState(false)
+
+  const [deleteCourse] = useDeleteCourseMutation()
+
+  const dispatch = useAppDispatch()
+
+  const handleDeleteCourse = async (id: number) => {
+    try {
+      deleteCourse(id).unwrap()
+      dispatch(showSuccess(t('course.delete_course_success')))
+    } catch (error) {
+      dispatch(showError(t('errors.general_error')))
+    } finally {
+      setOpen(false)
+    }
+  }
 
   const navigateToCourseDetailPage = (id: number) => {
     return navigate(`${PATHS.COURSES.ROOT}/${id}`)
   }
 
   return (
-    <CourseCardContainer onClick={() => navigateToCourseDetailPage(id)}>
+    <CourseCardContainer
+      onClick={() => !isInstructor && navigateToCourseDetailPage(id)}
+      width={width || '55vh'}>
       <CourseImageContainer>
         <CourseImage src={image} alt={courseTitle} />
         {discount !== GLOBAL_VARIABLES.FREE_CURRENCY ? (
@@ -92,11 +123,44 @@ const CourseCard = ({
           <LabelWithIcon label={duration} icon={<TimerOutlinedIcon />} />
         </Stack>
         <Divider />
-        <Stack alignItems="flex-end">
-          <BuyButton variant="outlined" color="primary">
-            {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
-          </BuyButton>
-        </Stack>
+
+        {!isInstructor ? (
+          <Stack alignItems="flex-end">
+            <BuyButton variant="outlined" color="primary">
+              {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
+            </BuyButton>
+          </Stack>
+        ) : (
+          <Stack justifyContent={'space-between'} direction={'row'} p={1}>
+            <LabelWithIcon
+              onClick={() =>
+                navigate(PATHS.DASHBOARD.DESIGNER.MY_COURSES.EDIT_COURSE)
+              }
+              label={t('common.edit')}
+              icon={<EditNoteOutlinedIcon />}
+            />
+            <LabelWithIcon
+              onClick={() => setOpen(true)}
+              label={t('common.delete')}
+              icon={<DeleteOutlineOutlinedIcon />}
+            />
+          </Stack>
+        )}
+        <CustomDialogActions
+          open={open}
+          onAccept={() => handleDeleteCourse(id)}
+          onClose={() => setOpen(false)}
+          onCancel={() => setOpen(false)}>
+          <Stack direction={'column'} spacing={1} alignItems={'center'}>
+            <img src={trash} width={100} />
+            <Typography color={GREY.main} variant="h1" fontWeight={'medium'}>
+              {t('course.delete_course')}
+            </Typography>
+            <Typography variant="h6" color={GREY.main}>
+              {t('course.delete_course_confirm')}
+            </Typography>
+          </Stack>
+        </CustomDialogActions>
       </CourseContent>
     </CourseCardContainer>
   )

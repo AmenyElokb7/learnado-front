@@ -3,7 +3,7 @@ import { PaginationResponse } from 'types/interfaces/Pagination'
 import { Course } from 'types/models/Course'
 import { ApiPaginationResponse } from '../type'
 import { CourseApi, SingleCourseResponseData } from './coursesApi.type'
-import { generatePictureSrc } from '@utils/helpers/string.helpers'
+import { generatePictureSrc, toSnakeCase } from '@utils/helpers/string.helpers'
 import { ModuleApi } from '../modules/moduleApi'
 import { Module } from 'types/models/Module'
 import { transformMedia } from '../transform'
@@ -17,6 +17,7 @@ import {
   formatPriceWithDiscount,
 } from '@utils/helpers/price.helpers'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
+import { FieldValues } from 'react-hook-form'
 
 export const transformFetchCoursesResponse = (
   response: ApiPaginationResponse<CourseApi>,
@@ -97,4 +98,20 @@ export const transformCourseModules = (modules: ModuleApi[]): Module[] => {
     media: transformMedia(module.media),
     // TODO: add quiz later
   }))
+}
+export const encodeCourse = (values: FieldValues): FormData => {
+  const formData = new FormData()
+  Object.keys(values).forEach((key) => {
+    if (key === 'courseMedia') {
+      const mediaFiles = Array.isArray(values[key])
+        ? values[key]
+        : [values[key]]
+      mediaFiles.forEach((file: File) => {
+        formData.append('course_media[]', file)
+      })
+      return
+    }
+    formData.append(toSnakeCase(key), values[key])
+  })
+  return formData
 }

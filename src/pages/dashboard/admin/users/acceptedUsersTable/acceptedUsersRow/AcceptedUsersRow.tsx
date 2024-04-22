@@ -3,12 +3,14 @@ import { useAppDispatch } from '@redux/hooks'
 import { InstructorAvatar } from '@features/home/homeCourses/coursesCard/courseCard.style'
 import UserRoleChip from '@features/users/userRoleChip/UserRoleChip'
 import { ToggleOff } from '@mui/icons-material'
-import { TableCell, TableRow, Tooltip } from '@mui/material'
+import { Stack, TableCell, TableRow, Tooltip, Typography } from '@mui/material'
 import { useTranslation } from 'react-i18next'
 import { AcceptedUserRowProps } from './AcceptedUsersRow.type'
 import CustomDialogActions from '@components/dialogs/customDialogActions/CustomDialogActions'
 import { useSuspendUserMutation } from '@redux/apis/user/usersApi'
 import { showError, showSuccess } from '@redux/slices/snackbarSlice'
+import { GREY } from '@config/colors/colors'
+import suspend from '@assets/logo/suspend.png'
 
 function AcceptedUsersRow({ user }: AcceptedUserRowProps) {
   const { t } = useTranslation()
@@ -56,7 +58,15 @@ function AcceptedUsersRow({ user }: AcceptedUserRowProps) {
         onAccept={() => handleSuspendUser(user.id)}
         onClose={() => setOpen(false)}
         onCancel={() => setOpen(false)}>
-        {t('users.suspend_user')}
+        <Stack direction={'column'} spacing={1} alignItems={'center'}>
+          <img src={suspend} width={100} />
+          <Typography color={GREY.main} variant="h1" fontWeight={'medium'}>
+            {t('users.suspend_user_confirm')}
+          </Typography>
+          <Typography variant="h6" color={GREY.main}>
+            {t('users.suspend_user')}
+          </Typography>
+        </Stack>
       </CustomDialogActions>
     </TableRow>
   )

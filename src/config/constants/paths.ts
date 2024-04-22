@@ -61,6 +61,15 @@ export const PATHS = {
       MY_QUIZZES: '/dashboard/instructor/my-quizzes',
       MY_SUPPORT: '/dashboard/instructor/my-support',
     },
+    DESIGNER: {
+      ROOT: '/dashboard/designer',
+      MY_COURSES: {
+        ROOT: '/dashboard/designer/my-courses',
+        ADD_COURSE: '/dashboard/designer/my-courses/add-course',
+        EDIT_COURSE: '/dashboard/designer/my-courses/:courseId',
+      },
+      MY_LEARNING_PATHS: '/dashboard/designer/my-learning-paths',
+    },
   },
 
   MAIN: {

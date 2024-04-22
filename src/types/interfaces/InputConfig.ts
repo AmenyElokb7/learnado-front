@@ -11,7 +11,14 @@ export interface InputConfig {
   options?: InputOption[]
 }
 
-export type InputType = 'email' | 'password' | 'number' | 'text'
+export type InputType =
+  | 'email'
+  | 'password'
+  | 'number'
+  | 'text'
+  | 'date'
+  | 'datetime-local'
+  | 'textarea'
 
 export interface InputOption {
   label: string

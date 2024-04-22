@@ -121,6 +121,15 @@ export const userApi = createApi({
       }),
       invalidatesTags: ['Users'],
     }),
+    getActiveUsers: builder.query<PaginationResponse<User>, QueryParams>({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.ACTIVE_USERS, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: ApiPaginationResponse<UserApi>) =>
+        transformFetchUsersResponse(response),
+      providesTags: ['Users'],
+    }),
   }),
 })
 export const {
@@ -135,4 +144,5 @@ export const {
   useSuspendUserMutation,
   useEditUserMutation,
   useGetUserByIdQuery,
+  useGetActiveUsersQuery,
 } = userApi

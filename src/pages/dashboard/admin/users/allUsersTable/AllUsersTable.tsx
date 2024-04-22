@@ -1,6 +1,6 @@
 import CustomPagination from '@components/customPagination/CustomPagination'
 import CustomTable from '@components/customTable/CustomTable'
-import { Stack, Typography } from '@mui/material'
+import { Stack } from '@mui/material'
 import { useGetUsersForAdminQuery } from '@redux/apis/user/usersApi'
 import usePagination from 'src/hooks/usePagination'
 import {
@@ -10,7 +10,6 @@ import {
 import AllUsersRow from './allUsersRow/AllUsersRow'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import useDebounce from 'src/hooks/useDebounce'
-import { useTranslation } from 'react-i18next'
 
 function AllUsersTable() {
   const {
@@ -19,8 +18,6 @@ function AllUsersTable() {
     handleRowsPerPageChange,
     handleSearchChange,
   } = usePagination()
-
-  const { t } = useTranslation()
 
   const debouncedSearchQuery = useDebounce(
     queryParams.keyword,

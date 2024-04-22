@@ -3,7 +3,7 @@ import { useAppDispatch } from '@redux/hooks'
 import { InstructorAvatar } from '@features/home/homeCourses/coursesCard/courseCard.style'
 import UserRoleChip from '@features/users/userRoleChip/UserRoleChip'
 import { Check, Close } from '@mui/icons-material'
-import { Stack, TableCell, TableRow, Tooltip } from '@mui/material'
+import { Stack, TableCell, TableRow, Tooltip, Typography } from '@mui/material'
 import { PendingUserRowProps } from './PendingUsersRow.type'
 import { useTranslation } from 'react-i18next'
 import CustomDialogActions from '@components/dialogs/customDialogActions/CustomDialogActions'
@@ -12,6 +12,10 @@ import {
   useRejectUserMutation,
   useValidateUserMutation,
 } from '@redux/apis/user/usersApi'
+import validate from '@assets/logo/validate.png'
+const reject = require('@assets/logo/reject.webp')
+import { GREY } from '@config/colors/colors'
+import { UserActionsEnum } from '@config/enums/userActions.enum'
 
 function PendingUsersRow({ user }: PendingUserRowProps) {
   const { t } = useTranslation()
@@ -28,11 +32,11 @@ function PendingUsersRow({ user }: PendingUserRowProps) {
 
   const handleUserAction = async (id: number) => {
     try {
-      if (actionType === 'validate') {
-        validateUser(id).unwrap()
+      if (actionType === UserActionsEnum.VALIDATE) {
+        await validateUser(id).unwrap()
         dispatch(showSuccess(t('users.validate_user_success')))
-      } else if (actionType === 'reject') {
-        rejectUser(id).unwrap()
+      } else if (actionType === UserActionsEnum.REJECT) {
+        await rejectUser(id).unwrap()
         dispatch(showSuccess(t('users.reject_user_success')))
       }
       setActionType(null)
@@ -86,9 +90,27 @@ function PendingUsersRow({ user }: PendingUserRowProps) {
         onAccept={() => handleUserAction(user.id)}
         onClose={() => setOpen(false)}
         onCancel={() => setOpen(false)}>
-        {actionType === 'validate'
-          ? t('users.confirm_validate_user')
-          : t('users.confirm_reject_user')}
+        {actionType === 'validate' ? (
+          <Stack direction={'column'} spacing={1} alignItems={'center'}>
+            <img src={validate} width={100} />
+            <Typography color={GREY.main} variant="h1" fontWeight={'medium'}>
+              {t('users.validate_user')}
+            </Typography>
+            <Typography variant="h6" color={GREY.main}>
+              {t('users.confirm_validate_user')}
+            </Typography>
+          </Stack>
+        ) : (
+          <Stack direction={'column'} spacing={1} alignItems={'center'}>
+            <img src={reject} width={100} />
+            <Typography color={GREY.main} variant="h1" fontWeight={'medium'}>
+              {t('users.reject_user')}
+            </Typography>
+            <Typography variant="h6" color={GREY.main}>
+              {t('users.confirm_reject_user')}
+            </Typography>
+          </Stack>
+        )}
       </CustomDialogActions>
     </TableRow>
   )

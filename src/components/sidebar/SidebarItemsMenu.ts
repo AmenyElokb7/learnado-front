@@ -10,6 +10,8 @@ import CalendarMonthOutlinedIcon from '@mui/icons-material/CalendarMonthOutlined
 import ManageAccountsOutlinedIcon from '@mui/icons-material/ManageAccountsOutlined'
 import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined'
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
+import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined'
+import RouteOutlinedIcon from '@mui/icons-material/RouteOutlined'
 export interface SidebarItem {
   id: number
   label: string
@@ -91,5 +93,19 @@ export const ItemsSidebar: SidebarItem[] = [
     path: PATHS.DASHBOARD.ADMIN.CATEGORY,
     icon: CategoryOutlinedIcon,
     accessibleRoles: [UserRoleEnum.ADMIN],
+  },
+  {
+    id: 10,
+    label: 'sidebar.courses',
+    path: PATHS.DASHBOARD.DESIGNER.MY_COURSES.ROOT,
+    icon: RocketLaunchOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.DESIGNER],
+  },
+  {
+    id: 11,
+    label: 'sidebar.learning_path',
+    path: PATHS.DASHBOARD.DESIGNER.MY_LEARNING_PATHS,
+    icon: RouteOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.DESIGNER],
   },
 ]

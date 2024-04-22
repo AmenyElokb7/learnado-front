@@ -13,11 +13,17 @@ export const injectPaginationParamsToUrl = (
     .filter(([, value]) => value !== undefined)
     //Map the key value pairs to a string
     .map(([key, value]) => {
+      // Check if the value is an array
       if (Array.isArray(value)) {
         return value
           .map((item) => `${toSnakeCase(item.name)}=${item.id}`)
           .join('&')
       }
+      // Check if the value is a boolean
+      if (typeof value === 'boolean') {
+        return `${toSnakeCase(key)}=${value ? 1 : 0}`
+      }
+      // Default Return
       return `${toSnakeCase(key)}=${value}`
     })
     //Join the strings with an ampersand

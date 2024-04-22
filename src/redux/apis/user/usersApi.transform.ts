@@ -1,7 +1,12 @@
 import { transformPaginationResponse } from '@redux/apis/transform'
 import { PaginationResponse } from 'types/interfaces/Pagination'
 import { ApiPaginationResponse } from '../type'
-import { SingleUserResponseData, UserApi } from './usersApi.type'
+import {
+  APIFacilitatorsResponse,
+  FacilitatorsResponse,
+  SingleUserResponseData,
+  UserApi,
+} from './usersApi.type'
 import { User } from 'types/models/User'
 import { generatePictureSrc, toSnakeCase } from '@utils/helpers/string.helpers'
 
@@ -13,9 +18,32 @@ import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 export const transformFetchUsersResponse = (
   response: ApiPaginationResponse<UserApi>,
 ): PaginationResponse<User> => {
+  if (response.meta) {
+    return {
+      ...transformPaginationResponse(response),
+      data: transformUsers(Object.values(response?.data)),
+    }
+  }
+
   return {
-    ...transformPaginationResponse(response),
+    message: response.message,
     data: transformUsers(Object.values(response?.data)),
+    meta: {
+      currentPage: GLOBAL_VARIABLES.PAGINATION.FIRST_PAGE,
+      perPage: GLOBAL_VARIABLES.PAGINATION.ROWS_PER_PAGE,
+      total: GLOBAL_VARIABLES.PAGINATION.TOTAL_ITEMS,
+      count: GLOBAL_VARIABLES.PAGINATION.TOTAL_ITEMS,
+    },
+  }
+}
+
+export const transformFacilitatorsResponse = (
+  response: APIFacilitatorsResponse,
+): FacilitatorsResponse => {
+  const { data, message } = response
+  return {
+    facilitators: transformUsers(Object.values(data)),
+    message,
   }
 }
 
@@ -62,7 +90,7 @@ export const transformSingleUser = (data: UserApi): User => {
 export const encodeUser = (values: FieldValues): FormData => {
   const formData = new FormData()
   if (values.profilePicture === null) {
-    values.profilePicture = ''
+    values.profilePicture = GLOBAL_VARIABLES.EMPTY_STRING
   }
   Object.keys(values).forEach((key) => {
     formData.append(toSnakeCase(key), values[key])

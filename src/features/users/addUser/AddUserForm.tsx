@@ -21,7 +21,7 @@ import { PATHS } from '@config/constants/paths'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import AddUserSkeleton from './addUserSkeleton/AddUserSkeleton'
 
-export default function AddUserForm() {
+function AddUserForm() {
   const { userId } = useParams<string>()
 
   const isEditMode = Boolean(userId)
@@ -37,6 +37,7 @@ export default function AddUserForm() {
 
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
+
   const RegisterFormMethods = useForm({
     mode: 'onChange',
     shouldFocusError: true,
@@ -135,3 +136,4 @@ export default function AddUserForm() {
     </FormProvider>
   )
 }
+export default AddUserForm

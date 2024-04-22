@@ -23,6 +23,7 @@ function CoursesList({ courses, isLoading }: CoursesListProps) {
       {Boolean(courses) &&
         courses?.map((course) => (
           <CourseCard
+            width="50vh"
             key={course.id}
             id={course.id}
             image={course.media[0]?.fileName}

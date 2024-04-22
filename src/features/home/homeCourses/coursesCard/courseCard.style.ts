@@ -8,9 +8,12 @@ import {
   styled,
 } from '@mui/material'
 import { BLUE, GREY } from '@config/colors/colors'
+import { StyleProps } from './CourseCard.style.type'
 
-export const CourseCardContainer = styled(Box)(({ theme }) => ({
-  width: '50vh',
+export const CourseCardContainer = styled(Box, {
+  shouldForwardProp: (prop) => prop !== 'width',
+})(({ theme }) => ({ width }: StyleProps) => ({
+  width: width,
   margin: '10px',
   borderRadius: 16,
   overflow: 'hidden',
@@ -28,6 +31,9 @@ export const CourseCardContainer = styled(Box)(({ theme }) => ({
     },
   },
   [theme.breakpoints.down('sm')]: {
+    width: 'auto',
+  },
+  [theme.breakpoints.down('md')]: {
     width: '40vh',
   },
 }))

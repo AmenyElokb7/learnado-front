@@ -1,7 +1,6 @@
 import { ConfigEnv } from '@config/configEnv'
 import { LocalStorageKeysEnum } from '@config/enums/localStorage.enum'
 import * as CryptoJS from 'crypto-js'
-import { decodeToken } from './decodeToken'
 import { User } from 'types/models/User'
 
 //___________________get secret key from environment variables___________________

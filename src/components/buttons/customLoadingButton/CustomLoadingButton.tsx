@@ -2,8 +2,8 @@ import { LoadingButton } from '@mui/lab'
 import { CustomLoadingButtonProps } from './CustomLoadingButton.type'
 export const CustomLoadingButton = ({
   isLoading,
-  onClick,
   children,
+  onClick,
 }: CustomLoadingButtonProps) => {
   return (
     <LoadingButton
