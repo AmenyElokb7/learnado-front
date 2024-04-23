@@ -1,4 +1,3 @@
-
 export const common = {
   delete: 'Delete',
   edit: 'Edit',
@@ -26,4 +25,6 @@ export const common = {
   true: 'True',
   false: 'False',
   error: 'Error',
+  save: 'Save',
+  update: 'Update',
 }

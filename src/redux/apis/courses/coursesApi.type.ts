@@ -2,6 +2,7 @@ import { MediaApi } from 'types/models/Media'
 import { Language } from 'types/models/Language'
 import { UserApi } from '../user/usersApi.type'
 import { ModuleApi } from '../modules/modulesApi.type'
+import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 
 export interface CourseApi {
   id: number
@@ -70,9 +71,10 @@ export interface CourseForDesignerApi {
 
 export interface ApiStep {
   id: number
+
   title: string
   description: string
-  duration: string
+  duration: number
   media: MediaApi[]
   quiz: {
     id: number
@@ -83,7 +85,7 @@ export interface ApiStep {
 export interface ApiQuestion {
   id: number
   question: string
-  type: string
+  type: QuestionTypeEnum
   is_valid: 0 | 1
   answers: ApiAnswer[]
 }

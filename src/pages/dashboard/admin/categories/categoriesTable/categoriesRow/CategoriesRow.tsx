@@ -10,7 +10,7 @@ import { GREY } from '@config/colors/colors'
 import trash from '@assets/logo/icon-trash.svg'
 import { useDeleteCategoryMutation } from '@redux/apis/categories/categoriesApi'
 
-function CategoriesRow({ category }: CategoriesRowProps) {
+function CategoriesRow({ category, onEdit }: CategoriesRowProps) {
   const [deleteCategory] = useDeleteCategoryMutation()
 
   const [open, setOpen] = useState(false)
@@ -18,7 +18,7 @@ function CategoriesRow({ category }: CategoriesRowProps) {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
 
-  const handleDeleteUser = async (id: number) => {
+  const handleDeleteCategory = async (id: number) => {
     try {
       deleteCategory(id).unwrap()
       dispatch(showSuccess(t('category.delete_category_success')))
@@ -27,6 +27,9 @@ function CategoriesRow({ category }: CategoriesRowProps) {
     } finally {
       setOpen(false)
     }
+  }
+  const handleEditClick = (id: number) => {
+    onEdit(id)
   }
 
   return (
@@ -41,7 +44,11 @@ function CategoriesRow({ category }: CategoriesRowProps) {
         <TableCell>
           <Stack direction={'row'} spacing={2}>
             <Tooltip title={t('common.edit')}>
-              <Edit color="info" cursor="pointer" onClick={() => {}} />
+              <Edit
+                color="info"
+                cursor="pointer"
+                onClick={() => handleEditClick(category.id)}
+              />
             </Tooltip>
             <Tooltip title={t('common.delete')}>
               <Delete
@@ -55,7 +62,7 @@ function CategoriesRow({ category }: CategoriesRowProps) {
       </TableRow>
       <CustomDialogActions
         open={open}
-        onAccept={() => handleDeleteUser(category.id)}
+        onAccept={() => handleDeleteCategory(category.id)}
         onClose={() => setOpen(false)}
         onCancel={() => setOpen(false)}>
         <Stack direction={'column'} spacing={1} alignItems={'center'}>

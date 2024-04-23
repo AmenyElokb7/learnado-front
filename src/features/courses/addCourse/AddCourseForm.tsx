@@ -3,11 +3,18 @@ import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
 import { Divider, Stack } from '@mui/material'
 import CustomStepper from '@components/CustomStepper/CustomStepper'
-import { DEFAULT_SECTIONS, STEPS } from './AddCourseForm.constants'
+import {
+  DEFAULT_COURSE,
+  DEFAULT_SECTIONS,
+  STEPS,
+} from './AddCourseForm.constants'
 import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
 import { GoBackButton } from './AddCourseForm.style'
 import { useForm } from 'react-hook-form'
-import { useCreateCourseMutation } from '@redux/apis/courses/coursesApi'
+import {
+  useCreateCourseMutation,
+  useUpdateCourseMutation,
+} from '@redux/apis/courses/coursesApi'
 import { useAppDispatch } from '@redux/hooks'
 import { showError, showSuccess } from '@redux/slices/snackbarSlice'
 import CourseForm from './courseForm/CourseForm'
@@ -17,10 +24,13 @@ import { useNavigate } from 'react-router-dom'
 import { useCreateModuleMutation } from '@redux/apis/modules/moduleApi'
 import { FormValues } from './sectionForm/module/Module.type'
 import { AddCourseFormProps } from './AddCourseForm.type'
+import { CourseForDesigner } from 'types/models/Course'
 
 export default function AddCourseForm({
   isEditMode,
   courseDefaultValues,
+  id,
+  isFetching,
 }: AddCourseFormProps) {
   const { t } = useTranslation()
 
@@ -30,14 +40,18 @@ export default function AddCourseForm({
   const [files, setFiles] = useState<Record<number, File[]>>(
     courseDefaultValues?.media ? courseDefaultValues.media : {},
   )
-  const [courseId, setCourseId] = useState<string | null>(null)
+  const [courseId, setCourseId] = useState<string | null | undefined>(
+    id || null,
+  )
   const [activeStep, setActiveStep] = useState(0)
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({})
 
-  const StepperFormMethods = useForm({
+  const StepperFormMethods = useForm<CourseForDesigner>({
     mode: 'onChange',
     shouldFocusError: true,
+    defaultValues: courseDefaultValues ? courseDefaultValues : DEFAULT_COURSE,
   })
+
   const SectionFormMethods = useForm<FormValues>({
     mode: 'onChange',
     shouldFocusError: true,
@@ -53,10 +67,17 @@ export default function AddCourseForm({
   const [createSectionActionApi, { isLoading: isLoadingSection }] =
     useCreateModuleMutation()
 
+  const [updateCourseActionApi, { isLoading: isLoadingUpdate }] =
+    useUpdateCourseMutation()
   const handleAddCourse = StepperFormMethods.handleSubmit(async (values) => {
     try {
       if (isEditMode) {
         // Handle Update Course
+        await updateCourseActionApi({
+          id: Number(courseId),
+          course: values,
+        }).unwrap()
+        dispatch(showSuccess(t('course.update_course_success')))
       } else {
         const courseResponse = await createCourseActionApi(values).unwrap()
         setCourseId(String(courseResponse.data.id))
@@ -65,7 +86,7 @@ export default function AddCourseForm({
       setCompleted({ ...completed, [activeStep]: true })
       setActiveStep((prev) => prev + 1)
     } catch (error) {
-      dispatch(showError(t('course.add_course_failure')))
+      dispatch(showError(t('course.api_course_failure')))
     }
   })
 
@@ -103,6 +124,7 @@ export default function AddCourseForm({
             sectionFormMethods={SectionFormMethods}
             isEditMode={isEditMode}
             defaultValues={courseDefaultValues}
+            isFetching={isFetching}
           />
         )
       default:
@@ -139,9 +161,9 @@ export default function AddCourseForm({
         </GoBackButton>
         <Stack>
           <CustomLoadingButton
-            isLoading={isLoading || isLoadingSection}
+            isLoading={isLoading || isLoadingSection || isLoadingUpdate}
             onClick={activeStep === 0 ? handleAddCourse : handleAddSection}>
-            {t('common.next')}
+            {isEditMode ? t('common.update') : t('common.next')}
           </CustomLoadingButton>
         </Stack>
       </Stack>

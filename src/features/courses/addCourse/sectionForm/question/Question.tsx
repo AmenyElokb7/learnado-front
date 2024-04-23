@@ -29,10 +29,12 @@ function Question({
   handleRemoveAnswer,
 }: QuestionProps) {
   const { t } = useTranslation()
-  const questionType = sectionFormMethods.watch(
-    `sections.${sectionIndex}.quiz.questions.${questionIndex}.type`,
+  // Question to be submitted to the api after the update
+  const questionToUpdate = sectionFormMethods.watch(
+    `sections.${sectionIndex}.quiz.questions.${questionIndex}`,
   )
-  const isBinary = questionType === QuestionTypeEnum.BINARY
+
+  const isBinary = questionToUpdate.type === QuestionTypeEnum.BINARY
   const answers = field.quiz.questions[questionIndex].answers
 
   return (

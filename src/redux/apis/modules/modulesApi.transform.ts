@@ -1,6 +1,9 @@
 import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
 import { getQuestionTypeFilter } from '@utils/helpers/course.helpers'
+import { ModuleApi } from './modulesApi.type'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 
 export const encodeModule = (
   sections: Section[],
@@ -11,8 +14,8 @@ export const encodeModule = (
   sections.forEach((section: Section, index: number) => {
     formData.append(`steps[${index}][title]`, section.title)
     formData.append(`steps[${index}][description]`, section.description)
-    formData.append(`steps[${index}][duration]`, section.duration)
-    if (section.externalUrls.length) {
+    formData.append(`steps[${index}][duration]`, String(section.duration))
+    if (section?.externalUrls?.length) {
       section.externalUrls.forEach((externalUrl, externalUrlIndex) => {
         formData.append(
           `steps[${index}][external_urls][${externalUrlIndex}][url]`,
@@ -68,4 +71,33 @@ export const encodeModule = (
   })
 
   return formData
+}
+
+export const transformModuleResponse = (
+  data: ItemDetailsResponse<ModuleApi>,
+): ItemDetailsResponse<Section> => {
+  return {
+    message: data.message,
+    data: transformSingleModule(data.data),
+  }
+}
+
+const transformSingleModule = (data: ModuleApi): Section => {
+  return {
+    id: data.id,
+    title: data.title,
+    description: data.description,
+    media:
+      data.media.length > 0
+        ? {
+            id: data.media[0].id,
+            modelId: data.media?.[0]?.model_id ?? 0,
+            mimeType:
+              data.media?.[0]?.mime_type ?? GLOBAL_VARIABLES.EMPTY_STRING,
+            fileName:
+              data.media?.[0]?.file_name ?? GLOBAL_VARIABLES.EMPTY_STRING,
+            title: data.media?.[0]?.title ?? GLOBAL_VARIABLES.EMPTY_STRING,
+          }
+        : [],
+  }
 }

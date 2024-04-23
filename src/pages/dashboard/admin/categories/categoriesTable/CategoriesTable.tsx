@@ -7,8 +7,9 @@ import useDebounce from 'src/hooks/useDebounce'
 import usePagination from 'src/hooks/usePagination'
 import { CategoriesTableHeaders } from './CategorieTable.contant'
 import CategoriesRow from './categoriesRow/CategoriesRow'
+import { CategoriesTableProps } from './CategoriesTable.type'
 
-function CategoriesTable() {
+function CategoriesTable({ onEdit }: CategoriesTableProps) {
   const {
     queryParams,
     handlePageChange,
@@ -35,7 +36,11 @@ function CategoriesTable() {
         queryParams={queryParams}
         handleSearchChange={handleSearchChange}>
         {data?.data?.map((category) => (
-          <CategoriesRow key={category.id} category={category} />
+          <CategoriesRow
+            key={category.id}
+            category={category}
+            onEdit={onEdit}
+          />
         ))}
       </CustomTable>
       <CustomPagination

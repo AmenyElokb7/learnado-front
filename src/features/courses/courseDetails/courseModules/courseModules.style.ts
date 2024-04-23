@@ -4,6 +4,7 @@ import {
   AccordionDetails,
   ListItem,
   styled,
+  Button,
 } from '@mui/material'
 import KeyboardArrowDownOutlinedIcon from '@mui/icons-material/KeyboardArrowDownOutlined'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
@@ -48,3 +49,11 @@ export const StyledExpandIcon = styled(KeyboardArrowDownOutlinedIcon)(
       transition: 'transform 0.2 ease-in',
     }),
 )
+
+export const StyledButton = styled(Button)({
+  color: 'inherit',
+  '&:hover': {
+    backgroundColor: 'inherit',
+    textDecoration: 'underline',
+  },
+})

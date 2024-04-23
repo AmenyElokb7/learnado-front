@@ -25,15 +25,22 @@ export interface ModuleProps {
 }
 
 export interface Section {
-  id?: number
+  databaseId?: number
   title: string
   description: string
   duration: number
   hasQuiz: 1 | 0
   quiz: Quiz
-  externalUrls: {
+  externalUrls?: {
     url: string
     title: string
+  }[]
+  media?: {
+    id: number
+    modelId: number
+    fileName: string
+    title: string
+    mimeType: string
   }[]
 }
 export interface FormValues {

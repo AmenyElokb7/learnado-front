@@ -4,6 +4,7 @@ export const PATHS = {
   COURSES: {
     ROOT: '/Courses',
     COURSES_DETAIL: '/courses/:courseId',
+    STEP: '/courses/:courseId/:stepId',
   },
 
   LEARNING_PATH: {

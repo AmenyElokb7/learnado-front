@@ -23,6 +23,13 @@ import Question from '../question/Question'
 import useDragAndDropModule from './useDragAndDropModule'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined'
+import { useDeleteModuleMutation } from '@redux/apis/modules/moduleApi'
+import { useAppDispatch } from '@redux/hooks'
+import { showError, showSuccess } from '@redux/slices/snackbarSlice'
+import CustomDialogActions from '@components/dialogs/customDialogActions/CustomDialogActions'
+import { GREY } from '@config/colors/colors'
+import trash from '@assets/logo/icon-trash.svg'
+import { courseApi } from '@redux/apis/courses/coursesApi'
 
 function Module({
   field,
@@ -50,10 +57,10 @@ function Module({
       title: GLOBAL_VARIABLES.EMPTY_STRING,
     },
   ]
-
+  const dispatch = useAppDispatch()
   // State Declaration
   const [expanded, setExpanded] = useState(true)
-
+  const [open, setOpen] = useState(false)
   const { t } = useTranslation()
 
   const hasQuiz = sectionFormMethods.watch(`sections.${index}.hasQuiz`)
@@ -65,6 +72,27 @@ function Module({
     handleOnDragStart,
     handleOnDrop,
   } = useDragAndDropModule({ index, onDrop })
+
+  const [deletesection] = useDeleteModuleMutation()
+  // Delete section
+  const handleDeleteSection = async () => {
+    try {
+      // Dele section api call
+      deletesection(field.databaseId).unwrap()
+      // dispatch success Snackbar
+      dispatch(showSuccess(t('section.delete_success')))
+      // Invalidate the get CourseForDesigner query
+      dispatch(courseApi.util.invalidateTags(['Courses', 'CoursesForDesigner']))
+      // Delete from the form
+      handleRemoveModule(index)
+    } catch (erroor) {
+      // Dispatch error Snackbar
+      dispatch(showError(t('errors.general_error')))
+    } finally {
+      // Close the dialog
+      setOpen(false)
+    }
+  }
 
   return (
     <ModuleRoot
@@ -98,12 +126,14 @@ function Module({
             }
           />
           <Typography variant="h3" color="primary">
-            {t('section.section', { index: index + 1 })}
+            {t('section.section', { index: index + 1 })}: {field.title}
           </Typography>
         </Stack>
         <Tooltip title={t('common.delete')}>
           <IconButton
-            onClick={() => handleRemoveModule(index)}
+            onClick={() =>
+              isEditMode ? setOpen(true) : handleRemoveModule(index)
+            }
             disabled={!canDelete}
             sx={{
               color: (theme) =>
@@ -247,6 +277,21 @@ function Module({
           )}
         </Grid>
       </Collapse>
+      <CustomDialogActions
+        open={open}
+        onAccept={handleDeleteSection}
+        onClose={() => setOpen(false)}
+        onCancel={() => setOpen(false)}>
+        <Stack direction={'column'} spacing={1} alignItems={'center'}>
+          <img src={trash} width={100} />
+          <Typography color={GREY.main} variant="h1" fontWeight={'medium'}>
+            {t('section.delete_section_confirm')}
+          </Typography>
+          <Typography variant="h6" color={GREY.main}>
+            {t('section.delete_section')}
+          </Typography>
+        </Stack>
+      </CustomDialogActions>
     </ModuleRoot>
   )
 }

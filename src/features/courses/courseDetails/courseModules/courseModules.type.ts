@@ -1,5 +1,6 @@
-import { Module } from 'types/models/Module'
+import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
 
 export interface CourseContentProps {
-  steps: Module[]
+  steps: Section[]
+  courseId?: string
 }

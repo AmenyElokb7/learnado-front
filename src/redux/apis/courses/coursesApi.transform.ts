@@ -95,7 +95,7 @@ export const transformSingleCourse = (course: CourseApi): Course => {
           ]
         : [],
     },
-    modules: transformCourseModules(course.steps),
+    sections: transformCourseModules(course.steps),
     media: transformMedia(course.media),
   }
 }
@@ -103,28 +103,26 @@ export const transformSingleCourse = (course: CourseApi): Course => {
 export const transformCourseModules = (modules: ModuleApi[]): Module[] => {
   return modules.map((module) => ({
     id: module.id,
+    databaseId: module.id,
     title: module.title,
     description: module.description,
     duration: transformDuration(module.duration),
     courseId: module.course_id,
     createdAt: transformDateFormat(module.created_at),
     media: transformMedia(module.media),
-    hasQuiz: module.sections?.some(
-      (section) => section.quiz.questions.length > 0,
-    )
-      ? 1
-      : 0,
-    // TODO: add quiz later
+    hasQuiz: module?.quiz?.questions?.length > 0 ? 1 : 0,
   }))
 }
 export const encodeCourse = (values: FieldValues): FormData => {
   // extract price and discount from values
-  const { price, discount, selectedUserIds, ...rest } = values
+  const { price, discount, selectedUserIds, endTime, startTime, ...rest } =
+    values
 
   // extract values to encode
+  //TODO: Fix lat and lng
   const valuesToEncode: Omit<
     FieldValues,
-    'price' | 'discount' | 'selectedUserIds'
+    'price' | 'discount' | 'selectedUserIds' | 'endTime' | 'startTime'
   > = { ...rest }
 
   const formData = new FormData()
@@ -145,6 +143,12 @@ export const encodeCourse = (values: FieldValues): FormData => {
       const teachingTypeVlaue =
         values[key] === TeachingTypeFilterEnum.NO_TYPE ? 0 : values[key]
       formData.append(toSnakeCase(key), teachingTypeVlaue)
+      if (values.startTime) {
+        formData.append(toSnakeCase('startTime'), values['startTime'])
+      }
+      if (values.endTime) {
+        formData.append(toSnakeCase('endTime'), values['endTime'])
+      }
     } else if (key === 'isPaid') {
       formData.append(toSnakeCase(key), values[key])
       if (Number(values[key]) === 1) {
@@ -193,6 +197,7 @@ export const transformFetchCourseForDesignerResponse = (
       sequential: data.sequential,
       startTime: data.start_time,
       endTime: data.end_time,
+      courseMedia: `${ConfigEnv.MEDIA_BASE_URL}/${data.media[0]?.file_name}`,
       sections:
         data.steps.length > 0
           ? data.steps.map((step) => transformCourseSection(step))
@@ -202,23 +207,30 @@ export const transformFetchCourseForDesignerResponse = (
   }
 }
 
-export const transformCourseSection = (sectionApi: ApiStep): Section => {
-  const { id, questions } = sectionApi.quiz
+const transformCourseSection = (sectionApi: ApiStep): Section => {
   return {
-    id: sectionApi.id,
+    databaseId: sectionApi.id,
     title: sectionApi.title,
     description: sectionApi.description,
     duration: Number(sectionApi.duration),
-    hasQuiz: sectionApi.quiz.questions.length > 0 ? 1 : 0,
+    hasQuiz: sectionApi?.quiz?.questions?.length > 0 ? 1 : 0,
     // TODO: add external urls
     externalUrls: [],
-    quiz: {
-      id,
-      questions:
-        questions.length > 0
-          ? questions.map((question) => transformQuestionSection(question))
-          : [],
-    },
+    quiz:
+      sectionApi?.quiz?.questions?.length > 0
+        ? {
+            id: sectionApi.quiz.id,
+            questions:
+              sectionApi.quiz.questions.length > 0
+                ? sectionApi.quiz.questions.map((question) =>
+                    transformQuestionSection(question),
+                  )
+                : [],
+          }
+        : {
+            id: 0,
+            questions: [],
+          },
   }
 }
 
@@ -228,7 +240,7 @@ export const transformQuestionSection = (
   const { id, is_valid, question, type, answers } = questionApi
   return {
     id: id,
-    type: decodeQuestionType(type),
+    type: decodeQuestionType(type.toString()),
     question: question,
     isValid: is_valid,
     answers:

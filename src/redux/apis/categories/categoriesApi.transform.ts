@@ -6,6 +6,8 @@ import { CategoryApi } from './categoriesApi.type'
 import { ConfigEnv } from '@config/configEnv'
 import { transformPaginationResponse } from '@redux/apis/transform'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
+import { FieldValues } from 'react-hook-form'
 
 export const transformFetchCategoryResponse = (
   response: ApiPaginationResponse<CategoryApi>,
@@ -37,4 +39,34 @@ const transformCategories = (data: CategoryApi[]): Category[] => {
       ? `${ConfigEnv.MEDIA_BASE_URL}/${category.media[0].file_name}`
       : noImage,
   }))
+}
+
+const transformCategory = (data: CategoryApi): Category => {
+  return {
+    id: data.id,
+    title: data.category,
+    nbrOfLessons: data.courses_count,
+    url: data.media[0]?.file_name
+      ? `${ConfigEnv.MEDIA_BASE_URL}/${data.media[0].file_name}`
+      : noImage,
+  }
+}
+export const transformSingleCategory = (
+  response: ItemDetailsResponse<CategoryApi>,
+): ItemDetailsResponse<Category> => {
+  return {
+    data: transformCategory(response.data),
+    message: response.message,
+  }
+}
+export const encodeCategory = (values: FieldValues): FormData => {
+  const formData = new FormData()
+
+  if (values.category) {
+    formData.append('category', values.category)
+  }
+  if (values.media) {
+    formData.append('media', values.media)
+  }
+  return formData
 }

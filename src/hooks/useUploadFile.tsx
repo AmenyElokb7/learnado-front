@@ -11,7 +11,7 @@ import { UseFormReturn } from 'react-hook-form'
 interface IUseUploadFile {
   fieldName: string
   initPreview: null | string
-  formMethods?: UseFormReturn
+  formMethods?: UseFormReturn<any, any, undefined>
   index: number
   setFiles?: Dispatch<SetStateAction<Record<number, File[]>>>
 }
@@ -43,8 +43,8 @@ const useUploadFile = ({
     }
   }
 
-  const handleResetPreview = (event: MouseEvent<SVGSVGElement>) => {
-    event.stopPropagation()
+  const handleResetPreview = (event?: MouseEvent<SVGSVGElement>) => {
+    event?.stopPropagation()
     formMethods?.setValue(fieldName, null)
     setPreview(null)
   }

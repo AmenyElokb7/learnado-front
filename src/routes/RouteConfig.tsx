@@ -101,6 +101,7 @@ export const ROUTE_CONFIG: RouteObject[] = [
       { path: PATHS.ROOT, element: <HomePage /> },
       { path: PATHS.COURSES.ROOT, element: <Courses /> },
       { path: PATHS.COURSES.COURSES_DETAIL, element: <CourseDetail /> },
+      { path: PATHS.COURSES.STEP, element: <CourseDetail /> },
       { path: PATHS.ABOUT_US, element: <AboutUsPage /> },
       { path: PATHS.INSTRUCTORS, element: <InstructorsPage /> },
     ],
@@ -179,6 +180,14 @@ export const ROUTE_CONFIG: RouteObject[] = [
         ),
       },
       {
+        path: PATHS.DASHBOARD.ADMIN.CATEGORY.EDIT_CATEGORY,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <CategoriesPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
         path: PATHS.DASHBOARD.DESIGNER.MY_COURSES.ROOT,
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.DESIGNER]}>
@@ -204,9 +213,9 @@ export const ROUTE_CONFIG: RouteObject[] = [
       },
     ],
   },
-  { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
-  {
-    path: PATHS.ANY,
-    element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
-  },
+  // { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
+  // {
+  //   path: PATHS.ANY,
+  //   element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
+  // },
 ]

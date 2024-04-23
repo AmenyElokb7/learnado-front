@@ -26,4 +26,9 @@ export const ENDPOINTS = {
   UPDATE_PROFILE: 'update-profile',
   DELETE_LANGUAGE: 'admin/delete-language',
   DELETE_CATEGORY: 'admin/delete-category',
+  CREATE_CATEGORY: 'admin/create-category',
+  UPDATE_CATEGORY: 'admin/update-category',
+  STEPS: 'steps',
+  DELETE_MODULE: 'designer/delete-step',
+  UPDATE_COURSE: 'designer/update-course',
 }

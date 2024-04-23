@@ -11,7 +11,7 @@ import trash from '@assets/logo/icon-trash.svg'
 import { useDeleteLanguageMutation } from '@redux/apis/languages/languagesApi'
 
 function LanguagesRow({ language }: LanguagesRowProps) {
-
+  
   const [deleteLanguage] = useDeleteLanguageMutation()
 
   const [open, setOpen] = useState(false)
@@ -19,7 +19,7 @@ function LanguagesRow({ language }: LanguagesRowProps) {
   const dispatch = useAppDispatch()
   const { t } = useTranslation()
 
-  const handleDeleteUser = async (id: number) => {
+  const handleDeleteLanguage = async (id: number) => {
     try {
       deleteLanguage(id).unwrap()
       dispatch(showSuccess(t('language.delete_language_success')))
@@ -52,7 +52,7 @@ function LanguagesRow({ language }: LanguagesRowProps) {
       </TableRow>
       <CustomDialogActions
         open={open}
-        onAccept={() => handleDeleteUser(language.id)}
+        onAccept={() => handleDeleteLanguage(language.id)}
         onClose={() => setOpen(false)}
         onCancel={() => setOpen(false)}>
         <Stack direction={'column'} spacing={1} alignItems={'center'}>

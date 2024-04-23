@@ -8,9 +8,10 @@ import {
 import { useEffect } from 'react'
 import { UseFormReturn } from 'react-hook-form'
 import usePagination from 'src/hooks/usePagination'
+import { CourseForDesigner } from 'types/models/Course'
 
 interface UseCourseForm {
-  formMethods: UseFormReturn
+  formMethods: UseFormReturn<CourseForDesigner, any, undefined>
 }
 
 export default function useCourseForm({ formMethods }: UseCourseForm) {

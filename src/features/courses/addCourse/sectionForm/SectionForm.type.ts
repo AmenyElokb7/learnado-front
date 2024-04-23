@@ -8,5 +8,6 @@ export interface SectionFormProps {
   files: Record<number, File[]>
   isEditMode?: boolean
   defaultValues?: CourseForDesigner
+  isFetching?: boolean
   setFiles: Dispatch<SetStateAction<Record<number, File[]>>>
 }

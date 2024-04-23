@@ -25,4 +25,5 @@ export const common = {
   true: 'Vrai',
   false: 'Faux',
   error: 'Erreur',
+  save: 'Enregistrer',
 }

@@ -26,7 +26,7 @@ import { FieldValues } from 'react-hook-form'
 export const courseApi = createApi({
   reducerPath: 'courseApi',
   baseQuery: baseQueryConfig,
-  tagTypes: ['Courses'],
+  tagTypes: ['Courses', 'CoursesForDesigner'],
   endpoints: (builder) => ({
     getCourses: builder.query<PaginationResponse<Course>, QueryParams>({
       query: (params) => ({
@@ -70,6 +70,17 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ['Courses'],
     }),
+    updateCourse: builder.mutation<
+      CreateCourseResponse,
+      { id: number; course: FieldValues }
+    >({
+      query: ({ id, course }) => ({
+        url: ENDPOINTS.UPDATE_COURSE + `/${id}`,
+        method: MethodsEnum.POST,
+        body: encodeCourse(course),
+      }),
+      invalidatesTags: ['Courses'],
+    }),
     getCourseForDesignerById: builder.query<
       ItemDetailsResponse<CourseForDesigner>,
       string
@@ -81,6 +92,7 @@ export const courseApi = createApi({
       transformResponse: (
         response: ItemDetailsResponse<CourseForDesignerApi>,
       ) => transformFetchCourseForDesignerResponse(response),
+      providesTags: ['CoursesForDesigner'],
     }),
   }),
 })
@@ -92,4 +104,5 @@ export const {
   useDeleteCourseMutation,
   useCreateCourseMutation,
   useGetCourseForDesignerByIdQuery,
+  useUpdateCourseMutation,
 } = courseApi

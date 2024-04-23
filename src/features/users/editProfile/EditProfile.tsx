@@ -14,15 +14,14 @@ import UploadInput from '@components/Inputs/uploadInput/UploadInput'
 import useUploadFile from 'src/hooks/useUploadFile'
 import { useAppDispatch } from '@redux/hooks'
 import { showSuccess } from '@redux/slices/snackbarSlice'
-import { useNavigate } from 'react-router-dom'
-import { PATHS } from '@config/constants/paths'
 import { IError } from 'types/interfaces/Error'
 import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
-import { useRef } from 'react'
-import { User } from 'types/models/User'
 import CustomPasswordTextField from '@components/Inputs/customPasswordTextField/CustomPasswordTextField'
 import useError from 'src/hooks/useError'
 import Error from '@components/error/Error'
+import { logout } from '@redux/slices/authSlice'
+import { PATHS } from '@config/constants/paths'
+import { useNavigate } from 'react-router-dom'
 
 function EditProfile() {
   const { t } = useTranslation()
@@ -34,8 +33,6 @@ function EditProfile() {
     shouldFocusError: true,
   })
   const { data, isLoading, isError } = useGetUserProfileQuery()
-
-  const initialDataRef = useRef(data?.data)
 
   const { preview, handleOnChange, handleResetPreview } = useUploadFile({
     formMethods: UserFormMethods,
@@ -52,29 +49,11 @@ function EditProfile() {
     useUpdateProfileMutation()
 
   const onSubmit = UserFormMethods.handleSubmit(async (values) => {
-    const modifiedValues: Partial<User> = {
-      firstName: values.firstName,
-      lastName: values.lastName,
-    }
-    if (values.password) {
-      modifiedValues.password = values.password
-      modifiedValues.passwordConfirmation = values.passwordConfirmation
-    }
-
-    Object.keys(modifiedValues).forEach((key) => {
-      const currentKey = key as keyof User
-      if (
-        initialDataRef.current &&
-        values[currentKey] === initialDataRef.current[currentKey]
-      ) {
-        modifiedValues[currentKey] = values[currentKey]
-      }
-    })
-
     try {
-      await updateProfileApiAction(modifiedValues).unwrap()
+      await updateProfileApiAction(values).unwrap()
       dispatch(showSuccess(t('users.profile_updated_successfully')))
-      navigate(PATHS.DASHBOARD.PROFILE.ROOT)
+      dispatch(logout())
+      navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`)
     } catch (error) {
       getError(error as IError)
     }

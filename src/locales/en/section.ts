@@ -18,6 +18,9 @@ export const section = {
   externalUrlTitle_placeholder: 'Enter external URL title',
   add_media_url: 'Add media URL',
   add_section: 'Add new section',
+  delete_section: 'Are you sure you want to delete this section?',
+  delete_section_confirm: 'Delete section?',
+  delete_success: 'Section deleted successfully',
   quiz: {
     question: 'Question: ',
     questions: 'Questions',

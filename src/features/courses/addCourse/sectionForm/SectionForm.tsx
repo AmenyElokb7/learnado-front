@@ -5,11 +5,13 @@ import Module from './module/Module'
 import { t } from 'i18next'
 import { FormProvider } from 'react-hook-form'
 import useSectionForm from './useSectionForm'
+import FallbackLoader from '@components/fallback/FallbackLoader'
 
 function SectionForm({
   files,
   sectionFormMethods,
   isEditMode,
+  isFetching,
   setFiles,
 }: SectionFormProps) {
   const {
@@ -24,6 +26,10 @@ function SectionForm({
     handleRemoveExternalUrl,
     onDrop,
   } = useSectionForm({ sectionFormMethods })
+
+  if (isFetching) {
+    return <FallbackLoader />
+  }
 
   return (
     <FormProvider {...sectionFormMethods}>
