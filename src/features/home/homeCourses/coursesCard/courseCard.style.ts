@@ -45,6 +45,7 @@ export const CourseImageContainer = styled('div')(({ theme }) => ({
   lineHeight: 0,
   cursor: 'pointer',
   position: 'relative',
+  objectFit: 'fill',
 }))
 export const PriceLabel = styled(Box)(({ theme }) => ({
   backgroundColor: theme.palette.background.paper,

@@ -13,6 +13,7 @@ import useUploadFile from 'src/hooks/useUploadFile'
 import { FormProvider } from 'react-hook-form'
 import FallbackLoader from '@components/fallback/FallbackLoader'
 import { useTranslation } from 'react-i18next'
+import { generatePictureSrc } from '@utils/helpers/string.helpers'
 
 function CourseForm({ formMethods, defaultValues }: CourseFormProps) {
   const {
@@ -33,7 +34,7 @@ function CourseForm({ formMethods, defaultValues }: CourseFormProps) {
   const { preview, handleOnChange, handleResetPreview } = useUploadFile({
     formMethods,
     fieldName: 'courseMedia',
-    initPreview: defaultValues?.courseMedia || null,
+    initPreview: generatePictureSrc(defaultValues?.courseMedia.name) || null,
     index: 0,
   })
 

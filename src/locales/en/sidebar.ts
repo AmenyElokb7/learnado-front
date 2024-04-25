@@ -12,4 +12,5 @@ export const sidebar = {
   pending_users: 'Pending Users',
   courses: 'My Courses',
   learning_path: 'My Learning Paths',
+  quizzes: 'My Quizzes',
 }

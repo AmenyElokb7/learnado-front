@@ -55,6 +55,18 @@ export const courseApi = createApi({
         transformFetchCoursesResponse(response),
       providesTags: ['Courses'],
     }),
+    getInstructorCourses: builder.query<
+      PaginationResponse<Course>,
+      QueryParams
+    >({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.INSTRUCTOR_COURSES, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: ApiPaginationResponse<CourseApi>) =>
+        transformFetchCoursesResponse(response),
+      providesTags: ['Courses'],
+    }),
     deleteCourse: builder.mutation<void, number>({
       query: (id) => ({
         url: ENDPOINTS.DELETE_COURSE + `/${id}`,
@@ -105,4 +117,5 @@ export const {
   useCreateCourseMutation,
   useGetCourseForDesignerByIdQuery,
   useUpdateCourseMutation,
+  useGetInstructorCoursesQuery,
 } = courseApi

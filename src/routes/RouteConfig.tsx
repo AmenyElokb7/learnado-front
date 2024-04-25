@@ -79,6 +79,16 @@ const LanguagesPage = lazy(
 const CategoriesPage = lazy(
   () => import('src/pages/dashboard/admin/categories/CategoriesPage'),
 )
+
+const InstructorCalendarPage = lazy(
+  () => import('src/pages/dashboard/instructor/calendarPage/CalendarPage'),
+)
+const InstructorCoursesPage = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/instructor/instructorCourses/InstructorCoursesPage'
+    ),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -211,11 +221,27 @@ export const ROUTE_CONFIG: RouteObject[] = [
           </RoleBasedGuard>
         ),
       },
+      {
+        path: PATHS.DASHBOARD.INSTRUCTOR.MY_CALENDAR,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.FACILITATOR]}>
+            <InstructorCalendarPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.INSTRUCTOR.MY_COURSES,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.FACILITATOR]}>
+            <InstructorCoursesPage />
+          </RoleBasedGuard>
+        ),
+      },
     ],
   },
-  // { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
-  // {
-  //   path: PATHS.ANY,
-  //   element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
-  // },
+  { path: PATHS.MAIN.ERROR.P_404, element: <NotFound /> },
+  {
+    path: PATHS.ANY,
+    element: <Navigate to={PATHS.MAIN.ERROR.P_404} replace />,
+  },
 ]

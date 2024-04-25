@@ -42,11 +42,11 @@ const CourseCard = ({
   courseTitle,
   coursePrice,
   discount,
-  hasDiscount,
   isPaid,
   lessonsCount,
   duration,
   createdAt,
+  isDesigner,
   isInstructor,
   width,
   navigateToEditCoursePage,
@@ -77,7 +77,7 @@ const CourseCard = ({
 
   return (
     <CourseCardContainer
-      onClick={() => !isInstructor && navigateToCourseDetailPage(id)}
+      onClick={() => !isDesigner && navigateToCourseDetailPage(id)}
       width={width || '55vh'}>
       <CourseImageContainer>
         <CourseImage src={image} alt={courseTitle} />
@@ -119,14 +119,13 @@ const CourseCard = ({
           <LabelWithIcon
             label={t('course.number_of_lessons', { count: lessonsCount })}
             icon={<MenuBookOutlinedIcon />}
-            onClick={() => navigateToCourseDetailPage(id)}
           />
 
           <LabelWithIcon label={duration} icon={<TimerOutlinedIcon />} />
         </Stack>
         <Divider />
 
-        {!isInstructor ? (
+        {!isDesigner && !isInstructor ? (
           <Stack alignItems="flex-end">
             <BuyButton variant="outlined" color="primary">
               {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
@@ -134,20 +133,22 @@ const CourseCard = ({
           </Stack>
         ) : (
           <Stack justifyContent={'space-between'} direction={'row'} p={1}>
-            {isInstructor && (
-              <LabelWithIcon
-                onClick={() =>
-                  navigateToEditCoursePage && navigateToEditCoursePage(id)
-                }
-                label={t('common.edit')}
-                icon={<EditNoteOutlinedIcon />}
-              />
+            {isDesigner && (
+              <>
+                <LabelWithIcon
+                  onClick={() =>
+                    navigateToEditCoursePage && navigateToEditCoursePage(id)
+                  }
+                  label={t('common.edit')}
+                  icon={<EditNoteOutlinedIcon />}
+                />
+                <LabelWithIcon
+                  onClick={() => setOpen(true)}
+                  label={t('common.delete')}
+                  icon={<DeleteOutlineOutlinedIcon />}
+                />
+              </>
             )}
-            <LabelWithIcon
-              onClick={() => setOpen(true)}
-              label={t('common.delete')}
-              icon={<DeleteOutlineOutlinedIcon />}
-            />
           </Stack>
         )}
         <CustomDialogActions

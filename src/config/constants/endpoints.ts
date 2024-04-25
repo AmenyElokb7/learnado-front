@@ -31,4 +31,10 @@ export const ENDPOINTS = {
   STEPS: 'steps',
   DELETE_MODULE: 'designer/delete-step',
   UPDATE_COURSE: 'designer/update-course',
+  DELETE_QUIZ: 'designer/delete-quiz',
+  DELETE_QUESTION: 'designer/delete-question',
+  DELETE_ANSWER: 'designer/delete-answer',
+  UPDATE_QUIZ: 'designer/update-step-quiz',
+  UPDATE_MODULE: 'designer/update-step',
+  INSTRUCTOR_COURSES: 'facilitator/courses',
 }

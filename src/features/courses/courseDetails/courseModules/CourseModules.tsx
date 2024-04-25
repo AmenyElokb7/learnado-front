@@ -9,13 +9,13 @@ export const CourseModules = ({ steps, courseId }: CourseContentProps) => {
     <RectangularCard title={t('course.modules')}>
       {steps.map((step) => (
         <CourseModule
-          key={step.id}
+          key={step.databaseId}
           title={step.title}
           media={step.media || []}
           duration={Number(step.duration)}
           section={step}
           courseId={courseId}
-          sectionId={step.id}
+          sectionId={step.databaseId}
         />
       ))}
     </RectangularCard>

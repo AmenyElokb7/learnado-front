@@ -56,7 +56,7 @@ export interface CourseForDesignerApi {
   facilitator_id: number
 
   is_public: 0 | 1
-  subscribers: number[]
+  subscribers: UserApi[]
   sequential: 0 | 1
   teaching_type: number
   link: string
@@ -67,6 +67,10 @@ export interface CourseForDesignerApi {
   created_at: string
   media: MediaApi[]
   steps: ApiStep[]
+  external_urls?: {
+    url: string
+    title: string
+  }[]
 }
 
 export interface ApiStep {

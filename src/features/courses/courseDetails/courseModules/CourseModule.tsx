@@ -29,6 +29,7 @@ function CourseModule({
   section,
   courseId,
   sectionId,
+  quiz,
 }: CourseModuleProps) {
   const [scroll, setScroll] = useState<DialogProps['scroll']>('paper')
   const [isOpened, setIsOpened] = useState(false)
@@ -91,6 +92,11 @@ function CourseModule({
                           onClick={handleOpenDialog('body')}
                           variant="text">
                           {item.title}
+                          {quiz && (
+                            <Typography variant="body2">
+                              has quiz
+                            </Typography>
+                          )}
                         </StyledButton>
                       </Stack>
                     </Grid>

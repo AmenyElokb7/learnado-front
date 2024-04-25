@@ -13,6 +13,7 @@ function UploadMultipleFiles({
   const { t } = useTranslation()
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
+
     if (file) {
       setFiles((prev) => {
         const files = prev[index] || []
@@ -60,7 +61,11 @@ function UploadMultipleFiles({
               isEditMode={isEditMode}
               onChange={handleChange}
               onDelete={(e) => handleDeletePreview(e, fileIndex)}
-              preview={isEditMode ? file.name : URL.createObjectURL(file)}
+              preview={
+                file?.name.includes('http://localhost:8000')
+                  ? file.name
+                  : URL.createObjectURL(file)
+              }
               file={file}
             />
           </Grid>

@@ -66,4 +66,5 @@ export const course = {
   update_course_success: 'Course updated successfully',
   api_course_failure: 'Something went wrong! Please try again',
   link_required: 'Link is required',
+  not_found: 'Course not found',
 }

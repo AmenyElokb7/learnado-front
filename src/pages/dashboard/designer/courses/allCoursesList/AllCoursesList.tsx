@@ -7,7 +7,12 @@ import CourseCard from '@features/home/homeCourses/coursesCard/CourseCard'
 import { Stack } from '@mui/material'
 import { PATHS } from '@config/constants/paths'
 
-function AllCoursesList({ courses, isLoading }: AllCoursesListProps) {
+function AllCoursesList({
+  courses,
+  isLoading,
+  isDesigner,
+  isInstructor,
+}: AllCoursesListProps) {
   const { t } = useTranslation()
   const navigate = useNavigate()
 
@@ -43,7 +48,8 @@ function AllCoursesList({ courses, isLoading }: AllCoursesListProps) {
             duration={course.duration}
             isPaid={course.isPaid}
             createdAt={course.createdAt}
-            isInstructor
+            isDesigner={isDesigner}
+            isInstructor={isInstructor}
             navigateToEditCoursePage={navigateToEditCoursePage}
           />
         ))}

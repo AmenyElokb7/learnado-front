@@ -13,4 +13,17 @@ export interface CourseModuleProps {
   section: Section
   courseId?: string
   sectionId?: number
+  quiz?: {
+    questions: {
+      id: number
+      question: string
+      type: number
+      isValid: boolean
+      answers: {
+        id: number
+        answer: string
+        isValid: boolean
+      }[]
+    }[]
+  }
 }

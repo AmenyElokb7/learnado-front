@@ -24,6 +24,7 @@ export const HeaderOverlay = styled(Box)(({ theme }) => ({
 
 export const HeaderDetail = styled(Stack)(({ theme }) => ({
   display: 'flex',
+  width: '500px',
   flexDirection: 'row',
   flexWrap: 'wrap',
   lineHeight: 1.2,
@@ -31,6 +32,7 @@ export const HeaderDetail = styled(Stack)(({ theme }) => ({
   gap: 25,
   [theme.breakpoints.down('sm')]: {
     flexDirection: 'column',
+    width: 'auto',
   },
 }))
 

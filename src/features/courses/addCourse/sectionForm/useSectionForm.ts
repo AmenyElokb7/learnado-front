@@ -7,6 +7,7 @@ import {
 } from './SectionForm.constants'
 import { FormValues } from './module/Module.type'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 
 interface UseSectionFormProps {
   sectionFormMethods: UseFormReturn<FormValues, any, undefined>
@@ -49,6 +50,33 @@ export default function useSectionForm({
       ...fieldToUpdate,
       quiz: {
         questions: [...fieldToUpdate.quiz.questions, DEFAULT_QUESTION_OBJECT],
+      },
+    })
+  }
+
+  // Remove a quiz from the module
+  const handleRemoveQuiz = (index: number) => {
+    const fieldToUpdate = sectionFormMethods.watch(`sections.${index}`)
+    update(index, {
+      ...fieldToUpdate,
+      quiz: {
+        questions: [
+          {
+            question: GLOBAL_VARIABLES.EMPTY_STRING,
+            type: QuestionTypeEnum.BINARY,
+            isValid: 0,
+            answers: [
+              {
+                answer: GLOBAL_VARIABLES.EMPTY_STRING,
+                isValid: 0,
+              },
+              {
+                answer: GLOBAL_VARIABLES.EMPTY_STRING,
+                isValid: 0,
+              },
+            ],
+          },
+        ],
       },
     })
   }
@@ -142,6 +170,7 @@ export default function useSectionForm({
       externalUrls: [
         ...fieldToUpdate.externalUrls,
         {
+          id: 0,
           url: GLOBAL_VARIABLES.EMPTY_STRING,
           title: GLOBAL_VARIABLES.EMPTY_STRING,
         },
@@ -177,5 +206,6 @@ export default function useSectionForm({
     handleAddAnswer,
     handleAddExternalUrl,
     handleRemoveExternalUrl,
+    handleRemoveQuiz,
   }
 }

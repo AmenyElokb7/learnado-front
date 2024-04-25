@@ -2,8 +2,8 @@ import { Step } from '@components/CustomStepper/CustomStepper.type'
 import { Section } from './sectionForm/module/Module.type'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { QuestionTypeEnum } from '@config/enums/questionType.enum'
-import { CourseForDesigner } from 'types/models/Course'
 import { TeachingTypeFilterEnum } from '@config/enums/teachingType.enum'
+import { CourseFormValues } from './courseForm/CourseForm.type'
 
 export const STEPS: Step[] = [
   {
@@ -24,6 +24,7 @@ export const DEFAULT_SECTIONS: Section[] = [
     hasQuiz: 0,
     externalUrls: [
       {
+        id: 0,
         url: GLOBAL_VARIABLES.EMPTY_STRING,
         title: GLOBAL_VARIABLES.EMPTY_STRING,
       },
@@ -50,7 +51,7 @@ export const DEFAULT_SECTIONS: Section[] = [
   },
 ]
 
-export const DEFAULT_COURSE: CourseForDesigner = {
+export const DEFAULT_COURSE: CourseFormValues = {
   title: GLOBAL_VARIABLES.EMPTY_STRING,
   description: GLOBAL_VARIABLES.EMPTY_STRING,
   categoryId: 0,
@@ -68,7 +69,4 @@ export const DEFAULT_COURSE: CourseForDesigner = {
   subscribers: [],
   latitude: GLOBAL_VARIABLES.DEFAULT_LOCALIZATION.LAT,
   longitude: GLOBAL_VARIABLES.DEFAULT_LOCALIZATION.LNG,
-  media: {},
-  courseMedia: GLOBAL_VARIABLES.EMPTY_STRING,
-  sections: DEFAULT_SECTIONS,
 }

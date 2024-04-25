@@ -15,7 +15,7 @@ const Header = () => {
   const location = useLocation()
 
   const title = (
-    location.pathname.split('/').pop() || GLOBAL_VARIABLES.EMPTY_STRING
+    location.pathname.split('/')[1] || GLOBAL_VARIABLES.EMPTY_STRING
   )
     .replace(/([A-Z])/g, ' $1')
     .trim()

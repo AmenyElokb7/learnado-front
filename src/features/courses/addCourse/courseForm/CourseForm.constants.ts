@@ -106,7 +106,7 @@ export const CREATE_COURSE_FORM_CONFIG: Record<string, InputConfig> = {
     rules: { required: 'course.teaching_type_required' },
   },
   subscribers: {
-    name: 'selectedUserIds',
+    name: 'subscribers',
     placeholder: GLOBAL_VARIABLES.EMPTY_STRING,
     defaultValue: GLOBAL_VARIABLES.EMPTY_STRING,
     label: 'course.selectedUserIds',

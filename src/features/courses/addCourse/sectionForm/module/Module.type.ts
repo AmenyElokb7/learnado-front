@@ -22,6 +22,8 @@ export interface ModuleProps {
   handleRemoveModule: (index: number) => void
   handleAddExternalUrl: (index: number) => void
   handleRemoveExternalUrl: (index: number, externalUrlIndex: number) => void
+  handleAddSectionApi?: () => void
+  handleRemoveQuiz?: (index: number) => void
 }
 
 export interface Section {
@@ -32,6 +34,7 @@ export interface Section {
   hasQuiz: 1 | 0
   quiz: Quiz
   externalUrls?: {
+    id: number
     url: string
     title: string
   }[]

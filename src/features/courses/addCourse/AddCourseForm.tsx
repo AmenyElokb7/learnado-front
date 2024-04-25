@@ -3,11 +3,7 @@ import Box from '@mui/material/Box'
 import { useTranslation } from 'react-i18next'
 import { Divider, Stack } from '@mui/material'
 import CustomStepper from '@components/CustomStepper/CustomStepper'
-import {
-  DEFAULT_COURSE,
-  DEFAULT_SECTIONS,
-  STEPS,
-} from './AddCourseForm.constants'
+import { DEFAULT_SECTIONS, STEPS } from './AddCourseForm.constants'
 import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
 import { GoBackButton } from './AddCourseForm.style'
 import { useForm } from 'react-hook-form'
@@ -22,9 +18,10 @@ import SectionForm from './sectionForm/SectionForm'
 import { PATHS } from '@config/constants/paths'
 import { useNavigate } from 'react-router-dom'
 import { useCreateModuleMutation } from '@redux/apis/modules/moduleApi'
-import { FormValues } from './sectionForm/module/Module.type'
+import { FormValues, Section } from './sectionForm/module/Module.type'
 import { AddCourseFormProps } from './AddCourseForm.type'
-import { CourseForDesigner } from 'types/models/Course'
+import { CourseFormValues } from './courseForm/CourseForm.type'
+import { generateCourseFormDefaultValues } from './AddCourseForm.helpers'
 
 export default function AddCourseForm({
   isEditMode,
@@ -40,16 +37,17 @@ export default function AddCourseForm({
   const [files, setFiles] = useState<Record<number, File[]>>(
     courseDefaultValues?.media ? courseDefaultValues.media : {},
   )
+
   const [courseId, setCourseId] = useState<string | null | undefined>(
     id || null,
   )
-  const [activeStep, setActiveStep] = useState(0)
+  const [activeStep, setActiveStep] = useState(1)
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({})
 
-  const StepperFormMethods = useForm<CourseForDesigner>({
+  const StepperFormMethods = useForm<CourseFormValues>({
     mode: 'onChange',
     shouldFocusError: true,
-    defaultValues: courseDefaultValues ? courseDefaultValues : DEFAULT_COURSE,
+    defaultValues: generateCourseFormDefaultValues(courseDefaultValues),
   })
 
   const SectionFormMethods = useForm<FormValues>({
@@ -69,6 +67,7 @@ export default function AddCourseForm({
 
   const [updateCourseActionApi, { isLoading: isLoadingUpdate }] =
     useUpdateCourseMutation()
+
   const handleAddCourse = StepperFormMethods.handleSubmit(async (values) => {
     try {
       if (isEditMode) {
@@ -91,10 +90,17 @@ export default function AddCourseForm({
   })
 
   const handleAddSection = SectionFormMethods.handleSubmit(async (values) => {
+    let addedSections: Section[] = []
+
+    if (isEditMode) {
+      const defaultLength = courseDefaultValues?.sections.length
+      addedSections = values.sections.slice(Number(defaultLength) + 1)
+    }
+
     try {
       await createSectionActionApi({
         courseId: String(courseId),
-        sections: values.sections,
+        sections: isEditMode ? addedSections : values.sections,
         files,
       }).unwrap()
       dispatch(showSuccess(t('section.add_section_success')))
@@ -125,6 +131,7 @@ export default function AddCourseForm({
             isEditMode={isEditMode}
             defaultValues={courseDefaultValues}
             isFetching={isFetching}
+            handleAddSection={handleAddSection}
           />
         )
       default:

@@ -124,6 +124,7 @@ export const DEFAULT_MODULE_OBJECT: Section = {
   hasQuiz: 0,
   externalUrls: [
     {
+      id: 0,
       url: GLOBAL_VARIABLES.EMPTY_STRING,
       title: GLOBAL_VARIABLES.EMPTY_STRING,
     },

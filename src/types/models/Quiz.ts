@@ -18,3 +18,22 @@ export interface Answer {
   answer: string
   isValid: 0 | 1
 }
+
+export interface QuizApi {
+  id?: number
+  questions: QuestionApi[]
+}
+
+export interface QuestionApi {
+  id?: number
+  question: string
+  type: QuestionTypeEnum
+  is_valid: 0 | 1
+  answers: AnswerApi[]
+}
+
+export interface AnswerApi {
+  id?: number
+  answer: string
+  is_valid: 0 | 1
+}

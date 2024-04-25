@@ -44,3 +44,15 @@ export const decodeQuestionType = (type: string): QuestionTypeEnum => {
       return QuestionTypeEnum.BINARY
   }
 }
+
+// export const getEventColor = (
+//   course: Course,
+// ): { backgroundColor: string; textColor: string } => {
+//   if (course.isPaid) {
+//     return { backgroundColor: '#e0ffcd', textColor: '#ffffff' }
+//   } else if (course.isPublic) {
+//     return { backgroundColor: '#ffebbb', textColor: '#ffffff' }
+//   } else {
+//     return { backgroundColor: '#ffcab0', textColor: '#ffffff' }
+//   }
+// }

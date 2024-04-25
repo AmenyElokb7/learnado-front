@@ -34,52 +34,52 @@ function Question({
     `sections.${sectionIndex}.quiz.questions.${questionIndex}`,
   )
 
-  const isBinary = questionToUpdate.type === QuestionTypeEnum.BINARY
-  const answers = field.quiz.questions[questionIndex].answers
+  const isBinary = questionToUpdate
+    ? questionToUpdate.type === QuestionTypeEnum.BINARY
+    : false
+  const answers = field.quiz ? field.quiz.questions[questionIndex].answers : []
 
   return (
-    <Stack spacing={2}>
-      <Stack direction={'row'} spacing={2}>
-        <Grid container alignItems={'center'}>
-          <Grid item xs={12} lg={4}>
-            <Typography color={BLUE.main} fontWeight={'medium'} variant="h4">
-              {t('section.quiz.question')}
-            </Typography>
-          </Grid>
-          <Grid item xs={12} lg={7}>
-            <CustomTextField
-              config={{
-                ...CREATE_STEP_FORM_CONFIG.questionTitle,
-                name: `sections.${sectionIndex}.quiz.questions.${questionIndex}.question`,
-              }}
-            />
-          </Grid>
-          <Grid item xs={12} lg={1}>
-            <Tooltip title={t('section.quiz.remove_question')}>
-              <IconButton
-                disabled={!canDelete}
-                sx={{
-                  color: (theme) =>
-                    canDelete
-                      ? theme.palette.error.main
-                      : theme.palette.action.disabled,
-                }}
-                onClick={() =>
-                  handleDeleteQuestion(sectionIndex, questionIndex)
-                }>
-                <DeleteOutlineOutlinedIcon fontSize="medium" />
-              </IconButton>
-            </Tooltip>
-          </Grid>
-        </Grid>
+    <Stack spacing={1} sx={{ boxShadow: '2px 2px 2px 1px rgba(0, 0, 0, 0.2)' }}>
+      <Stack alignSelf={'flex-end'}>
+        <Tooltip title={t('section.quiz.remove_question')}>
+          <IconButton
+            disabled={!canDelete}
+            sx={{
+              color: (theme) =>
+                canDelete
+                  ? theme.palette.error.main
+                  : theme.palette.action.disabled,
+            }}
+            onClick={() => handleDeleteQuestion(sectionIndex, questionIndex)}>
+            <DeleteOutlineOutlinedIcon fontSize="medium" />
+          </IconButton>
+        </Tooltip>
       </Stack>
-      <Stack direction={'row'} alignItems={'center'}>
-        <Grid item xs={12} lg={4}>
+      <Grid container alignItems={'center'}>
+        <Grid item xs={12} lg={3}>
+          <Typography color={BLUE.main} fontWeight={'medium'} variant="h4">
+            {t('section.quiz.question')}
+          </Typography>
+        </Grid>
+
+        <Grid item xs={12} lg={8}>
+          <CustomTextField
+            config={{
+              ...CREATE_STEP_FORM_CONFIG.questionTitle,
+              name: `sections.${sectionIndex}.quiz.questions.${questionIndex}.question`,
+            }}
+          />
+        </Grid>
+      </Grid>
+
+      <Grid container alignItems={'center'}>
+        <Grid item xs={12} lg={3}>
           <Typography color={BLUE.main} fontWeight={'medium'} variant="h4">
             {t('section.quiz.question_type')}
           </Typography>
         </Grid>
-        <Grid item xs={12} lg={7}>
+        <Grid item xs={12} lg={8}>
           <CustomSelectField
             config={{
               ...CREATE_STEP_FORM_CONFIG.questionType,
@@ -87,7 +87,7 @@ function Question({
             }}
           />
         </Grid>
-      </Stack>
+      </Grid>
       {!isBinary ? (
         <Stack p={4}>
           <Grid item xs={12} lg={4}>
@@ -116,8 +116,8 @@ function Question({
           ))}
         </Stack>
       ) : (
-        <Stack direction={'row'} spacing={2} alignItems={'center'}>
-          <Grid item xs={12} lg={4}>
+        <Grid container alignItems={'center'}>
+          <Grid item xs={12} lg={3}>
             <Typography color={BLUE.main} fontWeight={'medium'} variant="h4">
               {t('section.quiz.question_isValid')}
             </Typography>
@@ -130,7 +130,7 @@ function Question({
               }}
             />
           </Grid>
-        </Stack>
+        </Grid>
       )}
       <Divider />
     </Stack>

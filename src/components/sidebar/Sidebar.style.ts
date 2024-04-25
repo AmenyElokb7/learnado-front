@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 
 export const StyledSidebarCard = styled(Stack)(({ theme }) => ({
   display: 'flex',
+  position: 'sticky',
   flexDirection: 'column',
   width: '300px',
   borderRadius: '20px',

@@ -4,10 +4,15 @@ import { baseQueryConfig } from '@redux/baseQueryConfig'
 import { MethodsEnum } from '@config/enums/method.enum'
 import { ENDPOINTS } from '@config/constants/endpoints'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
-import { encodeModule, transformModuleResponse } from './modulesApi.transform'
+import {
+  encodeModule,
+  encodeQuiz,
+  encodeUpdateModule,
+} from './modulesApi.transform'
 import { Module } from 'types/models/Module'
-import { CreateModuleRequest, ModuleApi } from './modulesApi.type'
+import { CreateModuleRequest } from './modulesApi.type'
 import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
+import { Quiz } from 'types/models/Quiz'
 
 export const moduleApi = createApi({
   reducerPath: 'moduleApi',
@@ -25,15 +30,7 @@ export const moduleApi = createApi({
       }),
       invalidatesTags: ['Modules'],
     }),
-    getModuleMedia: builder.query<ItemDetailsResponse<Section>, number>({
-      query: (stepId) => ({
-        url: `${ENDPOINTS.STEPS}/${stepId}`,
-        method: MethodsEnum.GET,
-      }),
-      transformResponse: (response: ItemDetailsResponse<ModuleApi>) =>
-        transformModuleResponse(response),
-      providesTags: ['Modules'],
-    }),
+
     deleteModule: builder.mutation<void, number | undefined>({
       query: (moduleId) => ({
         url: `${ENDPOINTS.DELETE_MODULE}/${moduleId}`,
@@ -41,11 +38,55 @@ export const moduleApi = createApi({
       }),
       invalidatesTags: ['Modules'],
     }),
+    deleteQuiz: builder.mutation<void, number | undefined>({
+      query: (quizId) => ({
+        url: `${ENDPOINTS.DELETE_QUIZ}/${quizId}`,
+        method: MethodsEnum.DELETE,
+      }),
+    }),
+    deleteQuestion: builder.mutation<void, number | undefined>({
+      query: (questionId) => ({
+        url: `${ENDPOINTS.DELETE_QUESTION}/${questionId}`,
+        method: MethodsEnum.DELETE,
+      }),
+    }),
+    deleteAnswer: builder.mutation<void, number | undefined>({
+      query: (answerId) => ({
+        url: `${ENDPOINTS.DELETE_ANSWER}/${answerId}`,
+        method: MethodsEnum.DELETE,
+      }),
+    }),
+    updateQuiz: builder.mutation<
+      void,
+      { sectionId: number | undefined; data: Quiz }
+    >({
+      query: ({ sectionId, data }) => ({
+        url: `${ENDPOINTS.UPDATE_QUIZ}/${sectionId}`,
+        method: MethodsEnum.POST,
+        body: encodeQuiz(data),
+        invalidatesTags: ['Modules'],
+      }),
+    }),
+    updateModule: builder.mutation<
+      void,
+      { sectionId: number | undefined; data: Section; files: File[] }
+    >({
+      query: ({ sectionId, data, files }) => ({
+        url: `${ENDPOINTS.UPDATE_MODULE}/${sectionId}`,
+        method: MethodsEnum.POST,
+        body: encodeUpdateModule(data, files),
+        invalidatesTags: ['Modules'],
+      }),
+    }),
   }),
 })
 
 export const {
   useCreateModuleMutation,
-  useGetModuleMediaQuery,
   useDeleteModuleMutation,
+  useDeleteQuizMutation,
+  useDeleteQuestionMutation,
+  useDeleteAnswerMutation,
+  useUpdateQuizMutation,
+  useUpdateModuleMutation,
 } = moduleApi

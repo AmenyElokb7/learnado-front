@@ -12,6 +12,7 @@ import TranslateOutlinedIcon from '@mui/icons-material/TranslateOutlined'
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
 import RocketLaunchOutlinedIcon from '@mui/icons-material/RocketLaunchOutlined'
 import RouteOutlinedIcon from '@mui/icons-material/RouteOutlined'
+import DynamicFormOutlinedIcon from '@mui/icons-material/DynamicFormOutlined'
 export interface SidebarItem {
   id: number
   label: string
@@ -71,38 +72,59 @@ export const ItemsSidebar: SidebarItem[] = [
     label: 'sidebar.my_calendar',
     path: PATHS.DASHBOARD.STUDENT.MY_CALENDAR,
     icon: CalendarMonthOutlinedIcon,
-    accessibleRoles: [UserRoleEnum.USER, UserRoleEnum.FACILITATOR],
+    accessibleRoles: [UserRoleEnum.USER],
   },
   {
     id: 7,
+    label: 'sidebar.my_calendar',
+    path: PATHS.DASHBOARD.INSTRUCTOR.MY_CALENDAR,
+    icon: CalendarMonthOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.FACILITATOR],
+  },
+  {
+    id: 8,
+    label: 'sidebar.courses',
+    path: PATHS.DASHBOARD.INSTRUCTOR.MY_COURSES,
+    icon: RocketLaunchOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.FACILITATOR],
+  },
+  {
+    id: 9,
+    label: 'sidebar.quizzes',
+    path: PATHS.DASHBOARD.INSTRUCTOR.MY_QUIZZES,
+    icon: DynamicFormOutlinedIcon,
+    accessibleRoles: [UserRoleEnum.FACILITATOR],
+  },
+  {
+    id: 10,
     label: 'sidebar.users',
     path: PATHS.DASHBOARD.ADMIN.USERS.ALL,
     icon: ManageAccountsOutlinedIcon,
     accessibleRoles: [UserRoleEnum.ADMIN],
   },
   {
-    id: 8,
+    id: 11,
     label: 'sidebar.language',
     path: PATHS.DASHBOARD.ADMIN.LANGUAGES.ROOT,
     icon: TranslateOutlinedIcon,
     accessibleRoles: [UserRoleEnum.ADMIN],
   },
   {
-    id: 9,
+    id: 12,
     label: 'sidebar.category',
     path: PATHS.DASHBOARD.ADMIN.CATEGORY.ROOT,
     icon: CategoryOutlinedIcon,
     accessibleRoles: [UserRoleEnum.ADMIN],
   },
   {
-    id: 10,
+    id: 13,
     label: 'sidebar.courses',
     path: PATHS.DASHBOARD.DESIGNER.MY_COURSES.ROOT,
     icon: RocketLaunchOutlinedIcon,
     accessibleRoles: [UserRoleEnum.DESIGNER],
   },
   {
-    id: 11,
+    id: 14,
     label: 'sidebar.learning_path',
     path: PATHS.DASHBOARD.DESIGNER.MY_LEARNING_PATHS,
     icon: RouteOutlinedIcon,

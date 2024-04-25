@@ -15,6 +15,11 @@ export const ModuleRoot = styled(Stack)(
     transition: 'transform 0.2s ease-in-out',
   }),
 )
+export const QuizRoot = styled(Stack)(() => ({
+  borderRadius: '10px',
+  border: `1px solid ${GREY.light}`,
+  padding: '20px',
+}))
 
 export const StyledArrowIcon = styled(ArrowForwardIosOutlinedIcon)(
   ({ expanded }: { expanded: string }) => ({

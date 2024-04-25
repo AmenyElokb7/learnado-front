@@ -10,4 +10,9 @@ export interface SectionFormProps {
   defaultValues?: CourseForDesigner
   isFetching?: boolean
   setFiles: Dispatch<SetStateAction<Record<number, File[]>>>
+  handleAddSection?: () => void
+}
+
+export interface ExtendedFile extends File {
+  id: number
 }
