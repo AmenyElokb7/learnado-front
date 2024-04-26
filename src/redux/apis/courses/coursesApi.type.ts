@@ -1,7 +1,7 @@
 import { MediaApi } from 'types/models/Media'
 import { Language } from 'types/models/Language'
 import { UserApi } from '../user/usersApi.type'
-import { ModuleApi } from '../modules/moduleApi'
+import { ModuleApi } from '../modules/modulesApi.type'
 
 export interface CourseApi {
   id: number
@@ -31,4 +31,12 @@ export interface CourseApi {
 export interface SingleCourseResponseData {
   data: CourseApi
   message: string
+}
+
+export interface CreateCourseResponse {
+  message: string
+  data: {
+    course: CourseApi
+    media: MediaApi[]
+  }
 }

@@ -41,7 +41,18 @@ export const StyledPreviewImage = styled('img')(() => ({
   objectFit: 'cover',
   borderRadius: '5px',
 }))
-
+export const StyledPreviewVideo = styled('video')(() => ({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  borderRadius: '5px',
+}))
+export const StyledPreviewPdf = styled('object')(() => ({
+  width: '100%',
+  height: '100%',
+  objectFit: 'cover',
+  borderRadius: '5px',
+}))
 export const StyledDeleteIcon = styled(DeleteOutlineOutlinedIcon)(
   ({ theme }) => ({
     position: 'absolute',

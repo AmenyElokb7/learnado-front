@@ -4,7 +4,7 @@ import { Course } from 'types/models/Course'
 import { ApiPaginationResponse } from '../type'
 import { CourseApi, SingleCourseResponseData } from './coursesApi.type'
 import { generatePictureSrc, toSnakeCase } from '@utils/helpers/string.helpers'
-import { ModuleApi } from '../modules/moduleApi'
+
 import { Module } from 'types/models/Module'
 import { transformMedia } from '../transform'
 import {
@@ -18,6 +18,7 @@ import {
 } from '@utils/helpers/price.helpers'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 import { FieldValues } from 'react-hook-form'
+import { ModuleApi } from '../modules/modulesApi.type'
 
 export const transformFetchCoursesResponse = (
   response: ApiPaginationResponse<CourseApi>,

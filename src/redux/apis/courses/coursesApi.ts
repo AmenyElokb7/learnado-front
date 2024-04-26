@@ -1,7 +1,11 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 
 import { PaginationResponse } from 'types/interfaces/Pagination'
-import { CourseApi, SingleCourseResponseData } from './coursesApi.type'
+import {
+  CourseApi,
+  CreateCourseResponse,
+  SingleCourseResponseData,
+} from './coursesApi.type'
 import { baseQueryConfig } from '@redux/baseQueryConfig'
 import { Course } from 'types/models/Course'
 import { QueryParams } from 'types/interfaces/QueryParams'
@@ -56,7 +60,7 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ['Courses'],
     }),
-    createCourse: builder.mutation<ItemDetailsResponse<Course>, FieldValues>({
+    createCourse: builder.mutation<CreateCourseResponse, FieldValues>({
       query: (course) => ({
         url: ENDPOINTS.CREATE_COURSE,
         method: MethodsEnum.POST,

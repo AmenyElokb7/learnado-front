@@ -10,6 +10,7 @@ import { sidebar } from './sidebar'
 import { common } from './common'
 import { users } from './users'
 import { dashboard } from './dashboard'
+import { section } from './section'
 
 const en = {
   topbar,
@@ -24,5 +25,6 @@ const en = {
   common,
   users,
   dashboard,
+  section
 }
 export default en

@@ -139,7 +139,7 @@ export const CREATE_COURSE_FORM_CONFIG: Record<string, InputConfig> = {
     defaultValue: GLOBAL_VARIABLES.EMPTY_STRING,
     label: 'course.startTime',
     type: 'datetime-local',
-    rules: { min : dayjs().format('YYYY-MM-DDTHH:mm') },
+    rules: { min: dayjs().format('YYYY-MM-DDTHH:mm') },
   },
   endTime: {
     name: 'endTime',
@@ -147,7 +147,6 @@ export const CREATE_COURSE_FORM_CONFIG: Record<string, InputConfig> = {
     defaultValue: GLOBAL_VARIABLES.EMPTY_STRING,
     label: 'course.endTime',
     type: 'datetime-local',
-
   },
   isSequential: {
     name: 'sequential',
