@@ -1,4 +1,3 @@
-import { width } from './../../../node_modules/@mui/lab/node_modules/@mui/system/index.d'
 import {
   Stack,
   styled,
@@ -41,7 +40,7 @@ export const TopBarContainer = styled(Stack)(
       zIndex: 1000,
       backgroundColor:
         isscrolled === GLOBAL_VARIABLES.TRUE_STRING
-          ? alpha(theme.palette.background.default, 0.3)
+          ? alpha(theme.palette.background.default, 0.8)
           : ishomepage === GLOBAL_VARIABLES.FALSE_STRING
           ? theme.palette.common.white
           : 'transparent',
@@ -71,7 +70,7 @@ export const UserTitle = styled(Typography)(({ theme }) => ({
 
 export const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
   lineHeight: '1.5rem',
-  color: GREY.main,
+  color: GREY.dark,
   '&:hover': {
     color: theme.palette.primary.main,
     backgroundColor: 'transparent',
