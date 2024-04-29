@@ -7,7 +7,7 @@ import {
   CreateCourseResponse,
   SingleCourseResponseData,
 } from './coursesApi.type'
-import { baseQueryConfig } from '@redux/baseQueryConfig'
+import { baseQueryConfigWithRefresh } from '@redux/baseQueryConfig'
 import { Course, CourseForDesigner } from 'types/models/Course'
 import { QueryParams } from 'types/interfaces/QueryParams'
 import { MethodsEnum } from '@config/enums/method.enum'
@@ -25,12 +25,20 @@ import { FieldValues } from 'react-hook-form'
 
 export const courseApi = createApi({
   reducerPath: 'courseApi',
-  baseQuery: baseQueryConfig,
-  tagTypes: ['Courses', 'CoursesForDesigner'],
+  baseQuery: baseQueryConfigWithRefresh,
+  tagTypes: ['Courses', 'CoursesForDesigner', 'Course'],
   endpoints: (builder) => ({
     getCourses: builder.query<PaginationResponse<Course>, QueryParams>({
       query: (params) => ({
         url: injectPaginationParamsToUrl(ENDPOINTS.COURSES, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: ApiPaginationResponse<CourseApi>) =>
+        transformFetchCoursesResponse(response),
+    }),
+    getCoursesForGuest: builder.query<PaginationResponse<Course>, QueryParams>({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.GUEST_COURSES, params),
         method: MethodsEnum.GET,
       }),
       transformResponse: (response: ApiPaginationResponse<CourseApi>) =>
@@ -45,6 +53,18 @@ export const courseApi = createApi({
       },
       transformResponse: (response: SingleCourseResponseData) =>
         transformFetchCourseResponse(response),
+      providesTags: ['Course'],
+    }),
+    getCoursForGuesteById: builder.query<ItemDetailsResponse<Course>, string>({
+      query(id) {
+        return {
+          url: ENDPOINTS.GUEST_COURSES + `/${id}`,
+          method: MethodsEnum.GET,
+        }
+      },
+      transformResponse: (response: SingleCourseResponseData) =>
+        transformFetchCourseResponse(response),
+      providesTags: ['Course'],
     }),
     getDesignerCourses: builder.query<PaginationResponse<Course>, QueryParams>({
       query: (params) => ({
@@ -106,6 +126,22 @@ export const courseApi = createApi({
       ) => transformFetchCourseForDesignerResponse(response),
       providesTags: ['CoursesForDesigner'],
     }),
+    enrollCourse: builder.mutation<void, number | undefined>({
+      query: (courseId) => ({
+        url: `${ENDPOINTS.ENROLL_COURSE}/${courseId}`,
+        method: MethodsEnum.POST,
+      }),
+      invalidatesTags: ['Courses', 'Course'],
+    }),
+    getEnrolledCourses: builder.query<PaginationResponse<Course>, QueryParams>({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.ENROLLED_COURSES, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: ApiPaginationResponse<CourseApi>) =>
+        transformFetchCoursesResponse(response),
+      providesTags: ['Courses'],
+    }),
   }),
 })
 
@@ -118,4 +154,8 @@ export const {
   useGetCourseForDesignerByIdQuery,
   useUpdateCourseMutation,
   useGetInstructorCoursesQuery,
+  useGetCoursesForGuestQuery,
+  useGetCoursForGuesteByIdQuery,
+  useEnrollCourseMutation,
+  useGetEnrolledCoursesQuery,
 } = courseApi

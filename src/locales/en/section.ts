@@ -58,5 +58,6 @@ export const section = {
     delete_answer_confirm: 'Delete answer?',
     delete_answer: 'Are you sure you want to delete this answer?',
     delete_answer_success: 'Answer deleted successfully',
+    update_success: 'Quiz updated successfully',
   },
 }

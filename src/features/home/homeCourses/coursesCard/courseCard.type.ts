@@ -5,6 +5,7 @@ export interface CourseCardProps {
   instructorAvatar: string
   courseTitle: string
   isPaid: boolean
+  isActive?: boolean
   coursePrice: string
   discount: string
   hasDiscount?: boolean
@@ -14,5 +15,6 @@ export interface CourseCardProps {
   isDesigner?: boolean
   isInstructor?: boolean
   width?: string
+  isEnrolled?: boolean
   navigateToEditCoursePage?: (id: number) => void
 }

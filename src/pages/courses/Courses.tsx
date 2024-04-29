@@ -9,7 +9,10 @@ import FilterPrice from '../../features/courses/filterSection/filterPrice/Filter
 import FilterTeachingType from '../../features/courses/filterSection/filterTeachingType/FilterTeachingType'
 import CustomPagination from '@components/customPagination/CustomPagination'
 import usePagination from 'src/hooks/usePagination'
-import { useGetCoursesQuery } from '@redux/apis/courses/coursesApi'
+import {
+  useGetCoursesForGuestQuery,
+  useGetCoursesQuery,
+} from '@redux/apis/courses/coursesApi'
 import FilterHeader from '../../features/courses/filterSection/filterHeader/FilterHeader'
 import useDebounce from 'src/hooks/useDebounce'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
@@ -17,6 +20,7 @@ import { useSelector } from 'react-redux'
 import { useEffect } from 'react'
 import { RootState } from '@redux/store'
 import { useTranslation } from 'react-i18next'
+import { getUserFromLocalStorage } from '@utils/localStorage/storage'
 
 const Courses = () => {
   const {
@@ -34,10 +38,17 @@ const Courses = () => {
     queryParams.keyword,
     GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
   )
-  const { isFetching, data } = useGetCoursesQuery({
-    ...queryParams,
-    keyword: debouncedSearchQuery,
-  })
+  const user = !!getUserFromLocalStorage()
+
+  const { data, isFetching } = user
+    ? useGetCoursesQuery({
+        ...queryParams,
+        keyword: debouncedSearchQuery,
+      })
+    : useGetCoursesForGuestQuery({
+        ...queryParams,
+        keyword: debouncedSearchQuery,
+      })
 
   const searchQuery = useSelector(
     (state: RootState) => state.appSlice.searchQuery,

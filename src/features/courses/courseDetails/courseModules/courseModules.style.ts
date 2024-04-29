@@ -54,6 +54,6 @@ export const StyledButton = styled(Button)({
   color: 'inherit',
   '&:hover': {
     backgroundColor: 'inherit',
-    textDecoration: 'underline',
+    textDecoration: 'none',
   },
 })

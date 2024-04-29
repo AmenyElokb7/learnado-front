@@ -3,4 +3,6 @@ export interface CourseCardMediaProps {
   coursePrice: string
   discount: string
   isPaid: boolean
+  isEnrolled?: boolean
+  handleEnroll: () => void
 }

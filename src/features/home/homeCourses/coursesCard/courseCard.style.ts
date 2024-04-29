@@ -13,7 +13,7 @@ import { StyleProps } from './CourseCard.style.type'
 export const CourseCardContainer = styled(Box, {
   shouldForwardProp: (prop) => prop !== 'width',
 })(({ theme }) => ({ width }: StyleProps) => ({
-  width: width,
+  width: width || '45vh',
   margin: '10px',
   borderRadius: 16,
   overflow: 'hidden',
@@ -34,7 +34,7 @@ export const CourseCardContainer = styled(Box, {
     width: 'auto',
   },
   [theme.breakpoints.down('md')]: {
-    width: '40vh',
+    width: '45vh',
   },
 }))
 
@@ -131,6 +131,7 @@ export const BuyButton = styled(Button)(({ theme }) => ({
   backgroundColor: BLUE.main,
   color: theme.palette.common.white,
   borderRadius: 20,
+  zIndex: 999999,
   margin: '10px 0',
   '&:hover': {
     border: `1px solid ${BLUE.main}`,

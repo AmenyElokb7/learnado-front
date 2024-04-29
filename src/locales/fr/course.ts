@@ -60,4 +60,6 @@ export const course = {
   is_public_required: 'Public requis',
   api_course_failure: 'Quelque chose s’est mal passé! Veuillez réessayer',
   link_required: 'Lien requis',
+  enroll_course_success: 'Cours inscrit avec succès',
+  quiz_submitted: 'Quiz soumis avec succès',
 }

@@ -3,7 +3,7 @@ import { CourseCardContainer } from '../courseCard.style'
 
 function CoursesCardSkeleton() {
   return (
-    <CourseCardContainer sx={{ padding: '16px' }}>
+    <CourseCardContainer sx={{ padding: '16px' }} width={'45vh'}>
       <Skeleton
         sx={{ height: 190, borderRadius: '25px' }}
         animation="wave"

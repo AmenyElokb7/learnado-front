@@ -1,19 +1,19 @@
 import BodyCard from '@components/cards/bodyCard/BodyCard'
-import { PATHS } from '@config/constants/paths'
-import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
-import AllCoursesList from './allCoursesList/AllCoursesList'
-import { useGetDesignerCoursesQuery } from '@redux/apis/courses/coursesApi'
-import usePagination from 'src/hooks/usePagination'
 import CustomPagination from '@components/customPagination/CustomPagination'
-import useDebounce from 'src/hooks/useDebounce'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
-import { useSelector } from 'react-redux'
-import { RootState } from '@redux/store'
+import AllCoursesList from '@pages/dashboard/designer/courses/allCoursesList/AllCoursesList'
+import { useGetEnrolledCoursesQuery } from '@redux/apis/courses/coursesApi'
 import { useEffect } from 'react'
+import { useTranslation } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import useDebounce from 'src/hooks/useDebounce'
+import usePagination from 'src/hooks/usePagination'
+import { RootState } from '@redux/store'
 import SearchSection from '@features/courses/searchSection/SearchSection'
 
-function CoursesPage() {
+function EnrolledCoursesPage() {
+  const { t } = useTranslation()
+
   const {
     queryParams,
     handlePageChange,
@@ -21,14 +21,12 @@ function CoursesPage() {
     handleSearchChange,
   } = usePagination()
 
-  const { t } = useTranslation()
-  const navigate = useNavigate()
-
   const debouncedSearchQuery = useDebounce(
     queryParams.keyword,
     GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
   )
-  const { isLoading, data } = useGetDesignerCoursesQuery({
+
+  const { isLoading, data } = useGetEnrolledCoursesQuery({
     ...queryParams,
     keyword: debouncedSearchQuery,
   })
@@ -44,15 +42,12 @@ function CoursesPage() {
   }, [searchQuery])
 
   return (
-    <BodyCard
-      title={t('course.all_courses')}
-      buttonText={t('course.add_course')}
-      onClick={() => navigate(PATHS.DASHBOARD.DESIGNER.MY_COURSES.ADD_COURSE)}>
+    <BodyCard title={t('course.all_courses')}>
       <SearchSection
         handleSearchChange={handleSearchChange}
         searchValue={queryParams.keyword}
       />
-      <AllCoursesList isLoading={isLoading} courses={data?.data} isDesigner />
+      <AllCoursesList isLoading={isLoading} courses={data?.data} />
       <CustomPagination
         page={queryParams.page}
         count={data?.meta.count || 0}
@@ -64,5 +59,4 @@ function CoursesPage() {
     </BodyCard>
   )
 }
-
-export default CoursesPage
+export default EnrolledCoursesPage

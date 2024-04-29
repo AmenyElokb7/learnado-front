@@ -36,6 +36,7 @@ function AllCoursesList({
             width="45vh"
             key={course.id}
             id={course.id}
+            isActive={course?.isActive}
             image={course.media[0]?.fileName}
             instructorName={`${course.facilitator.firstName} ${course.facilitator.lastName}`}
             instructorAvatar={
@@ -50,6 +51,7 @@ function AllCoursesList({
             createdAt={course.createdAt}
             isDesigner={isDesigner}
             isInstructor={isInstructor}
+            isEnrolled={course.isSubscribed}
             navigateToEditCoursePage={navigateToEditCoursePage}
           />
         ))}

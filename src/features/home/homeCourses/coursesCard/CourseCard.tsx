@@ -31,8 +31,12 @@ import CustomDialogActions from '@components/dialogs/customDialogActions/CustomD
 import { GREY } from '@config/colors/colors'
 import { useAppDispatch } from '@redux/hooks'
 import { showError, showSuccess } from '@redux/slices/snackbarSlice'
-import { useDeleteCourseMutation } from '@redux/apis/courses/coursesApi'
+import {
+  useDeleteCourseMutation,
+  useEnrollCourseMutation,
+} from '@redux/apis/courses/coursesApi'
 import trash from '@assets/logo/icon-trash.svg'
+import { getUserFromLocalStorage } from '@utils/localStorage/storage'
 
 const CourseCard = ({
   id,
@@ -43,11 +47,13 @@ const CourseCard = ({
   coursePrice,
   discount,
   isPaid,
+  isActive,
   lessonsCount,
   duration,
   createdAt,
   isDesigner,
   isInstructor,
+  isEnrolled,
   width,
   navigateToEditCoursePage,
 }: CourseCardProps) => {
@@ -74,6 +80,17 @@ const CourseCard = ({
   const navigateToCourseDetailPage = (id: number) => {
     return navigate(`${PATHS.COURSES.ROOT}/${id}`)
   }
+  const [enrollCourse] = useEnrollCourseMutation()
+
+  const handleEnroll = async (id: number) => {
+    try {
+      await enrollCourse(id)
+      dispatch(showSuccess(t('course.enroll_course_success')))
+    } catch (error) {
+      dispatch(showError(t('errors.general_error')))
+    }
+  }
+  const user = !!getUserFromLocalStorage()
 
   return (
     <CourseCardContainer
@@ -125,15 +142,24 @@ const CourseCard = ({
         </Stack>
         <Divider />
 
-        {!isDesigner && !isInstructor ? (
+        {!isDesigner && !isInstructor && !(Number(isEnrolled) === 1) ? (
           <Stack alignItems="flex-end">
-            <BuyButton variant="outlined" color="primary">
+            <BuyButton
+              onClick={
+                user
+                  ? !isPaid
+                    ? () => handleEnroll(id)
+                    : () => {}
+                  : () => navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`)
+              }
+              variant="outlined"
+              color="primary">
               {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
             </BuyButton>
           </Stack>
         ) : (
           <Stack justifyContent={'space-between'} direction={'row'} p={1}>
-            {isDesigner && (
+            {isDesigner && Number(isActive) === 0 && (
               <>
                 <LabelWithIcon
                   onClick={() =>

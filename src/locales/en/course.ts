@@ -67,4 +67,6 @@ export const course = {
   api_course_failure: 'Something went wrong! Please try again',
   link_required: 'Link is required',
   not_found: 'Course not found',
+  enroll_course_success: 'Course enrolled successfully',
+  quiz_submitted: 'Quiz submitted successfully',
 }

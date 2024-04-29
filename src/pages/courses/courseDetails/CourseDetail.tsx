@@ -1,6 +1,10 @@
 import { Grid, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
-import { useGetCourseByIdQuery } from '@redux/apis/courses/coursesApi'
+import {
+  useEnrollCourseMutation,
+  useGetCoursForGuesteByIdQuery,
+  useGetCourseByIdQuery,
+} from '@redux/apis/courses/coursesApi'
 import { ConfigEnv } from '@config/configEnv'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import CourseHeader from '@features/courses/courseDetails/courseDetailsHeader/CourseDetailsHeader'
@@ -20,16 +24,29 @@ import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
 import CourseOtherMediaCard from '@features/courses/courseDetails/courseMediaCard/courseOtherMediaCard/CourseOtherMediaCard'
 import FallbackLoader from '@components/fallback/FallbackLoader'
 import { TeachingTypeFilterEnum } from '@config/enums/teachingType.enum'
+import { getUserFromLocalStorage } from '@utils/localStorage/storage'
+import { useAppDispatch } from '@redux/hooks'
+import { showError, showSuccess } from '@redux/slices/snackbarSlice'
 
 export const CourseDetail = () => {
   const { t } = useTranslation()
   const { courseId } = useParams<string>()
-  const { data, isLoading } = useGetCourseByIdQuery(courseId as string)
+  const dispatch = useAppDispatch()
+
+  const user = !!getUserFromLocalStorage()
+
+  const [enrollCourse] = useEnrollCourseMutation()
+
+  const { data, isLoading } = user
+    ? useGetCourseByIdQuery(courseId as string)
+    : useGetCoursForGuesteByIdQuery(courseId as string)
+
+  const course = data?.data
   if (isLoading) return <FallbackLoader />
 
-  if (!data?.data) return <NoDataFound message={t('course.not_found')} />
+  if (!course) return <NoDataFound message={t('course.not_found')} />
 
-  const stepsWithMedia = data.data?.sections?.map((section) => {
+  const stepsWithMedia = course?.sections?.map((section) => {
     return {
       ...section,
       media: section.media || [],
@@ -37,7 +54,14 @@ export const CourseDetail = () => {
     }
   })
 
-  const course = data?.data
+  const handleEnroll = async (id: number) => {
+    try {
+      await enrollCourse(id)
+      dispatch(showSuccess(t('course.enroll_course_success')))
+    } catch (error) {
+      dispatch(showError(t('errors.general_error')))
+    }
+  }
 
   return (
     <StackWithBackground>
@@ -86,6 +110,10 @@ export const CourseDetail = () => {
           position={'relative'}
           top={{ sm: '0', md: '0', lg: '-200px' }}>
           <CourseMediaCard
+            isEnrolled={course?.isSubscribed}
+            handleEnroll={() => {
+              handleEnroll(course.id)
+            }}
             image={course.media?.[0].fileName}
             coursePrice={course?.price}
             discount={course.discount}

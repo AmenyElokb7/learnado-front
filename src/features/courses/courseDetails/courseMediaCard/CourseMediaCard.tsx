@@ -13,13 +13,20 @@ import {
   CourseImageContainer,
   PriceLabel,
 } from '@features/home/homeCourses/coursesCard/courseCard.style'
+import { getUserFromLocalStorage } from '@utils/localStorage/storage'
+import { useNavigate } from 'react-router-dom'
+import { PATHS } from '@config/constants/paths'
 
 const CourseMediaCard = ({
   image,
   coursePrice,
   discount,
   isPaid,
+  isEnrolled,
+  handleEnroll,
 }: CourseCardMediaProps) => {
+  const user = !!getUserFromLocalStorage()
+  const navigate = useNavigate()
   const { t } = useTranslation()
   return (
     <CardRoot width={{ lg: 400, sm: 'auto' }}>
@@ -39,9 +46,20 @@ const CourseMediaCard = ({
         </PriceLabel>
       </CourseImageContainer>
       <Stack p={2}>
-        <BuyButton>
-          {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
-        </BuyButton>
+        {!isEnrolled && (
+          <BuyButton
+            onClick={
+              user
+                ? !isPaid
+                  ? handleEnroll
+                  : () => {}
+                : () => navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`)
+            }
+            variant="outlined"
+            color="primary">
+            {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
+          </BuyButton>
+        )}
       </Stack>
     </CardRoot>
   )
