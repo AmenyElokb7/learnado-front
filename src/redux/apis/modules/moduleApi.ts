@@ -1,22 +1,24 @@
 import { createApi } from '@reduxjs/toolkit/query/react'
 
-import { baseQueryConfig } from '@redux/baseQueryConfig'
+import { baseQueryConfigWithRefresh } from '@redux/baseQueryConfig'
 import { MethodsEnum } from '@config/enums/method.enum'
 import { ENDPOINTS } from '@config/constants/endpoints'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 import {
   encodeModule,
   encodeQuiz,
+  encodeQuizSubmission,
   encodeUpdateModule,
 } from './modulesApi.transform'
 import { Module } from 'types/models/Module'
 import { CreateModuleRequest } from './modulesApi.type'
 import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
 import { Quiz } from 'types/models/Quiz'
+import { FieldValues } from 'react-hook-form'
 
 export const moduleApi = createApi({
   reducerPath: 'moduleApi',
-  baseQuery: baseQueryConfig,
+  baseQuery: baseQueryConfigWithRefresh,
   tagTypes: ['Modules'],
   endpoints: (builder) => ({
     createModule: builder.mutation<
@@ -78,6 +80,18 @@ export const moduleApi = createApi({
         invalidatesTags: ['Modules'],
       }),
     }),
+
+    submitQuiz: builder.mutation<
+      void,
+      { quizId: number | undefined; data: FieldValues }
+    >({
+      query: ({ quizId, data }) => ({
+        url: `${ENDPOINTS.SUBMIT_QUIZ}/${quizId}`,
+        method: MethodsEnum.POST,
+        body: encodeQuizSubmission(data),
+        invalidatesTags: ['Modules'],
+      }),
+    }),
   }),
 })
 
@@ -89,4 +103,5 @@ export const {
   useDeleteAnswerMutation,
   useUpdateQuizMutation,
   useUpdateModuleMutation,
+  useSubmitQuizMutation,
 } = moduleApi

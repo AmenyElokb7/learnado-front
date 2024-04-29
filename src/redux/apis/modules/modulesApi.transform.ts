@@ -6,6 +6,7 @@ import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 import { Quiz } from 'types/models/Quiz'
 import { Module } from 'types/models/Module'
+import { FieldValues } from 'react-hook-form'
 
 export const encodeModule = (
   sections: Section[],
@@ -94,6 +95,7 @@ const transformSingleModule = (data: ModuleApi): Module => {
     createdAt: data.created_at,
     hasQuiz: data.has_quiz,
     quiz: {
+      id: data.quiz?.id,
       questions: data.quiz?.questions.map((question) => ({
         id: question.id,
         question: question.question,
@@ -151,25 +153,27 @@ export const encodeQuiz = (quiz: Quiz): FormData => {
       )
     }
 
-    if (question.answers && question.answers.length > 0) {
-      question.answers.forEach((answer, answerIndex) => {
-        if (answer.id) {
-          // Include the answer ID when it exists
-          formData.append(
-            `quiz[questions][${questionIndex}][answers][${answerIndex}][id]`,
-            String(answer.id),
-          )
-        }
+    if (Number(question.type) === QuestionTypeEnum.QCM) {
+      if (question.answers && question.answers.length > 0) {
+        question.answers.forEach((answer, answerIndex) => {
+          if (answer.id) {
+            // Include the answer ID when it exists
+            formData.append(
+              `quiz[questions][${questionIndex}][answers][${answerIndex}][id]`,
+              String(answer.id),
+            )
+          }
 
-        formData.append(
-          `quiz[questions][${questionIndex}][answers][${answerIndex}][answer]`,
-          answer.answer,
-        )
-        formData.append(
-          `quiz[questions][${questionIndex}][answers][${answerIndex}][is_valid]`,
-          Boolean(answer.isValid) ? '1' : '0',
-        )
-      })
+          formData.append(
+            `quiz[questions][${questionIndex}][answers][${answerIndex}][answer]`,
+            answer.answer,
+          )
+          formData.append(
+            `quiz[questions][${questionIndex}][answers][${answerIndex}][is_valid]`,
+            Boolean(answer.isValid) ? '1' : '0',
+          )
+        })
+      }
     }
   })
 
@@ -205,5 +209,33 @@ export const encodeUpdateModule = (
     })
   }
 
+  return formData
+}
+
+interface QuizAnswer {
+  answer: number[] | number
+}
+
+export const encodeQuizSubmission = (data: FieldValues): FormData => {
+  const formData = new FormData()
+  Object.entries(data.answers).forEach(([questionId, answerData], index) => {
+    const typedAnswerData = answerData as QuizAnswer
+
+    // Always append the question_id
+    formData.append(`answers[${index}][question_id]`, questionId)
+
+    // Check if answer is an array and append each item individually
+    if (Array.isArray(typedAnswerData.answer)) {
+      typedAnswerData.answer.forEach((answerId) => {
+        formData.append(`answers[${index}][answer][]`, `${answerId}`)
+      })
+    } else {
+      // For single answers, just append the value
+      formData.append(
+        `answers[${index}][answer][]`,
+        `${typedAnswerData.answer}`,
+      )
+    }
+  })
   return formData
 }

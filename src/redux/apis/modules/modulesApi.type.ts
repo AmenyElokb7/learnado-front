@@ -12,6 +12,7 @@ export interface ModuleApi {
   created_at: string
   has_quiz: 0 | 1
   quiz: {
+    id: number
     questions: QuestionApi[]
   }
 }
