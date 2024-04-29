@@ -1,6 +1,7 @@
 export const ENDPOINTS = {
   CATEGORIES: 'categories',
   COURSES: 'courses',
+  GUEST_COURSES: 'guest-courses',
   FACILITATORS: 'facilitators',
   REGISTER: 'register',
   LOGIN: 'login',
@@ -37,4 +38,8 @@ export const ENDPOINTS = {
   UPDATE_QUIZ: 'designer/update-step-quiz',
   UPDATE_MODULE: 'designer/update-step',
   INSTRUCTOR_COURSES: 'facilitator/courses',
+  REFRESH_TOKEN: 'refresh-token',
+  SUBMIT_QUIZ: 'quiz/submit',
+  ENROLL_COURSE: 'subscribe-course',
+  ENROLLED_COURSES: 'enrolled-courses',
 }

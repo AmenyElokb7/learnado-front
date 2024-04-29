@@ -1,101 +1,96 @@
-import {
-  BaseQueryApi,
-  BaseQueryFn,
-  FetchArgs,
-  FetchBaseQueryError,
-  fetchBaseQuery,
-} from '@reduxjs/toolkit/query'
-import { ConfigEnv } from '@config/configEnv'
+import { Mutex } from 'async-mutex'
 import i18n from 'i18n'
 import {
+  fetchBaseQuery,
+  FetchArgs,
+  FetchBaseQueryError,
+  BaseQueryApi,
+  BaseQueryFn,
+} from '@reduxjs/toolkit/query/react'
+import {
+  clearLocalStorage,
   getFromLocalStorage,
-  removeFromLocalStorage,
   setToLocalStorage,
 } from '@utils/localStorage/storage'
 import { LocalStorageKeysEnum } from '@config/enums/localStorage.enum'
-
-import { logout } from './slices/authSlice'
+import { ConfigEnv } from '@config/configEnv'
+import { ENDPOINTS } from '@config/constants/endpoints'
 import { MethodsEnum } from '@config/enums/method.enum'
 
-interface RefreshResponse {
-  accessToken: string
-  refreshToken?: string
-}
+export const baseQueryConfig = (
+  args: string | FetchArgs,
+  api: BaseQueryApi,
+  extraOptions: {},
+) =>
+  fetchBaseQuery({
+    baseUrl: `${ConfigEnv.API_ENDPOINT}`,
+    prepareHeaders: (headers) => {
+      const token = getFromLocalStorage(LocalStorageKeysEnum.AccessToken)
+      if (token) {
+        headers.set('Authorization', `Bearer ${token}`)
+      }
+      headers.set('Accept', 'application/json')
+      headers.set('Accept-Language', i18n.language)
+      return headers
+    },
+  })(args, api, extraOptions)
 
-const baseQuery = fetchBaseQuery({
+const mutex = new Mutex()
+const refreshTokenBaseQuery = fetchBaseQuery({
   baseUrl: `${ConfigEnv.API_ENDPOINT}`,
   prepareHeaders: (headers) => {
-    headers.set('Accept-Language', i18n.language)
     headers.set('Accept', 'application/json')
-    const token = getFromLocalStorage(LocalStorageKeysEnum.AccessToken)
-    if (token) {
-      headers.set('Authorization', `Bearer ${token}`)
-    }
+    headers.set('Accept-Language', i18n.language)
+    headers.set(
+      'Authorization',
+      `Bearer ${getFromLocalStorage(LocalStorageKeysEnum.RefreshToken)}`,
+    )
     return headers
   },
 })
 
-async function tryToRefreshToken(
-  api: BaseQueryApi,
-): Promise<RefreshResponse | undefined> {
-  const refreshToken = getFromLocalStorage(LocalStorageKeysEnum.RefreshToken)
-  if (!refreshToken) return undefined
-
-  const refreshResult = (await baseQuery(
-    {
-      url: '/refresh-token',
-      method: MethodsEnum.POST,
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${refreshToken}`,
-      },
-      body:{ refreshToken },
-    },
-    api,
-    {},
-  )) as {
-    data: RefreshResponse | undefined
-    error: FetchBaseQueryError | undefined
-  }
-
-  if (refreshResult.data) {
-    return refreshResult.data as RefreshResponse
-  } else {
-    api.dispatch(logout())
-    return undefined
-  }
-}
-
-const baseQueryWithReauth: BaseQueryFn<
+export const baseQueryConfigWithRefresh: BaseQueryFn<
   string | FetchArgs,
   unknown,
-  FetchBaseQueryError,
-  {}
+  FetchBaseQueryError
 > = async (args, api, extraOptions) => {
-  let result = await baseQuery(args, api, extraOptions)
-  if (result.error && result.error.status === 401) {
-    const refreshResult = await tryToRefreshToken(api)
-    if (refreshResult) {
-      setToLocalStorage(
-        LocalStorageKeysEnum.AccessToken,
-        refreshResult.accessToken,
-      )
-      if (refreshResult.refreshToken) {
-        setToLocalStorage(
-          LocalStorageKeysEnum.RefreshToken,
-          refreshResult.refreshToken,
-        )
-      }
+  let result = await baseQueryConfig(args, api, extraOptions)
 
-      // Retry the original query with the new token
-      return baseQuery(args, api, extraOptions)
+  if (result.error && result.error.status === 401) {
+    if (!mutex.isLocked()) {
+      const release = await mutex.acquire()
+      try {
+        const refreshResult = await refreshTokenBaseQuery(
+          {
+            url: ENDPOINTS.REFRESH_TOKEN,
+            method: MethodsEnum.POST,
+            body: JSON.stringify({
+              refresh_token: getFromLocalStorage(
+                LocalStorageKeysEnum.RefreshToken,
+              ),
+            }),
+          },
+          api,
+          extraOptions,
+        )
+
+        if (refreshResult.data) {
+          setToLocalStorage(
+            LocalStorageKeysEnum.AccessToken,
+            (refreshResult.data as { data: { access_token: string } }).data
+              .access_token,
+          )
+          result = await baseQueryConfig(args, api, extraOptions)
+        } else {
+          clearLocalStorage()
+        }
+      } finally {
+        release()
+      }
     } else {
-      // Logout logic or handle token refresh failure
-      removeFromLocalStorage(LocalStorageKeysEnum.AccessToken)
-      removeFromLocalStorage(LocalStorageKeysEnum.RefreshToken)
-      // Optionally dispatch logout action or redirect to login
+      await mutex.waitForUnlock()
+      result = await baseQueryConfig(args, api, extraOptions)
     }
   }
   return result
 }
-export const baseQueryConfig = baseQueryWithReauth

@@ -1,6 +1,6 @@
 import { User } from 'types/models/User'
 import { ENDPOINTS } from '@config/constants/endpoints'
-import { baseQueryConfig } from '@redux/baseQueryConfig'
+import { baseQueryConfigWithRefresh } from '@redux/baseQueryConfig'
 import { injectPaginationParamsToUrl } from '@utils/helpers/queryParamInjector'
 import { PaginationResponse } from 'types/interfaces/Pagination'
 import { QueryParams } from 'types/interfaces/QueryParams'
@@ -19,7 +19,7 @@ import { FieldValues } from 'react-hook-form'
 
 export const userApi = createApi({
   reducerPath: 'userApi',
-  baseQuery: baseQueryConfig,
+  baseQuery: baseQueryConfigWithRefresh,
   tagTypes: ['Users', 'User', 'Profile'],
   endpoints: (builder) => ({
     getFacilitators: builder.query<PaginationResponse<User>, QueryParams>({

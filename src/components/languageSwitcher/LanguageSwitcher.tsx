@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Avatar, Menu, MenuItem } from '@mui/material'
 import TranslateIcon from '@mui/icons-material/Translate'
 import { useTranslation } from 'react-i18next'
