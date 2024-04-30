@@ -1,6 +1,7 @@
-import { Grid, Typography } from '@mui/material'
+import { Grid, Stack, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import {
+  useCompleteCourseMutation,
   useEnrollCourseMutation,
   useGetCoursForGuesteByIdQuery,
   useGetCourseByIdQuery,
@@ -35,6 +36,8 @@ export const CourseDetail = () => {
 
   const user = !!getUserFromLocalStorage()
 
+  const [completeCourse] = useCompleteCourseMutation()
+
   const [enrollCourse] = useEnrollCourseMutation()
 
   const { data, isLoading } = user
@@ -56,8 +59,17 @@ export const CourseDetail = () => {
 
   const handleEnroll = async (id: number) => {
     try {
-      await enrollCourse(id)
+      await enrollCourse(id).unwrap
       dispatch(showSuccess(t('course.enroll_course_success')))
+    } catch (error) {
+      dispatch(showError(t('errors.general_error')))
+    }
+  }
+
+  const handleCompleteCourse = async (id: number) => {
+    try {
+      await completeCourse(id).unwrap
+      dispatch(showSuccess(t('course.complete_course_success')))
     } catch (error) {
       dispatch(showError(t('errors.general_error')))
     }
@@ -80,7 +92,7 @@ export const CourseDetail = () => {
       />
 
       <Grid container>
-        <Grid item lg={8} sm={12} md={12}>
+        <Grid item lg={8.5} sm={12}>
           {course.media && course.media.length > 1 && (
             <CourseOtherMediaCard medias={course.media} />
           )}
@@ -89,7 +101,11 @@ export const CourseDetail = () => {
           </RectangularCard>
 
           {course.sections && course.sections.length > 0 ? (
-            <CourseModules steps={stepsWithMedia} courseId={courseId} />
+            <CourseModules
+              steps={stepsWithMedia}
+              courseId={courseId}
+              isEnrolled={course.isSubscribed}
+            />
           ) : (
             <RectangularCard title="Modules">
               <Typography>{t('course.no_steps_found')}</Typography>
@@ -106,32 +122,41 @@ export const CourseDetail = () => {
         </Grid>
         <Grid
           item
-          lg={4}
+          lg={3}
           position={'relative'}
           top={{ sm: '0', md: '0', lg: '-200px' }}>
-          <CourseMediaCard
-            isEnrolled={course?.isSubscribed}
-            handleEnroll={() => {
-              handleEnroll(course.id)
-            }}
-            image={course.media?.[0].fileName}
-            coursePrice={course?.price}
-            discount={course.discount}
-            isPaid={course.isPaid}
-          />
-          <CardRoot alignItems={'center'} width={{ sm: '100%', lg: '400px' }}>
-            <StyledAvatar
-              src={course.facilitator.media?.[0].fileName}
-              alt={course.facilitator.firstName}
+          <Stack direction={{ lg: 'column', md: 'row', sm: 'column' }} gap={2}>
+            <CourseMediaCard
+              isEnrolled={course?.isSubscribed}
+              handleEnroll={() => {
+                handleEnroll(course.id)
+              }}
+              handleBuyCourse={() => {}}
+              handleCompleteCourse={() => {
+                handleCompleteCourse(course.id)
+              }}
+              isCompleted={course.isCompleted}
+              image={course.media?.[0].fileName}
+              coursePrice={course?.price}
+              discount={course.discount}
+              isPaid={course.isPaid}
             />
-            <InstructorTitle>
-              {course.facilitator.firstName} {course.facilitator.lastName}
-            </InstructorTitle>
-            <LabelWithIcon
-              icon={<Email />}
-              label={course.facilitator.email ?? GLOBAL_VARIABLES.EMPTY_STRING}
-            />
-          </CardRoot>
+            <CardRoot alignItems={'center'}>
+              <StyledAvatar
+                src={course.facilitator.media?.[0].fileName}
+                alt={course.facilitator.firstName}
+              />
+              <InstructorTitle>
+                {course.facilitator.firstName} {course.facilitator.lastName}
+              </InstructorTitle>
+              <LabelWithIcon
+                icon={<Email />}
+                label={
+                  course.facilitator.email ?? GLOBAL_VARIABLES.EMPTY_STRING
+                }
+              />
+            </CardRoot>
+          </Stack>
         </Grid>
       </Grid>
     </StackWithBackground>

@@ -6,6 +6,8 @@ import {
   ApiQuestion,
   ApiStep,
   CourseApi,
+  CourseCertificate,
+  CourseCertificateApi,
   CourseForDesignerApi,
   SingleCourseResponseData,
 } from './coursesApi.type'
@@ -94,6 +96,7 @@ export const transformSingleCourse = (course: CourseApi): Course => {
     lessonsCount: course.lessons_count,
     subscribedUsersCount: course.subscribed_users_count,
     isSubscribed: Number(course?.is_subscribed) === 1,
+    isCompleted: Number(course?.is_completed) === 1,
     facilitator: {
       id: course.facilitator.id,
       firstName: course.facilitator.first_name,
@@ -345,4 +348,35 @@ export const decodeSectionsMedia = (
   })
 
   return sectionsMedias
+}
+
+export const transformCourseCerificate = (
+  data: CourseCertificateApi,
+): CourseCertificate => {
+  return {
+    id: data.id,
+    courseTitle: data.course.title,
+    downloadUrl: data.download_url,
+  }
+}
+
+export const transformCourseCerificates = (
+  data: CourseCertificateApi[],
+): CourseCertificate[] => {
+  return data.map((certificate) => transformCourseCerificate(certificate))
+}
+
+export const transformCourseCerificatesResponse = (
+  response: ApiPaginationResponse<CourseCertificateApi>,
+): PaginationResponse<CourseCertificate> => {
+  return {
+    message: response.message,
+    data: transformCourseCerificates(response.data),
+    meta: {
+      currentPage: GLOBAL_VARIABLES.PAGINATION.FIRST_PAGE,
+      perPage: GLOBAL_VARIABLES.PAGINATION.ROWS_PER_PAGE,
+      total: GLOBAL_VARIABLES.PAGINATION.TOTAL_ITEMS,
+      count: GLOBAL_VARIABLES.PAGINATION.TOTAL_ITEMS,
+    },
+  }
 }

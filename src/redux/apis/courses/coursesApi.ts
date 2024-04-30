@@ -3,6 +3,8 @@ import { createApi } from '@reduxjs/toolkit/query/react'
 import { PaginationResponse } from 'types/interfaces/Pagination'
 import {
   CourseApi,
+  CourseCertificate,
+  CourseCertificateApi,
   CourseForDesignerApi,
   CreateCourseResponse,
   SingleCourseResponseData,
@@ -16,6 +18,7 @@ import { ENDPOINTS } from '@config/constants/endpoints'
 import { ApiPaginationResponse } from '../type'
 import {
   encodeCourse,
+  transformCourseCerificatesResponse,
   transformFetchCourseForDesignerResponse,
   transformFetchCourseResponse,
   transformFetchCoursesResponse,
@@ -35,6 +38,7 @@ export const courseApi = createApi({
       }),
       transformResponse: (response: ApiPaginationResponse<CourseApi>) =>
         transformFetchCoursesResponse(response),
+      providesTags: ['Courses'],
     }),
     getCoursesForGuest: builder.query<PaginationResponse<Course>, QueryParams>({
       query: (params) => ({
@@ -43,6 +47,7 @@ export const courseApi = createApi({
       }),
       transformResponse: (response: ApiPaginationResponse<CourseApi>) =>
         transformFetchCoursesResponse(response),
+      providesTags: ['Courses'],
     }),
     getCourseById: builder.query<ItemDetailsResponse<Course>, string>({
       query(id) {
@@ -142,6 +147,26 @@ export const courseApi = createApi({
         transformFetchCoursesResponse(response),
       providesTags: ['Courses'],
     }),
+    completeCourse: builder.mutation<void, number | undefined>({
+      query: (courseId) => ({
+        url: `${ENDPOINTS.COMPLETE_COURSE}/${courseId}`,
+        method: MethodsEnum.POST,
+      }),
+      invalidatesTags: ['Courses', 'Course'],
+    }),
+    getStudentCertificates: builder.query<
+      PaginationResponse<CourseCertificate>,
+      QueryParams
+    >({
+      query: (params) => ({
+        url: injectPaginationParamsToUrl(ENDPOINTS.COURSE_CERTIFICATE, params),
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (
+        response: ApiPaginationResponse<CourseCertificateApi>,
+      ) => transformCourseCerificatesResponse(response),
+      providesTags: ['Courses'],
+    }),
   }),
 })
 
@@ -158,4 +183,6 @@ export const {
   useGetCoursForGuesteByIdQuery,
   useEnrollCourseMutation,
   useGetEnrolledCoursesQuery,
+  useCompleteCourseMutation,
+  useGetStudentCertificatesQuery,
 } = courseApi

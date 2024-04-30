@@ -15,4 +15,5 @@ export interface CourseModuleProps {
   courseId?: string
   sectionId?: number
   quiz?: Quiz
+  isEnrolled?: boolean
 }

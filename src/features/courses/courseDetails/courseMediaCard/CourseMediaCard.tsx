@@ -23,13 +23,16 @@ const CourseMediaCard = ({
   discount,
   isPaid,
   isEnrolled,
+  isCompleted,
   handleEnroll,
+  handleCompleteCourse,
+  handleBuyCourse,
 }: CourseCardMediaProps) => {
   const user = !!getUserFromLocalStorage()
   const navigate = useNavigate()
   const { t } = useTranslation()
   return (
-    <CardRoot width={{ lg: 400, sm: 'auto' }}>
+    <CardRoot>
       <CourseImageContainer>
         <StyledCardMedia src={image} alt="Course image" />
         <PriceLabel>
@@ -45,20 +48,33 @@ const CourseMediaCard = ({
           )}
         </PriceLabel>
       </CourseImageContainer>
-      <Stack p={2}>
-        {!isEnrolled && (
+      <Stack p={2} sx={{ zIndex: 999 }}>
+        {!isEnrolled ? (
           <BuyButton
             onClick={
               user
                 ? !isPaid
                   ? handleEnroll
-                  : () => {}
+                  : handleBuyCourse
                 : () => navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`)
             }
             variant="outlined"
             color="primary">
             {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
           </BuyButton>
+        ) : (
+          !isCompleted && (
+            <BuyButton
+              onClick={
+                user
+                  ? handleCompleteCourse
+                  : () => navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`)
+              }
+              variant="outlined"
+              color="primary">
+              {t('course.complete_course')}
+            </BuyButton>
+          )
         )}
       </Stack>
     </CardRoot>

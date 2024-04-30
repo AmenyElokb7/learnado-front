@@ -94,6 +94,13 @@ const EnrolledCoursesPage = lazy(
     import('src/pages/dashboard/student/enrolledCourses/EnrolledCoursesPage'),
 )
 
+const StudentCertificatePage = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/student/studentCertificatesPage/StudentCertificatesPage'
+    ),
+)
+
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -247,6 +254,14 @@ export const ROUTE_CONFIG: RouteObject[] = [
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.USER]}>
             <EnrolledCoursesPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.STUDENT.MY_CERTIFICATES,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.USER]}>
+            <StudentCertificatePage />
           </RoleBasedGuard>
         ),
       },

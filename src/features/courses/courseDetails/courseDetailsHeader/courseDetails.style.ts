@@ -12,6 +12,12 @@ export const HeaderOverlay = styled(Box)(({ theme }) => ({
   margin: '20px',
   color: 'white',
   height: '500px',
+  [theme.breakpoints.down('md')]: {
+    width: '100%',
+    padding: '50px',
+    paddingTop: '100px',
+    margin: '0px',
+  },
   [theme.breakpoints.down('sm')]: {
     width: 'auto',
     height: 'auto',

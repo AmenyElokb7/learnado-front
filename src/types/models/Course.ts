@@ -25,6 +25,7 @@ export interface Course {
   lat?: number | null
   long?: number | null
   isSubscribed?: boolean
+  isCompleted?: boolean
   createdAt: string
   facilitator: Partial<User>
   sections: Module[]

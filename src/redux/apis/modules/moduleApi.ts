@@ -92,6 +92,12 @@ export const moduleApi = createApi({
         invalidatesTags: ['Modules'],
       }),
     }),
+    indexQuizzesScore: builder.query<ItemDetailsResponse<Quiz>, number>({
+      query: (params) => ({
+        url: ENDPOINTS.INDEX_QUIZZES_SCORE,
+        method: MethodsEnum.GET,
+      }),
+    }),
   }),
 })
 

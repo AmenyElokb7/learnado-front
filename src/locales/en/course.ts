@@ -69,4 +69,7 @@ export const course = {
   not_found: 'Course not found',
   enroll_course_success: 'Course enrolled successfully',
   quiz_submitted: 'Quiz submitted successfully',
+  complete_course: 'Complete Course',
+  complete_course_success: "Congratulations! You've completed the course",
+  certificates: 'Certificates',
 }

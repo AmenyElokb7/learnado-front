@@ -16,5 +16,6 @@ export interface CourseCardProps {
   isInstructor?: boolean
   width?: string
   isEnrolled?: boolean
+  isCompleted?: boolean
   navigateToEditCoursePage?: (id: number) => void
 }

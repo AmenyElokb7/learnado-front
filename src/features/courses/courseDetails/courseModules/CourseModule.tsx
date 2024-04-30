@@ -33,6 +33,7 @@ function CourseModule({
   section,
   courseId,
   sectionId,
+  isEnrolled,
 }: CourseModuleProps) {
   const [scroll, setScroll] = useState<DialogProps['scroll']>('paper')
   const [isOpened, setIsOpened] = useState(false)
@@ -59,91 +60,102 @@ function CourseModule({
   const isAuthenticated = getUserFromLocalStorage()
 
   return (
-    <Stack spacing={1}>
-      <Stack
-        direction={'row'}
-        alignItems={'center'}
-        justifyContent={'space-between'}
-        p={1}
-        sx={{
-          background: BLUE.light,
-          borderRadius: '5px',
-          cursor: 'pointer',
-        }}
-        onClick={onCollapseClick}>
-        <Typography variant="h6">{title}</Typography>
-        <Stack direction={'row'} spacing={1} alignItems={'center'}>
-          <Typography variant="body2">
-            {duration} {t('common.minutes')}
-          </Typography>
-          <IconButton>
-            <StyledExpandIcon
-              isopened={
-                isOpened
-                  ? GLOBAL_VARIABLES.TRUE_STRING
-                  : GLOBAL_VARIABLES.FALSE_STRING
-              }
-            />
-          </IconButton>
+    <>
+      <Stack spacing={1}>
+        <Stack
+          direction={'row'}
+          alignItems={'center'}
+          justifyContent={'space-between'}
+          p={1}
+          sx={{
+            background: BLUE.light,
+            borderRadius: '5px',
+            cursor: 'pointer',
+          }}
+          onClick={onCollapseClick}>
+          <Typography variant="h6">{title}</Typography>
+          <Stack direction={'row'} spacing={1} alignItems={'center'}>
+            <Typography variant="body2">
+              {duration} {t('common.minutes')}
+            </Typography>
+            <IconButton>
+              <StyledExpandIcon
+                isopened={
+                  isOpened
+                    ? GLOBAL_VARIABLES.TRUE_STRING
+                    : GLOBAL_VARIABLES.FALSE_STRING
+                }
+              />
+            </IconButton>
+          </Stack>
         </Stack>
-      </Stack>
-      <Collapse in={isOpened} timeout={200}>
-        <Stack>
-          <List>
-            {media.map((item, index) => (
-              <Stack key={index}>
-                <Grid container>
-                  <ListItem>
-                    <Grid item sm={12}>
-                      <Stack direction={'row'} alignItems={'center'}>
-                        <Avatar
-                          variant="rounded"
-                          sx={{ width: 20, height: 20 }}
-                          src={play}
-                        />
-                        <StyledButton
-                          onClick={
-                            isAuthenticated
-                              ? handleOpenDialog('body')
-                              : () => {
-                                  navigate(
-                                    `/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`,
-                                  )
-                                }
-                          }
-                          variant="text">
-                          {item.title}
-                        </StyledButton>
-                      </Stack>
-                      <Divider color={GREY.light} />
-                    </Grid>
-                  </ListItem>
-                  {(section?.quiz?.questions?.length ?? 0) > 1 && (
+        <Collapse in={isOpened} timeout={200}>
+          <Stack>
+            <List>
+              {media.map((item, index) => (
+                <Stack key={index}>
+                  <Grid container>
                     <ListItem>
-                      <Stack direction={'row'} alignItems={'center'}>
-                        <PsychologyAltOutlinedIcon />
-                        <StyledButton onClick={handleOpenQuizDialog}>
-                          <Typography
-                            fontWeight={'medium'}
-                            sx={{
-                              '&:hover': {
-                                textDecoration: 'none',
-                                color: 'primary',
-                              },
-                            }}>
-                            {t('section.quiz.quiz')}
-                          </Typography>
-                        </StyledButton>
-                      </Stack>
+                      <Grid item sm={12}>
+                        <Stack direction={'row'} alignItems={'center'}>
+                          <Avatar
+                            variant="rounded"
+                            sx={{ width: 20, height: 20 }}
+                            src={play}
+                          />
+                          <StyledButton
+                            disabled={!isEnrolled ? true : false}
+                            onClick={
+                              isAuthenticated
+                                ? handleOpenDialog('body')
+                                : () => {
+                                    navigate(
+                                      `/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`,
+                                    )
+                                  }
+                            }
+                            variant="text">
+                            {item.title}
+                          </StyledButton>
+                        </Stack>
+                        <Divider color={GREY.light} />
+                      </Grid>
                     </ListItem>
-                  )}
-                </Grid>
-              </Stack>
-            ))}
-          </List>
-        </Stack>
-      </Collapse>
-      <Stack width={700}>
+                  </Grid>
+                </Stack>
+              ))}
+              {(section?.quiz?.questions?.length ?? 0) > 1 && (
+                <ListItem>
+                  <Stack direction={'row'} alignItems={'center'}>
+                    <PsychologyAltOutlinedIcon />
+                    <StyledButton
+                      onClick={handleOpenQuizDialog}
+                      disabled={!isEnrolled ? true : false}>
+                      <Typography
+                        fontWeight={'medium'}
+                        sx={{
+                          '&:hover': {
+                            textDecoration: 'none',
+                            color: 'primary',
+                          },
+                        }}>
+                        {t('section.quiz.quiz')}
+                      </Typography>
+                    </StyledButton>
+                  </Stack>
+                </ListItem>
+              )}
+            </List>
+          </Stack>
+        </Collapse>
+
+        <CourseQuizDetails
+          open={openQuiz}
+          onClose={() => setOpenQuiz(false)}
+          section={section}
+        />
+      </Stack>
+      <Stack>
         <CourseModuleDetails
           open={open}
           onClose={handleClose}
@@ -151,12 +163,7 @@ function CourseModule({
           section={section}
         />
       </Stack>
-      <CourseQuizDetails
-        open={openQuiz}
-        onClose={() => setOpenQuiz(false)}
-        section={section}
-      />
-    </Stack>
+    </>
   )
 }
 

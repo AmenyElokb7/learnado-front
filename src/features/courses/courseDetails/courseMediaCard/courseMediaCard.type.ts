@@ -4,5 +4,8 @@ export interface CourseCardMediaProps {
   discount: string
   isPaid: boolean
   isEnrolled?: boolean
+  isCompleted?: boolean
   handleEnroll: () => void
+  handleCompleteCourse: () => void
+  handleBuyCourse: () => void
 }
