@@ -133,6 +133,7 @@ export const transformCourseModules = (modules: ModuleApi[]): Module[] => {
       module?.quiz?.questions?.length > 0
         ? {
             id: module.quiz.id,
+            timeLeft: module.quiz.time_left,
             questions: module.quiz.questions.map((question) => ({
               id: question.id,
               question: question.question,

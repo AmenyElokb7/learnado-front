@@ -14,6 +14,7 @@ export interface ModuleApi {
   quiz: {
     id: number
     questions: QuestionApi[]
+    time_left?: number
   }
 }
 
