@@ -9,12 +9,24 @@ import {
   encodeQuiz,
   encodeQuizSubmission,
   encodeUpdateModule,
+  transformQuizScoreResponse,
+  transformQuizSubmissionResponse,
 } from './modulesApi.transform'
 import { Module } from 'types/models/Module'
-import { CreateModuleRequest } from './modulesApi.type'
+import {
+  CreateModuleRequest,
+  QuizSubmission,
+  QuizSubmissionApi,
+  StudentQuiz,
+  StudentQuizApi,
+} from './modulesApi.type'
 import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
 import { Quiz } from 'types/models/Quiz'
 import { FieldValues } from 'react-hook-form'
+import { PaginationResponse } from 'types/interfaces/Pagination'
+import { QueryParams } from 'types/interfaces/QueryParams'
+import { injectPaginationParamsToUrl } from '@utils/helpers/queryParamInjector'
+import { ApiPaginationResponse } from '../type'
 
 export const moduleApi = createApi({
   reducerPath: 'moduleApi',
@@ -82,21 +94,28 @@ export const moduleApi = createApi({
     }),
 
     submitQuiz: builder.mutation<
-      void,
+      ItemDetailsResponse<QuizSubmission>,
       { quizId: number | undefined; data: FieldValues }
     >({
       query: ({ quizId, data }) => ({
         url: `${ENDPOINTS.SUBMIT_QUIZ}/${quizId}`,
         method: MethodsEnum.POST,
         body: encodeQuizSubmission(data),
-        invalidatesTags: ['Modules'],
       }),
+      transformResponse: (response: ItemDetailsResponse<QuizSubmissionApi>) =>
+        transformQuizSubmissionResponse(response),
+      invalidatesTags: ['Modules'],
     }),
-    indexQuizzesScore: builder.query<ItemDetailsResponse<Quiz>, number>({
+    getQuizzesScore: builder.query<
+      PaginationResponse<StudentQuiz>,
+      QueryParams
+    >({
       query: (params) => ({
-        url: ENDPOINTS.INDEX_QUIZZES_SCORE,
+        url: injectPaginationParamsToUrl(ENDPOINTS.INDEX_QUIZZES_SCORE, params),
         method: MethodsEnum.GET,
       }),
+      transformResponse: (response: ApiPaginationResponse<StudentQuizApi>) =>
+        transformQuizScoreResponse(response),
     }),
   }),
 })
@@ -110,4 +129,5 @@ export const {
   useUpdateQuizMutation,
   useUpdateModuleMutation,
   useSubmitQuizMutation,
+  useGetQuizzesScoreQuery,
 } = moduleApi

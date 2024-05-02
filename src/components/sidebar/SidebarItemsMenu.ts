@@ -49,7 +49,7 @@ export const ItemsSidebar: SidebarItem[] = [
   {
     id: 3,
     label: 'sidebar.enrolled_courses',
-    path: PATHS.DASHBOARD.STUDENT.MY_PROGRAM,
+    path: PATHS.DASHBOARD.STUDENT.MY_PROGRAM.ROOT,
     icon: SchoolOutlinedIcon,
     accessibleRoles: [UserRoleEnum.USER],
   },
@@ -70,17 +70,11 @@ export const ItemsSidebar: SidebarItem[] = [
   {
     id: 6,
     label: 'sidebar.my_calendar',
-    path: PATHS.DASHBOARD.STUDENT.MY_CALENDAR,
+    path: PATHS.DASHBOARD.MY_CALENDAR,
     icon: CalendarMonthOutlinedIcon,
-    accessibleRoles: [UserRoleEnum.USER],
+    accessibleRoles: [UserRoleEnum.USER, UserRoleEnum.FACILITATOR],
   },
-  {
-    id: 7,
-    label: 'sidebar.my_calendar',
-    path: PATHS.DASHBOARD.INSTRUCTOR.MY_CALENDAR,
-    icon: CalendarMonthOutlinedIcon,
-    accessibleRoles: [UserRoleEnum.FACILITATOR],
-  },
+
   {
     id: 8,
     label: 'sidebar.courses',

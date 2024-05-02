@@ -80,8 +80,8 @@ const CategoriesPage = lazy(
   () => import('src/pages/dashboard/admin/categories/CategoriesPage'),
 )
 
-const InstructorCalendarPage = lazy(
-  () => import('src/pages/dashboard/instructor/calendarPage/CalendarPage'),
+const CalendarPage = lazy(
+  () => import('src/pages/dashboard/calendarPage/CalendarPage'),
 )
 const InstructorCoursesPage = lazy(
   () =>
@@ -89,15 +89,31 @@ const InstructorCoursesPage = lazy(
       'src/pages/dashboard/instructor/instructorCourses/InstructorCoursesPage'
     ),
 )
-const EnrolledCoursesPage = lazy(
-  () =>
-    import('src/pages/dashboard/student/enrolledCourses/EnrolledCoursesPage'),
-)
 
 const StudentCertificatePage = lazy(
   () =>
     import(
       'src/pages/dashboard/student/studentCertificatesPage/StudentCertificatesPage'
+    ),
+)
+
+const StudentQuizPage = lazy(
+  () => import('src/pages/dashboard/student/studentQuiz/StudentQuizPage'),
+)
+const StudentCoursesPage = lazy(
+  () => import('src/pages/dashboard/student/courses/StudentCoursesPage'),
+)
+
+const EnrolledCoursesList = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/student/courses/enrolledCourses/EnrolledCoursesList'
+    ),
+)
+const CompletedCoursesList = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/student/courses/completedCourses/CompletedCoursesList'
     ),
 )
 
@@ -234,10 +250,19 @@ export const ROUTE_CONFIG: RouteObject[] = [
         ),
       },
       {
-        path: PATHS.DASHBOARD.INSTRUCTOR.MY_CALENDAR,
+        path: PATHS.DASHBOARD.MY_CALENDAR,
         element: (
-          <RoleBasedGuard accessibleRoles={[UserRoleEnum.FACILITATOR]}>
-            <InstructorCalendarPage />
+          <RoleBasedGuard
+            accessibleRoles={[UserRoleEnum.FACILITATOR, UserRoleEnum.USER]}>
+            <CalendarPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.STUDENT.MY_QUIZZES,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.USER]}>
+            <StudentQuizPage />
           </RoleBasedGuard>
         ),
       },
@@ -250,12 +275,22 @@ export const ROUTE_CONFIG: RouteObject[] = [
         ),
       },
       {
-        path: PATHS.DASHBOARD.STUDENT.MY_PROGRAM,
+        path: PATHS.DASHBOARD.STUDENT.MY_PROGRAM.ROOT,
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.USER]}>
-            <EnrolledCoursesPage />
+            <StudentCoursesPage />
           </RoleBasedGuard>
         ),
+        children: [
+          {
+            path: PATHS.DASHBOARD.STUDENT.MY_PROGRAM.ROOT,
+            element: <EnrolledCoursesList />,
+          },
+          {
+            path: PATHS.DASHBOARD.STUDENT.MY_PROGRAM.COMPLETED_COURSES,
+            element: <CompletedCoursesList />,
+          },
+        ],
       },
       {
         path: PATHS.DASHBOARD.STUDENT.MY_CERTIFICATES,

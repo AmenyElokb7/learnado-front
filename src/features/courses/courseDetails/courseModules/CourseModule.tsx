@@ -61,7 +61,6 @@ function CourseModule({
 
   const isAuthenticated = getUserFromLocalStorage()
   const timeLeft = section?.quiz.timeLeft ?? 0
-  console.log(timeLeft, 'timeLeft')
   return (
     <>
       <Stack spacing={1}>

@@ -1,12 +1,21 @@
 import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
 import { getQuestionTypeFilter } from '@utils/helpers/course.helpers'
-import { ModuleApi } from './modulesApi.type'
+import {
+  ModuleApi,
+  QuizSubmission,
+  QuizSubmissionApi,
+  StudentQuiz,
+  StudentQuizApi,
+} from './modulesApi.type'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
 import { Quiz } from 'types/models/Quiz'
 import { Module } from 'types/models/Module'
 import { FieldValues } from 'react-hook-form'
+import { ApiPaginationResponse } from '../type'
+import { PaginationResponse } from 'types/interfaces/Pagination'
+import { transformDateTimeFormat } from '@utils/helpers/date.helpers'
 
 export const encodeModule = (
   sections: Section[],
@@ -18,18 +27,21 @@ export const encodeModule = (
     formData.append(`steps[${index}][title]`, section.title)
     formData.append(`steps[${index}][description]`, section.description)
     formData.append(`steps[${index}][duration]`, String(section.duration))
+
     if (section?.externalUrls?.length) {
+
       section.externalUrls.forEach((externalUrl, externalUrlIndex) => {
         formData.append(
-          `steps[${index}][external_urls][${externalUrlIndex}][url]`,
+          `steps[${index}][media_urls][${externalUrlIndex}][url]`,
           externalUrl.url,
         )
         formData.append(
-          `steps[${index}][external_urls][${externalUrlIndex}][title]`,
+          `steps[${index}][media_urls][${externalUrlIndex}][title]`,
           externalUrl.title,
         )
       })
     }
+
     if (Number(section.hasQuiz) === 1 && section.quiz.questions.length > 0) {
       section.quiz.questions.forEach((question, questionIndex) => {
         formData.append(
@@ -238,4 +250,53 @@ export const encodeQuizSubmission = (data: FieldValues): FormData => {
     }
   })
   return formData
+}
+
+export const transformQuizSubmissionResponse = (
+  data: ItemDetailsResponse<QuizSubmissionApi>,
+): ItemDetailsResponse<QuizSubmission> => {
+  return {
+    message: data.message,
+    data: {
+      score: data.data.score,
+      totalScorePossible: data.data.total_score_possible,
+      needsReview: data.data.needs_review,
+      passed: data.data.passed,
+    },
+  }
+}
+export const transformQuizScores = (data: StudentQuizApi[]): StudentQuiz[] => {
+  return data.map((quiz) => ({
+    id: quiz.id,
+    score: quiz.score,
+    totalScorePossible: quiz.total_score_possible,
+    passed: quiz.passed,
+    createAt: transformDateTimeFormat(quiz.created_at),
+    quiz: {
+      id: quiz.quiz.id,
+      step: {
+        id: quiz.quiz.step.id,
+        title: quiz.quiz.step.title,
+        course: {
+          id: quiz.quiz.step.course.id,
+          title: quiz.quiz.step.course.title,
+        },
+      },
+    },
+  }))
+}
+
+export const transformQuizScoreResponse = (
+  data: ApiPaginationResponse<StudentQuizApi>,
+): PaginationResponse<StudentQuiz> => {
+  return {
+    message: data.message,
+    data: transformQuizScores(data.data),
+    meta: {
+      currentPage: GLOBAL_VARIABLES.PAGINATION.FIRST_PAGE,
+      perPage: GLOBAL_VARIABLES.PAGINATION.ROWS_PER_PAGE,
+      total: GLOBAL_VARIABLES.PAGINATION.TOTAL_ITEMS,
+      count: GLOBAL_VARIABLES.PAGINATION.TOTAL_ITEMS,
+    },
+  }
 }

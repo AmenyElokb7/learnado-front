@@ -17,6 +17,7 @@ import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined'
 import CustomRadioButton from '@components/Inputs/customRadioButton/CustomRadioButton'
 import AddCircleOutlineOutlinedIcon from '@mui/icons-material/AddCircleOutlineOutlined'
 import Question from '../../question/Question'
+import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 function ModuleBody({
   expanded,
@@ -70,54 +71,61 @@ function ModuleBody({
           index={index}
           setFiles={setFiles}
           isEditMode={isEditMode}
-          
         />
 
-        {externalUrls.map((_, indexUrl) => (
-          <Grid
-            item
-            xs={12}
-            key={indexUrl}
-            direction={'row'}
-            alignItems={'center'}
-            display={'flex'}
-            gap={4}>
-            <Grid item xs={12} sm={6}>
-              <CustomTextField
-                config={{
-                  ...CREATE_STEP_FORM_CONFIG.externalUrlTitle,
-                  name: `sections.${index}.externalUrls.${indexUrl}.title`,
-                }}
-              />
-            </Grid>
-            <Grid item xs={12} sm={6}>
-              <CustomTextField
-                config={{
-                  ...CREATE_STEP_FORM_CONFIG.externalUrl,
-                  name: `sections.${index}.externalUrls.${indexUrl}.url`,
-                }}
-              />
-            </Grid>
+        {externalUrls
+          .filter((url) => url.url !== GLOBAL_VARIABLES.EMPTY_STRING)
+          .map(
+            (url, indexUrl) => (
+              (
+                <Grid
+                  item
+                  xs={12}
+                  key={indexUrl}
+                  direction={'row'}
+                  alignItems={'center'}
+                  display={'flex'}
+                  gap={4}>
+                  <Grid item xs={12} sm={6}>
+                    <CustomTextField
+                      config={{
+                        ...CREATE_STEP_FORM_CONFIG.externalUrlTitle,
+                        name: `sections.${index}.externalUrls.${indexUrl}.title`,
+                      }}
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <CustomTextField
+                      config={{
+                        ...CREATE_STEP_FORM_CONFIG.externalUrl,
+                        name: `sections.${index}.externalUrls.${indexUrl}.url`,
+                      }}
+                    />
+                  </Grid>
 
-            <Grid item xs={12} sm={1}>
-              <Tooltip title={t('common.add')}>
-                <IconButton onClick={() => handleAddExternalUrl(index)}>
-                  <AddToPhotosOutlinedIcon color="info" />
-                </IconButton>
-              </Tooltip>
-              <Tooltip title={t('common.delete')}>
-                <IconButton
-                  disabled={externalUrls.length > 1 ? false : true}
-                  sx={{
-                    color: externalUrls.length === 1 ? 'inherit' : 'red',
-                  }}
-                  onClick={() => handleRemoveExternalUrl(index, indexUrl)}>
-                  <DeleteOutlineOutlinedIcon />
-                </IconButton>
-              </Tooltip>
-            </Grid>
-          </Grid>
-        ))}
+                  <Grid item xs={12} sm={1}>
+                    <Tooltip title={t('common.add')}>
+                      <IconButton onClick={() => handleAddExternalUrl(index)}>
+                        <AddToPhotosOutlinedIcon color="info" />
+                      </IconButton>
+                    </Tooltip>
+                    <Tooltip title={t('common.delete')}>
+                      <IconButton
+                        disabled={externalUrls.length > 1 ? false : true}
+                        sx={{
+                          color: externalUrls.length === 1 ? 'inherit' : 'red',
+                        }}
+                        onClick={() =>
+                          handleRemoveExternalUrl(index, indexUrl)
+                        }>
+                        <DeleteOutlineOutlinedIcon />
+                      </IconButton>
+                    </Tooltip>
+                  </Grid>
+                </Grid>
+              )
+            ),
+          )}
 
         <Grid item xs={12}>
           <CustomRadioButton

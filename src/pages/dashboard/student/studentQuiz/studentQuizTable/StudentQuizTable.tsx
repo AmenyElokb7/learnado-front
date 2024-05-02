@@ -1,45 +1,42 @@
 import CustomPagination from '@components/customPagination/CustomPagination'
 import CustomTable from '@components/customTable/CustomTable'
 import { Stack } from '@mui/material'
-import { CertificatesTableHeaders } from './StudentCertificatesTable.constants'
+import { FiltersByRoleOptions } from '@pages/dashboard/admin/users/allUsersTable/AllUsersTable.constants'
+import { useGetQuizzesScoreQuery } from '@redux/apis/modules/moduleApi'
 import usePagination from 'src/hooks/usePagination'
+import StudentQuizRow from './studentQuizRow/StudentQuizRow'
 import useDebounce from 'src/hooks/useDebounce'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
-import StudentCertificatesRow from './studentCertificatesRow/StudentCertificatesRow'
-import { useGetStudentCertificatesQuery } from '@redux/apis/courses/coursesApi'
-import FallbackLoader from '@components/fallback/FallbackLoader'
+import { StudentQuizTableHeaders } from './StudentQuizTable.constants'
 
-function StudentCertificatesTable() {
+function StudentQuizTable() {
   const {
     queryParams,
     handlePageChange,
     handleRowsPerPageChange,
     handleSearchChange,
   } = usePagination()
+
   const debouncedSearchQuery = useDebounce(
     queryParams.keyword,
     GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
   )
-
-  const { isFetching, data, isLoading } = useGetStudentCertificatesQuery({
+  const { data, isLoading, isFetching } = useGetQuizzesScoreQuery({
     ...queryParams,
     keyword: debouncedSearchQuery,
   })
-  if (isLoading) return <FallbackLoader />
 
   return (
     <Stack direction={'column'} spacing={2}>
       <CustomTable
-        columns={CertificatesTableHeaders}
+        columns={StudentQuizTableHeaders}
         isLoading={isLoading}
         isFetching={isFetching}
         queryParams={queryParams}
+        filters={FiltersByRoleOptions}
         handleSearchChange={handleSearchChange}>
-        {data?.data?.map((certificate) => (
-          <StudentCertificatesRow
-            key={certificate.id}
-            certificate={certificate}
-          />
+        {data?.data?.map((quiz) => (
+          <StudentQuizRow key={quiz.id} quiz={quiz} />
         ))}
       </CustomTable>
       <CustomPagination
@@ -54,4 +51,4 @@ function StudentCertificatesTable() {
   )
 }
 
-export default StudentCertificatesTable
+export default StudentQuizTable
