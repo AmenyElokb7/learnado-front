@@ -66,6 +66,7 @@ const typography: TypographyOptions = {
   subtitle1: {
     fontFamily: APP_FONT_FAMILY,
     fontSize: '0.938rem',
+
     '&:first-letter': {
       textTransform: 'Uppercase',
     },
@@ -74,6 +75,7 @@ const typography: TypographyOptions = {
     fontWeight: 300,
     fontFamily: APP_FONT_FAMILY,
     fontSize: '0.9rem',
+
     lineHeight: '1.25rem',
   },
   button: {
@@ -82,6 +84,7 @@ const typography: TypographyOptions = {
     fontFamily: APP_FONT_FAMILY,
     fontWeight: 400,
     textTransform: 'none',
+
     '&:first-letter': {
       textTransform: 'Uppercase',
     },

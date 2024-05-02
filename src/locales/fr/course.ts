@@ -65,4 +65,6 @@ export const course = {
   complete_course: 'Terminer le cours',
   complete_course_success: 'Félicitations! Vous avez terminé le cours',
   certificates: 'Certificats',
+  enrolled_courses: 'Cours inscrits',
+  completed_courses: 'Cours terminés',
 }

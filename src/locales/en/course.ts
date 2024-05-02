@@ -72,4 +72,6 @@ export const course = {
   complete_course: 'Complete Course',
   complete_course_success: "Congratulations! You've completed the course",
   certificates: 'Certificates',
+  enrolled_courses: 'Enrolled Courses',
+  completed_courses: 'Completed Courses',
 }
