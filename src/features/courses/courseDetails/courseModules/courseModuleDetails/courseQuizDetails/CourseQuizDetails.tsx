@@ -27,9 +27,6 @@ function CourseQuizDetails({ onClose, open, section }: CustomQuizDetailsProps) {
   const [submitQuiz, { isLoading }] = useSubmitQuizMutation()
 
   const onSubmit = quizFormMethods.handleSubmit(async (values) => {
-    console.log('first', section?.quiz?.id)
-    console.log('values: ', values)
-
     try {
       await submitQuiz({ quizId, data: values })
       onClose()

@@ -25,6 +25,7 @@ export interface CourseApi {
   longitude?: number | null
   is_subscribed?: 0 | 1
   is_completed?: 0 | 1
+  time_left?: number
   created_at: string
   facilitator: UserApi
   media: MediaApi[]

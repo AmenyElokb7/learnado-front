@@ -25,6 +25,7 @@ import { getUserFromLocalStorage } from '@utils/localStorage/storage'
 import { useTranslation } from 'react-i18next'
 import PsychologyAltOutlinedIcon from '@mui/icons-material/PsychologyAltOutlined'
 import CourseQuizDetails from './courseModuleDetails/courseQuizDetails/CourseQuizDetails'
+import QuizCountdown from './QuizCountdown'
 
 function CourseModule({
   title,
@@ -39,6 +40,7 @@ function CourseModule({
   const [isOpened, setIsOpened] = useState(false)
   const [open, setOpen] = useState(false)
   const [openQuiz, setOpenQuiz] = useState(false)
+
   const { t } = useTranslation()
 
   const navigate = useNavigate()
@@ -58,7 +60,8 @@ function CourseModule({
   const onCollapseClick = () => setIsOpened((prev) => !prev)
 
   const isAuthenticated = getUserFromLocalStorage()
-
+  const timeLeft = section?.quiz.timeLeft ?? 0
+  console.log(timeLeft, 'timeLeft')
   return (
     <>
       <Stack spacing={1}>
@@ -103,6 +106,7 @@ function CourseModule({
                             sx={{ width: 20, height: 20 }}
                             src={play}
                           />
+
                           <StyledButton
                             disabled={!isEnrolled ? true : false}
                             onClick={
@@ -126,23 +130,27 @@ function CourseModule({
               ))}
               {(section?.quiz?.questions?.length ?? 0) > 1 && (
                 <ListItem>
-                  <Stack direction={'row'} alignItems={'center'}>
-                    <PsychologyAltOutlinedIcon />
-                    <StyledButton
-                      onClick={handleOpenQuizDialog}
-                      disabled={!isEnrolled ? true : false}>
-                      <Typography
-                        fontWeight={'medium'}
-                        sx={{
-                          '&:hover': {
-                            textDecoration: 'none',
-                            color: 'primary',
-                          },
-                        }}>
-                        {t('section.quiz.quiz')}
-                      </Typography>
-                    </StyledButton>
-                  </Stack>
+                  {timeLeft > 0 ? (
+                    <QuizCountdown timeLeftInSeconds={timeLeft} />
+                  ) : (
+                    <Stack direction={'row'} alignItems={'center'}>
+                      <PsychologyAltOutlinedIcon />
+                      <StyledButton
+                        onClick={handleOpenQuizDialog}
+                        disabled={!isEnrolled || timeLeft > 0 ? true : false}>
+                        <Typography
+                          fontWeight={'medium'}
+                          sx={{
+                            '&:hover': {
+                              textDecoration: 'none',
+                              color: 'primary',
+                            },
+                          }}>
+                          {t('section.quiz.quiz')}
+                        </Typography>
+                      </StyledButton>
+                    </Stack>
+                  )}
                 </ListItem>
               )}
             </List>

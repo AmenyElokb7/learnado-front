@@ -55,5 +55,7 @@ export const section = {
     delete_answer: 'Êtes-vous sûr de vouloir supprimer cette réponse ?',
     delete_answer_success: 'Réponse supprimée avec succès',
     update_success: 'Quiz mis à jour avec succès',
+    next_attempt: 'Prochaine tentative dans : ',
+    time_left: 'Temps restant : ',
   },
 }

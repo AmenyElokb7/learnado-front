@@ -3,7 +3,11 @@ import CourseModule from './CourseModule'
 import { CourseContentProps } from './courseModules.type'
 import RectangularCard from '@components/cards/rectangularCard/RectangularCard'
 
-export const CourseModules = ({ steps, courseId, isEnrolled }: CourseContentProps) => {
+export const CourseModules = ({
+  steps,
+  courseId,
+  isEnrolled,
+}: CourseContentProps) => {
   const { t } = useTranslation()
   return (
     <RectangularCard title={t('course.modules')}>

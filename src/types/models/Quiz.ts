@@ -3,6 +3,7 @@ import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 export interface Quiz {
   id?: number
   questions: Question[]
+  timeLeft?: number
 }
 
 export interface Question {
@@ -22,6 +23,7 @@ export interface Answer {
 export interface QuizApi {
   id?: number
   questions: QuestionApi[]
+  time_left?: number
 }
 
 export interface QuestionApi {

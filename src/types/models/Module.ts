@@ -13,5 +13,6 @@ export interface Module {
   quiz?: {
     id: number
     questions: Question[]
+    timeLeft?: number
   }
 }
