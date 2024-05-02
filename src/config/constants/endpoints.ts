@@ -42,8 +42,9 @@ export const ENDPOINTS = {
   SUBMIT_QUIZ: 'quiz/submit',
   ENROLL_COURSE: 'subscribe-course',
   ENROLLED_COURSES: 'enrolled-courses',
-  INDEX_QUIZZES_SCORE: 'quiz-attempts',
+  INDEX_QUIZZES_SCORE: 'quiz-scores',
   COMPLETE_COURSE: 'complete-course',
   COURSE_CERTIFICATE: 'course-certificate',
   DOWNLOAD_CERTIFICATE: 'certificates/download',
+  COMPLETED_COURSES: 'completed-courses',
 }

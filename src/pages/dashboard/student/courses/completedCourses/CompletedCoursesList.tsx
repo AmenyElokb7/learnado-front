@@ -1,17 +1,17 @@
 import BodyCard from '@components/cards/bodyCard/BodyCard'
 import CustomPagination from '@components/customPagination/CustomPagination'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import SearchSection from '@features/courses/searchSection/SearchSection'
 import AllCoursesList from '@pages/dashboard/designer/courses/allCoursesList/AllCoursesList'
-import { useGetEnrolledCoursesQuery } from '@redux/apis/courses/coursesApi'
+import { useGetCompletedCoursesQuery } from '@redux/apis/courses/coursesApi'
+import { RootState } from '@redux/store'
 import { useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
 import { useSelector } from 'react-redux'
 import useDebounce from 'src/hooks/useDebounce'
 import usePagination from 'src/hooks/usePagination'
-import { RootState } from '@redux/store'
-import SearchSection from '@features/courses/searchSection/SearchSection'
 
-function EnrolledCoursesPage() {
+function CompletedCoursesList() {
   const { t } = useTranslation()
 
   const {
@@ -26,7 +26,7 @@ function EnrolledCoursesPage() {
     GLOBAL_VARIABLES.DEBOUNCE_TIME.MEDIUM,
   )
 
-  const { isLoading, data } = useGetEnrolledCoursesQuery({
+  const { isLoading, data } = useGetCompletedCoursesQuery({
     ...queryParams,
     keyword: debouncedSearchQuery,
   })
@@ -59,4 +59,5 @@ function EnrolledCoursesPage() {
     </BodyCard>
   )
 }
-export default EnrolledCoursesPage
+
+export default CompletedCoursesList

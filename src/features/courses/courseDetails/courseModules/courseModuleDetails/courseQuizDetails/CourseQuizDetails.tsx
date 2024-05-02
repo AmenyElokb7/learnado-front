@@ -11,6 +11,10 @@ import CustomCheckboxButtonWithValue from '@components/Inputs/customCheckboxButt
 import CustomLoadingButton from '@components/buttons/customLoadingButton/CustomLoadingButton'
 import { useAppDispatch } from '@redux/hooks'
 import { showError, showSuccess } from '@redux/slices/snackbarSlice'
+import { useState } from 'react'
+import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
+import { courseApi } from '@redux/apis/courses/coursesApi'
+import { QuizSubmission } from '@redux/apis/modules/modulesApi.type'
 
 function CourseQuizDetails({ onClose, open, section }: CustomQuizDetailsProps) {
   const quizFormMethods = useForm({
@@ -23,18 +27,49 @@ function CourseQuizDetails({ onClose, open, section }: CustomQuizDetailsProps) {
   const dispatch = useAppDispatch()
 
   const quizId = section.quiz?.id
+  const [quizResults, setQuizResults] = useState<
+    ItemDetailsResponse<QuizSubmission> | undefined
+  >(undefined)
 
   const [submitQuiz, { isLoading }] = useSubmitQuizMutation()
 
   const onSubmit = quizFormMethods.handleSubmit(async (values) => {
     try {
-      await submitQuiz({ quizId, data: values })
-      onClose()
+      const response = await submitQuiz({ quizId, data: values }).unwrap()
+      setQuizResults(response)
+      dispatch(courseApi.util.invalidateTags(['Course', 'Courses']))
       dispatch(showSuccess(t('course.quiz_submitted')))
     } catch (error) {
       dispatch(showError(t('common.error')))
     }
   })
+  if (quizResults) {
+    return (
+      <CustomFullScreenDialog open={open} handleClose={onClose}>
+        <Stack
+          direction={'column'}
+          spacing={4}
+          alignItems="center"
+          justifyContent="center">
+          <Typography variant="h4" gutterBottom>
+            {t('section.quiz.quiz_completed')}
+          </Typography>
+          <Typography variant="h6">
+            {t('section.quiz.score')} {quizResults.data.score}/
+            {quizResults.data.totalScorePossible}
+          </Typography>
+          <Typography variant="body1" color="textSecondary">
+            {quizResults.data.passed
+              ? t('section.quiz.passed')
+              : t('section.quiz.failed')}
+          </Typography>
+          <CustomLoadingButton isLoading={isLoading} onClick={onClose}>
+            Close
+          </CustomLoadingButton>
+        </Stack>
+      </CustomFullScreenDialog>
+    )
+  }
 
   return (
     <CustomFullScreenDialog open={open} handleClose={onClose}>
@@ -85,7 +120,7 @@ function CourseQuizDetails({ onClose, open, section }: CustomQuizDetailsProps) {
                             name: `answers[${question.id}].answer`,
                             options: [
                               { label: t('common.yes'), value: 1 },
-                              { label: t('common.no'), value: 2 },
+                              { label: t('common.no'), value: 0 },
                             ],
                           }}
                         />

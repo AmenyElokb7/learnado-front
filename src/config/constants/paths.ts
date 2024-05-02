@@ -28,6 +28,7 @@ export const PATHS = {
 
   DASHBOARD: {
     ROOT: '/dashboard',
+    MY_CALENDAR: '/dashboard/my-calendar',
     PROFILE: {
       ROOT: '/dashboard/profile',
       SETTINGS: '/dashboard/profile/settings',
@@ -56,17 +57,18 @@ export const PATHS = {
     },
     STUDENT: {
       ROOT: '/dashboard/student',
-      MY_PROGRAM: '/dashboard/student/my-program',
+      MY_PROGRAM: {
+        ROOT: '/dashboard/student/my-program',
+        COMPLETED_COURSES: '/dashboard/student/my-program/completed-courses',
+      },
       MY_CERTIFICATES: '/dashboard/student/my-certificates',
       MY_QUIZZES: '/dashboard/student/my-quizzes',
-      MY_CALENDAR: '/dashboard/student/my-calendar',
       MY_SUPPORT: '/dashboard/student/my-support',
     },
     INSTRUCTOR: {
       ROOT: '/dashboard/instructor',
       MY_COURSES: '/dashboard/instructor/my-courses',
       MY_STUDENTS: '/dashboard/instructor/my-students',
-      MY_CALENDAR: '/dashboard/instructor/my-calendar',
       MY_QUIZZES: '/dashboard/instructor/my-quizzes',
       MY_SUPPORT: '/dashboard/instructor/my-support',
     },

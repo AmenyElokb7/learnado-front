@@ -147,6 +147,17 @@ export const courseApi = createApi({
         transformFetchCoursesResponse(response),
       providesTags: ['Courses'],
     }),
+    getCompletedCourses: builder.query<PaginationResponse<Course>, QueryParams>(
+      {
+        query: (params) => ({
+          url: injectPaginationParamsToUrl(ENDPOINTS.COMPLETED_COURSES, params),
+          method: MethodsEnum.GET,
+        }),
+        transformResponse: (response: ApiPaginationResponse<CourseApi>) =>
+          transformFetchCoursesResponse(response),
+        providesTags: ['Courses'],
+      },
+    ),
     completeCourse: builder.mutation<void, number | undefined>({
       query: (courseId) => ({
         url: `${ENDPOINTS.COMPLETE_COURSE}/${courseId}`,
@@ -183,6 +194,7 @@ export const {
   useGetCoursForGuesteByIdQuery,
   useEnrollCourseMutation,
   useGetEnrolledCoursesQuery,
+  useGetCompletedCoursesQuery,
   useCompleteCourseMutation,
   useGetStudentCertificatesQuery,
 } = courseApi

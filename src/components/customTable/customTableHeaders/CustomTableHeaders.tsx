@@ -1,11 +1,16 @@
 import { TableCell, TableHead, TableRow } from '@mui/material'
 import { CustomTableHeadersProps } from './customTableHeaders.type'
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next'
 
 const CustomTableHeaders = ({ columns }: CustomTableHeadersProps) => {
   const { t } = useTranslation()
   return (
-    <TableHead>
+    <TableHead
+      sx={{
+        '& .MuiTableCell-root': {
+          background: "#f8f9fa",
+        },
+      }}>
       <TableRow>
         {columns.map((header) => (
           <TableCell
