@@ -19,6 +19,8 @@ import { Email } from '@mui/icons-material'
 import LabelWithIcon from '@components/labelWithIcon/LabelWithIcon'
 import CourseOtherMediaCard from '@features/courses/courseDetails/courseMediaCard/courseOtherMediaCard/CourseOtherMediaCard'
 import FallbackLoader from '@components/fallback/FallbackLoader'
+import { TeachingTypeFilterEnum } from '@config/enums/teachingType.enum'
+
 export const CourseDetail = () => {
   const { t } = useTranslation()
   const { courseId } = useParams<string>()
@@ -27,10 +29,11 @@ export const CourseDetail = () => {
 
   if (!data?.data) return <NoDataFound message={t('course.not_found')} />
 
-  const stepsWithMedia = data.data?.modules?.map((module) => {
+  const stepsWithMedia = data.data?.sections?.map((section) => {
     return {
-      ...module,
-      media: module.media || [],
+      ...section,
+      media: section.media || [],
+      quiz: section.quiz || [],
     }
   })
 
@@ -57,20 +60,25 @@ export const CourseDetail = () => {
           {course.media && course.media.length > 1 && (
             <CourseOtherMediaCard medias={course.media} />
           )}
+          <RectangularCard title={t('course.description')}>
+            <Typography>{course.description}</Typography>
+          </RectangularCard>
 
-          {course.modules && course.modules.length > 0 ? (
-            <CourseModules steps={stepsWithMedia} />
+          {course.sections && course.sections.length > 0 ? (
+            <CourseModules steps={stepsWithMedia} courseId={courseId} />
           ) : (
             <RectangularCard title="Modules">
               <Typography>{t('course.no_steps_found')}</Typography>
             </RectangularCard>
           )}
 
-          <CourseMapCard
-            latitude={course.lat ?? null}
-            longitude={course.long ?? null}
-            mapboxAccessToken={ConfigEnv.MAPBOX_ACCESS_TOKEN}
-          />
+          {course.teachingType === TeachingTypeFilterEnum.ON_A_PLACE && (
+            <CourseMapCard
+              latitude={course.lat ?? null}
+              longitude={course.long ?? null}
+              mapboxAccessToken={ConfigEnv.MAPBOX_ACCESS_TOKEN}
+            />
+          )}
         </Grid>
         <Grid
           item

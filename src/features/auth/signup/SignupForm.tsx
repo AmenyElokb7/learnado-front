@@ -65,7 +65,7 @@ export default function SignUpForm() {
             <Grid item xs={12} sm={6}>
               <CustomPasswordTextField
                 config={{
-                  ...SIGNUP_FORM_CONFIG.confirmPassword,
+                  ...SIGNUP_FORM_CONFIG.passwordConfirmation,
                   rules: {
                     validate: (value) => {
                       if (value !== password)

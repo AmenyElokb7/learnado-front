@@ -4,11 +4,13 @@ export interface InputConfig {
   label: string
   name: string
   placeholder: string
-  defaultValue: string | number
+  defaultValue?: string | number | number[] | string[]
   type?: InputType
   rules?: RegisterOptions
   disabled?: boolean
   options?: InputOption[]
+  multiple?: boolean
+  ommitedFromSubmissionData?: boolean
 }
 
 export type InputType =

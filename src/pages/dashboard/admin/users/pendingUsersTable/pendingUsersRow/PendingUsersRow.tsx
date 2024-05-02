@@ -13,7 +13,8 @@ import {
   useValidateUserMutation,
 } from '@redux/apis/user/usersApi'
 import validate from '@assets/logo/validate.png'
-const reject = require('@assets/logo/reject.webp')
+// const reject = require('@assets/logo/reject.webp')
+import reject from '@assets/logo/reject.webp'
 import { GREY } from '@config/colors/colors'
 import { UserActionsEnum } from '@config/enums/userActions.enum'
 

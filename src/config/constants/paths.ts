@@ -4,6 +4,7 @@ export const PATHS = {
   COURSES: {
     ROOT: '/Courses',
     COURSES_DETAIL: '/courses/:courseId',
+    STEP: '/courses/:courseId/:stepId',
   },
 
   LEARNING_PATH: {
@@ -41,8 +42,16 @@ export const PATHS = {
         EDIT_USER: '/dashboard/admin/users/:userId',
         ADD_USER: '/dashboard/admin/addUser',
       },
-      CATEGORY: '/dashboard/admin/categories',
-      LANGUAGE: '/dashboard/admin/languages',
+      CATEGORY: {
+        ROOT: '/dashboard/admin/categories',
+        ADD_CATEGORY: '/dashboard/admin/categories/add-category',
+        EDIT_CATEGORY: '/dashboard/admin/categories/:categoryId',
+      },
+      LANGUAGES: {
+        ROOT: '/dashboard/admin/languages',
+        ADD_LANGUAGE: '/dashboard/admin/languages/add-language',
+        EDIT_LANGUAGE: '/dashboard/admin/languages/:languageId',
+      },
       POSTS: '/dashboard/admin/posts',
     },
     STUDENT: {

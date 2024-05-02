@@ -3,11 +3,9 @@ import { Stack, Typography } from '@mui/material'
 import { GREY } from '@config/colors/colors'
 
 export const StatsCardRoot = styled(Stack)(({ theme }) => ({
-  width: '300px',
-  display: 'flex',
+  width: '400px',
   alignItems: 'center',
   justifyContent: 'center',
-  flexDirection: 'column',
   gap: '15px',
   padding: '20px',
   background: theme.palette.common.white,
@@ -16,6 +14,10 @@ export const StatsCardRoot = styled(Stack)(({ theme }) => ({
   border: `1px solid ${GREY.light}`,
   cursor: 'pointer',
   transition: 'transform 0.3s ease-in-out',
+
+  [theme.breakpoints.down('xl')]: {
+    width: '300px',
+  },
 
   [theme.breakpoints.down('sm')]: {
     width: 'auto',

@@ -59,8 +59,8 @@ export const SIGNUP_FORM_CONFIG: Record<string, InputConfig> = {
       },
     },
   },
-  confirmPassword: {
-    name: 'confirmPassword',
+  passwordConfirmation: {
+    name: 'passwordConfirmation',
     defaultValue: '',
     label: 'auth.confirm_password',
     placeholder: 'auth.confirm_password_placeholder',

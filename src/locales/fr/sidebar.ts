@@ -12,4 +12,5 @@ export const sidebar = {
   pending_users: 'Utilisateurs en attente',
   courses: 'Mes cours',
   learning_path: "Mes parcours d'apprentissage",
+  quizzes: 'Mes quiz',
 }

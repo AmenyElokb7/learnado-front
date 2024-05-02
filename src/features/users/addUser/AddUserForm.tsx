@@ -21,7 +21,7 @@ import { PATHS } from '@config/constants/paths'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import AddUserSkeleton from './addUserSkeleton/AddUserSkeleton'
 
-function AddUserForm() {
+export default function AddUserForm() {
   const { userId } = useParams<string>()
 
   const isEditMode = Boolean(userId)
@@ -55,6 +55,7 @@ function AddUserForm() {
     formMethods: RegisterFormMethods,
     fieldName: 'profilePicture',
     initPreview: String(user?.media?.[0]?.fileName),
+    index: 0,
   })
 
   const onSubmit = RegisterFormMethods.handleSubmit(async (values) => {
@@ -72,10 +73,13 @@ function AddUserForm() {
       getError(error as IError)
     }
   })
+
   if (isLoadingUser) return <AddUserSkeleton />
 
-  if (!user && !isLoadingUser && isEditMode)
-    return navigate(PATHS.MAIN.ERROR.P_403, { replace: true })
+  if (!user && !isLoadingUser && isEditMode) {
+    navigate(PATHS.MAIN.ERROR.P_404, { replace: true })
+    return null
+  }
 
   return (
     <FormProvider {...RegisterFormMethods}>
@@ -136,4 +140,3 @@ function AddUserForm() {
     </FormProvider>
   )
 }
-export default AddUserForm

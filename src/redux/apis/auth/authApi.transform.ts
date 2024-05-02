@@ -20,23 +20,24 @@ export const transformRegisterResponse = (
   }
 }
 export function signupEncoder(user: RegisterBody): RegisterBodyApi {
-  const { firstName, lastName, email, password, confirmPassword, role } = user
+  const { firstName, lastName, email, password, passwordConfirmation, role } =
+    user
   return {
     first_name: firstName,
     last_name: lastName,
     email: email,
     password: password,
-    password_confirmation: confirmPassword,
+    password_confirmation: passwordConfirmation,
     role: role,
   }
 }
 export function setPasswordEncoder(data: {
   password: string
-  confirmPassword: string
+  passwordConfirmation: string
 }): { password: string; password_confirmation: string } {
   return {
     password: data.password,
-    password_confirmation: data.confirmPassword,
+    password_confirmation: data.passwordConfirmation,
   }
 }
 

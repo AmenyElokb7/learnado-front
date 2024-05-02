@@ -38,6 +38,7 @@ function usePagination() {
       setQueryParams({
         ...queryParams,
         page: GLOBAL_VARIABLES.PAGINATION.FIRST_PAGE,
+        keyword: queryParams.keyword ?? GLOBAL_VARIABLES.EMPTY_STRING,
         filters: queryParams.filters?.map((item) =>
           item.name === filter.name ? filter : item,
         ),
@@ -62,7 +63,10 @@ function usePagination() {
   }
 
   const handleResetFilters = () => {
-    setQueryParams(INITIAL_QUERY_PARAMS)
+    setQueryParams({
+      ...INITIAL_QUERY_PARAMS,
+      keyword: GLOBAL_VARIABLES.EMPTY_STRING,
+    })
   }
 
   return {

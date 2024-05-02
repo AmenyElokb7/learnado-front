@@ -56,7 +56,7 @@ function SetPasswordForm() {
         />
         <CustomPasswordTextField
           config={{
-            ...SIGNUP_FORM_CONFIG.confirmPassword,
+            ...SIGNUP_FORM_CONFIG.passwordConfirmation,
             rules: {
               validate: (value) => {
                 if (value !== password) return `${t('auth.password_not_match')}`

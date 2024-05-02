@@ -16,16 +16,12 @@ function Answer({
   return (
     <Grid container display={'flex'} alignItems={'center'}>
       <Grid item xs={12} lg={1}>
-        <Tooltip title={t('section.quiz.correct_answer')}>
-          <IconButton>
-            <CustomCheckboxButton
-              config={{
-                ...CREATE_STEP_FORM_CONFIG.answerIsValid,
-                name: `sections.${sectionIndex}.quiz.questions.${questionIndex}.answers.${answerIndex}.isValid`
-              }}
-            />
-          </IconButton>
-        </Tooltip>
+        <CustomCheckboxButton
+          config={{
+            ...CREATE_STEP_FORM_CONFIG.answerIsValid,
+            name: `sections.${sectionIndex}.quiz.questions.${questionIndex}.answers.${answerIndex}.isValid`,
+          }}
+        />
       </Grid>
 
       <Grid item xs={12} lg={10}>

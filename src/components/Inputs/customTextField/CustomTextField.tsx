@@ -8,8 +8,16 @@ import { BLUE } from '@config/colors/colors'
 function CustomTextField({ config }: CustomTextFieldProps) {
   const { t } = useTranslation()
   const { control } = useFormContext()
-  const { label, name, defaultValue, type, rules, placeholder, disabled } =
-    config
+  const {
+    label,
+    name,
+    defaultValue,
+    type,
+    rules,
+    placeholder,
+    disabled,
+    ommitedFromSubmissionData,
+  } = config
 
   return (
     <Controller
@@ -42,6 +50,7 @@ function CustomTextField({ config }: CustomTextFieldProps) {
       name={name}
       defaultValue={defaultValue}
       control={control}
+      disabled={ommitedFromSubmissionData || disabled}
     />
   )
 }

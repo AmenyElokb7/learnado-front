@@ -10,9 +10,13 @@ import { UserRoleEnum } from '@config/enums/role.enum'
 import { Logout, Settings } from '@mui/icons-material'
 import { PATHS } from '@config/constants/paths'
 import CustomSidebarLink from '@components/customLink/customSidebarLink/CustomSidebarLink'
+import { useAppDispatch } from '@redux/hooks'
+import { logout } from '@redux/slices/authSlice'
 
 function Sidebar({ sidebarItem }: SidebarItemsProps) {
   const { t } = useTranslation()
+  const dispatch = useAppDispatch()
+
   const user = getUserFromLocalStorage()
   return (
     <StyledSidebarCard>
@@ -47,9 +51,12 @@ function Sidebar({ sidebarItem }: SidebarItemsProps) {
       <StyledSidebarMenu>
         <Logout />
         <CustomSidebarLink
-          to={PATHS.AUTH.ROOT}
           label={t('auth.logout')}
-          isActive={PATHS.AUTH.ROOT === window.location.pathname}
+          isActive={false}
+          to={`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`}
+          onClick={() => {
+            dispatch(logout())
+          }}
         />
       </StyledSidebarMenu>
     </StyledSidebarCard>

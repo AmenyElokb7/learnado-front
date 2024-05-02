@@ -20,6 +20,7 @@ import courseIcon from '@assets/logo/icon-01.svg'
 import timerIcon from '@assets/logo/timer-icon.svg'
 import calendar from '@assets/logo/calendar.png'
 import arrow from '@assets/logo/Arrow_east.svg'
+import { transformDateTimeFormat } from '@utils/helpers/date.helpers'
 
 const CourseHeader = ({
   title,
@@ -83,13 +84,13 @@ const CourseHeader = ({
           />
           {teachingType && (
             <Stack direction={'column'} gap={2}>
-              <Stack direction={'row'} spacing={4}>
+              <Stack direction={'row'} spacing={2}>
                 <LabelWithIcon
-                  label={startTime}
+                  label={transformDateTimeFormat(startTime)}
                   icon={<img src={calendar} width={25} />}></LabelWithIcon>
                 <img src={arrow} width={50} />
                 <LabelWithIcon
-                  label={endTime}
+                  label={transformDateTimeFormat(endTime)}
                   icon={<img src={calendar} width={25} />}></LabelWithIcon>
               </Stack>
               <Button variant="contained" sx={{ width: '150px' }}>

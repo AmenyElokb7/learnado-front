@@ -1,6 +1,6 @@
 import { User } from 'types/models/User'
 import { ENDPOINTS } from '@config/constants/endpoints'
-import { baseQueryConfig } from '@redux/baseQueryConfig'
+import { baseQueryConfigWithRefresh } from '@redux/baseQueryConfig'
 import { injectPaginationParamsToUrl } from '@utils/helpers/queryParamInjector'
 import { PaginationResponse } from 'types/interfaces/Pagination'
 import { QueryParams } from 'types/interfaces/QueryParams'
@@ -19,8 +19,8 @@ import { FieldValues } from 'react-hook-form'
 
 export const userApi = createApi({
   reducerPath: 'userApi',
-  baseQuery: baseQueryConfig,
-  tagTypes: ['Users', 'User'],
+  baseQuery: baseQueryConfigWithRefresh,
+  tagTypes: ['Users', 'User', 'Profile'],
   endpoints: (builder) => ({
     getFacilitators: builder.query<PaginationResponse<User>, QueryParams>({
       query: (params) => ({
@@ -130,8 +130,26 @@ export const userApi = createApi({
         transformFetchUsersResponse(response),
       providesTags: ['Users'],
     }),
+    getUserProfile: builder.query<ItemDetailsResponse<User>, void>({
+      query: () => ({
+        url: ENDPOINTS.USER_PROFILE,
+        method: MethodsEnum.GET,
+      }),
+      transformResponse: (response: SingleUserResponseData) =>
+        transformUserResponse(response),
+      providesTags: ['Profile'],
+    }),
+    updateProfile: builder.mutation<void, FieldValues>({
+      query: (data) => ({
+        url: ENDPOINTS.UPDATE_PROFILE,
+        method: MethodsEnum.POST,
+        body: encodeUser(data),
+      }),
+      invalidatesTags: ['Profile'],
+    }),
   }),
 })
+
 export const {
   useGetFacilitatorsQuery,
   useGetUsersForAdminQuery,
@@ -145,4 +163,6 @@ export const {
   useEditUserMutation,
   useGetUserByIdQuery,
   useGetActiveUsersQuery,
+  useGetUserProfileQuery,
+  useUpdateProfileMutation,
 } = userApi

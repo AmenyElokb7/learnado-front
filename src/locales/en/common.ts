@@ -24,4 +24,7 @@ export const common = {
   upload: 'Upload files',
   true: 'True',
   false: 'False',
+  error: 'Error',
+  save: 'Save',
+  update: 'Update',
 }

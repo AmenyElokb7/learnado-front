@@ -20,7 +20,7 @@ function CoursesPage() {
       title={t('course.all_courses')}
       buttonText={t('course.add_course')}
       onClick={() => navigate(PATHS.DASHBOARD.DESIGNER.MY_COURSES.ADD_COURSE)}>
-      <AllCoursesList isLoading={isLoading} courses={data?.data} />
+      <AllCoursesList isLoading={isLoading} courses={data?.data} isDesigner />
       <CustomPagination
         page={queryParams.page}
         count={data?.meta.count || 0}

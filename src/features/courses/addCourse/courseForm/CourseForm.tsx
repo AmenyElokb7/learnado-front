@@ -13,8 +13,9 @@ import useUploadFile from 'src/hooks/useUploadFile'
 import { FormProvider } from 'react-hook-form'
 import FallbackLoader from '@components/fallback/FallbackLoader'
 import { useTranslation } from 'react-i18next'
+import { generatePictureSrc } from '@utils/helpers/string.helpers'
 
-function CourseForm({ formMethods }: CourseFormProps) {
+function CourseForm({ formMethods, defaultValues }: CourseFormProps) {
   const {
     isLoadingAdditinalData,
     isPaid,
@@ -33,7 +34,7 @@ function CourseForm({ formMethods }: CourseFormProps) {
   const { preview, handleOnChange, handleResetPreview } = useUploadFile({
     formMethods,
     fieldName: 'courseMedia',
-    initPreview: null,
+    initPreview: generatePictureSrc(defaultValues?.courseMedia.name) || null,
     index: 0,
   })
 
@@ -69,7 +70,7 @@ function CourseForm({ formMethods }: CourseFormProps) {
           <Grid item xs={12} sm={6}>
             <CustomRadioButton config={CREATE_COURSE_FORM_CONFIG.isPaid} />
           </Grid>
-          {isPaid == 1 && (
+          {Number(isPaid) === 1 && (
             <>
               <Grid item xs={12} sm={6}>
                 <CustomTextField
@@ -97,7 +98,7 @@ function CourseForm({ formMethods }: CourseFormProps) {
             <Grid item xs={12} sm={6}>
               <CustomSelectField
                 config={{
-                  ...CREATE_COURSE_FORM_CONFIG.selectedUserIds,
+                  ...CREATE_COURSE_FORM_CONFIG.subscribers,
                   rules: { required: 'course.select_user_required' },
                   options: activeUsersOptions,
                 }}
@@ -118,8 +119,8 @@ function CourseForm({ formMethods }: CourseFormProps) {
               config={CREATE_COURSE_FORM_CONFIG.teachingType}
             />
           </Grid>
-
-          {teachingType === TeachingTypeFilterEnum.ON_A_PLACE && (
+          {/* TODO: track the place when changing the state and get the default value if isEditMode */}
+          {Number(teachingType) === TeachingTypeFilterEnum.ON_A_PLACE && (
             <Grid item xs={12}>
               <CourseMapCard
                 setLatitude={handleLatitudeChange}
@@ -129,7 +130,7 @@ function CourseForm({ formMethods }: CourseFormProps) {
             </Grid>
           )}
 
-          {teachingType === TeachingTypeFilterEnum.ONLINE && (
+          {Number(teachingType) === TeachingTypeFilterEnum.ONLINE && (
             <Grid item xs={12} sm={6}>
               <CustomTextField
                 config={{
@@ -140,8 +141,8 @@ function CourseForm({ formMethods }: CourseFormProps) {
             </Grid>
           )}
 
-          {(teachingType === TeachingTypeFilterEnum.ONLINE ||
-            teachingType === TeachingTypeFilterEnum.ON_A_PLACE) && (
+          {(Number(teachingType) === TeachingTypeFilterEnum.ONLINE ||
+            Number(teachingType) === TeachingTypeFilterEnum.ON_A_PLACE) && (
             <>
               <Grid item xs={12} sm={6}>
                 <CustomTextField

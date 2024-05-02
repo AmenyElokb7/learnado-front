@@ -54,3 +54,8 @@ export const getUserFromLocalStorage = (): User | null => {
 export const removeFromLocalStorage = (key: LocalStorageKeysEnum) => {
   localStorage.removeItem(key)
 }
+
+//------------------clear local storage------------------//
+export const clearLocalStorage = () => {
+  localStorage.clear()
+}

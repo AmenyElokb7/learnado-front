@@ -1,5 +1,6 @@
 import { Section } from '@features/courses/addCourse/sectionForm/module/Module.type'
 import { MediaApi } from 'types/models/Media'
+import { QuestionApi } from 'types/models/Quiz'
 
 export interface ModuleApi {
   id: number
@@ -9,6 +10,10 @@ export interface ModuleApi {
   duration: number
   media: MediaApi[]
   created_at: string
+  has_quiz: 0 | 1
+  quiz: {
+    questions: QuestionApi[]
+  }
 }
 
 export interface CreateModuleRequest {

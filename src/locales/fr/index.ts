@@ -11,6 +11,7 @@ import { common } from './common'
 import { users } from './users'
 import { dashboard } from './dashboard'
 import { section } from './section'
+import { language } from './language'
 
 const fr = {
   topbar,
@@ -26,5 +27,6 @@ const fr = {
   users,
   dashboard,
   section,
+  language,
 }
 export default fr

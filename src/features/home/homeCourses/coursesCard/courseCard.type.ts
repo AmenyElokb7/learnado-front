@@ -11,6 +11,8 @@ export interface CourseCardProps {
   lessonsCount: number
   duration: string
   createdAt: string
+  isDesigner?: boolean
   isInstructor?: boolean
   width?: string
+  navigateToEditCoursePage?: (id: number) => void
 }

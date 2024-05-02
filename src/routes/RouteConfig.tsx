@@ -21,7 +21,9 @@ const InstructorsPage = lazy(
 const NotFound = lazy(() => import('src/pages/notFound/NotFound'))
 const SignUpPage = lazy(() => import('src/pages/auth/signup/signupPage'))
 const LoginPage = lazy(() => import('src/pages/auth/login/LoginPage'))
-const ProfilePage = lazy(() => import('src/pages/profile/ProfilePage'))
+const ProfilePage = lazy(
+  () => import('src/pages/dashboard/profile/ProfilePage'),
+)
 const DashboardPage = lazy(() => import('src/pages/dashboard/DashboardPage'))
 const UsersPage = lazy(
   () => import('src/pages/dashboard/admin/users/UsersPage'),
@@ -60,6 +62,33 @@ const AddCoursePage = lazy(
   () =>
     import('src/pages/dashboard/designer/courses/addCoursePage/AddCoursePage'),
 )
+const EditCoursePage = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/designer/courses/updateCoursePage/UpdateCoursePage'
+    ),
+)
+const AccountSettingsPage = lazy(
+  () => import('src/pages/dashboard/accountSettings/AccountSettingsPage'),
+)
+
+const LanguagesPage = lazy(
+  () => import('src/pages/dashboard/admin/languages/LanguagesPage'),
+)
+
+const CategoriesPage = lazy(
+  () => import('src/pages/dashboard/admin/categories/CategoriesPage'),
+)
+
+const InstructorCalendarPage = lazy(
+  () => import('src/pages/dashboard/instructor/calendarPage/CalendarPage'),
+)
+const InstructorCoursesPage = lazy(
+  () =>
+    import(
+      'src/pages/dashboard/instructor/instructorCourses/InstructorCoursesPage'
+    ),
+)
 export const ROUTE_CONFIG: RouteObject[] = [
   {
     path: PATHS.AUTH.ROOT,
@@ -82,6 +111,7 @@ export const ROUTE_CONFIG: RouteObject[] = [
       { path: PATHS.ROOT, element: <HomePage /> },
       { path: PATHS.COURSES.ROOT, element: <Courses /> },
       { path: PATHS.COURSES.COURSES_DETAIL, element: <CourseDetail /> },
+      { path: PATHS.COURSES.STEP, element: <CourseDetail /> },
       { path: PATHS.ABOUT_US, element: <AboutUsPage /> },
       { path: PATHS.INSTRUCTORS, element: <InstructorsPage /> },
     ],
@@ -96,6 +126,10 @@ export const ROUTE_CONFIG: RouteObject[] = [
     children: [
       { path: PATHS.DASHBOARD.ROOT, element: <DashboardPage /> },
       { path: PATHS.DASHBOARD.PROFILE.ROOT, element: <ProfilePage /> },
+      {
+        path: PATHS.DASHBOARD.PROFILE.SETTINGS,
+        element: <AccountSettingsPage />,
+      },
       {
         path: PATHS.DASHBOARD.ADMIN.USERS.ROOT,
         element: (
@@ -140,6 +174,30 @@ export const ROUTE_CONFIG: RouteObject[] = [
         ),
       },
       {
+        path: PATHS.DASHBOARD.ADMIN.LANGUAGES.ROOT,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <LanguagesPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.ADMIN.CATEGORY.ROOT,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <CategoriesPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.ADMIN.CATEGORY.EDIT_CATEGORY,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.ADMIN]}>
+            <CategoriesPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
         path: PATHS.DASHBOARD.DESIGNER.MY_COURSES.ROOT,
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.DESIGNER]}>
@@ -152,6 +210,30 @@ export const ROUTE_CONFIG: RouteObject[] = [
         element: (
           <RoleBasedGuard accessibleRoles={[UserRoleEnum.DESIGNER]}>
             <AddCoursePage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.DESIGNER.MY_COURSES.EDIT_COURSE,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.DESIGNER]}>
+            <EditCoursePage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.INSTRUCTOR.MY_CALENDAR,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.FACILITATOR]}>
+            <InstructorCalendarPage />
+          </RoleBasedGuard>
+        ),
+      },
+      {
+        path: PATHS.DASHBOARD.INSTRUCTOR.MY_COURSES,
+        element: (
+          <RoleBasedGuard accessibleRoles={[UserRoleEnum.FACILITATOR]}>
+            <InstructorCoursesPage />
           </RoleBasedGuard>
         ),
       },

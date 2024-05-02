@@ -5,8 +5,7 @@ import { useTranslation } from 'react-i18next'
 function AddUserPages() {
   const { t } = useTranslation()
   return (
-    <BodyCard title={t('users.add_user')}>
-      {/* Add User Form */}
+    <BodyCard title={t('user.add_user')}>
       <AddUserForm />
     </BodyCard>
   )

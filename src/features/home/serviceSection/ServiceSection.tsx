@@ -17,7 +17,7 @@ function ServiceSection() {
   return (
     <>
       <Stack
-        direction={{ lg: 'row', sm: 'column' }}
+        direction={{ lg: 'row', sm: 'column', md: 'column' }}
         height={{ lg: '100vh', sm: 'auto' }}
         alignItems="center">
         <Bloc
@@ -25,17 +25,16 @@ function ServiceSection() {
           description={t('home.service_description')}>
           <Grid container ml={{ lg: 16 }}>
             {serviceCardsData.map((card, index) => (
-              <Stack direction={{ sm: 'column', lg: 'row' }} key={index}>
-                <StatsCardRoot>
-                  <ServiceSectionCard
-                    icon={card.icon}
-                    description={t(card.description)}
-                  />
-                </StatsCardRoot>
-              </Stack>
+              <StatsCardRoot key={index}>
+                <ServiceSectionCard
+                  icon={card.icon}
+                  description={t(card.description)}
+                />
+              </StatsCardRoot>
             ))}
           </Grid>
         </Bloc>
+
         <ImageService src={service} alt={GLOBAL_VARIABLES.APP_NAME} />
       </Stack>
 

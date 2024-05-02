@@ -2,6 +2,7 @@ import { useState } from 'react'
 import {
   Avatar,
   Collapse,
+  DialogProps,
   Divider,
   Grid,
   IconButton,
@@ -12,16 +13,37 @@ import {
 } from '@mui/material'
 
 import { BLUE } from '@config/colors/colors'
-import { StyledExpandIcon } from './courseModules.style'
-import CustomLink from '@components/customLink/CustomLink'
-import { PATHS } from '@config/constants/paths'
+import { StyledButton, StyledExpandIcon } from './courseModules.style'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 
 import play from '@assets/logo/play.svg'
 import { CourseModuleProps } from './courseModule.type'
+import { useNavigate } from 'react-router-dom'
+import CourseModuleDetails from './courseModuleDetails/CourseModuleDetails'
+import { PATHS } from '@config/constants/paths'
 
-function CourseModule({ title, media, duration }: CourseModuleProps) {
+function CourseModule({
+  title,
+  media,
+  duration,
+  section,
+  courseId,
+  sectionId,
+  quiz,
+}: CourseModuleProps) {
+  const [scroll, setScroll] = useState<DialogProps['scroll']>('paper')
   const [isOpened, setIsOpened] = useState(false)
+  const [open, setOpen] = useState(false)
+
+  const navigate = useNavigate()
+
+  const handleClose = () => setOpen(false)
+
+  const handleOpenDialog = (scrollType: DialogProps['scroll']) => () => {
+    navigate(`${PATHS.COURSES.ROOT}/${courseId}/${sectionId}`)
+    setOpen(true)
+    setScroll(scrollType)
+  }
 
   const onCollapseClick = () => setIsOpened((prev) => !prev)
 
@@ -39,15 +61,18 @@ function CourseModule({ title, media, duration }: CourseModuleProps) {
         }}
         onClick={onCollapseClick}>
         <Typography variant="h6">{title}</Typography>
-        <IconButton>
-          <StyledExpandIcon
-            isopened={
-              isOpened
-                ? GLOBAL_VARIABLES.TRUE_STRING
-                : GLOBAL_VARIABLES.FALSE_STRING
-            }
-          />
-        </IconButton>
+        <Stack direction={'row'} spacing={1} alignItems={'center'}>
+          <Typography variant="body2">{duration}</Typography>
+          <IconButton>
+            <StyledExpandIcon
+              isopened={
+                isOpened
+                  ? GLOBAL_VARIABLES.TRUE_STRING
+                  : GLOBAL_VARIABLES.FALSE_STRING
+              }
+            />
+          </IconButton>
+        </Stack>
       </Stack>
       <Collapse in={isOpened} timeout={700}>
         <Stack>
@@ -63,25 +88,34 @@ function CourseModule({ title, media, duration }: CourseModuleProps) {
                           sx={{ width: 20, height: 20 }}
                           src={play}
                         />
-                        <CustomLink
-                          isActive={false}
-                          to={`${PATHS.COURSES}/${item.id}`}
-                          label={item.title}
-                        />
+                        <StyledButton
+                          onClick={handleOpenDialog('body')}
+                          variant="text">
+                          {item.title}
+                          {quiz && (
+                            <Typography variant="body2">
+                              has quiz
+                            </Typography>
+                          )}
+                        </StyledButton>
                       </Stack>
-                    </Grid>
-                    <Grid item sm={2} lg={1} md={2}>
-                      <Typography variant="body2">{duration}</Typography>
                     </Grid>
                   </ListItem>
                 </Grid>
-
                 <Divider />
               </Stack>
             ))}
           </List>
         </Stack>
       </Collapse>
+      <Stack width={700}>
+        <CourseModuleDetails
+          open={open}
+          onClose={handleClose}
+          scroll={scroll}
+          section={section}
+        />
+      </Stack>
     </Stack>
   )
 }

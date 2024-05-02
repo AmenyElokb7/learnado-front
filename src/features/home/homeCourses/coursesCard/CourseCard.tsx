@@ -42,13 +42,14 @@ const CourseCard = ({
   courseTitle,
   coursePrice,
   discount,
-  hasDiscount,
   isPaid,
   lessonsCount,
   duration,
   createdAt,
+  isDesigner,
   isInstructor,
   width,
+  navigateToEditCoursePage,
 }: CourseCardProps) => {
   const { t } = useTranslation()
   const navigate = useNavigate()
@@ -76,7 +77,7 @@ const CourseCard = ({
 
   return (
     <CourseCardContainer
-      onClick={() => !isInstructor && navigateToCourseDetailPage(id)}
+      onClick={() => !isDesigner && navigateToCourseDetailPage(id)}
       width={width || '55vh'}>
       <CourseImageContainer>
         <CourseImage src={image} alt={courseTitle} />
@@ -124,7 +125,7 @@ const CourseCard = ({
         </Stack>
         <Divider />
 
-        {!isInstructor ? (
+        {!isDesigner && !isInstructor ? (
           <Stack alignItems="flex-end">
             <BuyButton variant="outlined" color="primary">
               {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
@@ -132,18 +133,22 @@ const CourseCard = ({
           </Stack>
         ) : (
           <Stack justifyContent={'space-between'} direction={'row'} p={1}>
-            <LabelWithIcon
-              onClick={() =>
-                navigate(PATHS.DASHBOARD.DESIGNER.MY_COURSES.EDIT_COURSE)
-              }
-              label={t('common.edit')}
-              icon={<EditNoteOutlinedIcon />}
-            />
-            <LabelWithIcon
-              onClick={() => setOpen(true)}
-              label={t('common.delete')}
-              icon={<DeleteOutlineOutlinedIcon />}
-            />
+            {isDesigner && (
+              <>
+                <LabelWithIcon
+                  onClick={() =>
+                    navigateToEditCoursePage && navigateToEditCoursePage(id)
+                  }
+                  label={t('common.edit')}
+                  icon={<EditNoteOutlinedIcon />}
+                />
+                <LabelWithIcon
+                  onClick={() => setOpen(true)}
+                  label={t('common.delete')}
+                  icon={<DeleteOutlineOutlinedIcon />}
+                />
+              </>
+            )}
           </Stack>
         )}
         <CustomDialogActions

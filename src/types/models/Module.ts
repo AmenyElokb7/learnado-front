@@ -1,5 +1,5 @@
-import { QuestionTypeEnum } from '@config/enums/questionType.enum'
 import { Media } from './Media'
+import { Question } from './Quiz'
 
 export interface Module {
   id: number
@@ -11,12 +11,6 @@ export interface Module {
   media: Media[]
   hasQuiz: 1 | 0
   quiz?: {
-    title: string
-    type: QuestionTypeEnum
-    isValid?: 0 | 1
-    answers: {
-      title: string
-      isValid: 0 | 1
-    }[]
-  }[]
+    questions: Question[]
+  }
 }

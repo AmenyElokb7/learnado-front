@@ -1,7 +1,7 @@
 export interface Media {
   id: number
   modelType: string
-  ModelId: number
+  modelId: number
   fileName: string
   mimeType: string
   externalUrl?: string

@@ -12,4 +12,7 @@ export interface User {
     modelId: number
     fileName: string
   }[]
+  createdAt?: string
+  password?: string
+  passwordConfirmation?: string
 }

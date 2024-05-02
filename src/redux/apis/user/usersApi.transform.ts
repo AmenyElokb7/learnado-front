@@ -14,6 +14,7 @@ import noUser from '@assets/images/noUser.png'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
 import { FieldValues } from 'react-hook-form'
 import { ItemDetailsResponse } from 'types/interfaces/ItemDetailsResponse'
+import { transformDateTimeFormat } from '@utils/helpers/date.helpers'
 
 export const transformFetchUsersResponse = (
   response: ApiPaginationResponse<UserApi>,
@@ -84,16 +85,17 @@ export const transformSingleUser = (data: UserApi): User => {
             fileName: noUser,
           },
         ],
+    createdAt: transformDateTimeFormat(data.created_at),
   }
 }
 
 export const encodeUser = (values: FieldValues): FormData => {
   const formData = new FormData()
-  if (values.profilePicture === null) {
-    values.profilePicture = GLOBAL_VARIABLES.EMPTY_STRING
-  }
+
   Object.keys(values).forEach((key) => {
-    formData.append(toSnakeCase(key), values[key])
+    if (values[key]) {
+      formData.append(toSnakeCase(key), values[key])
+    }
   })
   return formData
 }

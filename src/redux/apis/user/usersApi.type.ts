@@ -12,6 +12,7 @@ export interface UserApi {
   courses_count?: number
   is_valid?: 0 | 1
   media?: { model_id: number; file_name: string }[]
+  created_at?: string
 }
 export interface SingleUserResponseData {
   message: string

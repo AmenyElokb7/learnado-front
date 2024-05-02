@@ -6,7 +6,7 @@ export type RegisterBody = {
   lastName: string
   email: string
   password: string
-  confirmPassword: string
+  passwordConfirmation: string
   role: UserRoleEnum
   media: MediaApi[]
 }
