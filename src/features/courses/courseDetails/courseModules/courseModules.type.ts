@@ -3,4 +3,5 @@ import { Section } from '@features/courses/addCourse/sectionForm/module/Module.t
 export interface CourseContentProps {
   steps: Section[]
   courseId?: string
+  isEnrolled?: boolean
 }

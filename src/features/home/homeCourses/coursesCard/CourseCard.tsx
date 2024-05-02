@@ -32,11 +32,13 @@ import { GREY } from '@config/colors/colors'
 import { useAppDispatch } from '@redux/hooks'
 import { showError, showSuccess } from '@redux/slices/snackbarSlice'
 import {
+  useCompleteCourseMutation,
   useDeleteCourseMutation,
   useEnrollCourseMutation,
 } from '@redux/apis/courses/coursesApi'
 import trash from '@assets/logo/icon-trash.svg'
 import { getUserFromLocalStorage } from '@utils/localStorage/storage'
+import { IError } from 'types/interfaces/Error'
 
 const CourseCard = ({
   id,
@@ -54,6 +56,7 @@ const CourseCard = ({
   isDesigner,
   isInstructor,
   isEnrolled,
+  isCompleted,
   width,
   navigateToEditCoursePage,
 }: CourseCardProps) => {
@@ -81,22 +84,64 @@ const CourseCard = ({
     return navigate(`${PATHS.COURSES.ROOT}/${id}`)
   }
   const [enrollCourse] = useEnrollCourseMutation()
+  const [completeCourse] = useCompleteCourseMutation()
 
   const handleEnroll = async (id: number) => {
     try {
-      await enrollCourse(id)
+      await enrollCourse(id).unwrap()
       dispatch(showSuccess(t('course.enroll_course_success')))
+    } catch (error) {
+      if ((error as IError).status === 403) {
+        dispatch(showError(t('errors.forbidden_error')))
+      } else {
+        dispatch(showError(t('errors.general_error')))
+      }
+    }
+  }
+  const handleCompleteCourse = async (id: number) => {
+    try {
+      await completeCourse(id).unwrap()
+      dispatch(showSuccess(t('course.complete_course_success')))
     } catch (error) {
       dispatch(showError(t('errors.general_error')))
     }
   }
+
+  const handleButtonClick = () => {
+    if (!user) {
+      navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`)
+      return
+    }
+    if (!isPaid) {
+      if (!isEnrolled) {
+        handleEnroll(id)
+      } else if (!isCompleted) {
+        handleCompleteCourse(id)
+      }
+    } else if (!isEnrolled) {
+      // TODO:
+      // Handling the buy operation
+      // buy logic here
+    }
+  }
+  const getButtonLabel = () => {
+    if (!user || (isPaid && !isEnrolled)) {
+      return t('home.buy_button')
+    }
+    if (!isPaid && !isEnrolled) {
+      return t('home.enroll_button')
+    }
+    if (!isPaid && isEnrolled && !isCompleted) {
+      return t('home.complete_button')
+    }
+    return GLOBAL_VARIABLES.EMPTY_STRING
+  }
   const user = !!getUserFromLocalStorage()
 
   return (
-    <CourseCardContainer
-      onClick={() => !isDesigner && navigateToCourseDetailPage(id)}
-      width={width || '55vh'}>
-      <CourseImageContainer>
+    <CourseCardContainer width={width || '55vh'}>
+      <CourseImageContainer
+        onClick={() => !isDesigner && navigateToCourseDetailPage(id)}>
         <CourseImage src={image} alt={courseTitle} />
         {discount !== GLOBAL_VARIABLES.FREE_CURRENCY ? (
           <DiscountLabel>
@@ -143,18 +188,12 @@ const CourseCard = ({
         <Divider />
 
         {!isDesigner && !isInstructor && !(Number(isEnrolled) === 1) ? (
-          <Stack alignItems="flex-end">
+          <Stack alignItems="flex-end" sx={{ zIndex: 999 }}>
             <BuyButton
-              onClick={
-                user
-                  ? !isPaid
-                    ? () => handleEnroll(id)
-                    : () => {}
-                  : () => navigate(`/${PATHS.AUTH.ROOT}/${PATHS.AUTH.LOGIN}`)
-              }
+              onClick={handleButtonClick}
               variant="outlined"
               color="primary">
-              {!isPaid ? t('home.enroll_button') : t('home.buy_button')}
+              {getButtonLabel()}
             </BuyButton>
           </Stack>
         ) : (

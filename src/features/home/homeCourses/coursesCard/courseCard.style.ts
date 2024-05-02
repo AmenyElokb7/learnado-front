@@ -23,7 +23,6 @@ export const CourseCardContainer = styled(Box, {
   background: theme.palette.common.white,
   border: `1px solid ${GREY.light}`,
   transition: 'background-color 0.3s, transform 0.3s',
-  cursor: 'pointer',
   '&:hover': {
     '& img': {
       transform: 'scale(1.1)',

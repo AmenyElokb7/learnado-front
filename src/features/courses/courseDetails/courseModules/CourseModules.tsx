@@ -3,7 +3,7 @@ import CourseModule from './CourseModule'
 import { CourseContentProps } from './courseModules.type'
 import RectangularCard from '@components/cards/rectangularCard/RectangularCard'
 
-export const CourseModules = ({ steps, courseId }: CourseContentProps) => {
+export const CourseModules = ({ steps, courseId, isEnrolled }: CourseContentProps) => {
   const { t } = useTranslation()
   return (
     <RectangularCard title={t('course.modules')}>
@@ -14,6 +14,7 @@ export const CourseModules = ({ steps, courseId }: CourseContentProps) => {
           media={step.media || []}
           duration={Number(step.duration)}
           section={step}
+          isEnrolled={isEnrolled}
           courseId={courseId}
           sectionId={step.databaseId}
         />

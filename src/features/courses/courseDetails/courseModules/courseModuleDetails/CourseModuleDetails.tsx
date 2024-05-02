@@ -11,13 +11,13 @@ function CourseModuleDetails({
   onClose,
 }: CourseMediaDetailsProps) {
   const VideoPlayer = ({ src }: { src?: string }) => (
-    <video src={src} controls width={550} />
+    <video src={src} controls />
   )
   const ImageDisplay = ({ src }: { src?: string }) => (
-    <img src={src} alt={section.title} width={550} height={400} />
+    <img src={src} alt={section.title} height={400} />
   )
   const PDFViewer = ({ src }: { src?: string }) => (
-    <iframe src={src} title={section.title} width={550} height={500} />
+    <iframe src={src} title={section.title} height={300} />
   )
   const [currentMediaIndex, setCurrentMediaIndex] = useState(0)
 
@@ -29,7 +29,7 @@ function CourseModuleDetails({
       return <VideoPlayer src={media?.fileName} />
     } else if (media.mimeType.startsWith('image/')) {
       return <ImageDisplay src={media?.fileName} />
-    } else if (media.mimeType === 'application/pdf') {
+    } else if (media.mimeType.startsWith('application/pdf')) {
       return <PDFViewer src={media?.fileName} />
     } else {
       return null
@@ -58,7 +58,7 @@ function CourseModuleDetails({
                 <video src={mediaItem.fileName} width={100} />
               ) : mediaItem.mimeType.startsWith('image') ? (
                 <img src={mediaItem.fileName} width={100} />
-              ) : mediaItem.mimeType === 'application/pdf' ? (
+              ) : mediaItem.mimeType.startsWith('application/pdf') ? (
                 <iframe
                   src={mediaItem.fileName}
                   style={{ overflow: 'hidden' }}

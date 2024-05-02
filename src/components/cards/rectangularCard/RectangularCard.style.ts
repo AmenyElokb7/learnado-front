@@ -7,8 +7,9 @@ export const RectangularCardRoot = styled(Stack)(({ theme }) => ({
   overflow: 'hidden',
   border: `1px solid ${GREY.light}`,
   padding: 26,
-  width: '900px',
+  width: 'auto',
   margin: 16,
+
   [theme.breakpoints.down('sm')]: {
     width: 'auto',
   },
@@ -23,6 +24,6 @@ export const RectangularCardTypography = styled(Typography)({
 export const RectangularCardTitle = styled(Typography)({
   color: BLUE.main,
   fontWeight: 'bold',
-  fontSize: '1.7rem',
+  fontSize: '1.1rem',
   lineHeight: 2.5,
 })

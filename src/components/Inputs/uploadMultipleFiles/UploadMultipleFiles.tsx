@@ -12,18 +12,14 @@ function UploadMultipleFiles({
 }: UploadMultipleFilesProps) {
   const { t } = useTranslation()
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-
-    if (file) {
-      setFiles((prev) => {
-        const files = prev[index] || []
-        return {
-          ...prev,
-          [index]: [...files, file],
-        }
-      })
+    const newFiles = Array.from(e.target.files || []);
+    if (newFiles.length) {
+      setFiles(prev => ({
+        ...prev,
+        [index]: [...(prev[index] || []), ...newFiles],
+      }));
     }
-  }
+  };
 
   const handleDeletePreview = (
     event: MouseEvent<SVGSVGElement>,
@@ -52,27 +48,24 @@ function UploadMultipleFiles({
           onChange={handleChange}
           onDelete={(e) => handleDeletePreview(e, 0)}
           preview={null}
+          multiple
         />
       </Grid>
-      <Grid item xs={12} gap={2} display={'flex'}>
-        {files?.map((file, fileIndex) => (
+      <Grid item xs={12} gap={2} display="flex">
+        {files.map((file, fileIndex) => (
           <Grid item key={fileIndex} xs={12} sm={4}>
             <UploadInput
               isEditMode={isEditMode}
               onChange={handleChange}
               onDelete={(e) => handleDeletePreview(e, fileIndex)}
-              preview={
-                file?.name.includes('http://localhost:8000')
-                  ? file.name
-                  : URL.createObjectURL(file)
-              }
+              preview={URL.createObjectURL(file)}
               file={file}
             />
           </Grid>
         ))}
       </Grid>
     </>
-  )
-}
+  );
+};
 
 export default UploadMultipleFiles

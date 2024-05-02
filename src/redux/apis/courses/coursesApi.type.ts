@@ -24,6 +24,7 @@ export interface CourseApi {
   latitude?: number | null
   longitude?: number | null
   is_subscribed?: 0 | 1
+  is_completed?: 0 | 1
   created_at: string
   facilitator: UserApi
   media: MediaApi[]
@@ -102,4 +103,16 @@ export interface ApiAnswer {
   id: number
   answer: string
   is_valid: 0 | 1
+}
+
+export interface CourseCertificateApi {
+  id: number
+  course: CourseApi
+  download_url: string
+}
+
+export interface CourseCertificate {
+  id: number
+  courseTitle: string
+  downloadUrl: string
 }

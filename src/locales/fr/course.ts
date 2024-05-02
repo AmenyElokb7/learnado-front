@@ -62,4 +62,7 @@ export const course = {
   link_required: 'Lien requis',
   enroll_course_success: 'Cours inscrit avec succès',
   quiz_submitted: 'Quiz soumis avec succès',
+  complete_course: 'Terminer le cours',
+  complete_course_success: 'Félicitations! Vous avez terminé le cours',
+  certificates: 'Certificats',
 }

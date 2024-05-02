@@ -70,6 +70,7 @@ function ModuleBody({
           index={index}
           setFiles={setFiles}
           isEditMode={isEditMode}
+          
         />
 
         {externalUrls.map((_, indexUrl) => (
