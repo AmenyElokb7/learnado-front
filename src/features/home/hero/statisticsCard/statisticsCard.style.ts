@@ -3,7 +3,7 @@ import { Stack, Typography } from '@mui/material'
 import { GREY } from '@config/colors/colors'
 
 export const StatsCardRoot = styled(Stack)(({ theme }) => ({
-  width: '400px',
+  width: '350px',
   alignItems: 'center',
   justifyContent: 'center',
   gap: '15px',
@@ -16,7 +16,7 @@ export const StatsCardRoot = styled(Stack)(({ theme }) => ({
   transition: 'transform 0.3s ease-in-out',
 
   [theme.breakpoints.down('xl')]: {
-    width: '300px',
+    width: '500px',
   },
 
   [theme.breakpoints.down('sm')]: {

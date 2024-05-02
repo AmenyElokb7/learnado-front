@@ -41,7 +41,7 @@ export default function AddCourseForm({
   const [courseId, setCourseId] = useState<string | null | undefined>(
     id || null,
   )
-  const [activeStep, setActiveStep] = useState(1)
+  const [activeStep, setActiveStep] = useState(0)
   const [completed, setCompleted] = useState<{ [k: number]: boolean }>({})
 
   const StepperFormMethods = useForm<CourseFormValues>({

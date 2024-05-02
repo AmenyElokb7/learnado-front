@@ -27,4 +27,6 @@ export const common = {
   error: 'Error',
   save: 'Save',
   update: 'Update',
+  minutes: 'minutes',
+  submit: 'Submit',
 }

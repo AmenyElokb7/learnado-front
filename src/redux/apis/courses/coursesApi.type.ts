@@ -19,9 +19,11 @@ export interface CourseApi {
   is_sequential: 0 | 1
   teaching_type: number
   start_time?: string
+  is_active?: 0 | 1
   end_time?: string
   latitude?: number | null
   longitude?: number | null
+  is_subscribed?: 0 | 1
   created_at: string
   facilitator: UserApi
   media: MediaApi[]
@@ -56,6 +58,8 @@ export interface CourseForDesignerApi {
   facilitator_id: number
 
   is_public: 0 | 1
+
+  is_active?: 0 | 1
   subscribers: UserApi[]
   sequential: 0 | 1
   teaching_type: number

@@ -13,6 +13,7 @@ export interface Course {
   language_id: number
   language: Language
   isPaid: boolean
+  isActive?: boolean
   price: string
   discount: string
   duration: string
@@ -23,6 +24,7 @@ export interface Course {
   endTime?: string
   lat?: number | null
   long?: number | null
+  isSubscribed?: boolean
   createdAt: string
   facilitator: Partial<User>
   sections: Module[]
@@ -38,6 +40,7 @@ export interface CourseForDesigner {
   categoryId: number
   languageId: number
   isPaid: 0 | 1
+  isActive?: 0 | 1
   price: number
   discount: number
   facilitatorId: number

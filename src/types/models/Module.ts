@@ -11,6 +11,7 @@ export interface Module {
   media: Media[]
   hasQuiz: 1 | 0
   quiz?: {
+    id: number
     questions: Question[]
   }
 }

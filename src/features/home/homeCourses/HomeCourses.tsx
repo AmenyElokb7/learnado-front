@@ -5,18 +5,30 @@ import { PATHS } from '@config/constants/paths'
 import CoursesList from './coursesList/coursesListSkeleton/CoursesList'
 import { BlocBackground } from './coursesCard/courseCard.style'
 import usePagination from 'src/hooks/usePagination'
-import { useGetCoursesQuery } from '@redux/apis/courses/coursesApi'
+import {
+  useGetCoursesForGuestQuery,
+  useGetCoursesQuery,
+} from '@redux/apis/courses/coursesApi'
 import { GLOBAL_VARIABLES } from '@config/constants/globalVariables'
+import { getUserFromLocalStorage } from '@utils/localStorage/storage'
 
 function HomeCourses() {
   const navigate = useNavigate()
   const navigateToCoursesPage = () => navigate(PATHS.COURSES.ROOT)
 
   const { queryParams } = usePagination()
-  const { isLoading, data } = useGetCoursesQuery({
-    ...queryParams,
-    perPage: GLOBAL_VARIABLES.PAGINATION.CHUNK_ROWS_PER_PAGE,
-  })
+
+  const user = !!getUserFromLocalStorage()
+
+  const { data, isLoading } = user
+    ? useGetCoursesQuery({
+        ...queryParams,
+        perPage: GLOBAL_VARIABLES.PAGINATION.CHUNK_ROWS_PER_PAGE,
+      })
+    : useGetCoursesForGuestQuery({
+        ...queryParams,
+        perPage: GLOBAL_VARIABLES.PAGINATION.CHUNK_ROWS_PER_PAGE,
+      })
 
   return (
     <BlocBackground>

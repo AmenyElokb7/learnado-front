@@ -86,12 +86,14 @@ export const transformSingleCourse = (course: CourseApi): Course => {
     isSequential: course.is_sequential === 1,
     teachingType: course.teaching_type,
     startTime: course.start_time,
+    isActive: course?.is_active === 1,
     endTime: course.end_time,
     lat: course.latitude,
     long: course.longitude,
     createdAt: transformDateFormat(course.created_at),
     lessonsCount: course.lessons_count,
     subscribedUsersCount: course.subscribed_users_count,
+    isSubscribed: Number(course?.is_subscribed) === 1,
     facilitator: {
       id: course.facilitator.id,
       firstName: course.facilitator.first_name,
@@ -127,6 +129,7 @@ export const transformCourseModules = (modules: ModuleApi[]): Module[] => {
     quiz:
       module?.quiz?.questions?.length > 0
         ? {
+            id: module.quiz.id,
             questions: module.quiz.questions.map((question) => ({
               id: question.id,
               question: question.question,
@@ -146,16 +149,7 @@ export const transformCourseModules = (modules: ModuleApi[]): Module[] => {
                 question: GLOBAL_VARIABLES.EMPTY_STRING,
                 type: QuestionTypeEnum.BINARY,
                 isValid: 0,
-                answers: [
-                  {
-                    answer: GLOBAL_VARIABLES.EMPTY_STRING,
-                    isValid: 0,
-                  },
-                  {
-                    answer: GLOBAL_VARIABLES.EMPTY_STRING,
-                    isValid: 0,
-                  },
-                ],
+                answers: [],
               },
             ],
           },
@@ -177,7 +171,7 @@ export const encodeCourse = (values: FieldValues): FormData => {
   Object.keys(valuesToEncode).forEach((key) => {
     // append media
     if (key === 'courseMedia') {
-      formData.append('course_media[]', values[key])
+      formData.append('course_media', values[key])
     }
 
     if (key === 'teachingType') {
@@ -227,6 +221,7 @@ export const transformFetchCourseForDesignerResponse = (
       discount: Number(data.discount),
       facilitatorId: data.facilitator_id,
       isPublic: data.is_public,
+      isActive: data.is_active,
       latitude: data.latitude,
       longitude: data.longitude,
       link: data.link,
@@ -293,16 +288,7 @@ const transformCourseSection = (sectionApi: ApiStep): Section => {
                 question: GLOBAL_VARIABLES.EMPTY_STRING,
                 type: QuestionTypeEnum.BINARY,
                 isValid: 0,
-                answers: [
-                  {
-                    answer: GLOBAL_VARIABLES.EMPTY_STRING,
-                    isValid: 0,
-                  },
-                  {
-                    answer: GLOBAL_VARIABLES.EMPTY_STRING,
-                    isValid: 0,
-                  },
-                ],
+                answers: [],
               },
             ],
           },
